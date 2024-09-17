@@ -26,13 +26,34 @@ public class ControladorLoginTest {
 
 	@BeforeEach
 	public void init(){
-		datosLoginMock = new DatosLogin("dami@unlam.com", "123");
+		datosLoginMock = new DatosLogin("mari@unlam.com", "123");
 		usuarioMock = mock(Usuario.class);
-		when(usuarioMock.getEmail()).thenReturn("dami@unlam.com");
+		when(usuarioMock.getEmail()).thenReturn("mari@unlam.com");
 		requestMock = mock(HttpServletRequest.class);
 		sessionMock = mock(HttpSession.class);
 		servicioLoginMock = mock(ServicioLogin.class);
 		controladorLogin = new ControladorLogin(servicioLoginMock);
+	}
+
+	@Test
+	public void queAlTocarElBotonIngresarVayaAlaVistaPrincipal(){
+		ModelAndView modelAndView = controladorLogin.homePrincipal();
+		String nombre = modelAndView.getViewName();
+		assertThat(nombre, equalToIgnoringCase("homePrincipal"));
+	}
+
+	@Test
+	public void queAlTocarElBotonLoginvayaAlaVistaLogin(){
+		ModelAndView modelAndView = controladorLogin.irALogin();
+		String nombre = modelAndView.getViewName();
+		assertThat(nombre, equalToIgnoringCase("login"));
+	}
+
+	@Test
+	public void queAlTocarElBotonRegistratevayaAlaVistaNuevoUsuario(){
+		ModelAndView modelAndView = controladorLogin.nuevoUsuario();
+		String nombre = modelAndView.getViewName();
+		assertThat(nombre, equalToIgnoringCase("nuevoUsuario"));
 	}
 
 	@Test

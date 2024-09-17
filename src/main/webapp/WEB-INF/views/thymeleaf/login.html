@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Taller Web I</title>
+    <title>Juntadita</title>
 
     <!-- Boostrap core css -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
@@ -16,27 +16,34 @@
 
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">UNLAM</a>
-</nav>
-
 <main role="main" class="container">
 
     <div class = "container">
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <form action="#" th:action="@{/validar-login}" method="POST" th:object="${datosLogin}">
-                <h3 class="form-signin-heading">Taller Web I</h3>
+                <h3 class="form-signin-heading">Ingrese su mail y contraseña </h3>
                 <hr class="colorgraph"><br>
 
-                <input th:field="*{email}" id="email" type="email" class="form-control" required/>
-                <input th:field="*{password}" type="password" id="password" class="form-control" required/>
+                <input th:field="*{email}" id="email" type="email" class="form-control" placeholder="Ingrese su mail" required/>
+                <br>
+                <input th:field="*{password}" type="password" id="password" class="form-control" placeholder="Ingrese su contraseña" required/>
+                <br>
+                <br>
 
-                <button id="btn-login" class="btn btn-lg btn-primary btn-block" Type="Submit">Login</button>
+                <button id="btn-login" class="bonton" Type="Submit">INGRESAR</button>
 
                 <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
                 </p>
             </form>
-            <a id="ir-a-registrarme" href="nuevo-usuario">Registrarme</a>
+            <p class="m-0">
+                ¿No tienes cuenta?
+            </p>
+            <a
+                    id="ir-a-registrarme"
+                    href="nuevo-usuario"
+                    class="bonton"
+            >Registrate</a>
+
         </div>
     </div>
 </main>

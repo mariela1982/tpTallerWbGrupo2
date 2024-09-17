@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ControladorLogin {
@@ -36,14 +37,15 @@ public class ControladorLogin {
         ModelMap model = new ModelMap();
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
-        if (usuarioBuscado != null) {
+        if (usuarioBuscado != null ) {
             request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("redirect:/admin/panel");
         } else {
             model.put("error", "Usuario o clave incorrecta");
         }
         return new ModelAndView("login", model);
     }
+
 
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("usuario") Usuario usuario) {
@@ -73,6 +75,11 @@ public class ControladorLogin {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView inicio() {
         return new ModelAndView("redirect:/login");
+    }
+
+    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.POST)
+    public ModelAndView nuevoUsuario() {
+        return new ModelAndView("nuevoUsuario");
     }
 }
 
