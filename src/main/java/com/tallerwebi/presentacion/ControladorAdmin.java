@@ -30,6 +30,11 @@ public class ControladorAdmin {
         this.repositorioAdmin = repositorioAdmin;
     }
 
+    @GetMapping
+    public ModelAndView redirigirAPanel() {
+        return new ModelAndView("redirect:/admin/panel");
+    }
+
     // Controller para el panel de administrador
     @GetMapping("/panel")
     public ModelAndView panelAdmin() {
