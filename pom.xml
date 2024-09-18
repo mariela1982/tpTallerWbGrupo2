@@ -20,6 +20,7 @@
         <hibernate.version>5.4.24.Final</hibernate.version>
         <playwright.version>1.36.0</playwright.version>
         <hsqldb.version>2.3.2</hsqldb.version>
+        <jackson.version>2.9.6</jackson.version>
     </properties>
 
     <dependencies>
@@ -28,18 +29,38 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -52,6 +73,13 @@
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
             <version>${thymeleaf.spring.version}</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -72,6 +100,12 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -99,6 +133,16 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.activation</groupId>
+                    <artifactId>javax.activation-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -116,7 +160,73 @@
             <scope>provided</scope>
         </dependency>
         -->
+
+
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+    </dependency>
+
+    <!-- Dependencias adicionales -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-mail</artifactId>
+        <version>2.7.3</version>
+        <exclusions>
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <dependency>
+        <groupId>com.sun.activation</groupId>
+        <artifactId>jakarta.activation</artifactId>
+        <version>1.2.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.sendgrid</groupId>
+        <artifactId>sendgrid-java</artifactId>
+        <version>4.7.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>2.7.3</version>
+        <exclusions>
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <!-- Excluir commons-logging explícitamente -->
+    <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.2</version>
+        <scope>provided</scope>
+    </dependency>
+
     </dependencies>
+
 
     <build>
 
@@ -166,6 +276,7 @@
                     <webApp>
                         <contextPath>/spring</contextPath>
                     </webApp>
+
                 </configuration>
             </plugin>
 
