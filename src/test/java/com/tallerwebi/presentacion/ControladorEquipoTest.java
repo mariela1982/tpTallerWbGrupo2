@@ -4,7 +4,7 @@ import com.tallerwebi.dominio.ControladorEquipo;
 import com.tallerwebi.dominio.ServicioEquipo;
 import com.tallerwebi.dominio.excepcion.EquipoExistente;
 import com.tallerwebi.infraestructura.ServicioEquipoImpl;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.hamcrest.MatcherAssert.assertThat;
