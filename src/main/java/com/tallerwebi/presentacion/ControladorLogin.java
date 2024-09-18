@@ -33,7 +33,7 @@ public class ControladorLogin {
         return new ModelAndView("login", modelo);
     }
 
-    @RequestMapping(path = "/validar-login", method = RequestMethod.POST)
+    @RequestMapping(path = "/validarLogin", method = RequestMethod.POST)
     public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
         ModelMap model = new ModelMap();
 
@@ -67,7 +67,7 @@ public class ControladorLogin {
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("homePrincipal", model);
         }
-        return new ModelAndView("redirect:/nuevoUsuario");
+        return new ModelAndView("redirect:/login");
     }
 
     @RequestMapping(path = "/homePrincipal", method = RequestMethod.GET)
@@ -85,7 +85,7 @@ public class ControladorLogin {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.POST)
+    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.GET)
     public ModelAndView nuevoUsuario() {
         ModelMap model = new ModelMap();
         Usuario usuario = new Usuario();
