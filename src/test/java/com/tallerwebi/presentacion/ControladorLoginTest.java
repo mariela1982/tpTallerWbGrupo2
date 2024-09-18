@@ -6,7 +6,6 @@ import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,11 +31,8 @@ public class ControladorLoginTest {
 		when(usuarioMock.getEmail()).thenReturn("mari@unlam.com");
 		requestMock = mock(HttpServletRequest.class);
 		sessionMock = mock(HttpSession.class);
-
 		servicioLoginMock = mock(ServicioLogin.class);
 		controladorLogin = new ControladorLogin(servicioLoginMock);
-		RedirectAttributes redirectMock = mock(RedirectAttributes.class);
-
 	}
 
 	@Test
@@ -66,30 +62,29 @@ public class ControladorLoginTest {
 		when(servicioLoginMock.consultarUsuario(anyString(), anyString())).thenReturn(null);
 
 		// ejecucion
-
-		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock,requestMock);
+		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
 
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
-		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Usuario o password incorrecto"));
-
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("login"));
+		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Usuario o clave incorrecta"));
+		verify(sessionMock, times(0)).setAttribute("ROL", "ADMIN");
 	}
 	
 	@Test
-	public void loginConUsuarioYPasswordCorrectosDeberiaLLevarALavistaDeAdmin(){
+	public void loginConUsuarioYPasswordCorrectosDeberiaLLevarAHome(){
 		// preparacion
 		Usuario usuarioEncontradoMock = mock(Usuario.class);
-		when(usuarioEncontradoMock.getAdmin()).thenReturn(true);
-		when(requestMock.getSession(true)).thenReturn(sessionMock);
+		when(usuarioEncontradoMock.getRol()).thenReturn("ADMIN");
+
+		when(requestMock.getSession()).thenReturn(sessionMock);
 		when(servicioLoginMock.consultarUsuario(anyString(), anyString())).thenReturn(usuarioEncontradoMock);
-
+		
 		// ejecucion
-		sessionMock.setAttribute("usuario", usuarioEncontradoMock);
-		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock,requestMock);
-
+		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
+		
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/admin/panel"));
-
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/home"));
+		verify(sessionMock, times(1)).setAttribute("ROL", usuarioEncontradoMock.getRol());
 	}
 
 	@Test
@@ -112,7 +107,7 @@ public class ControladorLoginTest {
 		ModelAndView modelAndView = controladorLogin.registrarme(usuarioMock);
 
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("login"));
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("homePrincipal"));
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("El usuario ya existe"));
 	}
 

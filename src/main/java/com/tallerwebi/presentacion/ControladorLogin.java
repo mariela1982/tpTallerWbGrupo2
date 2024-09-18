@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,21 +32,18 @@ public class ControladorLogin {
         return new ModelAndView("login", modelo);
     }
 
-    @RequestMapping(path = "/validarLogin", method = RequestMethod.POST)
+    @RequestMapping(path = "/validar-login", method = RequestMethod.POST)
     public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
         ModelMap model = new ModelMap();
-        Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 
-        if (usuarioBuscado != null && !usuarioBuscado.getAdmin() ) {
-            return new ModelAndView("redirect:/homePrincipal");
-        } else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("usuario", usuarioBuscado);
+        Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
+        if (usuarioBuscado != null ) {
+            request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/admin/panel");
         } else {
-            model.put("error","Usuario o password incorrecto");
+            model.put("error", "Usuario o clave incorrecta");
         }
-        return new ModelAndView("redirect:/login",model);
+        return new ModelAndView("login", model);
     }
 
 
@@ -58,14 +54,13 @@ public class ControladorLogin {
             servicioLogin.registrar(usuario);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
-            return new ModelAndView("login", model);
+            return new ModelAndView("homePrincipal", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("homePrincipal", model);
         }
         return new ModelAndView("redirect:/login");
     }
-
 
     @RequestMapping(path = "/homePrincipal", method = RequestMethod.GET)
     public ModelAndView homePrincipal() {
@@ -82,18 +77,9 @@ public class ControladorLogin {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(path = "/nuevoUsuario", method = RequestMethod.GET)
+    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.POST)
     public ModelAndView nuevoUsuario() {
-        ModelMap model = new ModelMap();
-        Usuario usuario = new Usuario();
-        model.put("usuario", usuario);
-        return new ModelAndView("nuevoUsuario", model);
-    }
-    @RequestMapping(path = "/sign-out", method = RequestMethod.GET)
-    public ModelAndView cerrarSession(HttpServletRequest request) {
-        HttpSession misession = request.getSession();
-        misession.removeAttribute("usuario");
-        return new ModelAndView("redirect:/homePrincipal");
+        return new ModelAndView("nuevoUsuario");
     }
 }
 
