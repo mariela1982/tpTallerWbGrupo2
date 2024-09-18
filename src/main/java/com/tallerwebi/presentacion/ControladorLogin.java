@@ -21,6 +21,7 @@ public class ControladorLogin {
 
     @Autowired
     public ControladorLogin(ServicioLogin servicioLogin){
+
         this.servicioLogin = servicioLogin;
     }
 
@@ -37,8 +38,15 @@ public class ControladorLogin {
         ModelMap model = new ModelMap();
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
-        if (usuarioBuscado != null ) {
-            request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+
+        if (usuarioBuscado != null && !usuarioBuscado.getAdmin()) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("usuario", usuarioBuscado);
+            return new ModelAndView("homePrincipal");
+        }
+        else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("usuario", usuarioBuscado);
             return new ModelAndView("redirect:/admin/panel");
         } else {
             model.put("error", "Usuario o clave incorrecta");
@@ -54,12 +62,12 @@ public class ControladorLogin {
             servicioLogin.registrar(usuario);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
-            return new ModelAndView("homePrincipal", model);
+            return new ModelAndView("redirect:/", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("homePrincipal", model);
         }
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("redirect:/nuevoUsuario");
     }
 
     @RequestMapping(path = "/homePrincipal", method = RequestMethod.GET)
@@ -79,7 +87,10 @@ public class ControladorLogin {
 
     @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.POST)
     public ModelAndView nuevoUsuario() {
-        return new ModelAndView("nuevoUsuario");
+        ModelMap model = new ModelMap();
+        Usuario usuario = new Usuario();
+        model.put("usuario", usuario);
+        return new ModelAndView("nuevoUsuario",model);
     }
 }
 
