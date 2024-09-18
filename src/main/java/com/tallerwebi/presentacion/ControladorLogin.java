@@ -42,7 +42,7 @@ public class ControladorLogin {
         if (usuarioBuscado != null && !usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", usuarioBuscado);
-            return new ModelAndView("homePrincipal");
+            return new ModelAndView("redirect:/homePrincipal");
         }
         else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);

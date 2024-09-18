@@ -55,10 +55,13 @@
 
 
                 <label for="direccion">Direccion</label>
-                <select id="direccion" th:field="*{direccion}" class="form-select mb-3">
-                    <option value="0" selected>Busque una direccion y seleccione una opcion</option>
-                    <option th:each="option : ${directions}" th:value="${option}" th:text="${option}"></option>
-                </select>
+                <input id="direccion"
+                       th:field="*{direccion}"
+                       type="text"
+                       placeholder="ingrese direccion"
+                       class="form-select mb-3">
+
+                </input>
 
 
             </div>
@@ -112,7 +115,7 @@
             <p th:if="${error != null}" th:text="'Error ' + ${error}" class="alert alert-danger m-0"></p>
         </form>
 
-
+<!--
         <form th:action="@{/searchDirUsuario}" method="GET" class="signIn">
             <input type="text" name="query" placeholder="Buscá una direccion" required autocomplete="off"
                    class="form-control mb-3">
@@ -120,7 +123,7 @@
                     class="btnLogin btn btn-sm btn-primary btn-block mb-3">Busca direccion
             </button>
         </form>
-
+-->
     </div>
 </main>
 <!-- /.container -->
