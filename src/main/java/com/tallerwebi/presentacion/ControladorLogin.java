@@ -62,7 +62,7 @@ public class ControladorLogin {
             servicioLogin.registrar(usuario);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
-            return new ModelAndView("redirect:/", model);
+            return new ModelAndView("redirect:/homePrincipal", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("homePrincipal", model);
