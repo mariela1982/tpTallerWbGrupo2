@@ -10,20 +10,31 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Equipo {
+
+
+
+    private String nombre;
+    private String cbu;
+    private Long dtDni;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
+    private Long idEquipo;
 
-    @OneToMany(mappedBy = "equipo")
-    private List<Jugador> jugadores;
 
-    public Long getId() {
-        return id;
+    public void setIdEquipo(Long idEquipo) {
+        this.idEquipo = idEquipo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdEquipo() {
+        return idEquipo;
+    }
+
+    public String getCbu() {
+        return cbu;
+    }
+
+    public void setCbu(String cbu) {
+        this.cbu = cbu;
     }
 
     public String getNombre() {
@@ -34,12 +45,22 @@ public class Equipo {
         this.nombre = nombre;
     }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
+    public Long getDtDni() {
+        return dtDni;
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setDtDni(Long dtDni) {
+        this.dtDni = dtDni;
     }
-    
+
+
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "nombre='" + nombre + '\'' +
+                ", cbu='" + cbu + '\'' +
+                ", dtDni=" + dtDni +
+                ", idEquipo=" + idEquipo +
+                '}';
+    }
 }

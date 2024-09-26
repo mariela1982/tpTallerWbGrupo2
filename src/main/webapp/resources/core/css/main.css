@@ -1,5 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  padding-top: 5rem;
+    padding-top: 5rem;
+    background-image: url("../img/home.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 .starter-template {
   padding: 3rem 1.5rem;
@@ -7,7 +17,9 @@ body {
 }
 
 h1{
-	color:#0000FF;
+	color: black;
+  font-size: 60px;
+
 }
 
 h2{
@@ -16,4 +28,44 @@ h2{
 
 .navbar-brand{
     margin:0 2rem;
+}
+
+.bonton {
+ background-color: darkgreen;
+  color: white;
+  text-align: center;
+  border-radius: 30px;
+    text-decoration: none;
+    padding: 10px 70px;
+    font-size: 20px;
+
+
+}
+.container{
+    display: inline-grid;
+    grid-gap: 50px;
+    padding-bottom: 50px;
+    padding-left: 150px;
+    text-align: center;
+}
+
+.cont1{
+    text-align: center;
+
+}
+.cont2{
+    text-align: center;
+    align-self: center;
+
+}
+.cont3{
+    padding-top: 3rem;
+    }
+#titulo{
+    text-align: center;
+}
+
+.m-0{
+    padding-top: 50px;
+    padding-bottom: 15px;
 }
