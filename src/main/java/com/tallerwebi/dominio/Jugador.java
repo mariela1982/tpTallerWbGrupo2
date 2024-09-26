@@ -16,6 +16,11 @@ public class Jugador {
     private String nombre;
     private Date fechaNacimiento;
     private String posicion;
+    private String dni;
+    private String direccion;
+    private String email;
+    private String password;
+
 
     @ManyToOne
     private Equipo equipo;
@@ -59,4 +64,24 @@ public class Jugador {
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+
+
+
 }
