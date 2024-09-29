@@ -47,7 +47,7 @@ public class ControladorLogin {
         else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", usuarioBuscado);
-            return new ModelAndView("redirect:/admin/panel");
+            return new ModelAndView("redirect:/dt/panelDt");
         } else {
             model.put("error", "Usuario o clave incorrecta");
         }
