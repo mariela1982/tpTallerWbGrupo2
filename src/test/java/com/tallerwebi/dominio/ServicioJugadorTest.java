@@ -57,8 +57,6 @@ public class ServicioJugadorTest {
 
     }
 
-
-
     private void thenRegistroEsExitoso(Jugador jugador) {
         assertThat(jugador,notNullValue());
         verify(repositorioJugador,times(1)).guardar(jugador);
