@@ -2,7 +2,6 @@ package com.tallerwebi.dominio;
 
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -17,12 +16,12 @@ public class Jugador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private String posicion;
     private String dni;
     private String email;
     private String password;
-    private PartidosDeBsAs partidosDeBsAs;
+    private PartidosDeBsAs partido;
 
 
 
@@ -45,13 +44,11 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento.toLocalDate();
-    }
+
 
     public String getPosicion() {
         return posicion;
@@ -82,5 +79,17 @@ public class Jugador {
         return password;
     }
 
-    public PartidosDeBsAs getPartidosDeBsAs() {return partidosDeBsAs;}
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setPartido(PartidosDeBsAs partidosDeBsAs) {
+        this.partido = partidosDeBsAs;
+    }
+
+    public PartidosDeBsAs getPartido() {return partido;}
 }
