@@ -1,5 +1,7 @@
 package com.tallerwebi.dominio;
 
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class Equipo {
@@ -18,9 +21,11 @@ public class Equipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipo;
+    private String logo;
     private String nombre;
     private String cbu;
     private Long dtDni;
+    private PartidosDeBsAs partido;
 
 
     @OneToMany
@@ -66,6 +71,21 @@ public class Equipo {
         this.dtDni = dtDni;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public PartidosDeBsAs getPartido() {
+        return partido;
+    }
+
+    public void setPartido(PartidosDeBsAs partido) {
+        this.partido = partido;
+    }
 
     @Override
     public String toString() {
