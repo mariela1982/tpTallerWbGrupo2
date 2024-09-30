@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+// @service entre parentesis debo poner el nombre de la interface de servicio que voy a implementar
 @Service("servicioLogin")
+//utilizo siempre el @transactional
 @Transactional
+
 public class ServicioLoginImpl implements ServicioLogin {
 
     private RepositorioUsuario repositorioUsuario;

@@ -19,6 +19,8 @@ public class ControladorLogin {
     private ServicioLogin servicioLogin;
 
     @Autowired
+    //el autowired debemos ponerlo para que inyect el servicio , es decir ,me cree automaticamente el objeto servicio login
+
     public ControladorLogin(ServicioLogin servicioLogin){
         this.servicioLogin = servicioLogin;
     }
