@@ -2,6 +2,8 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.enums.Localidades;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class ControladorLogin {
@@ -42,7 +48,7 @@ public class ControladorLogin {
         if (usuarioBuscado != null && !usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", usuarioBuscado);
-            return new ModelAndView("redirect:/homePrincipal");
+            return new ModelAndView("redirect:/home");
         }
         else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);
@@ -62,35 +68,52 @@ public class ControladorLogin {
             servicioLogin.registrar(usuario);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
-            return new ModelAndView("redirect:/homePrincipal", model);
+            return new ModelAndView("redirect:/home", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
-            return new ModelAndView("homePrincipal", model);
+            return new ModelAndView("home", model);
         }
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(path = "/homePrincipal", method = RequestMethod.GET)
-    public ModelAndView homePrincipal() {
-        return new ModelAndView("homePrincipal");
-    }
-
     @RequestMapping(path = "/home", method = RequestMethod.GET)
-    public ModelAndView irAHome() {
+    public ModelAndView homePrincipal() {
         return new ModelAndView("home");
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView inicio() {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.GET)
-    public ModelAndView nuevoUsuario() {
-        ModelMap model = new ModelMap();
-        Usuario usuario = new Usuario();
-        model.put("usuario", usuario);
-        return new ModelAndView("nuevoUsuario",model);
+//    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.GET)
+//    public ModelAndView nuevoUsuario() {
+//        ModelMap model = new ModelMap();
+//        Usuario usuario = new Usuario();
+//        model.put("usuario", usuario);
+//
+//        return new ModelAndView("nuevoUsuario",model);
+//    }
+@RequestMapping(value = "/nuevoUsuario", method = RequestMethod.GET)
+public ModelAndView nuevoUsuario() {
+    ModelMap model = new ModelMap();
+    Usuario usuario = new Usuario();
+    model.put("usuario", usuario);
+    model.put("partidos", PartidosDeBsAs.values());
+    model.put("localidadesPorPartido", obtenerLocalidadesPorPartido());
+
+    return new ModelAndView("nuevoUsuario", model);
+}
+
+    private Map<String, List<String>> obtenerLocalidadesPorPartido() {
+        return Arrays.stream(Localidades.values())
+                .collect(Collectors.toMap(
+                        l -> l.getPartido().name(),
+                        Localidades::getLocalidad
+                ));
     }
+
+
+
 }
 

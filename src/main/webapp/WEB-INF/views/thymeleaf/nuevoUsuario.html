@@ -53,18 +53,32 @@
 
             <div>
 
-
                 <label for="direccion">Direccion</label>
                 <input id="direccion"
                        th:field="*{direccion}"
                        type="text"
                        placeholder="ingrese direccion"
-                       class="form-select mb-3">
-
-                </input>
-
+                       class="form-select mb-3"
+                />
 
             </div>
+            <div>
+                <label for="partidosDeBsAs">Partido de Buenos Aires</label>
+               <select id="partidosDeBsAs" th:field="*{partidosDeBsAs}" class="form-select mb-3" required onchange="cargarLocalidades()">
+                   <option value="" disabled selected>Seleccione su partido </option>
+                   <option th:each="partido : ${T(com.tallerwebi.dominio.enums.PartidosDeBsAs).values()} "
+                           th:value="${partido.name()}"
+                           th:text="${partido.name()}"></option>
+               </select>
+            </div>
+
+            <div>
+                <label for="localidades">Localidad</label>
+                <select id="localidades" name ="localidad" th:field="*{localidad}" class="form-select mb-3" required>
+                    <option value="" disabled selected>Selecciona una localidad</option>
+                </select>
+            </div>
+
 
             <div>
                 <label for="dni">DNI</label>
@@ -114,8 +128,7 @@
 
             <p th:if="${error != null}" th:text="'Error ' + ${error}" class="alert alert-danger m-0"></p>
         </form>
-
-
+ <script src="/resources/core/js/cargarLocalidad.js"></script>
     </div>
 </main>
 <!-- /.container -->

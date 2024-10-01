@@ -1,9 +1,9 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.tallerwebi.dominio.enums.Localidades;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+
+import javax.persistence.*;
 
 @Entity
 public class Usuario {
@@ -19,17 +19,25 @@ public class Usuario {
     private String password;
     private Boolean admin ;
 
+    @Enumerated(EnumType.STRING)
+    private PartidosDeBsAs partido;
+
+
+    private Localidades localidad;
+
     public Usuario() {
 
     }
 
-    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password) {
+    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partidosDeBsAs, Localidades localidad) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.direccion = direccion;
         this.email = email;
         this.password = password;
+        this.partido = partidosDeBsAs;
+        this.localidad = localidad;
         this.admin = false;
     }
 
@@ -64,4 +72,19 @@ public class Usuario {
     public void setDireccion(String direccion) {this.direccion = direccion;}
 
 
+    public PartidosDeBsAs getPartidosDeBsAs() {
+        return partido;
+    }
+
+    public void setPartidosDeBsAs(PartidosDeBsAs partidosDeBsAs) {
+        this.partido = partidosDeBsAs;
+    }
+
+    public Localidades getLocalidad() {
+        return  localidad;
+    }
+
+    public void setLocalidad(Localidades localidad) {
+        this.localidad = localidad;
+    }
 }
