@@ -21,10 +21,25 @@
         <h1 class="my-4 text-center">Gestion de Equipos</h1>
 
         <form th:action="@{/dt/equipos/crear}" method="post" class="mb-4" th:object="${equipo}">
+
+            <div class="mb-3">
+                <label for="logo" class="form-label">Insertar logo del equipo</label>
+                <input type="file" id="logo" name="logo" class="form-control" accept="image/png, image/jpeg" required>
+            </div>
+
+
+
+
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Equipo</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" required>
             </div>
+
+            <div class="mb-3">
+                <label for="cbu" class="form-label">Ingresar CBU: </label>
+                <input type="text" id="cbu" name="cbu" class="form-control" required>
+            </div>
+
 
             <div class="mb-3">
                 <label for="jugadores" class="form-label">Jugadores</label>
@@ -33,6 +48,19 @@
                     </option>
                 </select>
             </div>
+
+
+            <div class="mb-3">
+                <label for="partido" class="form-label">Partido perteneciente</label>
+                <select id="partido" name="partido" class="form-select" required>
+                    <option value="">Seleccione un partido</option>
+                    <option th:each="partido : ${T(com.tallerwebi.dominio.enums.PartidosDeBsAs).values()}"
+                            th:value="${partido.name()}"
+                            th:text="${partido.name()}"></option>
+                </select>
+            </div>
+
+
 
             <button type="submit" class="btn btn-primary">Crear Equipo</button>
         </form>

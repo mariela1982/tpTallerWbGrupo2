@@ -81,12 +81,8 @@
                 </tr>
                 <tr th:each="jugador : ${jugadores}">
                     <td th:text="${jugador.nombre}"></td>
-                    <td th:text="${#dates.format(jugador.fechaNacimiento, 'dd/MM/yyyy')}"></td>
+                    <!--<td th:text="${#dates.format(jugador.fechaNacimiento, 'dd/MM/yyyy')}"></td> !-->
                     <td th:text="${jugador.posicion}"></td>
-                    <td>
-                        <a th:href="@{/admin/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/admin/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
-                    </td>
                 </tr>
             </tbody>
         </table>

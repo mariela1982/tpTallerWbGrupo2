@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/jugadorFormulario")
@@ -34,4 +36,15 @@ public class ControladorJugador {
 
         return "dt/jugadoresDt";
     }
+
+    @GetMapping("/jugadores")
+    public ModelAndView mostrarJugadores() {
+        List<Jugador> jugadores = servicioJugador.obtenerTodos();
+        ModelAndView mav = new ModelAndView("dt/jugadoresDt");
+        mav.addObject("jugadores", jugadores);
+        return mav;
+    }
+
+
+
 }

@@ -1,7 +1,6 @@
 package com.tallerwebi.infraestructura;
 
 
-import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import org.hibernate.Session;
@@ -10,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class RepositorioJugadorImpl implements RepositorioJugador {
-
 
     SessionFactory sessionFactory;
 
@@ -29,6 +29,13 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
         Session session = sessionFactory.getCurrentSession();
         session.save(jugador);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List obtenerTodos() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Jugador.class).list();
     }
 
 

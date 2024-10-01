@@ -18,5 +18,11 @@ public class ControladorDt {
 
     @GetMapping("/jugadoresDt")
     public ModelAndView jugadoresDt(){return new ModelAndView("dt/jugadoresDt");}
+
+
+    @GetMapping("/equiposDt")
+    public ModelAndView equiposDt(){return new ModelAndView("dt/equiposDt");}
+
+
 }
 
