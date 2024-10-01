@@ -19,7 +19,8 @@ public class Jugador {
     private String fechaNacimiento;
     private String posicion;
     private String dni;
-
+    private String email;
+    private String password;
     private PartidosDeBsAs partido;
 
 
@@ -70,7 +71,13 @@ public class Jugador {
     }
 
 
+    public String getEmail() {
+        return email;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
