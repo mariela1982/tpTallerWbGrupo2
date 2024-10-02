@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,6 +23,10 @@ public class Equipo {
     private String nombre;
     private String cbu;
     private Long dtDni;
+
+    @ManyToOne
+    @JoinColumn(name = "torneo_id")
+    private Torneo torneo;
 
 
     @OneToMany

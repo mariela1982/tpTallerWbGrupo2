@@ -19,7 +19,8 @@ public class Usuario {
     private String direccion;
     private String email;
     private String password;
-    private Boolean admin ;
+    private Boolean admin;
+    private Integer saldo;
 
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
@@ -31,7 +32,7 @@ public class Usuario {
 
     }
 
-    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partidosDeBsAs) {
+    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -41,6 +42,7 @@ public class Usuario {
         this.partido = partidosDeBsAs;
 //        this.localidad = localidad;
         this.admin = false;
+        this.saldo = 0;
     }
 
 
@@ -89,4 +91,11 @@ public class Usuario {
 //    public void setLocalidad(Localidades localidad) {
 //        this.localidad = localidad;
 //    }
+    public Integer getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Integer saldo) {
+        this.saldo = saldo;
+    }
 }

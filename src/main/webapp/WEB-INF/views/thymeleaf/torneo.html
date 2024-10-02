@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Torneo</title>
+
+    <!-- Boostrap core css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <header th:replace="~{includes/userHeader :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Información del torneo -->
+            <div class="col-lg-8">
+                <h1 class="mb-4"><i class="fas fa-trophy"></i> Detalle del Torneo</h1>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-futbol"></i> Nombre:</strong> <span th:text="${torneo.nombre}">Torneo
+                            Nombre</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-gem"></i> Premio:</strong> $<span th:text="${torneo.premio}">0</span>
+                        ARG
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-ticket-alt"></i> Precio de Entrada:</strong> $<span
+                            th:text="${torneo.precioEntrada}">0</span> ARG
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha de Inicio:</strong> <span
+                            th:text="${#dates.format(torneo.fechaInicio, 'dd/MM/yyyy')}">01/01/2024</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-users"></i> Cantidad de Equipos:</strong> <span
+                            th:text="${torneo.cantidadEquipos}">0</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-map-marker-alt"></i> Partido:</strong> <span
+                            th:text="${torneo.partido}">Partido</span>
+                    </li>
+                </ul>
+
+                <!-- Lista de equipos -->
+                <h3 class="mt-4"><i class="fas fa-users"></i> Equipos Inscritos</h3>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="equipo : ${torneo.equipos}">
+                        <i class="fas fa-shield-alt"></i> <span th:text="${equipo.nombre}">Equipo 1</span>
+                    </li>
+                </ul>
+
+                <!-- Información de cupos -->
+                <div class="mt-4">
+                    <span class="badge bg-primary">Equipos Inscritos:
+                        <span th:text="${#lists.size(torneo.equipos)}">0</span>
+                    </span>
+
+                    <span class="badge bg-success">Cupos Disponibles:
+                        <span th:text="${cuposDisponibles}">0</span>
+                    </span>
+
+                    <span class="badge bg-danger">Cupos Ocupados:
+                        <span th:text="${cuposOcupados}">0</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Sección de inscripción -->
+            <div class="col-lg-4">
+                <h2 class="mb-4"><i class="fas fa-sign-in-alt"></i> Inscripcion</h2>
+
+                <form th:action="@{/equipo/inscribir}" method="post">
+                    <input type="hidden" name="torneoId" th:value="${torneo.id}">
+
+                    <button type="submit" class="btn btn-success btn-lg btn-block">
+                        <i class="fas fa-user-plus"></i> Inscribirse al Torneo
+                    </button>
+                </form>
+
+                <div th:if="${error}" class="alert alert-danger mt-4" role="alert">
+                    No tienes saldo suficiente para pagar la inscripcion. Por favor, carga mas dinero en tu cuenta.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
