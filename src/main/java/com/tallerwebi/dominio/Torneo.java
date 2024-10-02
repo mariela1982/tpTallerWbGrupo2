@@ -1,13 +1,16 @@
 package com.tallerwebi.dominio;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Entity
 public class Torneo {
@@ -20,14 +23,10 @@ public class Torneo {
     private Integer precioEntrada;
     private Date fechaInicio;
     private Integer cantidadEquipos;
-
-    @ManyToOne
-    @JoinColumn(name = "cancha_id")
-    private Cancha cancha;
-
-    @ManyToOne
-    @JoinColumn(name = "arbitro_id")
-    private Arbitro arbitro;
+    private PartidosDeBsAs partido;
+    
+    @OneToMany(mappedBy = "torneo", fetch = FetchType.EAGER)
+    private List<Equipo> equipos;
 
     public Long getId() {
         return id;
@@ -77,21 +76,20 @@ public class Torneo {
         this.cantidadEquipos = cantidadEquipos;
     }
 
-    public Cancha getCancha() {
-        return cancha;
+    public PartidosDeBsAs getPartido() {
+        return partido;
     }
 
-    public void setCancha(Cancha cancha) {
-        this.cancha = cancha;
+    public void setPartido(PartidosDeBsAs partido) {
+        this.partido = partido;
     }
 
-    public Arbitro getArbitro() {
-        return arbitro;
+    public List<Equipo> getEquipos() {
+        return equipos;
     }
 
-    public void setArbitro(Arbitro arbitro) {
-        this.arbitro = arbitro;
+    public void setEquipos(List<Equipo> equipos) {
+        this.equipos = equipos;
     }
-
 
 }

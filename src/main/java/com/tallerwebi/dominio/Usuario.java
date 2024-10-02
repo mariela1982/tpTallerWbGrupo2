@@ -17,7 +17,8 @@ public class Usuario {
     private String direccion;
     private String email;
     private String password;
-    private Boolean admin ;
+    private Boolean admin;
+    private Integer saldo;
 
     public Usuario() {
 
@@ -31,6 +32,7 @@ public class Usuario {
         this.email = email;
         this.password = password;
         this.admin = false;
+        this.saldo = 0;
     }
 
 
@@ -64,4 +66,11 @@ public class Usuario {
     public void setDireccion(String direccion) {this.direccion = direccion;}
 
 
+    public Integer getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Integer saldo) {
+        this.saldo = saldo;
+    }
 }
