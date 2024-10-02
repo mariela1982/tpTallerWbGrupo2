@@ -86,6 +86,23 @@ public class RepositorioJugadorTest {
         Assertions.assertEquals("Jugador 2", jugadores.get(1).getNombre());
     }
 
+
+    @Test
+    @Transactional
+    @Rollback
+    public void obtenerPorDni(){
+        Jugador jugador1 = new Jugador();
+        jugador1.setNombre("Kevin");
+        jugador1.setDni("45285663");
+
+        repositorioJugador.guardar(jugador1);
+
+        Jugador jugadorObtenido = repositorioJugador.obtenerPorDni("45285663");
+
+        Assertions.assertEquals("Kevin", jugadorObtenido.getNombre());
+
+    }
+
     }
 
 

@@ -10,6 +10,9 @@ public interface ServicioJugador {
     Boolean verificarDni(String dni) throws DniInvalidoException;
     Boolean verificarNombre(String nombre) throws NombreInvalidoException;
     Boolean verificarFechaDeNacimiento(String fecha);
+
+    Jugador obtenerPorDni(String dni);
+
     Boolean verificarDatosDelJugador(Jugador jugador) throws DniInvalidoException, NombreInvalidoException;
     List<Jugador> obtenerTodos();
 }

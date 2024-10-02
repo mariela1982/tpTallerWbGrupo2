@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface RepositorioJugador extends JpaRepository<Jugador, Long> {
     void guardar(Jugador jugador);
+
+    Jugador obtenerPorDni(String dni);
 }

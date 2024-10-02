@@ -5,6 +5,7 @@ import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.ServicioJugador;
 import com.tallerwebi.dominio.excepcion.DniInvalidoException;
 import com.tallerwebi.dominio.excepcion.NombreInvalidoException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,8 +25,12 @@ public class ServicioJugadorImpl implements ServicioJugador {
     private static final Pattern PATRON_NUMEROS = Pattern.compile(".*\\d.*");
 
 
-    private final RepositorioJugador repositorioJugador;
+    private RepositorioJugador repositorioJugador;
 
+
+
+
+    @Autowired
     public ServicioJugadorImpl(RepositorioJugador repositorioJugador) {
         this.repositorioJugador = repositorioJugador;
     }
@@ -39,9 +44,13 @@ public class ServicioJugadorImpl implements ServicioJugador {
 
     @Override
     public List<Jugador> obtenerTodos() {
-        return repositorioJugador.findAll(); // Llama al método del repositorio
+        return repositorioJugador.findAll();
     }
 
+    @Override
+    public Jugador obtenerPorDni(String dni) {
+        return repositorioJugador.obtenerPorDni(dni);
+    }
 
 
     @Override

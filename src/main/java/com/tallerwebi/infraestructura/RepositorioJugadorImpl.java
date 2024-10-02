@@ -5,6 +5,7 @@ import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,14 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
 
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Jugador obtenerPorDni(String dni) {
+        Session session = sessionFactory.getCurrentSession();
+        return (Jugador) session.createCriteria(Jugador.class)
+                .add(Restrictions.eq("dni", dni))
+                .uniqueResult();
+    }
 
 
 

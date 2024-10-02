@@ -76,14 +76,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:if="${#lists.isEmpty(jugadores)}">
-                    <td colspan="4" class="text-center">No hay jugadores registrados</td>
-                </tr>
-                <tr th:each="jugador : ${jugadores}">
-                    <td th:text="${jugador.nombre}"></td>
-                    <!--<td th:text="${#dates.format(jugador.fechaNacimiento, 'dd/MM/yyyy')}"></td> !-->
-                    <td th:text="${jugador.posicion}"></td>
-                </tr>
+            <tr th:if="${#lists.isEmpty(jugadores)}">
+                <td colspan="2" class="text-center">No hay jugadores registrados</td>
+            </tr>
+            <tr th:each="jugador : ${jugadores}">
+                <td th:text="${jugador.nombre}"></td>
+                <td th:text="${jugador.posicion}"></td>
+            </tr>
             </tbody>
         </table>
     </main>

@@ -40,7 +40,6 @@ public class ControladorJugador {
     @GetMapping("/jugadores")
     public ModelAndView mostrarJugadores() {
         List<Jugador> jugadores = servicioJugador.obtenerTodos();
-        System.out.println("Jugadores en el controlador: " + jugadores); // Para depuración
         ModelAndView mav = new ModelAndView("dt/jugadoresDt");
         mav.addObject("jugadores", jugadores);
         return mav;
