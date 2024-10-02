@@ -11,10 +11,10 @@
 
     <!-- custom style -->
     <link rel="stylesheet" th:href="@{/css/nuevoUs.css}"/>
-    <script>
-        let localidadesPorPartido = /*[[${localidadesPorPartido}]]*/ {};
-        console.log(localidadesPorPartido);
-    </script>
+<!--    <script>-->
+<!--        let localidadesPorPartido = /*[[${localidadesPorPartido}]]*/ {};-->
+<!--        console.log(localidadesPorPartido);-->
+<!--    </script>-->
 
 
 </head>
@@ -77,12 +77,12 @@
                </select>
             </div>
 
-            <div>
-                <label for="localidades">Localidad</label>
-                <select id="localidades"  th:field="*{localidad}" class="form-select mb-3" required>
-                    <option value="" disabled selected>Selecciona una localidad</option>
-                </select>
-            </div>
+<!--            <div>-->
+<!--                <label for="localidades">Localidad</label>-->
+<!--                <select id="localidades"  th:field="*{localidad}" class="form-select mb-3" required>-->
+<!--                    <option value="" disabled selected>Selecciona una localidad</option>-->
+<!--                </select>-->
+<!--            </div>-->
 
 
             <div>
@@ -133,30 +133,30 @@
 
             <p th:if="${error != null}" th:text="'Error ' + ${error}" class="alert alert-danger m-0"></p>
         </form>
-        <script >
+<!--        <script >-->
 
-            function cargarLocalidades() {
+<!--            function cargarLocalidades() {-->
 
-                const partidoSelect = document.getElementById('partidosDeBsAs');
-                const localidadSelect = document.getElementById('localidades');
-                const partidoSeleccionado = partidoSelect.value;
-                console.log(partidoSeleccionado);
+<!--                const partidoSelect = document.getElementById('partidosDeBsAs');-->
+<!--                const localidadSelect = document.getElementById('localidades');-->
+<!--                const partidoSeleccionado = partidoSelect.value;-->
+<!--                console.log(partidoSeleccionado);-->
 
-                localidadSelect.innerHTML = '<option value="" disabled selected>Selecciona una localidad</option>'; // para poder limpiar luego de cada eleccion las  localidades anteriores
-                if (partidoSeleccionado) {
-                   // const localidades = localidadesPorPartido[partidoSeleccionado];
-                    const localidades = localidadesPorPartido[partidoSeleccionado];
-                    console.log(localidades);
-                    localidades.forEach(localidad => {
-                        const option = document.createElement("option");
-                        option.value = localidad;
-                        option.textContent = localidad;
-                        localidadSelect.appendChild(option);
-                    });
-                }
+<!--                localidadSelect.innerHTML = '<option value="" disabled selected>Selecciona una localidad</option>'; // para poder limpiar luego de cada eleccion las  localidades anteriores-->
+<!--                if (partidoSeleccionado) {-->
+<!--                   // const localidades = localidadesPorPartido[partidoSeleccionado];-->
+<!--                    const localidades = localidadesPorPartido[partidoSeleccionado];-->
+<!--                    console.log(localidades);-->
+<!--                    localidades.forEach(localidad => {-->
+<!--                        const option = document.createElement("option");-->
+<!--                        option.value = localidad;-->
+<!--                        option.textContent = localidad;-->
+<!--                        localidadSelect.appendChild(option);-->
+<!--                    });-->
+<!--                }-->
 
-            }
-        </script>
+<!--            }-->
+<!--        </script>-->
     </div>
 </main>
 <!-- /.container -->

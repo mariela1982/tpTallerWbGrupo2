@@ -2,10 +2,12 @@ package com.tallerwebi.dominio;
 
 import com.tallerwebi.dominio.enums.Localidades;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Entity
+@DynamicUpdate
 public class Usuario {
 
     @Id
@@ -22,14 +24,14 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
 
-    @Enumerated(EnumType.STRING)
-    private Localidades localidad;
+//    @Enumerated(EnumType.STRING)
+//    private Localidades localidad;
 
     public Usuario() {
 
     }
 
-    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partidosDeBsAs, Localidades localidad) {
+    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partidosDeBsAs) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -37,7 +39,7 @@ public class Usuario {
         this.email = email;
         this.password = password;
         this.partido = partidosDeBsAs;
-        this.localidad = localidad;
+//        this.localidad = localidad;
         this.admin = false;
     }
 
@@ -80,11 +82,11 @@ public class Usuario {
         this.partido = partidosDeBsAs;
     }
 
-    public Localidades getLocalidad() {
-        return  localidad;
-    }
-
-    public void setLocalidad(Localidades localidad) {
-        this.localidad = localidad;
-    }
+//    public Localidades getLocalidad() {
+//        return  localidad;
+//    }
+//
+//    public void setLocalidad(Localidades localidad) {
+//        this.localidad = localidad;
+//    }
 }

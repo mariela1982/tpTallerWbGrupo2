@@ -46,10 +46,10 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 
-        if (usuarioBuscado != null && !usuarioBuscado.getAdmin()) {
+        if (usuarioBuscado != null ) {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", usuarioBuscado);
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("redirect:/directorTecnico");
         }
         else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);
@@ -107,20 +107,20 @@ public class ControladorLogin {
 public ModelAndView nuevoUsuario() {
     ModelMap model = new ModelMap();
     Usuario usuario = new Usuario();
-    model.put("usuario", usuario);
-    model.put("partidos", PartidosDeBsAs.values());
-    model.put("localidadesPorPartido", obtenerLocalidadesPorPartido());
+      model.put("usuario", usuario);
+//    model.put("partidos", PartidosDeBsAs.values());
+//    model.put("localidadesPorPartido", obtenerLocalidadesPorPartido());
 
     return new ModelAndView("nuevoUsuario", model);
 }
-
-    private Map<String, List<String>> obtenerLocalidadesPorPartido() {
-        return Arrays.stream(Localidades.values())
-                .collect(Collectors.toMap(
-                        l -> l.getPartido().name(),
-                        Localidades::getLocalidad
-                ));
-    }
+//
+//    private Map<String, List<String>> obtenerLocalidadesPorPartido() {
+//        return Arrays.stream(Localidades.values())
+//                .collect(Collectors.toMap(
+//                        l -> l.getPartido().name(),
+//                        Localidades::getLocalidad
+//                ));
+//    }
 
 
 
