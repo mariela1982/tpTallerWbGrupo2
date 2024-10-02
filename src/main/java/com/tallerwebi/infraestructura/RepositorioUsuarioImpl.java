@@ -8,16 +8,22 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 @Repository("repositorioUsuario")
+
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
+
     public RepositorioUsuarioImpl(SessionFactory sessionFactory){
+
         this.sessionFactory = sessionFactory;
     }
 
+    @Transactional
     @Override
     public Usuario buscarUsuario(String email, String password) {
 
@@ -28,21 +34,26 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .uniqueResult();
     }
 
+    @Transactional
     @Override
     public void guardar(Usuario usuario) {
-        sessionFactory.getCurrentSession().save(usuario);
+
+        Session session =sessionFactory.getCurrentSession();
+        session.save(usuario);
     }
 
-    @Override
-    public Usuario buscar(String email) {
-        return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-                .add(Restrictions.eq("email", email))
-                .uniqueResult();
-    }
+//    @Transactional
+//    @Override
+//    public Usuario buscar(String email) {
+//        return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+//                .add(Restrictions.eq("email", email))
+//                .uniqueResult();
+//    }
 
-    @Override
-    public void modificar(Usuario usuario) {
-        sessionFactory.getCurrentSession().update(usuario);
-    }
+//    @Transactional
+//    @Override
+//    public void modificar(Usuario usuario) {
+//        sessionFactory.getCurrentSession().update(usuario);
+//    }
 
 }
