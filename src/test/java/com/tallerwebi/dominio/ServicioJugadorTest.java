@@ -1,12 +1,16 @@
 package com.tallerwebi.dominio;
 
+import com.tallerwebi.config.HibernateConfig;
 import com.tallerwebi.dominio.excepcion.DniInvalidoException;
 import com.tallerwebi.dominio.excepcion.NombreInvalidoException;
 import com.tallerwebi.infraestructura.RepositorioJugadorImpl;
 import com.tallerwebi.infraestructura.ServicioJugadorImpl;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -17,7 +21,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+@RunWith(SpringRunner.class)
 
+@ContextConfiguration(classes = { HibernateConfig.class })
 public class ServicioJugadorTest {
 
     RepositorioJugador repositorioJugador = mock(RepositorioJugadorImpl.class);
@@ -92,10 +98,12 @@ public class ServicioJugadorTest {
         jugador2.setNombre("Alexis");
         jugador2.setFechaNacimiento("13/07/2003");
         jugador2.setDni("22222222");
-
-
         jugador2.setPosicion("Defensa");
 
+        doNothing().when(repositorioJugador).guardar(any(Jugador.class));
+
+        when(repositorioJugador.obtenerPorDni("45285663")).thenReturn(jugador1);
+        when(repositorioJugador.obtenerPorDni("22222222")).thenReturn(jugador2);
 
         servicioJugador.guardar(jugador1);
         servicioJugador.guardar(jugador2);
@@ -103,16 +111,9 @@ public class ServicioJugadorTest {
         Jugador jugadorObtenido = servicioJugador.obtenerPorDni("45285663");
         Jugador jugadorObtenido2 = servicioJugador.obtenerPorDni("22222222");
 
-
-
         assertEquals("Kevin", jugadorObtenido.getNombre());
         assertEquals("Alexis", jugadorObtenido2.getNombre());
-
-
-
-
-
-        // Verificar que se llamó al repositorio
     }
+
 
 }

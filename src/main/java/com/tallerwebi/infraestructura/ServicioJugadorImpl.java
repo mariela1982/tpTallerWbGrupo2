@@ -25,6 +25,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
     private static final Pattern PATRON_NUMEROS = Pattern.compile(".*\\d.*");
 
 
+    @Autowired
     private RepositorioJugador repositorioJugador;
 
 
@@ -36,6 +37,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
+    @Transactional
     public Jugador guardar(Jugador jugador) throws NombreInvalidoException, DniInvalidoException {
         verificarDatosDelJugador(jugador);
         this.repositorioJugador.guardar(jugador);
@@ -43,17 +45,23 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
+    @Transactional
+
     public List<Jugador> obtenerTodos() {
         return repositorioJugador.findAll();
     }
 
     @Override
+    @Transactional
+
     public Jugador obtenerPorDni(String dni) {
         return repositorioJugador.obtenerPorDni(dni);
     }
 
 
     @Override
+    @Transactional
+
     public Boolean verificarDatosDelJugador(Jugador jugador) throws DniInvalidoException, NombreInvalidoException {
         verificarDni(jugador.getDni());
         verificarNombre(jugador.getNombre());
@@ -62,6 +70,8 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
+    @Transactional
+
     public Boolean verificarDni(String dni) throws DniInvalidoException {
 
         if(dni.length() != 8){
@@ -72,6 +82,8 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
+    @Transactional
+
     public Boolean verificarNombre(String nombre) throws NombreInvalidoException {
 
         if(nombre.isEmpty() || PATRON_NUMEROS.matcher(nombre).matches()){
@@ -82,6 +94,8 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
+    @Transactional
+
     public Boolean verificarFechaDeNacimiento(String fecha) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);

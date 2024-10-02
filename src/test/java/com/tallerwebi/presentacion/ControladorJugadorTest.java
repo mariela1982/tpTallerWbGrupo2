@@ -7,14 +7,23 @@ import com.tallerwebi.dominio.excepcion.DniInvalidoException;
 import com.tallerwebi.dominio.excepcion.NombreInvalidoException;
 import com.tallerwebi.infraestructura.ServicioJugadorImpl;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+@WebAppConfiguration
 
 public class ControladorJugadorTest {
 
@@ -96,6 +105,8 @@ public class ControladorJugadorTest {
         jugador.setPartido(partidosDeBsAs);
         return jugador;
     }
+
+
 
 
 }

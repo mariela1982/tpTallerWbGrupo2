@@ -19,7 +19,7 @@ import javax.persistence.criteria.Root;
 public class RepositorioEquipoImpl implements RepositorioEquipo {
 
 
-
+    @Autowired
     SessionFactory sessionFactory;
 
     @Autowired

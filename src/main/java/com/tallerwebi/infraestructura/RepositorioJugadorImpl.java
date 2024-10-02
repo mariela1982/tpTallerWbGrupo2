@@ -22,6 +22,8 @@ import java.util.Optional;
 @Repository
 public class RepositorioJugadorImpl implements RepositorioJugador {
 
+
+    @Autowired
     SessionFactory sessionFactory;
 
     @Autowired
@@ -35,7 +37,7 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
     @Transactional
     public void guardar(Jugador jugador) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(jugador);
+        session.saveOrUpdate(jugador);
 
     }
 
