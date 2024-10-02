@@ -39,7 +39,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
 
     @Override
     public List<Jugador> obtenerTodos() {
-        return repositorioJugador.obtenerTodos(); // Llama al método del repositorio
+        return repositorioJugador.findAll(); // Llama al método del repositorio
     }
 
 
