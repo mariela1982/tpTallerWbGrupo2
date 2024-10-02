@@ -18,3 +18,12 @@ function cargarLocalidades() {
     }
 
 }
+// fetch(`/localidades?partido=${partidoSeleccionado}`)
+//     .then(response => response.json())
+//     .then(localidades => {
+//         localidades.forEach(localidad => {
+//             const option = document.createElement("option");
+//             option.value = localidad;
+//             option.textContent = localidad;
+//             localidadSelect.appendChild(option);
+//         });

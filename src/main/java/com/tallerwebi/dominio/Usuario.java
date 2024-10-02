@@ -22,7 +22,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
 
-
+    @Enumerated(EnumType.STRING)
     private Localidades localidad;
 
     public Usuario() {

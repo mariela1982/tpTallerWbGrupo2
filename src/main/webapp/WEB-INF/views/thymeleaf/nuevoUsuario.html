@@ -11,6 +11,11 @@
 
     <!-- custom style -->
     <link rel="stylesheet" th:href="@{/css/nuevoUs.css}"/>
+    <script>
+        let localidadesPorPartido = /*[[${localidadesPorPartido}]]*/ {};
+        console.log(localidadesPorPartido);
+    </script>
+
 
 </head>
 
@@ -74,7 +79,7 @@
 
             <div>
                 <label for="localidades">Localidad</label>
-                <select id="localidades" name ="localidad" th:field="*{localidad}" class="form-select mb-3" required>
+                <select id="localidades"  th:field="*{localidad}" class="form-select mb-3" required>
                     <option value="" disabled selected>Selecciona una localidad</option>
                 </select>
             </div>
@@ -128,7 +133,30 @@
 
             <p th:if="${error != null}" th:text="'Error ' + ${error}" class="alert alert-danger m-0"></p>
         </form>
- <script src="/resources/core/js/cargarLocalidad.js"></script>
+        <script >
+
+            function cargarLocalidades() {
+
+                const partidoSelect = document.getElementById('partidosDeBsAs');
+                const localidadSelect = document.getElementById('localidades');
+                const partidoSeleccionado = partidoSelect.value;
+                console.log(partidoSeleccionado);
+
+                localidadSelect.innerHTML = '<option value="" disabled selected>Selecciona una localidad</option>'; // para poder limpiar luego de cada eleccion las  localidades anteriores
+                if (partidoSeleccionado) {
+                   // const localidades = localidadesPorPartido[partidoSeleccionado];
+                    const localidades = localidadesPorPartido[partidoSeleccionado];
+                    console.log(localidades);
+                    localidades.forEach(localidad => {
+                        const option = document.createElement("option");
+                        option.value = localidad;
+                        option.textContent = localidad;
+                        localidadSelect.appendChild(option);
+                    });
+                }
+
+            }
+        </script>
     </div>
 </main>
 <!-- /.container -->

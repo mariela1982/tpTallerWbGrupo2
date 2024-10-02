@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -92,8 +93,16 @@ public class ControladorLogin {
 //        Usuario usuario = new Usuario();
 //        model.put("usuario", usuario);
 //
-//        return new ModelAndView("nuevoUsuario",model);
+//        // Obtener las localidades por partido
+//        Map<String, List<String>> localidadesPorPartido = new HashMap<>();
+//        for (PartidosDeBsAs partido : PartidosDeBsAs.values()) {
+//            localidadesPorPartido.put(partido.name(), Localidades.getLocalidadPorPartido(partido));
+//        }
+//        model.put("localidadesPorPartido", localidadesPorPartido);
+
+//        return new ModelAndView("nuevoUsuario", model);
 //    }
+
 @RequestMapping(value = "/nuevoUsuario", method = RequestMethod.GET)
 public ModelAndView nuevoUsuario() {
     ModelMap model = new ModelMap();
