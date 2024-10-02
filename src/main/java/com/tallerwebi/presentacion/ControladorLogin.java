@@ -39,15 +39,11 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 
-        if (usuarioBuscado != null && !usuarioBuscado.getAdmin()) {
+        if (usuarioBuscado != null) {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", usuarioBuscado);
             return new ModelAndView("redirect:/homePrincipal");
-        }
-        else if (usuarioBuscado != null && usuarioBuscado.getAdmin()) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("usuario", usuarioBuscado);
-            return new ModelAndView("redirect:/admin/panel");
+        
         } else {
             model.put("error", "Usuario o clave incorrecta");
         }
