@@ -44,14 +44,16 @@
 
                 <div class="col-md-6 mb-3">
                     <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
-                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" th:field="*{fechaInicio}" required>
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio"
+                        th:field="*{fechaInicio}" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="cantidadEquipos" class="form-label">Cantidad de Equipos</label>
-                    <select id="cantidadEquipos" name="cantidadEquipos" class="form-select" th:field="*{cantidadEquipos}" required>
+                    <select id="cantidadEquipos" name="cantidadEquipos" class="form-select"
+                        th:field="*{cantidadEquipos}" required>
                         <option value="4">4 Equipos</option>
                         <option value="8">8 Equipos</option>
                         <option value="16">16 Equipos</option>
@@ -59,27 +61,21 @@
                     </select>
                 </div>
 
+                <!-- Partidos -->
                 <div class="col-md-6 mb-3">
-                    <label for="cancha" class="form-label">Cancha</label>
-                    <select id="cancha" name="cancha.id" class="form-select" th:field="*{cancha.id}" required>
-                        <option th:each="cancha : ${canchas}" th:value="${cancha.id}" th:text="${cancha.nombre}">
+                    <label for="partido" class="form-label">Partido</label>
+                    <select id="partido" name="partido" class="form-select" required>
+                        <option value="">Seleccionar un Partido</option>
+                        <option th:each="partido : ${partidosDeBsAs}" th:value="${partido}" th:text="${partido.name()}">
                         </option>
+                        ></option>
                     </select>
+
                 </div>
             </div>
-            
-            <!-- arbitro -->
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="arbitro" class="form-label">Arbitro</label>
-                    <select id="arbitro" name="arbitro.id" class="form-select" th:field="*{arbitro.id}" required>
-                        <option th:each="arbitro : ${arbitros}" th:value="${arbitro.id}" th:text="${arbitro.nombre}">
-                        </option>
-                    </select>
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-primary" th:text="${editando ? 'Actualizar Torneo' : 'Agregar Torneo'}"></button>
+            <button type="submit" class="btn btn-primary"
+                th:text="${editando ? 'Actualizar Torneo' : 'Agregar Torneo'}">
+            </button>
         </form>
 
         <!-- Mensajes de alerta -->
@@ -102,25 +98,24 @@
                     <th>Premio</th>
                     <th>Fecha de Inicio</th>
                     <th>Equipos</th>
-                    <th>Cancha</th>
-                    <th>Arbitro</th>
+                    <th>Partido</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:if="${#lists.isEmpty(torneos)}">
-                    <td colspan="7" class="text-center">No hay torneos activos</td>
+                    <td colspan="6" class="text-center">No hay torneos activos</td>
                 </tr>
                 <tr th:each="torneo : ${torneos}">
                     <td th:text="${torneo.nombre}"></td>
                     <td th:text="${torneo.premio}"></td>
                     <td th:text="${#dates.format(torneo.fechaInicio, 'dd/MM/yyyy')}"></td>
                     <td th:text="${torneo.cantidadEquipos}"></td>
-                    <td th:text="${torneo.cancha.nombre}"></td>
-                    <td th:text="${torneo.arbitro.nombre}"></td>
+                    <td th:text="${torneo.partido.name()}"></td>
                     <td>
                         <a th:href="@{/admin/torneos/editar/{id}(id=${torneo.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/admin/torneos/eliminar/{id}(id=${torneo.id})}" class="btn btn-danger">Eliminar</a>
+                        <a th:href="@{/admin/torneos/eliminar/{id}(id=${torneo.id})}"
+                            class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             </tbody>

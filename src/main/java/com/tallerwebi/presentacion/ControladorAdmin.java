@@ -15,6 +15,7 @@ import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.Torneo;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Controller
 @RequestMapping("/admin")
@@ -50,6 +51,8 @@ public class ControladorAdmin {
 
         mav.addObject("torneo", new Torneo());
         mav.addObject("torneos", repositorioAdmin.obtenerTorneos());
+        
+        mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
 
         mav.addObject("editando", false);
 
