@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,13 +14,25 @@ public class Equipo {
 
 
 
-    private String nombre;
-    private String cbu;
-    private Long dtDni;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipo;
+    private String nombre;
+    private String cbu;
+    private Long dtDni;
 
+
+    @OneToMany
+    private List<Jugador> jugadores;
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
 
     public void setIdEquipo(Long idEquipo) {
         this.idEquipo = idEquipo;
