@@ -49,33 +49,37 @@
                             required
                     />
                 </div>
+                <div>
+                    <label for="dni">DNI</label>
+                    <input
+                            th:field="*{dni}"
+                            id="dni"
+                            type="text"
+                            class="form-control mb-3"
+                            placeholder="DNI"
+                            required
+                    />
+                </div>
+
             </div>
 
             <div>
-
-
                 <label for="direccion">Direccion</label>
                 <input id="direccion"
                        th:field="*{direccion}"
                        type="text"
                        placeholder="ingrese direccion"
-                       class="form-select mb-3">
-
-                </input>
-
-
-            </div>
-
-            <div>
-                <label for="dni">DNI</label>
-                <input
-                        th:field="*{dni}"
-                        id="dni"
-                        type="text"
-                        class="form-control mb-3"
-                        placeholder="DNI"
-                        required
+                       class="form-select mb-3"
                 />
+            </div>
+            <div>
+                <label for="partidosDeBsAs">Partido de Buenos Aires</label>
+                <select id="partidosDeBsAs" th:field="*{partido}" class="form-select mb-3" >
+                    <option value="" disabled selected>Seleccione su partido </option>
+                    <option th:each="partido : ${T(com.tallerwebi.dominio.enums.PartidosDeBsAs).values()} "
+                            th:value="${partido.name()}"
+                            th:text="${partido.name()}"></option>
+                </select>
             </div>
 
             <div>

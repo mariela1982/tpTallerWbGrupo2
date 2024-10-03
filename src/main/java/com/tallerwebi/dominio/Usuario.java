@@ -1,9 +1,8 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+
+import javax.persistence.*;
 
 @Entity
 public class Usuario {
@@ -20,11 +19,14 @@ public class Usuario {
     private Boolean admin;
     private Integer saldo;
 
+    @Enumerated
+    private PartidosDeBsAs partido;
+
     public Usuario() {
 
     }
 
-    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password) {
+    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partido) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -33,6 +35,7 @@ public class Usuario {
         this.password = password;
         this.admin = false;
         this.saldo = 0;
+        this.partido = partido;
     }
 
 
@@ -65,6 +68,12 @@ public class Usuario {
     public String getDireccion() {return direccion;}
     public void setDireccion(String direccion) {this.direccion = direccion;}
 
+    public PartidosDeBsAs getPartido() {
+        return partido;
+    }
+    public void setPartido(PartidosDeBsAs partido) {
+        this.partido = partido;
+    }
 
     public Integer getSaldo() {
         return saldo;

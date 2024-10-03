@@ -40,13 +40,19 @@ public class ControladorLogin {
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 
         if (usuarioBuscado != null) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("usuario", usuarioBuscado);
-            return new ModelAndView("redirect:/homePrincipal");
-        
-        } else {
-            model.put("error", "Usuario o clave incorrecta");
+            if ((usuarioBuscado.getAdmin())) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("usuario", usuarioBuscado);
+                return new ModelAndView("redirect:/admin/panel");
+            } else {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("usuario", usuarioBuscado);
+                return new ModelAndView("redirect:/home");
+
+            }
         }
+            model.put("error", "Usuario o clave incorrecta");
+
         return new ModelAndView("login", model);
     }
 
@@ -58,23 +64,20 @@ public class ControladorLogin {
             servicioLogin.registrar(usuario);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
-            return new ModelAndView("redirect:/homePrincipal", model);
+            return new ModelAndView("redirect:/home", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
-            return new ModelAndView("homePrincipal", model);
+            return new ModelAndView("home", model);
         }
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(path = "/homePrincipal", method = RequestMethod.GET)
-    public ModelAndView homePrincipal() {
-        return new ModelAndView("homePrincipal");
-    }
-
     @RequestMapping(path = "/home", method = RequestMethod.GET)
-    public ModelAndView irAHome() {
+    public ModelAndView homePrincipal() {
         return new ModelAndView("home");
     }
+
+
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView inicio() {
