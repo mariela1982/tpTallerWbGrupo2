@@ -77,8 +77,13 @@ public class ControladorLogin {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(path = "/home", method = RequestMethod.GET)
+    @RequestMapping(path = "/homePrincipal", method = RequestMethod.GET)
     public ModelAndView homePrincipal() {
+        return new ModelAndView("homePrincipal");
+    }
+
+    @RequestMapping(path = "/home", method = RequestMethod.GET)
+    public ModelAndView home() {
         return new ModelAndView("home");
     }
 

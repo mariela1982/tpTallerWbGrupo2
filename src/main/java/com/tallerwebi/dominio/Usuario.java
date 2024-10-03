@@ -5,6 +5,9 @@ import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+
+import javax.persistence.*;
 
 @Entity
 @DynamicUpdate
@@ -32,17 +35,16 @@ public class Usuario {
 
     }
 
-    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password) {
+    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partido) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.direccion = direccion;
         this.email = email;
         this.password = password;
-        this.partido = partidosDeBsAs;
-//        this.localidad = localidad;
         this.admin = false;
         this.saldo = 0;
+        this.partido = partido;
     }
 
 
@@ -75,22 +77,13 @@ public class Usuario {
     public String getDireccion() {return direccion;}
     public void setDireccion(String direccion) {this.direccion = direccion;}
 
-
-    public PartidosDeBsAs getPartidosDeBsAs() {
+    public PartidosDeBsAs getPartido() {
         return partido;
     }
-
-    public void setPartidosDeBsAs(PartidosDeBsAs partidosDeBsAs) {
-        this.partido = partidosDeBsAs;
+    public void setPartido(PartidosDeBsAs partido) {
+        this.partido = partido;
     }
 
-//    public Localidades getLocalidad() {
-//        return  localidad;
-//    }
-//
-//    public void setLocalidad(Localidades localidad) {
-//        this.localidad = localidad;
-//    }
     public Integer getSaldo() {
         return saldo;
     }

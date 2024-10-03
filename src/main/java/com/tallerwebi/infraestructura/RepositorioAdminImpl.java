@@ -24,9 +24,10 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public void guardarTorneo(Torneo torneo) {
+    public Torneo guardarTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(torneo);
+        return torneo;
     }
 
     @Transactional
@@ -52,9 +53,10 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public void guardarEquipo(Equipo equipo) {
+    public Equipo guardarEquipo(Equipo equipo) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(equipo);
+        return equipo;
     }
 
     @Transactional
@@ -80,9 +82,10 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public void guardarJugador(Jugador jugador) {
+    public Jugador guardarJugador(Jugador jugador) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(jugador);
+        return jugador;
     }
 
     @Transactional
@@ -108,9 +111,10 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public void guardarCancha(Cancha nombre) {
+    public Cancha guardarCancha(Cancha nombre) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(nombre);
+        return nombre;
     }
 
     @Transactional
@@ -136,9 +140,10 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public void guardarArbitro(Arbitro arbitro) {
+    public Arbitro guardarArbitro(Arbitro arbitro) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(arbitro);
+        return arbitro;
     }
 
     @Transactional

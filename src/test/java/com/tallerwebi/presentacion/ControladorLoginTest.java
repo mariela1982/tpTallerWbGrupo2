@@ -40,7 +40,7 @@ public class ControladorLoginTest {
 	public void queAlTocarElBotonIngresarVayaAlaVistaPrincipal(){
 		ModelAndView modelAndView = controladorLogin.homePrincipal();
 		String nombre = modelAndView.getViewName();
-		assertThat(nombre, equalToIgnoringCase("homePrincipal"));
+		assertThat(nombre, equalToIgnoringCase("home"));
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class ControladorLoginTest {
 		ModelAndView modelAndView = controladorLogin.registrarme(usuarioMock);
 
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/homePrincipal"));
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/home"));
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("El usuario ya existe"));
 	}
 
@@ -121,7 +121,7 @@ public class ControladorLoginTest {
 		ModelAndView modelAndView = controladorLogin.registrarme(usuarioMock);
 
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("homePrincipal"));
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("home"));
 		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Error al registrar el nuevo usuario"));
 	}
 }
