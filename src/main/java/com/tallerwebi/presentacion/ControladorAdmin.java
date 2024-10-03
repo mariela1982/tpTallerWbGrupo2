@@ -39,7 +39,7 @@ public class ControladorAdmin {
     // Controller para el panel de administrador
     @GetMapping("/panel")
     public ModelAndView panelAdmin() {
-        return new ModelAndView("admin/panel");
+        return new ModelAndView("dt/panel");
     }
 
     // Controller para la vista de gestion de torneos

@@ -23,12 +23,27 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version> <!-- Asegúrate de que esta versión sea compatible -->
+            <scope>provided</scope>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.5.8</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -66,6 +81,11 @@
             <version>${servletapi.version}</version>
             <scope>provided</scope>
         </dependency>
+
+
+
+
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -113,6 +133,9 @@
             <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
+
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
