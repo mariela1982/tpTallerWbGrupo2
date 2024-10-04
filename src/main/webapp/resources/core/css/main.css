@@ -41,8 +41,18 @@ h2 {
     display: inline-grid;
     grid-gap: 50px;
     padding-bottom: 50px;
-    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 50px;
     text-align: center;
+}
+.containerLogin{
+
+    grid-gap: 50px;
+    padding-left: 100px;
+
+    padding-top: 50px;
+    text-align: center;
+
 }
 
 .cont1 {

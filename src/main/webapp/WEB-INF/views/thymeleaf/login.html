@@ -19,9 +19,9 @@
 <body>
     <header th:replace="~{includes/userHeader :: header}"></header>
 
-    <main role="main" class="container">
+    <main role="main" >
 
-        <div class="container">
+        <div class="containerLogin">
             <div id="loginbox" style="margin-top:50px;"
                 class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <form action="#" th:action="@{/validarLogin}" method="POST" th:object="${datosLogin}">
