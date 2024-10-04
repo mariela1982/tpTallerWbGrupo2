@@ -1,18 +1,18 @@
 package com.tallerwebi.dominio;
 
-import com.tallerwebi.dominio.excepcion.CamposVacios;
-import com.tallerwebi.dominio.excepcion.EquipoExistente;
-import com.tallerwebi.infraestructura.RepositorioEquipoImpl;
-import com.tallerwebi.infraestructura.ServicioEquipoImpl;
-import org.junit.Test;
-
-import java.time.Clock;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
+import com.tallerwebi.dominio.excepcion.EquipoExistente;
+import com.tallerwebi.infraestructura.RepositorioEquipoImpl;
+import com.tallerwebi.infraestructura.ServicioEquipoImpl;
 
 public class ServicioEquipoTest {
 
