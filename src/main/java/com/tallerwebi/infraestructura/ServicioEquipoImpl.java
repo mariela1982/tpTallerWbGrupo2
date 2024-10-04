@@ -1,14 +1,14 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.Equipo;
-import com.tallerwebi.dominio.RepositorioEquipo;
-import com.tallerwebi.dominio.ServicioEquipo;
-import com.tallerwebi.dominio.excepcion.CamposVacios;
-import com.tallerwebi.dominio.excepcion.EquipoExistente;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import com.tallerwebi.dominio.Equipo;
+import com.tallerwebi.dominio.RepositorioEquipo;
+import com.tallerwebi.dominio.ServicioEquipo;
+import com.tallerwebi.dominio.excepcion.EquipoExistente;
 
 @Service
 @Transactional

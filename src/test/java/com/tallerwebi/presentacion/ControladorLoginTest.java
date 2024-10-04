@@ -1,18 +1,23 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.ServicioLogin;
-import com.tallerwebi.dominio.Usuario;
-import com.tallerwebi.dominio.excepcion.UsuarioExistente;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
-import static org.mockito.Mockito.*;
+import com.tallerwebi.dominio.ServicioLogin;
+import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 
 public class ControladorLoginTest {
 
@@ -20,7 +25,7 @@ public class ControladorLoginTest {
 	private Usuario usuarioMock;
 	private DatosLogin datosLoginMock;
 	private HttpServletRequest requestMock;
-	private HttpSession sessionMock;
+	// private HttpSession sessionMock;
 	private ServicioLogin servicioLoginMock;
 
 
@@ -31,7 +36,7 @@ public class ControladorLoginTest {
 		when(usuarioMock.getEmail()).thenReturn("mari@unlam.com");
 		when(usuarioMock.getPassword()).thenReturn("123");
 		requestMock = mock(HttpServletRequest.class);
-		sessionMock = mock(HttpSession.class);
+		// sessionMock = mock(HttpSession.class);
 		servicioLoginMock = mock(ServicioLogin.class);
 		controladorLogin = new ControladorLogin(servicioLoginMock);
 	}

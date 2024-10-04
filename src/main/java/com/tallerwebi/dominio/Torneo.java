@@ -14,7 +14,7 @@ import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Entity
 public class Torneo {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +24,7 @@ public class Torneo {
     private Date fechaInicio;
     private Integer cantidadEquipos;
     private PartidosDeBsAs partido;
-    
+
     @OneToMany(mappedBy = "torneo", fetch = FetchType.EAGER)
     private List<Equipo> equipos;
 
@@ -43,7 +43,7 @@ public class Torneo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public Integer getPremio() {
         return premio;
     }
@@ -59,7 +59,7 @@ public class Torneo {
     public void setPrecioEntrada(Integer precioEntrada) {
         this.precioEntrada = precioEntrada;
     }
-    
+
     public Date getFechaInicio() {
         return fechaInicio;
     }
