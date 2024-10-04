@@ -46,7 +46,7 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 
-        if (usuarioBuscado != null) {
+        if (usuarioBuscado != null&& !usuarioBuscado.getAdmin()) {
             HttpSession session = request.getSession(true);
             session.setAttribute("usuario", usuarioBuscado);
             return new ModelAndView("redirect:/directorTecnico");
