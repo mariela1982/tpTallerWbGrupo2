@@ -1,10 +1,9 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
 body {
-    padding-top: 5rem;
     background-image: url("../img/home.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,36 +11,33 @@ body {
     background-position: center;
 }
 .starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
 }
 
-h1{
-	color: black;
-  font-size: 60px;
-
+h1 {
+    color: black;
+    font-size: 60px;
 }
 
-h2{
-	color:#FF0000;
+h2 {
+    color: #ff0000;
 }
 
-.navbar-brand{
-    margin:0 2rem;
+.navbar-brand {
+    margin: 0 2rem;
 }
 
 .bonton {
- background-color: darkgreen;
-  color: white;
-  text-align: center;
-  border-radius: 30px;
+    background-color: darkgreen;
+    color: white;
+    text-align: center;
+    border-radius: 30px;
     text-decoration: none;
     padding: 10px 70px;
     font-size: 20px;
-
-
 }
-.container{
+.container {
     display: inline-grid;
     grid-gap: 50px;
     padding-bottom: 50px;
@@ -49,23 +45,21 @@ h2{
     text-align: center;
 }
 
-.cont1{
+.cont1 {
     text-align: center;
-
 }
-.cont2{
+.cont2 {
     text-align: center;
     align-self: center;
-
 }
-.cont3{
+.cont3 {
     padding-top: 3rem;
-    }
-#titulo{
+}
+#titulo {
     text-align: center;
 }
 
-.m-0{
+.m-0 {
     padding-top: 50px;
     padding-bottom: 15px;
 }
