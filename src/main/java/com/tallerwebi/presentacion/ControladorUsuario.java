@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.Torneo;
 import com.tallerwebi.dominio.Usuario;
 
-
 @Controller
 public class ControladorUsuario {
-        private RepositorioAdmin repositorioAdmin;
+    private RepositorioAdmin repositorioAdmin;
 
     @Autowired
     public ControladorUsuario(RepositorioAdmin repositorioAdmin) {
@@ -43,17 +41,6 @@ public class ControladorUsuario {
         return new ModelAndView("redirect:/cargar-dinero");
     }
 
-    @GetMapping("/pagar-inscripcion")
-    public ModelAndView pagarInscripcion(@RequestParam("torneo") Long torneoId, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("pagarInscripcion");
-        Torneo torneo = repositorioAdmin.obtenerTorneoPorId(torneoId);
-
-        mav.addObject("torneo", torneo);
-        mav.addObject("torneos", repositorioAdmin.obtenerTorneos());
-
-        return mav;
-    }
-
     @GetMapping("/torneos")
     public ModelAndView verTorneos(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("torneos");
@@ -71,8 +58,8 @@ public class ControladorUsuario {
         ModelAndView mav = new ModelAndView("torneo");
         Torneo torneo = repositorioAdmin.obtenerTorneoPorId(torneoId);
 
-        int cuposOcupados = torneo.getEquipos().size();
-        int cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+        Integer cuposOcupados = torneo.getEquipos().size();
+        Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
 
         mav.addObject("usuario", usuario);
         mav.addObject("torneo", torneo);
@@ -84,32 +71,37 @@ public class ControladorUsuario {
 
     @PostMapping("/equipo/inscribir")
     public ModelAndView inscribirEquipo(@RequestParam("torneoId") Long torneoId, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("torneo");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         Torneo torneo = repositorioAdmin.obtenerTorneoPorId(torneoId);
 
-        // Validar si el usuario tiene saldo suficiente
-        if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
-            ModelAndView mav = new ModelAndView("torneo");
-            mav.addObject("usuario", usuario);
-            mav.addObject("torneo", torneo);
-            mav.addObject("error", "Saldo insuficiente");
-            return mav;
+        Integer cuposOcupados = torneo.getEquipos().size();
+        Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+
+        // Validar si el usuario esta logueado
+        if (usuario == null) {
+            mav.addObject("error", "Tenes que estar logueado para inscribirte a un torneo");
+        } else {
+            // Validar si el torneo tiene cupos disponibles
+            if (cuposDisponibles <= 0) {
+                mav.addObject("error", "No hay cupos disponibles para inscribirte al torneo");
+            } else {
+                // Validar si el usuario tiene saldo suficiente
+                if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
+                    mav.addObject("error", "No tenes saldo suficiente para inscribirte al torneo");
+                } else {
+                    // Si tiene saldo suficiente, procesar el pago
+                    usuario.setSaldo(usuario.getSaldo() - torneo.getPrecioEntrada());
+                    mav.addObject("success", "Te inscribiste al torneo correctamente");
+                }
+            }
         }
 
-        // Si tiene saldo suficiente, procesar el pago
-        usuario.setSaldo(usuario.getSaldo() - torneo.getPrecioEntrada());
+        mav.addObject("usuario", usuario);
+        mav.addObject("torneo", torneo);
+        mav.addObject("cuposOcupados", cuposOcupados);
+        mav.addObject("cuposDisponibles", cuposDisponibles);
 
-        // Crear el equipo
-        Equipo equipo = new Equipo();
-        equipo.setNombre("Equipo de " + usuario.getNombre());
-
-        // Agregar el equipo al torneo
-        torneo.getEquipos().add(equipo);
-
-        // Guardar los cambios
-        repositorioAdmin.guardarEquipo(equipo);
-
-        return new ModelAndView("redirect:/torneos");
+        return mav;
     }
-
 }

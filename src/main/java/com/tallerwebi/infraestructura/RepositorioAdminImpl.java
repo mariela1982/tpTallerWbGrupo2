@@ -34,7 +34,7 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     @Override
     public List<Torneo> obtenerTorneos() {
         final Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Torneo.class).list();
+        return session.createQuery("SELECT DISTINCT t FROM Torneo t").list();
     }
 
     @Transactional

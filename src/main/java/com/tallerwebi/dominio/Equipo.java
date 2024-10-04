@@ -14,9 +14,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Equipo {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipo;
@@ -27,7 +24,6 @@ public class Equipo {
     @ManyToOne
     @JoinColumn(name = "torneo_id")
     private Torneo torneo;
-
 
     @OneToMany
     private List<Jugador> jugadores;
@@ -72,14 +68,11 @@ public class Equipo {
         this.dtDni = dtDni;
     }
 
+    public Torneo getTorneo() {
+        return torneo;
+    }
 
-    @Override
-    public String toString() {
-        return "Equipo{" +
-                "nombre='" + nombre + '\'' +
-                ", cbu='" + cbu + '\'' +
-                ", dtDni=" + dtDni +
-                ", idEquipo=" + idEquipo +
-                '}';
+    public void setTorneo(Torneo torneo) {
+        this.torneo = torneo;
     }
 }
