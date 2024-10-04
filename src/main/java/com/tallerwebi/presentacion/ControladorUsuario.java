@@ -1,6 +1,8 @@
 package com.tallerwebi.presentacion;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.Torneo;
 import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Controller
 public class ControladorUsuario {
@@ -42,13 +45,22 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/torneos")
-    public ModelAndView verTorneos(HttpServletRequest request) {
+    public ModelAndView verTorneos(@RequestParam(value = "partido", required = false) PartidosDeBsAs partido,
+            HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("torneos");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         List<Torneo> torneos = repositorioAdmin.obtenerTorneos();
+        if (partido != null) {
+            torneos = torneos.stream()
+                    .filter(torneo -> torneo.getPartido().equals(partido))
+                    .collect(Collectors.toList());
+        }
+
         mav.addObject("torneos", torneos);
         mav.addObject("usuario", usuario);
+        mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
+        mav.addObject("partido", partido);
         return mav;
     }
 

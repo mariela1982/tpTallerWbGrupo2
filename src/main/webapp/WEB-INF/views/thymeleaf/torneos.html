@@ -28,6 +28,17 @@
 		</div>
 	</div>
 
+	<!-- Filtro por partido y cantidad de equipos -->
+	<div class="container mt-3 d-flex justify-content-center align-items-center">
+		<form th:action="@{/torneos}" method="get" class="col-10 col-md-8 col-lg-6 d-flex justify-content-center align-items-center">
+			<select name="partido" class="form-select me-2" aria-label="Filtrar por partido">
+				<option value="" th:selected="${partido == null}">Todos los partidos</option>
+				<option th:each="partido : ${partidosDeBsAs}" th:value="${partido}" th:text="${partido}"></option>
+			</select>
+			<button type="submit" class="btn btn-primary">Filtrar</button>
+		</form>
+	</div>
+
 	<div class="container mt-5 d-flex justify-content-center align-items-center flex-wrap">
 		<!-- si no hay torneos activos -->
 		<div class="col-10 col-md-8 col-lg-6 d-flex justify-content-center align-items-center"
@@ -36,7 +47,7 @@
 		</div>
 
 		<!-- si hay torneos activos -->
-		<div th:each="torneo : ${torneos}" class="tournament_card col-5 shadow m-3">
+		<div th:each="torneo : ${torneos}" class="tournament_card col-5 shadow m-3" th:if="${(partido == null || torneo.partido == partido) && (cantidadEquipos == null || torneo.cantidadEquipos == cantidadEquipos)}">
 			<div class="col-12 text-center py-3">
 				<h3 class="tournament_title" th:text="${torneo.nombre}"></h3>
 			</div>
@@ -51,13 +62,11 @@
 				</div>
 				<div class="col-5 m-0 mb-3 p-2 d-flex justify-content-center align-items-center">
 					<i class="bi bi-geo-alt"></i>
-					<p class="tournament_subtitle m-0 ms-2" th:text="${torneo.partido}">
-					</p>
+					<p class="tournament_subtitle m-0 ms-2" th:text="${torneo.partido}"></p>
 				</div>
 				<div class="col-5 m-0 mb-3 p-2 d-flex justify-content-center align-items-center">
 					<i class="bi bi-person-check"></i>
-					<p class="tournament_subtitle m-0 ms-2" th:text="${torneo.cantidadEquipos}">
-					</p>
+					<p class="tournament_subtitle m-0 ms-2" th:text="${torneo.cantidadEquipos}"></p>
 				</div>
 			</div>
 			<div class="col-12 d-flex justify-content-center align-items-center">
