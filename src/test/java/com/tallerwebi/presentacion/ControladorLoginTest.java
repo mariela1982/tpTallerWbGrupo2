@@ -38,7 +38,7 @@ public class ControladorLoginTest {
 
 	@Test
 	public void queAlTocarElBotonIngresarVayaAlaVistaPrincipal(){
-		ModelAndView modelAndView = controladorLogin.homePrincipal();
+		ModelAndView modelAndView = controladorLogin.home();
 		String nombre = modelAndView.getViewName();
 		assertThat(nombre, equalToIgnoringCase("home"));
 	}
@@ -84,7 +84,7 @@ public class ControladorLoginTest {
 //		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
 //
 //		// validacion
-//		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/homePrincipal"));
+//		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/home"));
 //
 //	}
 
