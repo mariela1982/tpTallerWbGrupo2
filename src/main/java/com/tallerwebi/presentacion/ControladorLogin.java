@@ -20,7 +20,7 @@ public class ControladorLogin {
     private ServicioLogin servicioLogin;
 
     @Autowired
-    public ControladorLogin(ServicioLogin servicioLogin){
+    public ControladorLogin(ServicioLogin servicioLogin) {
 
         this.servicioLogin = servicioLogin;
     }
@@ -40,10 +40,10 @@ public class ControladorLogin {
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 
         if (usuarioBuscado != null) {
-            if ((usuarioBuscado.getAdmin())) {
+            if (usuarioBuscado.getAdmin()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("usuario", usuarioBuscado);
-                return new ModelAndView("redirect:/home");
+                return new ModelAndView("redirect:/admin");
             } else {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("usuario", usuarioBuscado);
@@ -51,21 +51,21 @@ public class ControladorLogin {
 
             }
         }
-            model.put("error", "Usuario o clave incorrecta");
+
+        model.put("error", "Usuario o clave incorrecta");
 
         return new ModelAndView("login", model);
     }
 
-
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("usuario") Usuario usuario) {
         ModelMap model = new ModelMap();
-        try{
+        try {
             servicioLogin.registrar(usuario);
-        } catch (UsuarioExistente e){
+        } catch (UsuarioExistente e) {
             model.put("error", "El usuario ya existe");
             return new ModelAndView("redirect:/home", model);
-        } catch (Exception e){
+        } catch (Exception e) {
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("home", model);
         }
@@ -73,23 +73,20 @@ public class ControladorLogin {
     }
 
     @RequestMapping(path = "/home", method = RequestMethod.GET)
-    public ModelAndView homePrincipal() {
+    public ModelAndView home() {
         return new ModelAndView("home");
     }
-
-
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView inicio() {
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(value = "/nuevoUsuario",method = RequestMethod.GET)
+    @RequestMapping(value = "/nuevoUsuario", method = RequestMethod.GET)
     public ModelAndView nuevoUsuario() {
         ModelMap model = new ModelMap();
         Usuario usuario = new Usuario();
         model.put("usuario", usuario);
-        return new ModelAndView("nuevoUsuario",model);
+        return new ModelAndView("nuevoUsuario", model);
     }
 }
-
