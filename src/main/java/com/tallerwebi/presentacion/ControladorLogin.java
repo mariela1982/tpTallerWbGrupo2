@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class ControladorLogin {
@@ -123,6 +126,13 @@ public ModelAndView nuevoUsuario() {
 //    }
 
 
-
+    // Logout
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return new ModelAndView("redirect:/login");
+    }
+    
 }
 
