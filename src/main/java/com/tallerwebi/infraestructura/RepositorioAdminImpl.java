@@ -51,13 +51,13 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         session.delete(torneo);
     }
 
-    @Transactional
-    @Override
-    public Equipo guardarEquipo(Equipo equipo) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(equipo);
-        return equipo;
-    }
+//    @Transactional
+//    @Override
+//    public Equipo guardarEquipo(Equipo equipo) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(equipo);
+//        return equipo;
+//    }
 
     @Transactional
     @Override

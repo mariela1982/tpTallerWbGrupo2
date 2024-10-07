@@ -43,7 +43,7 @@ public class ControladorEquipoTest {
     @Test
     public void siExisteEquipoConNombreDelRegistroElRegistroFalla() throws EquipoExistente {
 
-        when(servicioEquipo.registrar(nombreEquipo,cbu,dtDni)).thenThrow(EquipoExistente.class);
+        when(servicioEquipo.guardarEquipo(nombreEquipo,cbu,dtDni)).thenThrow(EquipoExistente.class);
 
         ModelAndView mav = whenRegistroEquipo(nombreEquipo,cbu,dtDni);
         thenRegistroFalla(mav,"El equipo ya existe");

@@ -20,28 +20,55 @@
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Jugadores</h1>
 
-        <form th:action="@{/admin/jugadores/crear}" method="post" class="mb-4" th:object="${jugador}">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre del Jugador</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" required>
+        <form th:action="@{/admin/jugadores/crear}" method="post"  th:object="${jugador}" class="signIn">
+            <div class="row">
+            <div class="col-6">
+                <label for="nombre" >Nombre y apellido del Jugador</label>
+                <input type="text" id="nombre" th:field="*{nombreYapellido}" class="form-control mb-3" placeholder="Ingrese Nombre y Apellido" required>
             </div>
+                <div >
+                  <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                 <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" class="form-control mb-3" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
+            <div >
                 <label for="posicion" class="form-label">Posicion</label>
-                <select id="posicion" name="posicion" class="form-select" required>
+                <select id="posicion" th:field="*{posicion}" class="form-select mb-3" required>
                     <option value="ARQUERO">Arquero</option>
                     <option value="DEFENSA">Defensa</option>
                     <option value="MEDIOCAMPISTA">Mediocampista</option>
                     <option value="DELANTERO">Delantero</option>
                 </select>
             </div>
+                <div>
+                    <label for="numero">Numero de Camiseta</label>
+                    <input th:field="*{numeroCamiseta}" id="numero" type="text" class="form-control mb-3" placeholder="Email"
+                           required />
+                </div>
+                <div>
+                    <label for="dni">DNI</label>
+                    <input th:field="*{dni}" id="dni" type="text" class="form-control mb-3" placeholder="DNI"
+                           required />
+                </div>
+                <div>
+                    <label for="direccion">Direccion</label>
+                    <input id="direccion" th:field="*{direccion}" type="text" placeholder="ingrese direccion"
+                           class="form-select mb-3" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input th:field="*{email}" id="email" type="email" class="form-control mb-3" placeholder="Email"
+                           required />
+                </div>
 
-            <button type="submit" class="btn btn-primary">Crear Jugador</button>
+            <div class="d-flex justify-content-center">
+                <button id="btn-login" class="btnLogin btn btn-sm btn-primary btn-block mb-3" type="submit">
+                    Crear Jugador
+                </button>
+            </div>
+            </div>
+
+            <p th:if="${error != null}" th:text="'Error ' + ${error}" class="alert alert-danger m-0"></p>
         </form>
 
         <h2>Jugadores</h2>
@@ -59,7 +86,7 @@
                     <td colspan="4" class="text-center">No hay jugadores registrados</td>
                 </tr>
                 <tr th:each="jugador : ${jugadores}">
-                    <td th:text="${jugador.nombre}"></td>
+                    <td th:text="${jugador.nombreYapellido}"></td>
                     <td th:text="${#dates.format(jugador.fechaNacimiento, 'dd/MM/yyyy')}"></td>
                     <td th:text="${jugador.posicion}"></td>
                     <td>

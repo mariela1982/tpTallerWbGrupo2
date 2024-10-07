@@ -40,7 +40,7 @@ public class ServicioEquipoTest {
     }
 
     private Equipo whenRegistroEquipo(String nombre, String cbu, Long dtDni) throws EquipoExistente {
-        return servicioEquipo.registrar(nombre,cbu,dtDni);
+        return servicioEquipo.guardarEquipo(nombre,cbu,dtDni);
     }
 
 

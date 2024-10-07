@@ -35,7 +35,7 @@ public class ControladorEquipo {
         }
 
         try{
-            servicioEquipo.registrar(nombre, numeroCbu, dtDni);
+            servicioEquipo.guardarEquipo(nombre, numeroCbu, dtDni);
 
         }
         catch (EquipoExistente ex){

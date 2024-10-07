@@ -39,7 +39,7 @@
 //    }
 //
 //    private Usuario whenRegistroUsuario(String email, String password) throws PasswordLongitudIncorrecta {
-//       Usuario usuarioCreado = servicioUsuario.registrar(email,password);
+//       Usuario usuarioCreado = servicioUsuario.guardarEquipo(email,password);
 //        return usuarioCreado;
 //    }
 //

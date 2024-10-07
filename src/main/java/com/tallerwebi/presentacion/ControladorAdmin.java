@@ -102,7 +102,7 @@ public class ControladorAdmin {
     // Controller para la vista de gestion de equipos
     @GetMapping("/equipos")
     public ModelAndView gestionEquipos() {
-        ModelAndView mav = new ModelAndView("admin/equipos");
+        ModelAndView mav = new ModelAndView("equipos");
         mav.addObject("equipos", repositorioAdmin.obtenerEquipos());
         mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
         mav.addObject("editando", false);
@@ -121,7 +121,7 @@ public class ControladorAdmin {
     public ModelAndView mostrarFormularioEdicionEquipo(@PathVariable("id") Long id) {
         Equipo equipo = repositorioAdmin.obtenerEquipoPorId(id);
         if (equipo != null) {
-            ModelAndView mav = new ModelAndView("admin/equipos");
+            ModelAndView mav = new ModelAndView("equipos");
             mav.addObject("equipos", repositorioAdmin.obtenerEquipos());
             mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
             mav.addObject("equipo", equipo);
@@ -148,15 +148,7 @@ public class ControladorAdmin {
         return new ModelAndView("redirect:/admin/equipos?eliminado=true");
     }
 
-    // Controller para la vista de gestion de jugadores
-    @GetMapping("/jugadores")
-    public ModelAndView gestionJugadores() {
-        ModelAndView mav = new ModelAndView("admin/jugadores");
-        mav.addObject("jugador", new Jugador());
-        mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
-        mav.addObject("editando", false);
-        return mav;
-    }
+
 
     // Controller para la creacion de jugadores
     @PostMapping("/jugadores/crear")
@@ -170,7 +162,7 @@ public class ControladorAdmin {
     public ModelAndView mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {
         Jugador jugador = repositorioAdmin.obtenerJugadorPorId(id);
         if (jugador != null) {
-            ModelAndView mav = new ModelAndView("admin/jugadores");
+            ModelAndView mav = new ModelAndView("jugadores");
             mav.addObject("jugador", jugador);
             mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
             mav.addObject("editando", true);

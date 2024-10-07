@@ -5,11 +5,11 @@ public interface ServicioAdmin {
     void guardarTorneo(Torneo nombre);
     void eliminarTorneo(Torneo nombre);
 
-    void guardarEquipo(Equipo nombre);
-    void eliminarEquipo(Equipo nombre);
-
-    void guardarJugador(Jugador nombre);
-    void eliminarJugador(Jugador nombre);
+//    void guardarEquipo(Equipo nombre);
+//    void eliminarEquipo(Equipo nombre);
+//
+//    void guardarJugador(Jugador nombre);
+//    void eliminarJugador(Jugador nombre);
 
     void guardarCancha(Cancha nombre);
     void elimiarCancha(Cancha nombre);

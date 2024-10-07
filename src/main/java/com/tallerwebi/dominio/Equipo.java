@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,13 +20,24 @@ public class Equipo {
     private String nombre;
     private String cbu;
     private Long dtDni;
-
-    @ManyToOne
-    @JoinColumn(name = "torneo_id")
-    private Torneo torneo;
+    private List<Torneo> torneos;
 
     @OneToMany
     private List<Jugador> jugadores;
+
+    public Equipo(String nombre, String cbu, Long dni){
+        this.nombre = nombre;
+        this.cbu = cbu;
+        this.dtDni = dni;
+        this.jugadores = new ArrayList<Jugador>();
+        this.torneos = new ArrayList<>();
+
+    }
+
+    public Equipo() {
+
+    }
+
 
     public List<Jugador> getJugadores() {
         return jugadores;
@@ -67,11 +79,11 @@ public class Equipo {
         this.dtDni = dtDni;
     }
 
-    public Torneo getTorneo() {
-        return torneo;
+    public List<Torneo> getTorneo() {
+        return torneos;
     }
 
     public void setTorneo(Torneo torneo) {
-        this.torneo = torneo;
+        torneos.add(torneo);
     }
 }

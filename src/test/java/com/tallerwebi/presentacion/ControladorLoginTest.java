@@ -127,6 +127,6 @@ public class ControladorLoginTest {
 
 		// validacion
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("home"));
-		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Error al registrar el nuevo usuario"));
+		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Error al guardarEquipo el nuevo usuario"));
 	}
 }

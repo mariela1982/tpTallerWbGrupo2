@@ -12,33 +12,52 @@ import javax.persistence.ManyToOne;
 public class Jugador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
+    private int id;
+    private String nombreYapellido;
     private Date fechaNacimiento;
     private String posicion;
     private String dni;
     private String direccion;
     private String email;
-    private String password;
+    private String telefono;
+    private Integer numeroCamiseta;
+    private Boolean tarjetaAmarilla;
+    private Boolean tarjetaRoja;
 
 
     @ManyToOne
     private Equipo equipo;
 
-    public Long getId() {
+
+    public Jugador(String nombre, Date fechaNacimiento, String posicion, String dni, String direccion, String email, String telefono, Integer numeroCamiseta) {
+        this.nombreYapellido = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.posicion = posicion;
+        this.dni = dni;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.numeroCamiseta = numeroCamiseta;
+        this.tarjetaAmarilla = false;
+        this.tarjetaRoja = false;
+    }
+
+    public Jugador() {
+
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+
+
+    public String getNombreYapellido() {
+        return nombreYapellido;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreYapellido(String nombreYapellido) {
+        this.nombreYapellido = nombreYapellido;
     }
 
     public Date getFechaNacimiento() {
@@ -77,8 +96,16 @@ public class Jugador {
         return email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public Integer getNumeroCamiseta() {
+        return numeroCamiseta;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
 

@@ -74,7 +74,7 @@ public class ControladorLogin {
             model.put("error", "El usuario ya existe");
             return new ModelAndView("redirect:/home", model);
         } catch (Exception e) {
-            model.put("error", "Error al registrar el nuevo usuario");
+            model.put("error", "Error al guardarEquipo el nuevo usuario");
             return new ModelAndView("home", model);
         }
         return new ModelAndView("redirect:/login");
