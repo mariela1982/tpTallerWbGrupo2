@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 public class Jugador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String nombreYapellido;
     private Date fechaNacimiento;
     private String posicion;
@@ -46,7 +46,7 @@ public class Jugador {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

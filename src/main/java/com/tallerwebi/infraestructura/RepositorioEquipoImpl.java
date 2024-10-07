@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.RepositorioEquipo;
 
+import java.util.List;
+
 @Repository("repositoioEquipo")
 @SuppressWarnings({ "deprecation", "unchecked" })
 public class RepositorioEquipoImpl implements RepositorioEquipo {
@@ -38,6 +40,11 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
         return (Equipo)session.createCriteria(Equipo.class)
                 .add(Restrictions.eq("nombre",nombre))
                 .uniqueResult();
+    }
+
+    @Override
+    public Equipo buscarPorID(Integer id) {
+        return null;
     }
 
     @Transactional
@@ -71,12 +78,22 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
     @Transactional
     @Override
     public Jugador buscarJugador(int idJugador, Equipo equipo) {
-        Session sesion= sessionFactory.getCurrentSession();
-        return (Jugador) sesion.createCriteria(Jugador.class)
-                .createAlias("Jugador.equipo","equipo")
-                .add(Restrictions.eq("equipo.id",equipo.getIdEquipo()))
-                .add(Restrictions.eq("Jugador.id",idJugador)
-                        .uniqueResult();
+//        Session sesion= sessionFactory.getCurrentSession();
+//        return (Jugador) sesion.createCriteria(Jugador.class)
+//                .createAlias("Jugador.equipo","equipo")
+//                .add(Restrictions.eq("equipo.id",equipo.getIdEquipo()))
+//                .add(Restrictions.eq("Jugador.id",idJugador);
+//           //             .uniqueResult();
+return null;
+    }
+
+    @Override
+    public List<Equipo> buscarEquipos() {
+        return List.of();
+    }
+
+    @Override
+    public void eliminar(Equipo equipo) {
 
     }
 

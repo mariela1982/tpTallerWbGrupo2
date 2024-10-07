@@ -20,7 +20,10 @@ public class Equipo {
     private String nombre;
     private String cbu;
     private Long dtDni;
-    private List<Torneo> torneos;
+
+    @ManyToOne
+
+    private Torneo torneo;
 
     @OneToMany
     private List<Jugador> jugadores;
@@ -30,7 +33,7 @@ public class Equipo {
         this.cbu = cbu;
         this.dtDni = dni;
         this.jugadores = new ArrayList<Jugador>();
-        this.torneos = new ArrayList<>();
+
 
     }
 
@@ -79,11 +82,11 @@ public class Equipo {
         this.dtDni = dtDni;
     }
 
-    public List<Torneo> getTorneo() {
-        return torneos;
+    public Torneo getTorneo() {
+        return torneo;
     }
 
     public void setTorneo(Torneo torneo) {
-        torneos.add(torneo);
+        this.torneo = torneo;
     }
 }

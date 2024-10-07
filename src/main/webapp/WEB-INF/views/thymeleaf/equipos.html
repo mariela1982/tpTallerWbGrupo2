@@ -20,7 +20,7 @@
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Equipos</h1>
 
-        <form th:action="@{/admin/equipos/crear}" method="post" class="mb-4" th:object="${equipo}">
+        <form th:action="@{/equipos/crear}" method="post" class="mb-4" th:object="${equipo}">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Equipo</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -58,8 +58,8 @@
                         </ul>
                     </td>
                     <td>
-                        <a th:href="@{/admin/equipos/editar/{id}(id=${equipo.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/admin/equipos/eliminar/{id}(id=${equipo.id})}" class="btn btn-danger">Eliminar</a>
+                        <a th:href="@{/equipos/editar/{id}(id=${equipo.id})}" class="btn btn-primary">Editar</a>
+                        <a th:href="@{/equipos/eliminar/{id}(id=${equipo.id})}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             </tbody>

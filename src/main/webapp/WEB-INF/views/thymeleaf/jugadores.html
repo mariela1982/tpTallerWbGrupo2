@@ -20,7 +20,7 @@
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Jugadores</h1>
 
-        <form th:action="@{/admin/jugadores/crear}" method="post"  th:object="${jugador}" class="signIn">
+        <form th:action="@{/crearJugador}" method="post"  th:object="${jugador}" class="signIn">
             <div class="row">
             <div class="col-6">
                 <label for="nombre" >Nombre y apellido del Jugador</label>
@@ -90,8 +90,8 @@
                     <td th:text="${#dates.format(jugador.fechaNacimiento, 'dd/MM/yyyy')}"></td>
                     <td th:text="${jugador.posicion}"></td>
                     <td>
-                        <a th:href="@{/admin/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/admin/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
+                        <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>
+                        <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             </tbody>

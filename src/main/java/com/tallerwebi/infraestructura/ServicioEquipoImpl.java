@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.tallerwebi.dominio.excepcion.EquipoExistente;
 
-@Service
+import java.util.List;
+
+@Service("servicioEquipo")
 @Transactional
 public class ServicioEquipoImpl implements ServicioEquipo {
 
@@ -85,6 +87,20 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
         return true;
     }
 
+    @Override
+    public List<Equipo> obtenerEquipos() {
+        return List.of();
+    }
+
+    @Override
+    public Equipo buscarEquipoPorId(Integer id) throws EquipoInexistente {
+        return null;
+    }
+
+    @Override
+    public void eliminarEquipo(Equipo equipo) {
+
+    }
 
 
 }

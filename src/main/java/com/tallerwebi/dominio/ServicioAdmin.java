@@ -1,5 +1,7 @@
 package com.tallerwebi.dominio;
 
+import java.util.List;
+
 public interface ServicioAdmin {
 
     void guardarTorneo(Torneo nombre);
@@ -16,5 +18,12 @@ public interface ServicioAdmin {
 
     void guardarArbitro(Arbitro nombre);
     void eliminarArbitro(Arbitro nombre);
+
+    List<Cancha> obtenerCanchas();
+
+    List<Arbitro> obtenerArbitros();
+
+    List<Torneo> obtenerTorneos();
+
 
 }
