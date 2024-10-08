@@ -15,7 +15,8 @@
 </head>
 
 <body>
-    <header th:replace="~{includes/adminHeader :: header}"></header>
+    <header th:replace="~{includes/userHeader :: header}"></header>
+
 
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Jugadores</h1>
@@ -40,11 +41,7 @@
                     <option value="DELANTERO">Delantero</option>
                 </select>
             </div>
-                <div>
-                    <label for="numero">Numero de Camiseta</label>
-                    <input th:field="*{numeroCamiseta}" id="numero" type="text" class="form-control mb-3" placeholder="Email"
-                           required />
-                </div>
+
                 <div>
                     <label for="dni">DNI</label>
                     <input th:field="*{dni}" id="dni" type="text" class="form-control mb-3" placeholder="DNI"
@@ -58,6 +55,16 @@
                 <div>
                     <label for="email">Email</label>
                     <input th:field="*{email}" id="email" type="email" class="form-control mb-3" placeholder="Email"
+                           required />
+                </div>
+                <div>
+                    <label for="telefono">Numero de Telefono</label>
+                    <input th:field="*{telefono}" id="telefono" type="text" class="form-control mb-3" placeholder="Telefono"
+                           required />
+                </div>
+                <div>
+                    <label for="numero">Numero de Camiseta</label>
+                    <input th:field="*{numeroCamiseta}" id="numero" type="text" class="form-control mb-3" placeholder="Email"
                            required />
                 </div>
 
@@ -86,9 +93,9 @@
                     <td colspan="4" class="text-center">No hay jugadores registrados</td>
                 </tr>
                 <tr th:each="jugador : ${jugadores}">
-                    <td th:text="${jugador.nombreYapellido}"></td>
-                    <td th:text="${#dates.format(jugador.fechaNacimiento, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${jugador.posicion}"></td>
+                    <td th:text="${jugador.getNombreYapellido()}"></td>
+                    <td th:text="${jugador.getFechaNacimiento()}"></td>
+                    <td th:text="${jugador.getPosicion()}"></td>
                     <td>
                         <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>
                         <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
@@ -98,7 +105,7 @@
         </table>
     </main>
 
-    <!-- Boostrap core js -->
+     Boostrap core js
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

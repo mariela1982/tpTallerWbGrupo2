@@ -47,6 +47,8 @@ public class ControladorDt {
         return new ModelAndView();
     }
 
+
+
 //
 ////modificar hay que usar servicio
 //    @GetMapping("/cargar-dinero")
@@ -138,19 +140,27 @@ public class ControladorDt {
 //        return mav;
 //    }
     // Controller para la creacion de jugadores
-    @PostMapping("/jugadores/crear")
+    @PostMapping("/crearJugador")
     public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,RedirectAttributes redirectAttrs) {
         ModelMap model = new ModelMap();
         try {
             servicioJugador.guardarJugador(jugador);
-        } catch (JugadorExistente e) {
+        } catch (JugadorExistente | JugadorInexistente e) {
            model.put("Error", "El jugador ya existe");
-           return new ModelAndView("redirect:/jugadores", model);
+           return new ModelAndView("jugadores", model);
         }
         redirectAttrs.addFlashAttribute("register", "Jugador registrado correctamente");
-        return new ModelAndView("redirect:/jugadores");
+        return new ModelAndView("jugadores");
 
 
+    }
+    @GetMapping("/jugadores")
+    public ModelAndView crearJugadores(){
+        ModelMap model = new ModelMap();
+        Jugador jugador = new Jugador();
+        model.put("jugador", jugador);
+
+        return new ModelAndView("jugadores", model);
     }
     // Controller para la vista de edicion de jugadores
     @GetMapping("/jugadores/editar/{id}")

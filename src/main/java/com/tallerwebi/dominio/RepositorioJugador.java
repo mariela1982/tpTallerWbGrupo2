@@ -3,9 +3,9 @@ package com.tallerwebi.dominio;
 import java.util.List;
 
 public interface RepositorioJugador {
-    void agregarJugador(Jugador j);
+    Jugador crearJugador(Jugador j);
     void eliminarJugador(Jugador j);
-    Jugador buscarJugador(int nombre);
+    Jugador buscarJugador(Integer nombre);
     List<Jugador> buscarJugadores();
 
 }

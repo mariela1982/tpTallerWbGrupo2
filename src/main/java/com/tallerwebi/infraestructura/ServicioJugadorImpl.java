@@ -23,7 +23,16 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
-    public void guardarJugador(Jugador nombre) throws JugadorExistente {
+    public void guardarJugador(Jugador nombre) throws JugadorExistente, JugadorInexistente {
+//        Jugador jugadorobtenido = buscarJugador(nombre.getId());
+//        try {
+//            if(jugadorobtenido != null){
+//                throw new JugadorExistente();
+//            }
+//        }catch(JugadorExistente ex){
+//            repositorioJugador.crearJugador(jugadorobtenido);
+//        }
+        repositorioJugador.crearJugador(nombre);
 
     }
 

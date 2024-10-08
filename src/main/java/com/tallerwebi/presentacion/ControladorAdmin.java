@@ -71,7 +71,7 @@ public class ControladorAdmin {
     public ModelAndView mostrarFormularioEdicionTorneo(@PathVariable("id") Integer id) {
         Torneo torneo = servicioAdmin.obtenerTorneos().get(id);
         if (torneo != null) {
-            ModelAndView mav = new ModelAndView("admin/torneos");
+            ModelAndView mav = new ModelAndView("torneosAdmin");
             mav.addObject("canchas", servicioAdmin.obtenerCanchas());
             mav.addObject("arbitros", servicioAdmin.obtenerArbitros());
             mav.addObject("torneo", torneo);
