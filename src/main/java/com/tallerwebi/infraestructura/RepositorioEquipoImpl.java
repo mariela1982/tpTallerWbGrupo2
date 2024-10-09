@@ -30,10 +30,10 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
     public Equipo buscar(String nombre) {
 
         Session session = sessionFactory.getCurrentSession();
-//        return (Equipo)session.createCriteria(Equipo.class)
-//                .add(Restrictions.eq("nombre",nombre))
-//                .uniqueResult();
-        return (Equipo) session.get(Equipo.class, nombre);
+        return (Equipo)session.createCriteria(Equipo.class)
+                .add(Restrictions.eq("nombre",nombre))
+                .uniqueResult();
+
     }
 
     @Override
