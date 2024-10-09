@@ -47,6 +47,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
         if(equipoBuscado != null){
             throw new EquipoExistente();
         }
+        repositorioEquipo.guardar(equipoBuscado);
 
           return  true;
 
@@ -67,7 +68,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     }
 
     @Override
-    public Jugador buscarJugador(int id_jugador,Equipo equipo) throws JugadorInexistente {
+    public Jugador buscarJugador(Integer id_jugador,Equipo equipo) throws JugadorInexistente {
     Jugador jugadorEncontrado = repositorioEquipo.buscarJugador(id_jugador,equipo);
     if(jugadorEncontrado == null){
         throw new JugadorInexistente();
@@ -93,7 +94,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     }
 
     @Override
-    public Equipo buscarEquipoPorId(Integer id) throws EquipoInexistente {
+    public Equipo buscarEquipoPorId(Long id) throws EquipoInexistente {
         return null;
     }
 

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header th:replace="~{includes/adminHeader :: header}"></header>
+    <header th:replace="~{includes/userHeader :: header}"></header>
 
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Equipos</h1>
@@ -23,16 +23,29 @@
         <form th:action="@{/equipos/crear}" method="post" class="mb-4" th:object="${equipo}">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Equipo</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" required>
+                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="cbu" class="form-label">Ingrese el cbu</label>
+                <input type="text" id="cbu" name="cbu" th:field="*{cbu}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="dni" class="form-label">ingrese el dni</label>
+                <input type="text" id="dni" name="dni" th:field="*{dtDni}" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="jugadores" class="form-label">Jugadores</label>
-                <select id="jugadores" name="jugadores" class="form-select" multiple required>
-                    <option th:each="jugador : ${jugadores}" th:value="${jugador.id}" th:text="${jugador.nombreYapellido}">
-                    </option>
-                </select>
-            </div>
+                <label  class="form-label">Jugadores</label>
+                <div th:each="jugador : ${jugadores}">
+                    <input type="checkbox" th:field="*{jugadores}" th:value="${jugador.getId()}">
+                    <label th:text="${jugador.getNombreYapellido()}"></label>
+                </div>
+<!--                <select id="jugadores" name="jugadores" class="form-select" multiple required>-->
+<!--                    <option th:each="jugador : ${jugadores}" th:value="${jugador.id}" th:text="${jugador.nombreYapellido}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </div>-->
+
 
             <button type="submit" class="btn btn-primary">Crear Equipo</button>
         </form>

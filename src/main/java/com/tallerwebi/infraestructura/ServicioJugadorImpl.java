@@ -37,23 +37,34 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
-    public void eliminarJugador(int jugadorId) throws JugadorInexistente {
+    public void eliminarJugador(Integer jugadorId) throws JugadorInexistente {
+        Jugador jugadorBuscado = repositorioJugador.buscarJugador(jugadorId);
+        if(jugadorBuscado == null){
+            throw new JugadorInexistente();
+        }else {
+            repositorioJugador.eliminarJugador(jugadorBuscado);
+        }
 
     }
 
     @Override
-    public Boolean actualizarJugador(int jugadorId) throws JugadorInexistente {
+    public Boolean actualizarJugador(Integer jugadorId) throws JugadorInexistente {
         return null;
     }
 
     @Override
-    public Jugador buscarJugador(int jugadorId) throws JugadorInexistente {
-        return null;
+    public Jugador buscarJugador(Integer jugadorId) throws JugadorInexistente {
+        Jugador jugadorBuscado = repositorioJugador.buscarJugador(jugadorId);
+        if(jugadorBuscado == null){
+            throw new JugadorInexistente();
+        }
+        return jugadorBuscado;
     }
 
     @Override
     public List<Jugador> obtenerJugadores() {
-        return List.of();
+
+        return repositorioJugador.buscarJugadores();
     }
 
 

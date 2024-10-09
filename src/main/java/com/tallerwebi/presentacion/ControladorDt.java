@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.EquipoExistente;
@@ -33,17 +34,17 @@ public class ControladorDt {
 
 
     @Autowired
-   // public ControladorUsuario(RepositorioAdmin repositorioAdmin) {
-    //    this.repositorioAdmin = repositorioAdmin;}
-
-    public ControladorDt(ServicioDt servicioDt, ServicioEquipo servicioEquipo, ServicioAdmin admin,ServicioJugador servicioJugador) {
+     public ControladorDt(ServicioDt servicioDt, ServicioEquipo servicioEquipo, ServicioAdmin admin,ServicioJugador servicioJugador) {
         this.servicioDt = servicioDt;
         this.servicioEquipo = servicioEquipo;
         this.servicioAdmin = admin;
         this.servicioJugador = servicioJugador;
     }
+
     @GetMapping("/directorTecnico")
-    public ModelAndView panelAdmin(){
+    public ModelAndView panelAdmin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario)session.getAttribute("usuario");
         return new ModelAndView();
     }
 
@@ -143,14 +144,16 @@ public class ControladorDt {
     @PostMapping("/crearJugador")
     public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,RedirectAttributes redirectAttrs) {
         ModelMap model = new ModelMap();
+
         try {
             servicioJugador.guardarJugador(jugador);
         } catch (JugadorExistente | JugadorInexistente e) {
            model.put("Error", "El jugador ya existe");
            return new ModelAndView("jugadores", model);
         }
+
         redirectAttrs.addFlashAttribute("register", "Jugador registrado correctamente");
-        return new ModelAndView("jugadores");
+        return new ModelAndView("redirect:/jugadores",model);
 
 
     }
@@ -211,11 +214,14 @@ public class ControladorDt {
     // Controller para la vista de gestion de equipos
     @GetMapping("/equipos")
     public ModelAndView gestionEquipos() {
-        ModelAndView mav = new ModelAndView("equipos");
-        mav.addObject("equipos", servicioEquipo.obtenerEquipos());
-        mav.addObject("jugadores", servicioJugador.obtenerJugadores());
-        mav.addObject("editando", false);
-        return mav;
+        ModelMap modelMap = new ModelMap();
+        Equipo equipo = new Equipo();
+        modelMap.put("equipo", equipo);
+
+        modelMap.put("equipos", servicioEquipo.obtenerEquipos());
+        modelMap.put("jugadores", servicioJugador.obtenerJugadores());
+        modelMap.put("editando", false);
+        return new ModelAndView("equipos",modelMap);
     }
 
     // Controller para la creacion de equipos
@@ -223,16 +229,19 @@ public class ControladorDt {
     public ModelAndView crearEquipo(@ModelAttribute("equipo") Equipo equipo) {
         ModelMap model = new ModelMap();
         try {
+//            List<Jugador> jugadoresSeleccionadosId = equipo.getJugadores();
+//            equipo.setJugadores(jugadoresSeleccionadosId);
             servicioEquipo.guardarEquipo(equipo);
         } catch (EquipoExistente e) {
             model.put("Error", "El equipo ya existe");
+            return new ModelAndView("equipos", model);
         }
         return new ModelAndView("redirect:/equipos?creado=true");
     }
 
     // Controller para la vista de edicion de equipos
     @GetMapping("/equipos/editar/{id}")
-    public ModelAndView mostrarFormularioEdicionEquipo(@PathVariable("id") Integer id) {
+    public ModelAndView mostrarFormularioEdicionEquipo(@PathVariable("id") Long id) {
         Equipo equipo = null;
         ModelMap model = new ModelMap();
         try {
@@ -265,7 +274,7 @@ public class ControladorDt {
 
     // Controller para la eliminacion de equipos
     @GetMapping("/equipos/eliminar/{id}")
-    public ModelAndView eliminarEquipo(@PathVariable("id") Integer id) {
+    public ModelAndView eliminarEquipo(@PathVariable("id") Long id) {
         Equipo equipo = null;
         ModelMap model = new ModelMap();
         try {

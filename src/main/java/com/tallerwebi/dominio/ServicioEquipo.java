@@ -15,13 +15,13 @@ public interface ServicioEquipo {
 
     Boolean editarEquipo(Jugador jugadornuevo, Jugador jugadorViejo, Equipo equipo) throws EquipoInexistente;
 
-    Jugador buscarJugador(int id_jugador,Equipo equipo) throws JugadorInexistente;
+    Jugador buscarJugador(Integer id_jugador,Equipo equipo) throws JugadorInexistente;
 
     Boolean agregarTorneo(Torneo torneo, String nombreEquipo) throws EquipoInexistente;
 
     List<Equipo> obtenerEquipos();
 
-    Equipo buscarEquipoPorId(Integer id) throws EquipoInexistente;
+    Equipo buscarEquipoPorId(Long id) throws EquipoInexistente;
 
     void eliminarEquipo(Equipo equipo);
 }
