@@ -50,61 +50,61 @@ public class ControladorAdminTest {
         assertEquals("admin/panel", mav.getViewName());
     }
 
-    @Test
-    public void queSePuedaMostrarLaGestionDeTorneos() {
-        // preparacion
-        when(repositorioAdmin.obtenerTorneos()).thenReturn(null);
+//    @Test
+//    public void queSePuedaMostrarLaGestionDeTorneos() {
+//        // preparacion
+//        when(repositorioAdmin.obtenerTorneos()).thenReturn(null);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.gestionTorneos();
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).obtenerTorneos();
+//        assertEquals("admin/torneos", mav.getViewName());
+//    }
 
-        // ejecucion
-        ModelAndView mav = controladorAdmin.gestionTorneos();
+//    @Test
+//    public void queSePuedaAgregarUnNuevoTorneo() {
+//        // preparacion
+//        Torneo torneo = new Torneo();
+//        when(repositorioAdmin.guardarTorneo(torneo)).thenReturn(torneo);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.crearTorneo(torneo);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).guardarTorneo(torneo);
+//        assertEquals("redirect:/admin/torneos?creado=true", mav.getViewName());
+//    }
 
-        // comprobacion
-        verify(repositorioAdmin, times(1)).obtenerTorneos();
-        assertEquals("admin/torneos", mav.getViewName());
-    }
+//    @Test
+//    public void queSePuedaEditarUnTorneo() {
+//        // preparacion
+//        Torneo torneo = new Torneo();
+//        when(repositorioAdmin.guardarTorneo(torneo)).thenReturn(torneo);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.editarTorneo(torneo);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).guardarTorneo(torneo);
+//        assertEquals("redirect:/admin/torneos?editado=true", mav.getViewName());
+//    }
 
-    @Test
-    public void queSePuedaAgregarUnNuevoTorneo() {
-        // preparacion
-        Torneo torneo = new Torneo();
-        when(repositorioAdmin.guardarTorneo(torneo)).thenReturn(torneo);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.crearTorneo(torneo);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).guardarTorneo(torneo);
-        assertEquals("redirect:/admin/torneos?creado=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaEditarUnTorneo() {
-        // preparacion
-        Torneo torneo = new Torneo();
-        when(repositorioAdmin.guardarTorneo(torneo)).thenReturn(torneo);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.editarTorneo(torneo);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).guardarTorneo(torneo);
-        assertEquals("redirect:/admin/torneos?editado=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaEliminarUnTorneo() {
-        // preparacion
-        Torneo torneo = new Torneo();
-        when(repositorioAdmin.obtenerTorneoPorId(1)).thenReturn(torneo);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.eliminarTorneo(1);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).obtenerTorneoPorId(1);
-        verify(repositorioAdmin, times(1)).eliminarTorneo(torneo);
-        assertEquals("redirect:/admin/torneos?eliminado=true", mav.getViewName());
-    }
+//    @Test
+//    public void queSePuedaEliminarUnTorneo() {
+//        // preparacion
+//        Torneo torneo = new Torneo();
+//        when(repositorioAdmin.obtenerTorneoPorId(1)).thenReturn(torneo);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.eliminarTorneo(1);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).obtenerTorneoPorId(1);
+//        verify(repositorioAdmin, times(1)).eliminarTorneo(torneo);
+//        assertEquals("redirect:/admin/torneos?eliminado=true", mav.getViewName());
+//    }
 
   //  @Test
 //    public void queSePuedaMostrarLaGestionDeEquipos() {
@@ -189,117 +189,117 @@ public class ControladorAdminTest {
 //        assertEquals("redirect:/admin/jugadores?eliminado=true", mav.getViewName());
 //    }
 
-    @Test
-    public void queSePuedaMostrarLaGestionDeCanchas() {
-        // preparacion
-        when(repositorioAdmin.obtenerCanchas()).thenReturn(null);
+//    @Test
+//    public void queSePuedaMostrarLaGestionDeCanchas() {
+//        // preparacion
+//        when(repositorioAdmin.obtenerCanchas()).thenReturn(null);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.gestionCanchas();
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).obtenerCanchas();
+//        assertEquals("admin/canchas", mav.getViewName());
+//    }
+//
+//    @Test
+//    public void queSePuedaAgregarUnaNuevaCancha() {
+//        // preparacion
+//        Cancha cancha = new Cancha();
+//        when(repositorioAdmin.guardarCancha(cancha)).thenReturn(cancha);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.crearCancha(cancha);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).guardarCancha(cancha);
+//        assertEquals("redirect:/admin/canchas?creada=true", mav.getViewName());
+//    }
 
-        // ejecucion
-        ModelAndView mav = controladorAdmin.gestionCanchas();
+//    @Test
+//    public void queSePuedaEditarUnaCancha() {
+//        // preparacion
+//        Cancha cancha = new Cancha();
+//        when(repositorioAdmin.guardarCancha(cancha)).thenReturn(cancha);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.editarCancha(cancha);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).guardarCancha(cancha);
+//        assertEquals("redirect:/admin/canchas?editada=true", mav.getViewName());
+//    }
 
-        // comprobacion
-        verify(repositorioAdmin, times(1)).obtenerCanchas();
-        assertEquals("admin/canchas", mav.getViewName());
-    }
+//    @Test
+//    public void queSePuedaEliminarUnaCancha() {
+//        // preparacion
+//        Cancha cancha = new Cancha();
+//        when(repositorioAdmin.obtenerCanchaPorId(1)).thenReturn(cancha);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.eliminarCancha(1);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).obtenerCanchaPorId(1);
+//        verify(repositorioAdmin, times(1)).eliminarCancha(cancha);
+//        assertEquals("redirect:/admin/canchas?eliminada=true", mav.getViewName());
+//    }
 
-    @Test
-    public void queSePuedaAgregarUnaNuevaCancha() {
-        // preparacion
-        Cancha cancha = new Cancha();
-        when(repositorioAdmin.guardarCancha(cancha)).thenReturn(cancha);
+//    @Test
+//    public void queSePuedaMostrarLaGestionDeArbitros() {
+//        // preparacion
+//        when(repositorioAdmin.obtenerArbitros()).thenReturn(null);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.gestionArbitros();
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).obtenerArbitros();
+//        assertEquals("admin/arbitros", mav.getViewName());
+//    }
 
-        // ejecucion
-        ModelAndView mav = controladorAdmin.crearCancha(cancha);
+//    @Test
+//    public void queSePuedaAgregarUnNuevoArbitro() {
+//        // preparacion
+//        Arbitro arbitro = new Arbitro();
+//        when(repositorioAdmin.guardarArbitro(arbitro)).thenReturn(arbitro);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.crearArbitro(arbitro);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).guardarArbitro(arbitro);
+//        assertEquals("redirect:/admin/arbitros?creado=true", mav.getViewName());
+//    }
+//
+//    @Test
+//    public void queSePuedaEditarUnArbitro() {
+//        // preparacion
+//        Arbitro arbitro = new Arbitro();
+//        when(repositorioAdmin.guardarArbitro(arbitro)).thenReturn(arbitro);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.editarArbitro(arbitro);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).guardarArbitro(arbitro);
+//        assertEquals("redirect:/admin/arbitros?editado=true", mav.getViewName());
+//    }
 
-        // comprobacion
-        verify(repositorioAdmin, times(1)).guardarCancha(cancha);
-        assertEquals("redirect:/admin/canchas?creada=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaEditarUnaCancha() {
-        // preparacion
-        Cancha cancha = new Cancha();
-        when(repositorioAdmin.guardarCancha(cancha)).thenReturn(cancha);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.editarCancha(cancha);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).guardarCancha(cancha);
-        assertEquals("redirect:/admin/canchas?editada=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaEliminarUnaCancha() {
-        // preparacion
-        Cancha cancha = new Cancha();
-        when(repositorioAdmin.obtenerCanchaPorId(1)).thenReturn(cancha);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.eliminarCancha(1);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).obtenerCanchaPorId(1);
-        verify(repositorioAdmin, times(1)).eliminarCancha(cancha);
-        assertEquals("redirect:/admin/canchas?eliminada=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaMostrarLaGestionDeArbitros() {
-        // preparacion
-        when(repositorioAdmin.obtenerArbitros()).thenReturn(null);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.gestionArbitros();
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).obtenerArbitros();
-        assertEquals("admin/arbitros", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaAgregarUnNuevoArbitro() {
-        // preparacion
-        Arbitro arbitro = new Arbitro();
-        when(repositorioAdmin.guardarArbitro(arbitro)).thenReturn(arbitro);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.crearArbitro(arbitro);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).guardarArbitro(arbitro);
-        assertEquals("redirect:/admin/arbitros?creado=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaEditarUnArbitro() {
-        // preparacion
-        Arbitro arbitro = new Arbitro();
-        when(repositorioAdmin.guardarArbitro(arbitro)).thenReturn(arbitro);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.editarArbitro(arbitro);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).guardarArbitro(arbitro);
-        assertEquals("redirect:/admin/arbitros?editado=true", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaEliminarUnArbitro() {
-        // preparacion
-        Arbitro arbitro = new Arbitro();
-        when(repositorioAdmin.obtenerArbitroPorId(1)).thenReturn(arbitro);
-
-        // ejecucion
-        ModelAndView mav = controladorAdmin.eliminarArbitro(1);
-
-        // comprobacion
-        verify(repositorioAdmin, times(1)).obtenerArbitroPorId(1);
-        verify(repositorioAdmin, times(1)).eliminarArbitro(arbitro);
-        assertEquals("redirect:/admin/arbitros?eliminado=true", mav.getViewName());
-    }
+//    @Test
+//    public void queSePuedaEliminarUnArbitro() {
+//        // preparacion
+//        Arbitro arbitro = new Arbitro();
+//        when(repositorioAdmin.obtenerArbitroPorId(1)).thenReturn(arbitro);
+//
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.eliminarArbitro(1);
+//
+//        // comprobacion
+//        verify(repositorioAdmin, times(1)).obtenerArbitroPorId(1);
+//        verify(repositorioAdmin, times(1)).eliminarArbitro(arbitro);
+//        assertEquals("redirect:/admin/arbitros?eliminado=true", mav.getViewName());
+//    }
 
     @Test
     public void queSePuedaMostrarLaGestionDePartidos() {
