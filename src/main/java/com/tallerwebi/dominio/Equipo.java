@@ -38,7 +38,7 @@ public class Equipo {
     }
 
     public Equipo() {
-
+        this.jugadores = new ArrayList<>();
     }
 
 
@@ -46,8 +46,8 @@ public class Equipo {
         return jugadores;
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugadores(Jugador jugador) {
+        jugadores.add(jugador);
     }
 
     public void setIdEquipo(Long idEquipo) {

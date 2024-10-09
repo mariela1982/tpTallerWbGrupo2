@@ -142,20 +142,21 @@ public class ControladorDt {
 //        return mav;
 //    }
     // Controller para la creacion de jugadores
-    @PostMapping("/crearJugador")
-    public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,RedirectAttributes redirectAttrs) {
-        ModelMap model = new ModelMap();
+@PostMapping("/crearJugador")
+public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
+    ModelMap model = new ModelMap();
+    try {
+        servicioJugador.guardarJugador(jugador);
+        model.addAttribute("jugadores",servicioJugador.obtenerJugadores());
+        model.addAttribute("jugadorCreado",jugador);
+        model.put("registro","jugador creado");
 
-        try {
-            servicioJugador.guardarJugador(jugador);
-        } catch (JugadorExistente | JugadorInexistente e) {
-           model.put("Error", "El jugador ya existe");
-           return new ModelAndView("jugadores", model);
-        }
+    } catch (JugadorExistente | JugadorInexistente e) {
+        model.put("Error", "El jugador ya existe");
+        return new ModelAndView("jugadores", model);
+    }
 
-        redirectAttrs.addFlashAttribute("register", "Jugador registrado correctamente");
-        return new ModelAndView("redirect:/jugadores",model);
-
+    return new ModelAndView("jugadores", model);
 
     }
     @GetMapping("/jugadores")
@@ -236,8 +237,9 @@ public class ControladorDt {
                for (Long id : jugadoresId) {
                    Jugador jugador =servicioJugador.buscarJugador(id);
                    jugadoresElegidos.add(jugador);
+                   equipo.setJugadores(jugador);
                }
-               equipo.setJugadores(jugadoresElegidos);
+
            }
             if (equipo.getJugadores() == null || equipo.getJugadores().isEmpty()) {
                 throw new IllegalArgumentException("El equipo debe tener al menos un jugador.");
