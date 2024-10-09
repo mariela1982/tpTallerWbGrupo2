@@ -37,7 +37,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
-    public void eliminarJugador(Integer jugadorId) throws JugadorInexistente {
+    public void eliminarJugador(Long jugadorId) throws JugadorInexistente {
         Jugador jugadorBuscado = repositorioJugador.buscarJugador(jugadorId);
         if(jugadorBuscado == null){
             throw new JugadorInexistente();
@@ -48,12 +48,12 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
-    public Boolean actualizarJugador(Integer jugadorId) throws JugadorInexistente {
+    public Boolean actualizarJugador(Long jugadorId) throws JugadorInexistente {
         return null;
     }
 
     @Override
-    public Jugador buscarJugador(Integer jugadorId) throws JugadorInexistente {
+    public Jugador buscarJugador(Long jugadorId) throws JugadorInexistente {
         Jugador jugadorBuscado = repositorioJugador.buscarJugador(jugadorId);
         if(jugadorBuscado == null){
             throw new JugadorInexistente();

@@ -40,7 +40,7 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
 
     @Override
     @Transactional
-    public Jugador buscarJugador(Integer id) {
+    public Jugador buscarJugador(Long id) {
        return sessionFactory.getCurrentSession().get(Jugador.class, id);
         }
 

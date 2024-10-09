@@ -43,9 +43,9 @@ public class ControladorAdmin {
     }
 
     // Controller para la vista de gestion de torneos
-    @GetMapping("/torneos")
+    @GetMapping("/torneosAdmin")
     public ModelAndView gestionTorneos() {
-        ModelAndView mav = new ModelAndView("/torneos");
+        ModelAndView mav = new ModelAndView("/torneosAdmin");
         mav.addObject("canchas", servicioAdmin.obtenerCanchas());
         mav.addObject("arbitros", servicioAdmin.obtenerArbitros());
 
@@ -60,14 +60,14 @@ public class ControladorAdmin {
     }
 
     // Controller para la creacion de torneos
-    @PostMapping("/torneos/crear")
+    @PostMapping("/torneosAdmin/crear")
     public ModelAndView crearTorneo(@ModelAttribute("torneo") Torneo torneo) {
         servicioAdmin.guardarTorneo(torneo); //faltaria una exepxion en guardartorneo de torneo existente;
-        return new ModelAndView("redirect:/admin/torneos?creado=true");
+        return new ModelAndView("redirect:/admin/torneosAdmin?creado=true");
     }
 
     // Controller para la vista de edicion de torneos
-    @GetMapping("/torneos/editar/{id}")
+    @GetMapping("/torneosAdmin/editar/{id}")
     public ModelAndView mostrarFormularioEdicionTorneo(@PathVariable("id") Integer id) {
         Torneo torneo = servicioAdmin.obtenerTorneos().get(id);
         if (torneo != null) {
@@ -79,24 +79,24 @@ public class ControladorAdmin {
             mav.addObject("editando", true);
             return mav;
         }
-        return new ModelAndView("redirect:/admin/torneos");
+        return new ModelAndView("redirect:/admin/torneosAdmin");
     }
 
     // Controller para la edicion de torneos
-    @PostMapping("/torneos/editar")
+    @PostMapping("/torneosAdmin/editar")
     public ModelAndView editarTorneo(@ModelAttribute("torneo") Torneo torneo) {
         servicioAdmin.guardarTorneo(torneo);
         return new ModelAndView("redirect:/admin/torneos?editado=true");
     }
 
     // Controller para la eliminacion de torneos
-    @GetMapping("/torneos/eliminar/{id}")
+    @GetMapping("/torneosAdmin/eliminar/{id}")
     public ModelAndView eliminarTorneo(@PathVariable("id") Integer id) {
         Torneo torneo = servicioAdmin.obtenerTorneos().get(id);
         if (torneo != null) {
             servicioAdmin.eliminarTorneo(torneo);
         }
-        return new ModelAndView("redirect:/admin/torneos?eliminado=true");
+        return new ModelAndView("redirect:/admin/torneosAdmin?eliminado=true");
     }
 
     // Controller para la vista de gestion de equipos

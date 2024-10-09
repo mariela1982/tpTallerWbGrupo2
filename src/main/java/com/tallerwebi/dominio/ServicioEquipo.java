@@ -15,7 +15,7 @@ public interface ServicioEquipo {
 
     Boolean editarEquipo(Jugador jugadornuevo, Jugador jugadorViejo, Equipo equipo) throws EquipoInexistente;
 
-    Jugador buscarJugador(Integer id_jugador,Equipo equipo) throws JugadorInexistente;
+    Jugador buscarJugador(Long idJugador,Equipo equipo) throws JugadorInexistente;
 
     Boolean agregarTorneo(Torneo torneo, String nombreEquipo) throws EquipoInexistente;
 

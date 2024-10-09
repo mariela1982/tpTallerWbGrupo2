@@ -5,7 +5,7 @@ import java.util.List;
 public interface RepositorioJugador {
     Jugador crearJugador(Jugador j);
     void eliminarJugador(Jugador j);
-    Jugador buscarJugador(Integer nombre);
+    Jugador buscarJugador(Long idJugador);
     List<Jugador> buscarJugadores();
 
 }

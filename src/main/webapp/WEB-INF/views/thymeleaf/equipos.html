@@ -37,7 +37,7 @@
             <div class="mb-3">
                 <label  class="form-label">Jugadores</label>
                 <div th:each="jugador : ${jugadores}">
-                    <input type="checkbox" th:field="*{jugadores}" th:value="${jugador.getId()}">
+                    <input type="checkbox" th:name="jugadoresId" th:value="${jugador.getId()}">
                     <label th:text="${jugador.getNombreYapellido()}"></label>
                 </div>
 <!--                <select id="jugadores" name="jugadores" class="form-select" multiple required>-->

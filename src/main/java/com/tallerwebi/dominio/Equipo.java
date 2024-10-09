@@ -32,7 +32,7 @@ public class Equipo {
         this.nombre = nombre;
         this.cbu = cbu;
         this.dtDni = dni;
-        this.jugadores = new ArrayList<Jugador>();
+        this.jugadores = new ArrayList<>();
 
 
     }

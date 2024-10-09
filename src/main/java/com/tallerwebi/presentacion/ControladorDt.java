@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -167,7 +168,7 @@ public class ControladorDt {
     }
     // Controller para la vista de edicion de jugadores
     @GetMapping("/jugadores/editar/{id}")
-    public ModelAndView mostrarFormularioEdicionJugador(@PathVariable("id") Integer id) {
+    public ModelAndView mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {
         Jugador jugador = null;
         ModelMap model = new ModelMap();
         try {
@@ -202,7 +203,7 @@ public class ControladorDt {
 
     // Controller para la eliminacion de jugadores
     @GetMapping("/jugadores/eliminar/{id}")
-    public ModelAndView eliminarJugador(@PathVariable("id") Integer id) {
+    public ModelAndView eliminarJugador(@PathVariable("id") Long id) {
         ModelMap model = new ModelMap();
         try {
             servicioJugador.eliminarJugador(id);
@@ -216,8 +217,8 @@ public class ControladorDt {
     public ModelAndView gestionEquipos() {
         ModelMap modelMap = new ModelMap();
         Equipo equipo = new Equipo();
-        modelMap.put("equipo", equipo);
 
+        modelMap.put("equipo", equipo);
         modelMap.put("equipos", servicioEquipo.obtenerEquipos());
         modelMap.put("jugadores", servicioJugador.obtenerJugadores());
         modelMap.put("editando", false);
@@ -226,13 +227,23 @@ public class ControladorDt {
 
     // Controller para la creacion de equipos
     @PostMapping("/equipos/crear")
-    public ModelAndView crearEquipo(@ModelAttribute("equipo") Equipo equipo) {
+    public ModelAndView crearEquipo(@ModelAttribute("equipo") Equipo equipo,
+                                    @RequestParam(value = "jugadoresId",required = false)List<Long> jugadoresId) {
         ModelMap model = new ModelMap();
         try {
-//            List<Jugador> jugadoresSeleccionadosId = equipo.getJugadores();
-//            equipo.setJugadores(jugadoresSeleccionadosId);
-            servicioEquipo.guardarEquipo(equipo);
-        } catch (EquipoExistente e) {
+           if (jugadoresId != null) {
+               List<Jugador> jugadoresElegidos = new ArrayList<Jugador>();
+               for (Long id : jugadoresId) {
+                   Jugador jugador =servicioJugador.buscarJugador(id);
+                   jugadoresElegidos.add(jugador);
+               }
+               equipo.setJugadores(jugadoresElegidos);
+           }
+            if (equipo.getJugadores() == null || equipo.getJugadores().isEmpty()) {
+                throw new IllegalArgumentException("El equipo debe tener al menos un jugador.");
+            }
+          servicioEquipo.guardarEquipo(equipo);
+        } catch (EquipoExistente | JugadorInexistente e) {
             model.put("Error", "El equipo ya existe");
             return new ModelAndView("equipos", model);
         }

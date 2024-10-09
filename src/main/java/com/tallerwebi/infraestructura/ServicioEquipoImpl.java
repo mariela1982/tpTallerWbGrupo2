@@ -68,8 +68,8 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     }
 
     @Override
-    public Jugador buscarJugador(Integer id_jugador,Equipo equipo) throws JugadorInexistente {
-    Jugador jugadorEncontrado = repositorioEquipo.buscarJugador(id_jugador,equipo);
+    public Jugador buscarJugador(Long idJugador,Equipo equipo) throws JugadorInexistente {
+    Jugador jugadorEncontrado = repositorioEquipo.buscarJugador(idJugador,equipo);
     if(jugadorEncontrado == null){
         throw new JugadorInexistente();
     }

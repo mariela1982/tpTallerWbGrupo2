@@ -3,6 +3,7 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.Torneo;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -15,10 +16,9 @@ import com.tallerwebi.dominio.RepositorioEquipo;
 
 import java.util.List;
 
-@Repository("repositoioEquipo")
-@SuppressWarnings({ "deprecation", "unchecked" })
+@Repository("repositorioEquipo")
 public class RepositorioEquipoImpl implements RepositorioEquipo {
-    SessionFactory sessionFactory;
+  private  SessionFactory sessionFactory;
 
     @Autowired
     public RepositorioEquipoImpl(SessionFactory sessionFactory) {
@@ -27,27 +27,23 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
 
 
     @Override
-    @Transactional(readOnly = true)
     public Equipo buscar(String nombre) {
 
-        //conectarse a la base de datos
         Session session = sessionFactory.getCurrentSession();
-
-        /* filtra si dentro de la base de datos encuentra al objeto con dicha
-        condicion (en este caso la de nombre)
-
-         */
-        return (Equipo)session.createCriteria(Equipo.class)
-                .add(Restrictions.eq("nombre",nombre))
-                .uniqueResult();
+//        return (Equipo)session.createCriteria(Equipo.class)
+//                .add(Restrictions.eq("nombre",nombre))
+//                .uniqueResult();
+        return (Equipo) session.get(Equipo.class, nombre);
     }
 
     @Override
-    public Equipo buscarPorID(Integer id) {
-        return null;
+    public Equipo buscarPorID(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return (Equipo)session.get(Equipo.class, id);
     }
 
-    @Transactional
+
     @Override
     public Equipo guardar(Equipo equipo) {
         final Session session = sessionFactory.getCurrentSession();
@@ -55,45 +51,60 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
         return equipo;
     }
 
-    @Transactional
+
     @Override
     public Equipo editar(Jugador nuevo, Jugador viejo, Equipo equipo) {
-
+        Session sesion= sessionFactory.getCurrentSession();
         Jugador jugadorAeliminar = buscarJugador(viejo.getId(),equipo);
 
         if (jugadorAeliminar != null) {
             equipo.getJugadores().remove(jugadorAeliminar);
             equipo.getJugadores().add(nuevo);
+            sesion.saveOrUpdate(equipo);
+            return equipo;
         }
+        return null;
 
-        return buscar(equipo.getNombre());
     }
 
-    @Transactional
+
     @Override
     public Torneo agregarTorneo(Torneo torneo, String nombreEquipo) {
+        Session sesion= sessionFactory.getCurrentSession();
+        Equipo equipo = sesion.get(Equipo.class, nombreEquipo);
+        if (equipo != null) {
+            equipo.setTorneo(torneo);
+            sesion.saveOrUpdate(equipo);
+            return torneo;
+        }
         return null;
     }
 
-    @Transactional
+
     @Override
-    public Jugador buscarJugador(int idJugador, Equipo equipo) {
-//        Session sesion= sessionFactory.getCurrentSession();
-//        return (Jugador) sesion.createCriteria(Jugador.class)
-//                .createAlias("Jugador.equipo","equipo")
-//                .add(Restrictions.eq("equipo.id",equipo.getIdEquipo()))
-//                .add(Restrictions.eq("Jugador.id",idJugador);
-//           //             .uniqueResult();
-return null;
+    public Jugador buscarJugador(Long idJugador, Equipo equipo) {
+        Session sesion= sessionFactory.getCurrentSession();
+        return (Jugador) sesion.createCriteria(Equipo.class,"equipo")
+                .createAlias("equipo.jugadores", "jugador")
+                .add(Restrictions.eq("equipo.id",equipo.getIdEquipo()))
+                .add(Restrictions.eq("jugador.id",idJugador))
+                .uniqueResult();
+
     }
 
     @Override
     public List<Equipo> buscarEquipos() {
-        return List.of();
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(Equipo.class);
+        return criteria.list();
+
+
     }
 
     @Override
     public void eliminar(Equipo equipo) {
+        Session sesion= sessionFactory.getCurrentSession();
+        sesion.delete(equipo);
 
     }
 

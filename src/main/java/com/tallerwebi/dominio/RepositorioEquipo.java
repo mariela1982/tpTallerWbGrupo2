@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface RepositorioEquipo {
     Equipo buscar(String nombre);
-    Equipo buscarPorID(Integer id);
+    Equipo buscarPorID(Long id);
 
     Equipo guardar(Equipo equipo);
 
@@ -12,7 +12,7 @@ public interface RepositorioEquipo {
 
     Torneo  agregarTorneo(Torneo torneo, String nombreEquipo);
 
-    Jugador buscarJugador(int idJugador, Equipo equipo);
+    Jugador buscarJugador(Long idJugador, Equipo equipo);
 
     List<Equipo> buscarEquipos();
 
