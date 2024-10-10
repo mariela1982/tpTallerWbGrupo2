@@ -66,28 +66,12 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 //        return equipo;
 //    }
 
-<<<<<<< HEAD
     @Transactional
     @Override
     public List<Equipo> obtenerEquipos() {
         final Session session = sessionFactory.getCurrentSession();
         return session.createQuery("SELECT DISTINCT e FROM Equipo e").list();
     }
-=======
-//    @Transactional
-//    @Override
-//    public List<Equipo> obtenerEquipos() {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return session.createCriteria(Equipo.class).list();
-//    }
-//
-//    @Transactional
-//    @Override
-//    public Equipo obtenerEquipoPorId(Integer id) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return (Equipo) session.get(Equipo.class, id);
-//    }
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
 
 //    @Transactional
 //    @Override

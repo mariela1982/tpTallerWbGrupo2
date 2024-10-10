@@ -14,19 +14,12 @@ public interface RepositorioAdmin {
 //    Equipo obtenerEquipoPorId(Integer id);
 //    void eliminarEquipo(Equipo equipo);
 
-<<<<<<< HEAD
     Jugador guardarJugador(Jugador jugador);
     List<Jugador> obtenerJugadores();
     Jugador obtenerJugadorPorId(Long id);
     void eliminarJugador(Jugador jugador);
     List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
     List<Jugador> obtenerJugadoresConSancion();
-=======
-//    Jugador guardarJugador(Jugador jugador);
-//    List<Jugador> obtenerJugadores();
-//    Jugador obtenerJugadorPorId(Integer id);
-//    void eliminarJugador(Jugador jugador);
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
 
     Cancha guardarCancha(Cancha cancha);
     List<Cancha> obtenerCanchas();

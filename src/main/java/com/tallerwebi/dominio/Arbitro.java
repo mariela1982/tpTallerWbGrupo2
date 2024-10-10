@@ -13,15 +13,10 @@ public class Arbitro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
-<<<<<<< HEAD
     private String apellido;
     private PartidosDeBsAs partido;
 
     public Long getId() {
-=======
-    
-    public Integer getId() {
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
         return id;
     }
 
