@@ -3,7 +3,9 @@ package com.tallerwebi.dominio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +18,7 @@ public class Equipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEquipo;
+    private Long id;
     private String nombre;
     private String cbu;
     private Long dtDni;
@@ -25,9 +27,20 @@ public class Equipo {
 
     private Torneo torneo;
 
-    @OneToMany
+    @OneToMany(mappedBy = "equipo", fetch = FetchType.EAGER)
     private List<Jugador> jugadores;
 
+<<<<<<< HEAD
+    @Column(name = "orden")
+    private Integer orden;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+=======
     public Equipo(String nombre, String cbu, Long dni){
         this.nombre = nombre;
         this.cbu = cbu;
@@ -72,6 +85,7 @@ public class Equipo {
 
     public void setCbu(String cbu) {
         this.cbu = cbu;
+>>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
     }
 
     public String getNombre() {
@@ -80,6 +94,14 @@ public class Equipo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getCbu() {
+        return cbu;
+    }
+
+    public void setCbu(String cbu) {
+        this.cbu = cbu;
     }
 
     public Long getDtDni() {
@@ -97,4 +119,21 @@ public class Equipo {
     public void setTorneo(Torneo torneo) {
         this.torneo = torneo;
     }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public Integer getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Integer orden) {
+        this.orden = orden;
+    }
+
 }

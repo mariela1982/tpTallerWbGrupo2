@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
@@ -26,6 +28,7 @@ public class Torneo {
     private PartidosDeBsAs partido;
 
     @OneToMany(mappedBy = "torneo", fetch = FetchType.EAGER)
+    @OrderColumn(name = "orden")
     private List<Equipo> equipos;
 
     public Integer getId() {
@@ -88,6 +91,30 @@ public class Torneo {
 
     public void setEquipos(List<Equipo> equipos) {
         this.equipos = equipos;
+    }
+
+    public void sortearEquipos() {
+        if (equipos != null && !equipos.isEmpty()) {
+            Collections.shuffle(equipos);
+
+            for (int i = 0; i < equipos.size(); i++) {
+                equipos.get(i).setOrden(i + 1);
+            }
+        }
+    }
+
+    public void agregarEquipo(Equipo equipo) {
+        if (equipos == null) {
+            equipos = Collections.emptyList();
+        }
+
+        equipos.add(equipo);
+    }
+
+    public void eliminarEquipo(Equipo equipo) {
+        if (equipos != null) {
+            equipos.remove(equipo);
+        }
     }
 
 }
