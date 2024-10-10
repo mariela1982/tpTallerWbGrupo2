@@ -1,0 +1,23 @@
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            <i class="fas fa-futbol"></i>
+            <span
+                    th:text="${partido.equipoLocal != null && partido.equipoLocal.nombre != null ? partido.equipoLocal.nombre : 'Esperando Rival'}">Equipo
+                1</span>
+            <strong
+                    th:text="${partido.golesLocal != null ? partido.golesLocal : '0'}">0</strong>
+            <strong> vs </strong>
+            <strong
+                    th:text="${partido.golesVisitante != null ? partido.golesVisitante : '0'}">0</strong>
+            <span
+                    th:text="${partido.equipoVisitante != null && partido.equipoVisitante.nombre != null ? partido.equipoVisitante.nombre : 'Esperando Rival'}">Equipo
+                2</span>
+        </div>
+
+        <a class="btn btn-primary btn-sm" th:href="@{/admin/partidos/{id}(id=${partido.id})}">
+            Ver Partido
+        </a>
+    </li>
+</ul>

@@ -72,3 +72,76 @@
 </body>
 
 </html>
+
+------------------------------------------
+@ -20,16 +20,36 @@
+<main class="container-lg">
+    <h1 class="my-4 text-center">Gestion de Arbitros</h1>
+
+
+    <form action="#" th:action="${editando ? '/spring/admin/arbitros/editar' : '/spring/admin/arbitros/crear'}" method="post" class="mb-4" th:object="${arbitro}">
+        <!-- Campo oculto para el ID de la cancha si estamos editando -->
+        <form action="#" th:action="${editando ? '/spring/admin/arbitros/editar' : '/spring/admin/arbitros/crear'}"
+              method="post" class="mb-4" th:object="${arbitro}">
+            <!-- Campo oculto para el ID de la arbitro si estamos editando -->
+            <input type="hidden" th:if="${editando}" th:name="id" th:value="${arbitro.id}" />
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del Arbitro</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required>
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="nombre" class="form-label">Nombre del Arbitro</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="apellido" class="form-label">Apellido del Arbitro</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" th:field="*{apellido}"
+                               required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="partido" class="form-label">Partido</label>
+                        <select id="partido" name="partido" class="form-select" required>
+                            <option value="">Seleccionar un Partido</option>
+                            <option th:each="partido : ${partidosDeBsAs}" th:value="${partido}" th:text="${partido.name()}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" th:text="${editando ? 'Actualizar Arbitro' : 'Agregar Arbitro'}"></button>
+                <button type="submit" class="btn btn-primary"
+                        th:text="${editando ? 'Actualizar Arbitro' : 'Agregar Arbitro'}"></button>
+        </form>
+
+        <!-- Mensajes de alerta -->
+        @ -47,19 +67,22 @@
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre Completo</th>
+                <th>Partido</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(arbitros)}">
+                <td colspan="2" class="text-center">No hay arbitros registrados</td>
+                <td colspan="3" class="text-center">No hay arbitros registrados</td>
+            </tr>
+            <tr th:each="arbitro : ${arbitros}">
+                <td th:text="${arbitro.nombre}"></td>
+                <td th:text="${arbitro.nombre} + ' ' + ${arbitro.apellido}">Nombre</td>
+                <td th:text="${arbitro.partido.name()}">Partido</td>
+                <td>
+                    <a th:href="@{/admin/arbitros/editar/{id}(id=${arbitro.id})}" class="btn btn-primary">Editar</a>
+                    <a th:href="@{/admin/arbitros/eliminar/{id}(id=${arbitro.id})}" class="btn btn-danger">Eliminar</a>
+                    <a th:href="@{/admin/arbitros/eliminar/{id}(id=${arbitro.id})}"
+                       class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
