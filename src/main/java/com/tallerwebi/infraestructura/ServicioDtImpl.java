@@ -29,13 +29,5 @@ public class ServicioDtImpl implements ServicioDt {
 
     }
 
-    @Override
-    public void guardarJugador(Jugador nombre) {
 
-    }
-
-    @Override
-    public void eliminarJugador(Jugador nombre) {
-
-    }
 }

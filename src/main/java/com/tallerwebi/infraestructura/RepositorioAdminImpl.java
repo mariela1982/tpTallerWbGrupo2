@@ -41,7 +41,7 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public Torneo obtenerTorneoPorId(Long id) {
+    public Torneo obtenerTorneoPorId(Integer id) {
         final Session session = sessionFactory.getCurrentSession();
         return (Torneo) session.get(Torneo.class, id);
     }
@@ -52,64 +52,78 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         final Session session = sessionFactory.getCurrentSession();
         session.delete(torneo);
     }
+//
+//    @Override
+//    public Equipo guardarEquipo(Equipo equipo) {
+//        return null;
+//    }
 
-    @Transactional
-    @Override
-    public Equipo guardarEquipo(Equipo equipo) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(equipo);
-        return equipo;
-    }
+//    @Transactional
+//    @Override
+//    public Equipo guardarEquipo(Equipo equipo) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(equipo);
+//        return equipo;
+//    }
 
+<<<<<<< HEAD
     @Transactional
     @Override
     public List<Equipo> obtenerEquipos() {
         final Session session = sessionFactory.getCurrentSession();
         return session.createQuery("SELECT DISTINCT e FROM Equipo e").list();
     }
+=======
+//    @Transactional
+//    @Override
+//    public List<Equipo> obtenerEquipos() {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return session.createCriteria(Equipo.class).list();
+//    }
+//
+//    @Transactional
+//    @Override
+//    public Equipo obtenerEquipoPorId(Integer id) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return (Equipo) session.get(Equipo.class, id);
+//    }
+>>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
 
-    @Transactional
-    @Override
-    public Equipo obtenerEquipoPorId(Long id) {
-        final Session session = sessionFactory.getCurrentSession();
-        return (Equipo) session.get(Equipo.class, id);
-    }
+//    @Transactional
+//    @Override
+//    public void eliminarEquipo(Equipo equipo) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        session.delete(equipo);
+//    }
 
-    @Transactional
-    @Override
-    public void eliminarEquipo(Equipo equipo) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.delete(equipo);
-    }
+//    @Transactional
+//    @Override
+//    public Jugador guardarJugador(Jugador jugador) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        session.saveOrUpdate(jugador);
+//        return jugador;
+//    }
 
-    @Transactional
-    @Override
-    public Jugador guardarJugador(Jugador jugador) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(jugador);
-        return jugador;
-    }
+//    @Transactional
+//    @Override
+//    public List<Jugador> obtenerJugadores() {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return session.createCriteria(Jugador.class).list();
+//    }
 
-    @Transactional
-    @Override
-    public List<Jugador> obtenerJugadores() {
-        final Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Jugador.class).list();
-    }
+//    @Transactional
+//    @Override
+//    public Jugador obtenerJugadorPorId(Long id) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return (Jugador) session.get(Jugador.class, id);
+//    }
 
-    @Transactional
-    @Override
-    public Jugador obtenerJugadorPorId(Long id) {
-        final Session session = sessionFactory.getCurrentSession();
-        return (Jugador) session.get(Jugador.class, id);
-    }
-
-    @Transactional
-    @Override
-    public void eliminarJugador(Jugador jugador) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.delete(jugador);
-    }
+//    @Transactional
+//    @Override
+//    public void eliminarJugador(Jugador jugador) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        session.delete(jugador);
+//    }
 
     @Transactional
     @Override
@@ -140,9 +154,10 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         return session.createCriteria(Cancha.class).list();
     }
 
+
     @Transactional
     @Override
-    public Cancha obtenerCanchaPorId(Long id) {
+    public Cancha obtenerCanchaPorId(Integer id) {
         final Session session = sessionFactory.getCurrentSession();
         return (Cancha) session.get(Cancha.class, id);
     }
@@ -169,9 +184,11 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         return session.createCriteria(Arbitro.class).list();
     }
 
+
+
     @Transactional
     @Override
-    public Arbitro obtenerArbitroPorId(Long id) {
+    public Arbitro obtenerArbitroPorId(Integer id) {
         final Session session = sessionFactory.getCurrentSession();
         return (Arbitro) session.get(Arbitro.class, id);
     }

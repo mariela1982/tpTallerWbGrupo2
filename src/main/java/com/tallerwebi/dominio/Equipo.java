@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,12 +24,13 @@ public class Equipo {
     private Long dtDni;
 
     @ManyToOne
-    @JoinColumn(name = "torneo_id")
+
     private Torneo torneo;
 
     @OneToMany(mappedBy = "equipo", fetch = FetchType.EAGER)
     private List<Jugador> jugadores;
 
+<<<<<<< HEAD
     @Column(name = "orden")
     private Integer orden;
 
@@ -38,6 +40,44 @@ public class Equipo {
 
     public void setId(Long id) {
         this.id = id;
+=======
+    public Equipo(String nombre, String cbu, Long dni){
+        this.nombre = nombre;
+        this.cbu = cbu;
+        this.dtDni = dni;
+        this.jugadores = new ArrayList<>();
+
+
+    }
+
+    public Equipo() {
+        this.jugadores = new ArrayList<>();
+    }
+
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(Jugador jugador) {
+        jugadores.add(jugador);
+    }
+
+    public void setIdEquipo(Long idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+
+    public Long getIdEquipo() {
+        return idEquipo;
+    }
+
+    public String getCbu() {
+        return cbu;
+    }
+
+    public void setCbu(String cbu) {
+        this.cbu = cbu;
+>>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
     }
 
     public String getNombre() {

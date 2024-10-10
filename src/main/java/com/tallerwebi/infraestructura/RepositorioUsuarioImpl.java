@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository("repositorioUsuario")
-
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
     @Autowired
@@ -22,6 +21,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
         this.sessionFactory = sessionFactory;
     }
+
 
     @Transactional
     @Override
