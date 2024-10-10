@@ -21,20 +21,31 @@
         <h1 class="my-4 text-center">Asignacion de Sanciones</h1>
 
         <form th:action="@{/admin/sanciones/asignar}" method="post" class="mb-4">
-            <div class="mb-3">
-                <label for="jugador" class="form-label">Jugador</label>
-                <select id="jugador" name="jugador" class="form-select" required>
-                    <option th:each="jugador : ${jugadores}" th:value="${jugador.id}" th:text="${jugador.nombre}">
-                    </option>
-                </select>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="equipo" class="form-label">Equipo</label>
+                    <select id="equipo" name="equipo" class="form-select" required>
+                        <option value="" disabled selected>Selecciona un equipo</option>
+                        <option th:each="equipo : ${equipos}" th:value="${equipo.id}" th:text="${equipo.nombre}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="jugador" class="form-label">Jugador</label>
+                    <select id="jugador" name="jugador" class="form-select" required>
+                        <option value="" disabled selected>Selecciona un jugador</option>
+
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label for="sancion" class="form-label">Sancion</label>
                 <select id="sancion" name="sancion" class="form-select" required>
                     <option value="" disabled selected>Selecciona una sancion</option>
-                    <option value="amarilla">Tarjeta Amarilla</option>
-                    <option value="roja">Tarjeta Roja</option>
+                    <option value="Tarjeta Amarilla">Tarjeta Amarilla</option>
+                    <option value="Tarjeta Roja">Tarjeta Roja</option>
                 </select>
             </div>
 
@@ -46,24 +57,33 @@
             <thead>
                 <tr>
                     <th>Jugador</th>
+                    <th>Equipo</th>
                     <th>Sancion</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:if="${#lists.isEmpty(sanciones)}">
-                    <td colspan="3" class="text-center">No hay sanciones registradas</td>
+                <tr th:if="${#lists.isEmpty(jugadoresConSancion)}">
+                    <td colspan="4" class="text-center">
+                        No hay jugadores sancionados
+                    </td>
                 </tr>
-                <tr th:each="sancion : ${sanciones}">
-                    <td th:text="${sancion.jugador.nombre}"></td>
-                    <td th:text="${sancion.tipo}"></td>
-                    <td><a th:href="@{/admin/sanciones/eliminar/{id}(id=${sancion.id})}"
-                            class="btn btn-danger btn-sm">Eliminar</a></td>
+
+                <tr th:each="jugador : ${jugadoresConSancion}">
+                    <td th:text="${jugador.nombre + ' ' + jugador.apellido}"></td>
+                    <td th:text="${jugador.equipo.nombre}"></td>
+                    <td th:text="${jugador.sancion}"></td>
+                    <td>
+                        <a th:href="@{/admin/sanciones/quitar/{id}(id=${jugador.id})}" class="btn btn-danger">
+                            Quitar Sancion
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </main>
 
+    <script th:src="@{/js/sanciones.js}"></script>
     <!-- Bootstrap core JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

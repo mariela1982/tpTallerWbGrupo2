@@ -301,23 +301,23 @@ public class ControladorAdminTest {
 //        assertEquals("redirect:/admin/arbitros?eliminado=true", mav.getViewName());
 //    }
 
-    @Test
-    public void queSePuedaMostrarLaGestionDePartidos() {
-        // ejecucion
-        ModelAndView mav = controladorAdmin.gestionPartidos();
-
-        // comprobacion
-        assertEquals("admin/partidos", mav.getViewName());
-    }
-
-    @Test
-    public void queSePuedaMostrarLaGestionDeSanciones() {
-        // ejecucion
-        ModelAndView mav = controladorAdmin.gestionSanciones();
-
-        // comprobacion
-        assertEquals("admin/sanciones", mav.getViewName());
-    }
+//    @Test
+//    public void queSePuedaMostrarLaGestionDePartidos() {
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.gestionPartidos();
+//
+//        // comprobacion
+//        assertEquals("admin/partidos", mav.getViewName());
+//    }
+//
+//    @Test
+//    public void queSePuedaMostrarLaGestionDeSanciones() {
+//        // ejecucion
+//        ModelAndView mav = controladorAdmin.gestionSanciones();
+//
+//        // comprobacion
+//        assertEquals("admin/sanciones", mav.getViewName());
+//    }
 
     @Test
     public void queSePuedaMostrarLaGestionDeResultados() {

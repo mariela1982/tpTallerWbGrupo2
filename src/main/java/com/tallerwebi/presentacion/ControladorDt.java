@@ -49,8 +49,6 @@ public class ControladorDt {
         return new ModelAndView();
     }
 
-
-
 //
 ////modificar hay que usar servicio
 //    @GetMapping("/cargar-dinero")
@@ -68,79 +66,87 @@ public class ControladorDt {
 //        usuario.setSaldo(usuario.getSaldo() + monto);
 //        return new ModelAndView("redirect:/cargar-dinero");
 //    }
-//
-//    @GetMapping("/torneos")
-//    public ModelAndView verTorneos(@RequestParam(value = "partido", required = false) PartidosDeBsAs partido,
-//            HttpServletRequest request) {
-//        ModelAndView mav = new ModelAndView("torneos");
-//        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-//
-//        List<Torneo> torneos = repositorioAdmin.obtenerTorneos();
-//        if (partido != null) {
-//            torneos = torneos.stream()
-//                    .filter(torneo -> torneo.getPartido().equals(partido))
-//                    .collect(Collectors.toList());
-//        }
-//
-//        mav.addObject("torneos", torneos);
-//        mav.addObject("usuario", usuario);
-//        mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
-//        mav.addObject("partido", partido);
-//        return mav;
-//    }
-//
-//    @GetMapping("/torneos/{id}")
-//    public ModelAndView verTorneo(@PathVariable("id") Long torneoId, HttpServletRequest request) {
-//        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-//        ModelAndView mav = new ModelAndView("torneo");
-//        Torneo torneo = repositorioAdmin.obtenerTorneoPorId(torneoId);
-//
-//        Integer cuposOcupados = torneo.getEquipos().size();
-//        Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
-//
-//        mav.addObject("usuario", usuario);
-//        mav.addObject("torneo", torneo);
-//        mav.addObject("cuposOcupados", cuposOcupados);
-//        mav.addObject("cuposDisponibles", cuposDisponibles);
-//
-//        return mav;
-//    }
-//
-//    @PostMapping("/equipo/inscribir")
-//    public ModelAndView inscribirEquipo(@RequestParam("torneoId") Long torneoId, HttpServletRequest request) {
-//        ModelAndView mav = new ModelAndView("torneo");
-//        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-//        Torneo torneo = repositorioAdmin.obtenerTorneoPorId(torneoId);
-//
-//        Integer cuposOcupados = torneo.getEquipos().size();
-//        Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
-//
-//        // Validar si el usuario esta logueado
-//        if (usuario == null) {
-//            mav.addObject("error", "Tenes que estar logueado para inscribirte a un torneo");
-//        } else {
-//            // Validar si el torneo tiene cupos disponibles
-//            if (cuposDisponibles <= 0) {
-//                mav.addObject("error", "No hay cupos disponibles para inscribirte al torneo");
-//            } else {
-//                // Validar si el usuario tiene saldo suficiente
-//                if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
-//                    mav.addObject("error", "No tenes saldo suficiente para inscribirte al torneo");
-//                } else {
-//                    // Si tiene saldo suficiente, procesar el pago
-//                    usuario.setSaldo(usuario.getSaldo() - torneo.getPrecioEntrada());
-//                    mav.addObject("success", "Te inscribiste al torneo correctamente");
-//                }
-//            }
-//        }
-//
-//        mav.addObject("usuario", usuario);
-//        mav.addObject("torneo", torneo);
-//        mav.addObject("cuposOcupados", cuposOcupados);
-//        mav.addObject("cuposDisponibles", cuposDisponibles);
-//
-//        return mav;
-//    }
+//--------------para inscribirse a un torneo-----------
+    @GetMapping("/torneos")
+    public ModelAndView verTorneos(@RequestParam(value = "partido", required = false) PartidosDeBsAs partido,
+            HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("torneos");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+        List<Torneo> torneos = servicioAdmin.obtenerTorneos();
+        if (partido != null) {
+            torneos = torneos.stream()
+                    .filter(torneo -> torneo.getPartido().equals(partido))
+                    .collect(Collectors.toList());
+        }
+
+        mav.addObject("torneos", torneos);
+        mav.addObject("usuario", usuario);
+        mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
+        mav.addObject("partido", partido);
+        return mav;
+    }
+
+    @GetMapping("/torneos/{id}")
+    public ModelAndView verTorneo(@PathVariable("id") Long torneoId, HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        ModelAndView mav = new ModelAndView("torneo");
+        Torneo torneo = servicioAdmin.obtenerTorneo(torneoId);
+
+        Integer cuposOcupados = torneo.getEquipos().size();
+        Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+
+        mav.addObject("usuario", usuario);
+        mav.addObject("torneo", torneo);
+        mav.addObject("cuposOcupados", cuposOcupados);
+        mav.addObject("cuposDisponibles", cuposDisponibles);
+
+        return mav;
+    }
+
+    @PostMapping("/equipo/inscribir")
+    public ModelAndView inscribirEquipo(@RequestParam("torneoId") Long torneoId, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("torneo");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Torneo torneo = servicioAdmin.obtenerTorneo(torneoId);
+
+        Integer cuposOcupados = torneo.getEquipos().size();
+        Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+
+        // Validar si el usuario esta logueado
+        if (usuario == null) {
+            mav.addObject("error", "Tenes que estar logueado para inscribirte a un torneo");
+        } else {
+            // Validar si el torneo tiene cupos disponibles
+            if (cuposDisponibles <= 0) {
+                mav.addObject("error", "No hay cupos disponibles para inscribirte al torneo");
+            } else {
+                // Validar si el usuario tiene saldo suficiente
+                if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
+                    mav.addObject("error", "No tenes saldo suficiente para inscribirte al torneo");
+                } else {
+                    // Si tiene saldo suficiente, procesar el pago
+                    usuario.setSaldo(usuario.getSaldo() - torneo.getPrecioEntrada());
+                    mav.addObject("success", "Te inscribiste al torneo correctamente");
+                }
+            }
+        }
+
+        mav.addObject("usuario", usuario);
+        mav.addObject("torneo", torneo);
+        mav.addObject("cuposOcupados", cuposOcupados);
+        mav.addObject("cuposDisponibles", cuposDisponibles);
+
+        return mav;
+    }
+    @GetMapping("/jugadores")
+    public ModelAndView crearJugadores(){
+        ModelMap model = new ModelMap();
+        Jugador jugador = new Jugador();
+        model.addAttribute("jugador", jugador);
+
+        return new ModelAndView("jugadores", model);
+    }
     // Controller para la creacion de jugadores
 @PostMapping("/crearJugador")
 public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
@@ -159,14 +165,7 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
     return new ModelAndView("jugadores", model);
 
     }
-    @GetMapping("/jugadores")
-    public ModelAndView crearJugadores(){
-        ModelMap model = new ModelMap();
-        Jugador jugador = new Jugador();
-        model.put("jugador", jugador);
 
-        return new ModelAndView("jugadores", model);
-    }
     // Controller para la vista de edicion de jugadores
     @GetMapping("/jugadores/editar/{id}")
     public ModelAndView mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {
