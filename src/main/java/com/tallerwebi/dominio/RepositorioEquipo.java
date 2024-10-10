@@ -3,7 +3,7 @@ package com.tallerwebi.dominio;
 import java.util.List;
 
 public interface RepositorioEquipo {
-    Equipo buscar(String nombre);
+    Equipo buscarEquipoPorNombre(String nombre);
     Equipo buscarPorID(Long id);
 
     Equipo guardar(Equipo equipo);

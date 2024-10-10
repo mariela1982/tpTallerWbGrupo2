@@ -28,7 +28,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     @Override
     public Equipo buscarEquipoPorNombre(String nombre) throws EquipoInexistente {
 
-        Equipo equipo = repositorioEquipo.buscar(nombre);
+        Equipo equipo = repositorioEquipo.buscarEquipoPorNombre(nombre);
 
         if(equipo == null){
             throw new EquipoInexistente();
@@ -42,7 +42,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     @Override
     public Boolean guardarEquipo(Equipo equipo) throws EquipoExistente {
 
-        Equipo equipoBuscado = repositorioEquipo.buscar(equipo.getNombre());
+        Equipo equipoBuscado = repositorioEquipo.buscarEquipoPorNombre(equipo.getNombre());
 
         if(equipoBuscado != null){
             throw new EquipoExistente();
@@ -57,7 +57,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     @Override
     public Boolean editarEquipo(Jugador jugadornuevo, Jugador jugadorViejo, Equipo equipo) throws EquipoInexistente {
 
-    Equipo equipoEncontrado = repositorioEquipo.buscar(equipo.getNombre());
+    Equipo equipoEncontrado = repositorioEquipo.buscarEquipoPorNombre(equipo.getNombre());
 
         if(equipoEncontrado == null){
             throw new EquipoInexistente();
@@ -79,7 +79,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     @Override
     public Boolean agregarTorneo(Torneo torneo, String nombreEquipo) throws EquipoInexistente {
 
-        Equipo equipoEncontrado = repositorioEquipo.buscar(nombreEquipo);
+        Equipo equipoEncontrado = repositorioEquipo.buscarEquipoPorNombre(nombreEquipo);
 
         if(equipoEncontrado == null){
             throw new EquipoInexistente();

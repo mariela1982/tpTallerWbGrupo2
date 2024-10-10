@@ -46,8 +46,16 @@ public class Equipo {
         return jugadores;
     }
 
-    public void setJugadores(Jugador jugador) {
-        jugadores.add(jugador);
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+
+    }
+
+    public void agregarJugador(Jugador jugador) {
+        if (this.jugadores == null) {
+            this.jugadores = new ArrayList<>();
+        }
+        this.jugadores.add(jugador);
     }
 
     public void setIdEquipo(Long idEquipo) {
