@@ -15,6 +15,7 @@ import java.util.List;
 @Transactional
 public class RepositorioJugadorImpl implements RepositorioJugador {
 //para tener acceso a la bd
+
     @Autowired
     private SessionFactory sessionFactory;
 

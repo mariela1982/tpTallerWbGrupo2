@@ -1,14 +1,12 @@
 package com.tallerwebi.dominio;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Entity
 public class Jugador {
@@ -22,7 +20,6 @@ public class Jugador {
     private String sancion;
 
     @ManyToOne
-    @JoinColumn(name = "equipo_id")
     private Equipo equipo;
 
 
@@ -57,12 +54,12 @@ public class Jugador {
         this.nombreYapellido = nombreYapellido;
     }
 
-    public String getApellido() {
-        return apellido;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getPosicion() {
@@ -73,23 +70,6 @@ public class Jugador {
         this.posicion = posicion;
     }
 
-    public PartidosDeBsAs getPartido() {
-        return partido;
-    }
-
-    public void setPartido(PartidosDeBsAs partido) {
-        this.partido = partido;
-    }
-
-    public String getSancion() {
-        return sancion;
-    }
-
-    public void setSancion(String sancion) {
-        this.sancion = sancion;
-    }
-
-    @JsonIgnore
     public Equipo getEquipo() {
         return equipo;
     }

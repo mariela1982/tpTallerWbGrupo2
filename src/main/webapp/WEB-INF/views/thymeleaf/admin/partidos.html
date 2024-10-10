@@ -58,7 +58,6 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Torneo</th>
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Equipo Local</th>
@@ -71,7 +70,6 @@
                     <td colspan="5" class="text-center">No hay partidos registrados</td>
                 </tr>
                 <tr th:each="partido : ${partidos}">
-                    <td th:text="${partido.torneo.nombre}"></td>
                     <td th:text="${#dates.format(partido.fecha, 'dd/MM/yyyy')}"></td>
                     <td th:text="${partido.hora}"></td>
                     <td th:text="${partido.equipoLocal.nombre}"></td>
@@ -79,8 +77,6 @@
                     <td>
                         <a th:href="@{/admin/partidos/editar/{id}(id=${partido.id})}" class="btn btn-primary">Editar</a>
                         <a th:href="@{/admin/partidos/eliminar/{id}(id=${partido.id})}" class="btn btn-danger">Eliminar</a>
-                        <a th:href="@{/admin/partidos/{id}/resultados}(id=${partido.id})" class="btn btn-info">Ver
-                            Resultados</a>
                     </td>
                 </tr>
             </tbody>

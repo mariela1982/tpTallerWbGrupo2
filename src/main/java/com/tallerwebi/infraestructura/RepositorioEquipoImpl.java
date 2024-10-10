@@ -17,8 +17,10 @@ import com.tallerwebi.dominio.RepositorioEquipo;
 import java.util.List;
 
 @Repository("repositorioEquipo")
+@Transactional
 public class RepositorioEquipoImpl implements RepositorioEquipo {
-  private  SessionFactory sessionFactory;
+
+    private  SessionFactory sessionFactory;
 
     @Autowired
     public RepositorioEquipoImpl(SessionFactory sessionFactory) {
@@ -27,12 +29,20 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
 
 
     @Override
-    public Equipo buscar(String nombre) {
+    public Equipo guardar(Equipo equipo) {
+        final Session session = sessionFactory.getCurrentSession();
+        session.save(equipo);
+        return equipo;
+    }
+
+    @Override
+    public Equipo buscarEquipoPorNombre(String nombre) {
 
         Session session = sessionFactory.getCurrentSession();
         return (Equipo)session.createCriteria(Equipo.class)
                 .add(Restrictions.eq("nombre",nombre))
                 .uniqueResult();
+
 
     }
 
@@ -42,15 +52,6 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
 
         return (Equipo)session.get(Equipo.class, id);
     }
-
-
-    @Override
-    public Equipo guardar(Equipo equipo) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(equipo);
-        return equipo;
-    }
-
 
     @Override
     public Equipo editar(Jugador nuevo, Jugador viejo, Equipo equipo) {

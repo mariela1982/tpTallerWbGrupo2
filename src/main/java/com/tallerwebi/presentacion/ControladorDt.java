@@ -233,24 +233,32 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         ModelMap model = new ModelMap();
         try {
            if (jugadoresId != null) {
-               List<Jugador> jugadoresElegidos = new ArrayList<Jugador>();
+               List<Jugador> jugadoresElegidos = new ArrayList<>();
                for (Long id : jugadoresId) {
                    Jugador jugador =servicioJugador.buscarJugador(id);
                    jugadoresElegidos.add(jugador);
-                   equipo.setJugadores(jugador);
-               }
 
+               }
+               if (equipo.getJugadores() == null){
+                   equipo.setJugadores(new ArrayList<>());
+               }
+               equipo.getJugadores().addAll(jugadoresElegidos);
            }
+
             if (equipo.getJugadores() == null || equipo.getJugadores().isEmpty()) {
                 throw new IllegalArgumentException("El equipo debe tener al menos un jugador.");
             }
           servicioEquipo.guardarEquipo(equipo);
+            model.addAttribute("equipos",servicioEquipo.obtenerEquipos());
+            model.addAttribute("equipoCreado",equipo);
+            model.put("registro","equipoCreado");
         } catch (EquipoExistente | JugadorInexistente e) {
             model.put("Error", "El equipo ya existe");
             return new ModelAndView("equipos", model);
         }
-        return new ModelAndView("redirect:/equipos?creado=true");
+        return new ModelAndView("/equipos",model);
     }
+
 
     // Controller para la vista de edicion de equipos
     @GetMapping("/equipos/editar/{id}")

@@ -31,10 +31,4 @@ public interface RepositorioAdmin {
     Arbitro obtenerArbitroPorId(Integer id);
     void eliminarArbitro(Arbitro arbitro);
 
-    Partido guardarPartido(Partido partido);
-    List<Partido> obtenerPartidos();
-    Partido obtenerPartidoPorId(Long id);
-    void eliminarPartido(Partido partido);
-    List<Partido> obtenerPartidosPorTorneo(Torneo torneo);
-    Partido obtenerPartidoEsperandoRival(Torneo torneo, String fase);
 }
