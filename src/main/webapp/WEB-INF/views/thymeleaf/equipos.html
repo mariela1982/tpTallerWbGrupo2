@@ -34,18 +34,19 @@
                 <input type="text" id="dni" name="dni" th:field="*{dtDni}" class="form-control" required>
             </div>
 
-            <div class="mb-3">
-                <label  class="form-label">Jugadores</label>
-                <div th:each="jugador : ${jugadores}">
-                    <input type="checkbox" th:name="jugadoresId" th:value="${jugador.getId()}">
-                    <label th:text="${jugador.getNombreYapellido()}"></label>
-                </div>
-<!--                <select id="jugadores" name="jugadores" class="form-select" multiple required>-->
-<!--                    <option th:each="jugador : ${jugadores}" th:value="${jugador.id}" th:text="${jugador.nombreYapellido}">-->
-<!--                    </option>-->
-<!--                </select>-->
+<!--            <div class="mb-3">-->
+<!--                <label  class="form-label">Jugadores</label>-->
+<!--                <div th:each="jugador : ${jugadores}">-->
+<!--                    <input type="checkbox" th:name="jugadoresId" th:value="${jugador.getId()}">-->
+<!--                    <label th:text="${jugador.getNombreYapellido()}"></label>-->
+<!--                </div>-->
 <!--            </div>-->
-
+            <div class="mb-3">
+                <label for="jugadores" class="form-label">Jugadores</label>
+                <select id="jugadores" th:name="jugadoresId"   multiple required>
+                    <!-- Opciones se llenarán con JavaScript -->
+                </select>
+            </div>
 
             <button type="submit" class="btn btn-primary">Crear Equipo</button>
         </form>
@@ -78,6 +79,43 @@
             </tbody>
         </table>
     </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("api/jugadoresJson")
+
+                .then(response => response.json())
+                .then(jugadores => {
+                    const select = document.getElementById("jugadores")
+                    jugadores.forEach(jugador => {
+                        const option = document.createElement("option");
+                        option.value = jugador.id; // Asegúrate de que "id" es el campo correcto
+                        option.textContent = jugador.nombreYapellido; // Asegúrate de que "nombreYapellido" es el campo correcto
+                        select.appendChild(option);
+                    });
+                });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/spring/api/jugadores') // Cambia la ruta según sea necesario
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(jugadores => {
+                    const select = document.getElementById('jugadores');
+                    jugadores.forEach(jugador => {
+                        const option = document.createElement('option');
+                        option.value = jugador.id;
+                        option.textContent = jugador.nombreYapellido;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching jugadores:', error));
+        });
+    </script>
 
 
     <!-- Boostrap core js -->

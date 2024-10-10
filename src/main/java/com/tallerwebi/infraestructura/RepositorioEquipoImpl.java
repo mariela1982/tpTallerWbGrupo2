@@ -87,7 +87,7 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
         Session sesion= sessionFactory.getCurrentSession();
         return (Jugador) sesion.createCriteria(Equipo.class,"equipo")
                 .createAlias("equipo.jugadores", "jugador")
-                .add(Restrictions.eq("equipo.id",equipo.getIdEquipo()))
+                .add(Restrictions.eq("equipo.id",equipo.getId()))
                 .add(Restrictions.eq("jugador.id",idJugador))
                 .uniqueResult();
 

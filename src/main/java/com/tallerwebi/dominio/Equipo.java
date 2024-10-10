@@ -40,11 +40,16 @@ public class Equipo {
             this.cbu = cbu;
             this.dtDni = dni;
             this.jugadores = new ArrayList<>();
+            this.orden = 0;
+            this.torneo = new Torneo();
         }
 
     public Equipo() {
-            this.jugadores = new ArrayList<>();
-        }
+        this.jugadores = new ArrayList<>();
+        this.orden = 0;
+        this.torneo = new Torneo();
+
+    }
 
         public Long getId() {
         return id;
@@ -69,14 +74,6 @@ public class Equipo {
                 this.jugadores = new ArrayList<>();
             }
             this.jugadores.add(jugador);
-        }
-
-        public void setIdEquipo (Long idEquipo){
-            this.id = idEquipo;
-        }
-
-        public Long getIdEquipo () {
-            return id;
         }
 
         public String getCbu () {

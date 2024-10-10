@@ -218,10 +218,10 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         ModelMap modelMap = new ModelMap();
         Equipo equipo = new Equipo();
 
-        modelMap.put("equipo", equipo);
-        modelMap.put("equipos", servicioEquipo.obtenerEquipos());
-        modelMap.put("jugadores", servicioJugador.obtenerJugadores());
-        modelMap.put("editando", false);
+        modelMap.addAttribute("equipo", equipo);
+        modelMap.addAttribute("equipos", servicioEquipo.obtenerEquipos());
+        modelMap.addAttribute("jugadores", servicioJugador.obtenerJugadores());
+        modelMap.addAttribute("editando", false);
         return new ModelAndView("equipos",modelMap);
     }
 
@@ -231,31 +231,35 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
                                     @RequestParam(value = "jugadoresId",required = false)List<Long> jugadoresId) {
         ModelMap model = new ModelMap();
         try {
-           if (jugadoresId != null) {
-               List<Jugador> jugadoresElegidos = new ArrayList<>();
-               for (Long id : jugadoresId) {
-                   Jugador jugador =servicioJugador.buscarJugador(id);
-                   jugadoresElegidos.add(jugador);
+            if (jugadoresId != null) {
+                List<Jugador> jugadoresElegidos = new ArrayList<>();
+                for (Long id : jugadoresId) {
+                    Jugador jugador = servicioJugador.buscarJugador(id);
+                    jugadoresElegidos.add(jugador);
+                    equipo.agregarJugador(jugador);
+                    System.out.println("Equipo recibido: " + equipo);
+                    System.out.println("Jugadores ID: " + jugadoresId);
 
-               }
-               if (equipo.getJugadores() == null){
-                   equipo.setJugadores(new ArrayList<>());
-               }
-               equipo.getJugadores().addAll(jugadoresElegidos);
-           }
+                }
+                if (equipo.getJugadores() == null) {
+                    equipo.setJugadores(new ArrayList<>());
+                }
+                equipo.getJugadores().addAll(jugadoresElegidos);
+            }
 
             if (equipo.getJugadores() == null || equipo.getJugadores().isEmpty()) {
                 throw new IllegalArgumentException("El equipo debe tener al menos un jugador.");
             }
-          servicioEquipo.guardarEquipo(equipo);
-            model.addAttribute("equipos",servicioEquipo.obtenerEquipos());
-            model.addAttribute("equipoCreado",equipo);
-            model.put("registro","equipoCreado");
+            servicioEquipo.guardarEquipo(equipo);
+            model.addAttribute("equipos", servicioEquipo.obtenerEquipos());
+            model.addAttribute("equipoCreado", equipo);
+            model.put("registro", "equipoCreado");
+
         } catch (EquipoExistente | JugadorInexistente e) {
             model.put("Error", "El equipo ya existe");
             return new ModelAndView("equipos", model);
         }
-        return new ModelAndView("/equipos",model);
+        return new ModelAndView("equipos",model);
     }
 
 
