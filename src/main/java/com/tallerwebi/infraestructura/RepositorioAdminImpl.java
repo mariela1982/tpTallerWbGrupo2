@@ -37,11 +37,11 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         return session.createQuery("SELECT DISTINCT t FROM Torneo t").list();
     }
 
-    @Transactional
     @Override
-    public Torneo obtenerTorneoPorId(Integer id) {
+    @Transactional
+    public Torneo obtenerTorneoPorId(Long id) {
         final Session session = sessionFactory.getCurrentSession();
-        return (Torneo) session.get(Torneo.class, id);
+        return session.get(Torneo.class, id);
     }
 
     @Transactional
@@ -50,92 +50,6 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         final Session session = sessionFactory.getCurrentSession();
         session.delete(torneo);
     }
-//
-//    @Override
-//    public Equipo guardarEquipo(Equipo equipo) {
-//        return null;
-//    }
-
-//    @Transactional
-//    @Override
-//    public Equipo guardarEquipo(Equipo equipo) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        session.saveOrUpdate(equipo);
-//        return equipo;
-//    }
-
-
-//    @Transactional
-//    @Override
-//    public List<Equipo> obtenerEquipos() {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return session.createQuery("SELECT DISTINCT e FROM Equipo e").list();
-//    }
-
-//    @Transactional
-//    @Override
-//    public List<Equipo> obtenerEquipos() {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return session.createCriteria(Equipo.class).list();
-//    }
-//
-//    @Transactional
-//    @Override
-//    public Equipo obtenerEquipoPorId(Integer id) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return (Equipo) session.get(Equipo.class, id);
-//    }
-
-
-//    @Transactional
-//    @Override
-//    public void eliminarEquipo(Equipo equipo) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        session.delete(equipo);
-//    }
-
-//    @Transactional
-//    @Override
-//    public Jugador guardarJugador(Jugador jugador) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        session.saveOrUpdate(jugador);
-//        return jugador;
-//    }
-
-//    @Transactional
-//    @Override
-//    public List<Jugador> obtenerJugadores() {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return session.createCriteria(Jugador.class).list();
-//    }
-
-//    @Transactional
-//    @Override
-//    public Jugador obtenerJugadorPorId(Long id) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return (Jugador) session.get(Jugador.class, id);
-//    }
-
-//    @Transactional
-//    @Override
-//    public void eliminarJugador(Jugador jugador) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        session.delete(jugador);
-//    }
-
-//    @Transactional
-//    @Override
-//    public List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo) {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return session.createCriteria(Jugador.class).add(Restrictions.eq("equipo", equipo)).list();
-//    }
-//
-//    @Transactional
-//    @Override
-//    public List<Jugador> obtenerJugadoresConSancion() {
-//        final Session session = sessionFactory.getCurrentSession();
-//        return session.createCriteria(Jugador.class).add(Restrictions.isNotNull("sancion")).list();
-//    }
 
     @Transactional
     @Override

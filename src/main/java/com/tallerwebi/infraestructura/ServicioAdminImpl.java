@@ -88,4 +88,9 @@ public class ServicioAdminImpl implements ServicioAdmin {
     public List<Torneo> obtenerTorneos() {
         return repositorioAdmin.obtenerTorneos();
     }
+
+    @Override
+    public Torneo obtenerTorneo(Long id) {
+        return repositorioAdmin.obtenerTorneoPorId(id);
+    }
 }

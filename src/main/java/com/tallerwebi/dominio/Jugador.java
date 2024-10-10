@@ -131,7 +131,27 @@ public class Jugador {
     }
 
 
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
+    public Boolean getTarjetaAmarilla() {
+        return tarjetaAmarilla;
+    }
 
+    public void setTarjetaAmarilla(Boolean tarjetaAmarilla) {
+        this.tarjetaAmarilla = tarjetaAmarilla;
+    }
+
+    public Boolean getTarjetaRoja() {
+        return tarjetaRoja;
+    }
+
+    public void setTarjetaRoja(Boolean tarjetaRoja) {
+        this.tarjetaRoja = tarjetaRoja;
+    }
 }

@@ -39,7 +39,7 @@ INSERT INTO Torneo(id, nombre, premio, precioEntrada, fechaInicio, cantidadEquip
                     (null, 'Torneo 1', 1000, 100, '2025-06-01', 4, 64),
                     (null, 'Torneo 2', 2000, 200, '2025-06-01', 8, 65),
                     (null, 'Torneo 3', 3000, 300, '2025-06-01', 16, 60),
-                    (null, 'Torneo 4', 4000, 400, '2025-06-01', 32, 82);
+                    (null, 'Torneo 4', 4000, 400, '2025-06-01', 32, 82),
                     (null, 'Copa Campeones', 1000, 100, '2025-06-01', 4, 64),
                     (null, 'Copa Argentina', 2000, 200, '2025-06-01', 8, 65),
                     (null, 'Copa Libertadores', 3000, 300, '2025-06-01', 16, 60),
@@ -75,36 +75,36 @@ INSERT INTO Equipo(id, nombre, cbu, dtDni, torneo_id, orden) VALUES
                     (null, 'Independiente', '123456789', 29363692, 4, 3),
                     (null, 'San Lorenzo', '123456789', 29363692, 4, 4);
 
-INSERT INTO Jugador(id, nombre, apellido, posicion, equipo_id) VALUES
-                    (null, 'Roman', 'Riquelme', 'Delantero', 1),
-                    (null, 'Marcos', 'Rojo', 'Defensor', 1),
-                    (null, 'Fernando', 'Gago', 'Mediocampista', 1),
-                    (null, 'Roberto', 'Abbondanzieri', 'Arquero', 1),
-                    (null, 'Martin', 'Palermo', 'Delantero', 1),
+INSERT INTO Jugador(id, nombreyapellido, posicion, equipo_id) VALUES
+                    (null, 'Roman Riquelme', 'Delantero', 1),
+                    (null, 'Marcos Rojo', 'Defensor', 1),
+                    (null, 'Fernando Gago', 'Mediocampista', 1),
+                    (null, 'Roberto Abbondanzieri', 'Arquero', 1),
+                    (null, 'Martin Palermo', 'Delantero', 1),
 
-                    (null, 'Enzo', 'Perez', 'Mediocampista', 2),
-                    (null, 'Franco', 'Armani', 'Arquero', 2),
-                    (null, 'Julian', 'Alvarez', 'Delantero', 2),
-                    (null, 'Milton', 'Casco', 'Defensor', 2),
-                    (null, 'Ignacio', 'Fernandez', 'Mediocampista', 2),
+                    (null, 'Enzo Perez', 'Mediocampista', 2),
+                    (null, 'Franco Armani', 'Arquero', 2),
+                    (null, 'Julian Alvarez', 'Delantero', 2),
+                    (null, 'Milton Casco', 'Defensor', 2),
+                    (null, 'Ignacio Fernandez', 'Mediocampista', 2),
 
-                    (null, 'Lisandro', 'Lopez', 'Delantero', 3),
-                    (null, 'Gabriel', 'Arias', 'Arquero', 3),
-                    (null, 'Leonardo', 'Sigali', 'Defensor', 3),
-                    (null, 'Matias', 'Rojas', 'Mediocampista', 3),
-                    (null, 'Nery', 'Dominguez', 'Mediocampista', 3),
+                    (null, 'Lisandro Lopez', 'Delantero', 3),
+                    (null, 'Gabriel Arias', 'Arquero', 3),
+                    (null, 'Leonardo Sigali', 'Defensor', 3),
+                    (null, 'Matias Rojas', 'Mediocampista', 3),
+                    (null, 'Nery Dominguez', 'Mediocampista', 3),
 
-                    (null, 'Silvio', 'Romero', 'Delantero', 4),
-                    (null, 'Martin', 'Campaña', 'Arquero', 4),
-                    (null, 'Fabricio', 'Bustos', 'Defensor', 4),
-                    (null, 'Lucas', 'Romero', 'Mediocampista', 4),
-                    (null, 'Alan', 'Velasco', 'Delantero', 4),
+                    (null, 'Silvio Romero', 'Delantero', 4),
+                    (null, 'Martin Campaña', 'Arquero', 4),
+                    (null, 'Fabricio Bustos', 'Defensor', 4),
+                    (null, 'Lucas Romero', 'Mediocampista', 4),
+                    (null, 'Alan Velasco', 'Delantero', 4),
 
-                    (null, 'Angel', 'Romero', 'Delantero', 5),
-                    (null, 'Sebastian', 'Torrico', 'Arquero', 5),
-                    (null, 'Fabricio', 'Coloccini', 'Defensor', 5),
-                    (null, 'Juan', 'Ramirez', 'Mediocampista', 5),
-                    (null, 'Oscar', 'Romero', 'Mediocampista', 5);
+                    (null, 'Angel Romero', 'Delantero', 5),
+                    (null, 'Sebastian Torrico', 'Arquero', 5),
+                    (null, 'Fabricio Coloccini', 'Defensor', 5),
+                    (null, 'Juan Ramirez', 'Mediocampista', 5),
+                    (null, 'Oscar Romero', 'Mediocampista', 5);
 
 INSERT INTO Partido(id, golesLocal, golesVisitante, fecha, hora, fase, equipoLocal_id, equipoVisitante_id, torneo_id, cancha_id, arbitro_id) VALUES
                     (null, null, null, '2025-06-01', '20:00:00', 'Semifinal', 1, 2, 1, 1, 1),

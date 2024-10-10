@@ -24,6 +24,9 @@ public interface ServicioAdmin {
     List<Arbitro> obtenerArbitros();
 
     List<Torneo> obtenerTorneos();
+    Torneo obtenerTorneo(Long id);
+
+
 
 
 }

@@ -19,7 +19,7 @@ public class Torneo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nombre;
     private Integer premio;
     private Integer precioEntrada;
@@ -31,7 +31,7 @@ public class Torneo {
     @OrderColumn(name = "orden")
     private List<Equipo> equipos;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
