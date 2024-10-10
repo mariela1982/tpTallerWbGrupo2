@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 import java.util.Date;
@@ -36,7 +36,7 @@ public class Jugador {
 
 
     @ManyToOne
-    @JoinColumn(name = "equipo_id")
+   // @JoinColumn(name = "equipo_id")
     private Equipo equipo;
 
 
@@ -71,13 +71,6 @@ public class Jugador {
         this.nombreYapellido = nombreYapellido;
     }
 
-//    public String getApellido() {
-//        return apellido;
-//    }
-//
-//    public void setApellido(String apellido) {
-//        this.apellido = apellido;
-//    }
 
     public String getPosicion() {
         return posicion;
@@ -103,7 +96,7 @@ public class Jugador {
         this.sancion = sancion;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public Equipo getEquipo() {
         return equipo;
     }
