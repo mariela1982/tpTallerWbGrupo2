@@ -1,9 +1,10 @@
-//package com.tallerwebi.dominio;
-//
-//import javax.persistence.criteria.CriteriaBuilder;
-//import java.util.List;
-//
-//public interface RepositorioAdmin {
+package com.tallerwebi.dominio;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.transaction.Transactional;
+import java.util.List;
+
+public interface RepositorioAdmin {
 //    Torneo guardarTorneo(Torneo torneo);
 //    List<Torneo> obtenerTorneos();
 //    Torneo obtenerTorneoPorId(Integer id);
@@ -30,28 +31,37 @@
 //    void eliminarArbitro(Arbitro arbitro);
 //
 //}
-@ -14,10 +14,19 @@ public interface RepositorioAdmin {
+/////////-------------------------equipo tampoco------------------
 //    Equipo obtenerEquipoPorId(Integer id);
 //    void eliminarEquipo(Equipo equipo);
 
-<<<<<<< HEAD
-    Jugador guardarJugador(Jugador jugador);
-    List<Jugador> obtenerJugadores();
-    Jugador obtenerJugadorPorId(Long id);
-    void eliminarJugador(Jugador jugador);
-    List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
-    List<Jugador> obtenerJugadoresConSancion();
-=======
+//-----------------el admin no tiene repo de Jugador ------------------------
+    //-------------------llama desde el servicio de jugador en el controler--------------------
 //    Jugador guardarJugador(Jugador jugador);
 //    List<Jugador> obtenerJugadores();
-//    Jugador obtenerJugadorPorId(Integer id);
+//    Jugador obtenerJugadorPorId(Long id);
 //    void eliminarJugador(Jugador jugador);
-        >>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+//    List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
+//    List<Jugador> obtenerJugadoresConSancion();
+
+
 
     Cancha guardarCancha(Cancha cancha);
     List<Cancha> obtenerCanchas();
-    @ -29,4 +38,10 @@ public interface RepositorioAdmin {
-        Arbitro obtenerArbitroPorId(Integer id);
+
+    @Transactional
+    Cancha obtenerCanchaPorId(Integer id);
+
+    @Transactional
+    void eliminarCancha(Cancha cancha);
+
+    @Transactional
+    Arbitro guardarArbitro(Arbitro arbitro);
+
+    @Transactional
+    List<Arbitro> obtenerArbitros();
+
+    Arbitro obtenerArbitroPorId(Integer id);
         void eliminarArbitro(Arbitro arbitro);
 
         Partido guardarPartido(Partido partido);

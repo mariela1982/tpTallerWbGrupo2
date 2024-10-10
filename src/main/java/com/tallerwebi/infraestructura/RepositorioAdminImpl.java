@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.tallerwebi.dominio.Arbitro;
 import com.tallerwebi.dominio.Cancha;
-import com.tallerwebi.dominio.Equipo;
-import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.Partido;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.Torneo;
@@ -66,14 +64,14 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 //        return equipo;
 //    }
 
-<<<<<<< HEAD
-    @Transactional
-    @Override
-    public List<Equipo> obtenerEquipos() {
-        final Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("SELECT DISTINCT e FROM Equipo e").list();
-    }
-=======
+
+//    @Transactional
+//    @Override
+//    public List<Equipo> obtenerEquipos() {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return session.createQuery("SELECT DISTINCT e FROM Equipo e").list();
+//    }
+
 //    @Transactional
 //    @Override
 //    public List<Equipo> obtenerEquipos() {
@@ -87,7 +85,7 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 //        final Session session = sessionFactory.getCurrentSession();
 //        return (Equipo) session.get(Equipo.class, id);
 //    }
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
 
 //    @Transactional
 //    @Override
@@ -125,19 +123,19 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 //        session.delete(jugador);
 //    }
 
-    @Transactional
-    @Override
-    public List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo) {
-        final Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Jugador.class).add(Restrictions.eq("equipo", equipo)).list();
-    }
-
-    @Transactional
-    @Override
-    public List<Jugador> obtenerJugadoresConSancion() {
-        final Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Jugador.class).add(Restrictions.isNotNull("sancion")).list();
-    }
+//    @Transactional
+//    @Override
+//    public List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo) {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return session.createCriteria(Jugador.class).add(Restrictions.eq("equipo", equipo)).list();
+//    }
+//
+//    @Transactional
+//    @Override
+//    public List<Jugador> obtenerJugadoresConSancion() {
+//        final Session session = sessionFactory.getCurrentSession();
+//        return session.createCriteria(Jugador.class).add(Restrictions.isNotNull("sancion")).list();
+//    }
 
     @Transactional
     @Override

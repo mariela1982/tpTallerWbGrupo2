@@ -10,18 +10,18 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
+import java.util.Date;
+
 @Entity
 public class Jugador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-<<<<<<< HEAD
-    private String nombre;
-    private String apellido;
-    private String posicion;
+
+
     private PartidosDeBsAs partido;
     private String sancion;
-=======
+
     private String nombreYapellido;
     private Date fechaNacimiento;
     private String posicion;
@@ -33,7 +33,7 @@ public class Jugador {
     private Boolean tarjetaAmarilla;
     private Boolean tarjetaRoja;
 
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
 
     @ManyToOne
     @JoinColumn(name = "equipo_id")
@@ -71,13 +71,13 @@ public class Jugador {
         this.nombreYapellido = nombreYapellido;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+//    public String getApellido() {
+//        return apellido;
+//    }
+//
+//    public void setApellido(String apellido) {
+//        this.apellido = apellido;
+//    }
 
     public String getPosicion() {
         return posicion;
@@ -112,8 +112,7 @@ public class Jugador {
         this.equipo = equipo;
     }
 
-<<<<<<< HEAD
-=======
+
     public String getDni() {
         return dni;
     }
@@ -141,5 +140,5 @@ public class Jugador {
 
 
 
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
 }

@@ -1,13 +1,13 @@
 package com.tallerwebi.presentacion;
 
-<<<<<<< HEAD
+
 import java.sql.Date;
 import java.time.LocalTime;
 import java.util.List;
 
-=======
+
 import com.tallerwebi.dominio.*;
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
+
 import com.tallerwebi.dominio.Arbitro;
 import com.tallerwebi.dominio.Cancha;
 import com.tallerwebi.dominio.Equipo;
@@ -28,8 +28,8 @@ import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.Partido;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.Torneo;
-=======
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
+
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Controller
@@ -70,13 +70,10 @@ public class ControladorAdmin {
         mav.addObject("arbitros", servicioAdmin.obtenerArbitros());
 
         mav.addObject("torneo", new Torneo());
-<<<<<<< HEAD
-        mav.addObject("torneos", repositorioAdmin.obtenerTorneos());
 
-=======
         mav.addObject("torneos", servicioAdmin.obtenerTorneos());
         
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
         mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
 
         mav.addObject("editando", false);
@@ -115,27 +112,19 @@ public class ControladorAdmin {
     }
 
     // Controller para la eliminacion de torneos
-<<<<<<< HEAD
-    @GetMapping("/torneos/eliminar/{id}")
-    public ModelAndView eliminarTorneo(@PathVariable("id") Long id) {
-        Torneo torneo = repositorioAdmin.obtenerTorneoPorId(id);
 
-=======
     @GetMapping("/torneosAdmin/eliminar/{id}")
     public ModelAndView eliminarTorneo(@PathVariable("id") Integer id) {
         Torneo torneo = servicioAdmin.obtenerTorneos().get(id);
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
         if (torneo != null) {
             servicioAdmin.eliminarTorneo(torneo);
         }
-<<<<<<< HEAD
 
-        return new ModelAndView("redirect:/admin/torneos?eliminado=true");
-=======
         return new ModelAndView("redirect:/admin/torneosAdmin?eliminado=true");
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
-    }
 
+    }
+//--------------------llamar al servicio--------------------------------------
     // Controller para la vista de detalles de torneo
     @GetMapping("/torneos/{id}")
     public ModelAndView verTorneo(@PathVariable("id") Long torneoId) {
@@ -158,6 +147,7 @@ public class ControladorAdmin {
         return new ModelAndView("redirect:/admin/torneos");
     }
 
+    //--------------------------llamar al servicio------------------------------------
     // Controller para el sorteo de equipos
     @PostMapping("/torneos/sortear")
     public ModelAndView sortearEquipos(@RequestParam("id") Long id) {
@@ -230,23 +220,23 @@ public class ControladorAdmin {
 //    }
 
     // Controller para la vista de edicion de equipos
-<<<<<<< HEAD
-    @GetMapping("/equipos/editar/{id}")
-    public ModelAndView mostrarFormularioEdicionEquipo(@PathVariable("id") Long id) {
-        Equipo equipo = repositorioAdmin.obtenerEquipoPorId(id);
 
-        if (equipo != null) {
-            ModelAndView mav = new ModelAndView("admin/equipos");
-            mav.addObject("equipos", repositorioAdmin.obtenerEquipos());
-            mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
-            mav.addObject("equipo", equipo);
-            mav.addObject("editando", true);
-            return mav;
-        }
+//    @GetMapping("/equipos/editar/{id}")
+//    public ModelAndView mostrarFormularioEdicionEquipo(@PathVariable("id") Long id) {
+//        Equipo equipo = repositorioAdmin.obtenerEquipoPorId(id);
+//
+//        if (equipo != null) {
+//            ModelAndView mav = new ModelAndView("admin/equipos");
+//            mav.addObject("equipos", repositorioAdmin.obtenerEquipos());
+//            mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
+//            mav.addObject("equipo", equipo);
+//            mav.addObject("editando", true);
+//            return mav;
+//        }
+//
+//        return new ModelAndView("redirect:/admin/equipos");
+//    }
 
-        return new ModelAndView("redirect:/admin/equipos");
-    }
-=======
 //    @GetMapping("/equipos/editar/{id}")
 //    public ModelAndView mostrarFormularioEdicionEquipo(@PathVariable("id") Long id) {
 //        Equipo equipo = repositorioAdmin.obtenerEquipoPorId(id);
@@ -260,7 +250,7 @@ public class ControladorAdmin {
 //        }
 //        return new ModelAndView("redirect:/admin/equipos");
 //    }
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
 
 //    // Controller para la edicion de equipos
 //    @PostMapping("/equipos/editar")
@@ -279,19 +269,18 @@ public class ControladorAdmin {
 //        return new ModelAndView("redirect:/admin/equipos?eliminado=true");
 //    }
 
-<<<<<<< HEAD
+
     // Controller para la vista de gestion de jugadores
-    @GetMapping("/jugadores")
-    public ModelAndView gestionJugadores() {
-        ModelAndView mav = new ModelAndView("admin/jugadores");
-        mav.addObject("jugador", new Jugador());
-        mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
-        mav.addObject("editando", false);
-        mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
-        return mav;
-    }
-=======
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+//    @GetMapping("/jugadores")
+//    public ModelAndView gestionJugadores() {
+//        ModelAndView mav = new ModelAndView("admin/jugadores");
+//        mav.addObject("jugador", new Jugador());
+//        mav.addObject("jugadores", repositorioAdmin.obtenerJugadores());
+//        mav.addObject("editando", false);
+//        mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
+//        return mav;
+//    }
+
 
 
    // Controller para la creacion de jugadores
@@ -432,11 +421,11 @@ public class ControladorAdmin {
     @GetMapping("/partidos")
     public ModelAndView gestionPartidos() {
         ModelAndView mav = new ModelAndView("admin/partidos");
-<<<<<<< HEAD
+
         mav.addObject("partidos", repositorioAdmin.obtenerPartidos());
-=======
+
      //    mav.addObject("partidos", servicioAdmin.obtenerPartidos());
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
+
         mav.addObject("editando", false);
         return mav;
     }

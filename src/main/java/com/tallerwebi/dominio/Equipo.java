@@ -24,116 +24,101 @@ public class Equipo {
     private Long dtDni;
 
     @ManyToOne
-
     private Torneo torneo;
 
     @OneToMany(mappedBy = "equipo", fetch = FetchType.EAGER)
     private List<Jugador> jugadores;
 
-<<<<<<< HEAD
+
     @Column(name = "orden")
     private Integer orden;
 
-    public Long getId() {
+
+
+    public Equipo(String nombre, String cbu, Long dni) {
+            this.nombre = nombre;
+            this.cbu = cbu;
+            this.dtDni = dni;
+            this.jugadores = new ArrayList<>();
+        }
+
+    public Equipo() {
+            this.jugadores = new ArrayList<>();
+        }
+
+        public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-=======
-    public Equipo(String nombre, String cbu, Long dni){
-        this.nombre = nombre;
-        this.cbu = cbu;
-        this.dtDni = dni;
-        this.jugadores = new ArrayList<>();
+
+        public void setId(Long id) {
+        this.id = id;}
 
 
-    }
-
-    public Equipo() {
-        this.jugadores = new ArrayList<>();
-    }
-
-
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
-
-    }
-
-    public void agregarJugador(Jugador jugador) {
-        if (this.jugadores == null) {
-            this.jugadores = new ArrayList<>();
+        public List<Jugador> getJugadores () {
+            return jugadores;
         }
-        this.jugadores.add(jugador);
-    }
 
-    public void setIdEquipo(Long idEquipo) {
-        this.idEquipo = idEquipo;
-    }
+        public void setJugadores (List < Jugador > jugadores) {
+            this.jugadores = jugadores;
 
-    public Long getIdEquipo() {
-        return idEquipo;
-    }
+        }
 
-    public String getCbu() {
-        return cbu;
-    }
+        public void agregarJugador (Jugador jugador){
+            if (this.jugadores == null) {
+                this.jugadores = new ArrayList<>();
+            }
+            this.jugadores.add(jugador);
+        }
 
-    public void setCbu(String cbu) {
-        this.cbu = cbu;
->>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b
-    }
+        public void setIdEquipo (Long idEquipo){
+            this.id = idEquipo;
+        }
 
-    public String getNombre() {
-        return nombre;
-    }
+        public Long getIdEquipo () {
+            return id;
+        }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+        public String getCbu () {
+            return cbu;
+        }
 
-    public String getCbu() {
-        return cbu;
-    }
+        public void setCbu (String cbu){
+            this.cbu = cbu;
 
-    public void setCbu(String cbu) {
-        this.cbu = cbu;
-    }
+        }
 
-    public Long getDtDni() {
-        return dtDni;
-    }
+        public String getNombre () {
+            return nombre;
+        }
 
-    public void setDtDni(Long dtDni) {
-        this.dtDni = dtDni;
-    }
+        public void setNombre (String nombre){
+            this.nombre = nombre;
+        }
 
-    public Torneo getTorneo() {
-        return torneo;
-    }
 
-    public void setTorneo(Torneo torneo) {
-        this.torneo = torneo;
-    }
+        public Long getDtDni () {
+            return dtDni;
+        }
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
+        public void setDtDni (Long dtDni){
+            this.dtDni = dtDni;
+        }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
+        public Torneo getTorneo () {
+            return torneo;
+        }
 
-    public Integer getOrden() {
-        return orden;
-    }
+        public void setTorneo (Torneo torneo){
+            this.torneo = torneo;
+        }
 
-    public void setOrden(Integer orden) {
-        this.orden = orden;
-    }
+        public Integer getOrden () {
+            return orden;
+        }
 
-}
+        public void setOrden (Integer orden){
+            this.orden = orden;
+        }
+
+    }}
