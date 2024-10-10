@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Partido</title>
+
+    <!-- Boostrap core css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+    <header th:replace="~{includes/adminHeader :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Información del partido -->
+            <div class="col-lg-8">
+                <h1 class="mb-4"><i class="fas fa-futbol"></i> Detalles del Partido</h1>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">
+                            <span
+                                th:text="${partido.equipoLocal != null && partido.equipoLocal.nombre != null ? partido.equipoLocal.nombre : 'Esperando Rival'}">
+                                Equipo 1
+                            </span>
+                            <strong th:text="${partido.golesLocal != null ? partido.golesLocal : '0'}">0</strong>
+                            <strong> vs </strong>
+                            <strong
+                                th:text="${partido.golesVisitante != null ? partido.golesVisitante : '0'}">0</strong>
+                            <span
+                                th:text="${partido.equipoVisitante != null && partido.equipoVisitante.nombre != null ? partido.equipoVisitante.nombre : 'Esperando Rival'}">Equipo
+                                2</span>
+                        </h3>
+
+                        <ul class="list-group list-group-flush mt-4">
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-calendar-alt"></i> Fecha:</strong>
+                                <span th:text="${partido.fecha != null 
+                                    ? #dates.format(partido.fecha, 'dd/MM/yyyy') 
+                                    : 'Sin asignar'}">Fecha</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-clock"></i> Hora:</strong>
+                                <span th:text="${partido.hora != null 
+                                    ? partido.hora
+                                    : 'Sin asignar'}">Hora</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-flag"></i> Fase:</strong>
+                                <span th:text="${partido.fase != null ? partido.fase : 'Sin asignar'}">
+                                    Fase 1
+                                </span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-trophy"></i> Torneo:</strong> <span
+                                    th:text="${partido.torneo.nombre}">Torneo Nombre</span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-map-marker-alt"></i> Cancha:</strong>
+                                <span th:text="${partido.cancha != null ? partido.cancha.nombre : 'Sin asignar'}">
+                                    Cancha 1
+                                </span>
+                            </li>
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-user-tie"></i> Arbitro:</strong>
+                                <span
+                                    th:text="${partido.arbitro != null ? partido.arbitro.nombre + ' ' + partido.arbitro.apellido : 'Sin asignar'}">
+                                    Arbitro 1
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Sección para jugar el partido -->
+            <div class="col-lg-4">
+                <h1 class="mb-4"><i class="fas fa-play-circle"></i> Jugar Partido</h1>
+
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p>
+                            <strong>Estado:</strong>
+                            <span
+                                th:if="${partido.fecha != null and partido.hora != null and partido.cancha != null and partido.arbitro != null}"
+                                class="badge bg-success">Listo para jugar</span>
+                            <span
+                                th:unless="${partido.fecha != null and partido.hora != null and partido.cancha != null and partido.arbitro != null}"
+                                class="badge bg-danger">Faltan datos</span>
+                        </p>
+
+                        <!-- <form th:action="@{/admin/partidos/jugar}" method="post" class="mb-4" th:if="${
+                            partido.fecha != null and 
+                            partido.hora != null and
+                            partido.cancha != null and 
+                            partido.arbitro != null
+                        }">
+                            <input type="hidden" name="partidoId" th:value="${partido.id}">
+
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-play"></i> Iniciar Partido
+                            </button>
+                        </form> -->
+
+                        <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#completarResultadoModal" th:if="${
+                                partido.fecha != null and 
+                                partido.hora != null and
+                                partido.cancha != null and 
+                                partido.arbitro != null
+                            }">
+                            <i class="fas fa-play"></i> Completar el resultado del partido
+                        </button>
+
+                        <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#completarPartidoModal" th:unless="${
+                                    partido.fecha != null and 
+                                    partido.hora != null and
+                                    partido.cancha != null and 
+                                    partido.arbitro != null
+                                }">
+                            <i class="fas fa-exclamation-triangle"></i> Completar los datos del partido
+                        </button>
+                    </div>
+                </div>
+
+                <div th:if="${param.estaFinalizado}" class="alert alert-success mt-4" role="alert">
+                    El partido ya ha sido finalizado
+                </div>
+
+                <div th:if="${param.golesIguales}" class="alert alert-danger mt-4" role="alert">
+                    Los goles no pueden ser iguales
+                </div>
+
+                <a th:href="@{/admin/torneos/{id}(id=${partido.torneo.id})}" class="btn btn-primary mt-4">
+                    <i class="fas fa-arrow-left"></i> Volver al Torneo
+                </a>
+            </div>
+        </div>
+
+        <!-- Modal para completar los datos del partido -->
+        <div class="modal fade" id="completarResultadoModal" tabindex="-1"
+            aria-labelledby="completarResultadoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="completarResultadoModalLabel">
+                            Completar el resultado del partido
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/admin/partidos/completar-resultado}" method="post" th:object="${partido}">
+                            <input type="hidden" name="id" th:value="${partido.id}">
+                            <div class="mb-3">
+                                <label for="golesLocal" class="form-label"
+                                    th:text="'Goles de ' + ${partido.equipoLocal != null && partido.equipoLocal.nombre != null ? partido.equipoLocal.nombre : 'Esperando Rival'}">
+                                    Goles Local
+                                </label>
+                                <input type="number" class="form-control" id="golesLocal" name="golesLocal"
+                                    th:value="${partido.golesLocal}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="golesVisitante" class="form-label"
+                                    th:text="'Goles de ' + ${partido.equipoVisitante != null && partido.equipoVisitante.nombre != null ? partido.equipoVisitante.nombre : 'Esperando Rival'}">
+                                    Goles Visitante
+                                </label>
+                                <input type="number" class="form-control" id="golesVisitante" name="golesVisitante"
+                                    th:value="${partido.golesVisitante}" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para completar el resultado del partido -->
+        <div class="modal fade" id="completarPartidoModal" tabindex="-1" aria-labelledby="completarPartidoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="completarPartidoModalLabel">Completar los datos del partido</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/admin/partidos/completar}" method="post" th:object="${partido}">
+                            <input type="hidden" name="id" th:value="${partido.id}">
+                            <div class="mb-3">
+                                <label for="fecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="fecha" name="fecha"
+                                    th:value="${partido.fecha}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="hora" class="form-label">Hora</label>
+                                <input type="time" class="form-control" id="hora" name="hora"
+                                    th:value="${partido.hora}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cancha" class="form-label">Cancha</label>
+                                <select class="form-select" id="cancha" name="cancha_id">
+                                    <option value="">Seleccionar una Cancha</option>
+                                    <option th:each="cancha : ${canchas}" th:value="${cancha.id}"
+                                        th:text="${cancha.nombre}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="arbitro" class="form-label">Arbitro</label>
+                                <select class="form-select" id="arbitro" name="arbitro_id">
+                                    <option value="">Seleccionar un Arbitro</option>
+                                    <option th:each="arbitro : ${arbitros}" th:value="${arbitro.id}"
+                                        th:text="${arbitro.nombre + ' ' + arbitro.apellido}"></option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -21,7 +21,12 @@
         <h1 class="my-4 text-center">Gestion de Torneos</h1>
 
         <!-- Formulario para crear un nuevo torneo -->
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/thymeleaf/admin/torneos.html
+        <form action="#" th:action="${editando ? '/spring/admin/torneos/editar' : '/spring/admin/torneos/crear'}"
+            method="post" class="mb-4" th:object="${torneo}">
+=======
         <form action="#" th:action="${editando ? '/spring/admin/torneosAdmin/editar' : '/spring/admin/torneosAdmin/crear'}" method="post" class="mb-4" th:object="${torneo}">
+>>>>>>> ad86a6bf20047f5053dcd25662c3169ea931aa4b:src/main/webapp/WEB-INF/views/thymeleaf/admin/torneosAdmin.html
             <!-- Campo oculto para el ID del torneo si estamos editando -->
             <input type="hidden" th:if="${editando}" th:name="id" th:value="${torneo.id}" />
             <div class="row">
@@ -39,7 +44,8 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="precioEntrada" class="form-label">Precio de Entrada</label>
-                    <input type="number" class="form-control" id="precioEntrada" name="precioEntrada" th:field="*{precioEntrada}" required>
+                    <input type="number" class="form-control" id="precioEntrada" name="precioEntrada"
+                        th:field="*{precioEntrada}" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -68,9 +74,7 @@
                         <option value="">Seleccionar un Partido</option>
                         <option th:each="partido : ${partidosDeBsAs}" th:value="${partido}" th:text="${partido.name()}">
                         </option>
-                        ></option>
                     </select>
-
                 </div>
             </div>
             <button type="submit" class="btn btn-primary"
@@ -104,7 +108,7 @@
             </thead>
             <tbody>
                 <tr th:if="${#lists.isEmpty(torneos)}">
-                    <td colspan="6" class="text-center">No hay torneos activos</td>
+                    <td colspan="7" class="text-center">No hay torneos activos</td>
                 </tr>
                 <tr th:each="torneo : ${torneos}">
                     <td th:text="${torneo.nombre}"></td>
@@ -113,9 +117,15 @@
                     <td th:text="${torneo.cantidadEquipos}"></td>
                     <td th:text="${torneo.partido.name()}"></td>
                     <td>
-                        <a th:href="@{/admin/torneos/editar/{id}(id=${torneo.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/admin/torneos/eliminar/{id}(id=${torneo.id})}"
-                            class="btn btn-danger">Eliminar</a>
+                        <a th:href="@{/admin/torneos/editar/{id}(id=${torneo.id})}" class="btn btn-primary">
+                            Editar
+                        </a>
+                        <a th:href="@{/admin/torneos/eliminar/{id}(id=${torneo.id})}" class="btn btn-danger">
+                            Eliminar
+                        </a>
+                        <a th:href="@{/admin/torneos/{id}(id=${torneo.id})}" class="btn btn-info">
+                            Ver Detalles
+                        </a>
                     </td>
                 </tr>
             </tbody>
