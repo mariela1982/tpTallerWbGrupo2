@@ -17,6 +17,8 @@ public interface RepositorioAdmin {
     List<Jugador> obtenerJugadores();
     Jugador obtenerJugadorPorId(Long id);
     void eliminarJugador(Jugador jugador);
+    List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
+    List<Jugador> obtenerJugadoresConSancion();
 
     Cancha guardarCancha(Cancha cancha);
     List<Cancha> obtenerCanchas();
@@ -28,4 +30,10 @@ public interface RepositorioAdmin {
     Arbitro obtenerArbitroPorId(Long id);
     void eliminarArbitro(Arbitro arbitro);
 
+    Partido guardarPartido(Partido partido);
+    List<Partido> obtenerPartidos();
+    Partido obtenerPartidoPorId(Long id);
+    void eliminarPartido(Partido partido);
+    List<Partido> obtenerPartidosPorTorneo(Torneo torneo);
+    Partido obtenerPartidoEsperandoRival(Torneo torneo, String fase);
 }

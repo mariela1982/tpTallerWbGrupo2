@@ -49,7 +49,7 @@ public class RepositorioEquipoTest {
 
         repositorioEquipo.guardar(equipo);
 
-        assertThat(equipo.getIdEquipo(),notNullValue());
+        assertThat(equipo.getId(),notNullValue());
 
 
 

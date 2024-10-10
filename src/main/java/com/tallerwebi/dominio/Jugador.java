@@ -1,12 +1,14 @@
 package com.tallerwebi.dominio;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Entity
 public class Jugador {
@@ -14,15 +16,13 @@ public class Jugador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private Date fechaNacimiento;
+    private String apellido;
     private String posicion;
-    private String dni;
-    private String direccion;
-    private String email;
-    private String password;
-
+    private PartidosDeBsAs partido;
+    private String sancion;
 
     @ManyToOne
+    @JoinColumn(name = "equipo_id")
     private Equipo equipo;
 
     public Long getId() {
@@ -41,12 +41,12 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getPosicion() {
@@ -57,6 +57,23 @@ public class Jugador {
         this.posicion = posicion;
     }
 
+    public PartidosDeBsAs getPartido() {
+        return partido;
+    }
+
+    public void setPartido(PartidosDeBsAs partido) {
+        this.partido = partido;
+    }
+
+    public String getSancion() {
+        return sancion;
+    }
+
+    public void setSancion(String sancion) {
+        this.sancion = sancion;
+    }
+
+    @JsonIgnore
     public Equipo getEquipo() {
         return equipo;
     }
@@ -64,24 +81,5 @@ public class Jugador {
     public void setEquipo(Equipo equipo) {
         this.equipo = equipo;
     }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-
-
 
 }
