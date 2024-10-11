@@ -50,23 +50,23 @@ public class ControladorDt {
         return new ModelAndView();
     }
 
-//
-////modificar hay que usar servicio
-//    @GetMapping("/cargar-dinero")
-//    public ModelAndView cargarDinero(HttpServletRequest request) {
-//        ModelAndView mav = new ModelAndView("cargarDinero");
-//        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-//
-//        mav.addObject("usuario", usuario);
-//        return mav;
-//    }
-////modificar
-//    @PostMapping("/procesar-cargar-dinero")
-//    public ModelAndView procesarCargarDinero(@ModelAttribute("monto") Integer monto, HttpServletRequest request) {
-//        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-//        usuario.setSaldo(usuario.getSaldo() + monto);
-//        return new ModelAndView("redirect:/cargar-dinero");
-//    }
+
+//modificar hay que usar servicio
+    @GetMapping("/cargar-dinero")
+    public ModelAndView cargarDinero(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("cargarDinero");
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+        mav.addObject("usuario", usuario);
+        return mav;
+    }
+//modificar
+    @PostMapping("/procesar-cargar-dinero")
+    public ModelAndView procesarCargarDinero(@ModelAttribute("monto") Integer monto, HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        usuario.setSaldo(usuario.getSaldo() + monto);
+        return new ModelAndView("redirect:/cargar-dinero");
+    }
 //--------------para inscribirse a un torneo-----------
     @GetMapping("/torneos")
     public ModelAndView verTorneos(@RequestParam(value = "partido", required = false) PartidosDeBsAs partido,
