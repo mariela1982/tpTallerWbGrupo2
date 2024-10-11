@@ -49,7 +49,7 @@ public class RepositorioEquipoTest {
 
         repositorioEquipo.guardar(equipo);
 
-        assertThat(equipo.getIdEquipo(),notNullValue());
+        assertThat(equipo.getId(),notNullValue());
 
 
 
@@ -62,7 +62,7 @@ public class RepositorioEquipoTest {
     @Test
     @Transactional
     @Rollback
-    public void buscarEquipoPorNombre(){
+    public void buscarEquipoPorNombreEquipoPorNombre(){
         Equipo equipo = new Equipo();
         equipo.setNombre(nombreEquipo);
         equipo.setDtDni(dtDni);
@@ -70,7 +70,7 @@ public class RepositorioEquipoTest {
         sessionFactory.getCurrentSession().saveOrUpdate(equipo);
 
 
-        Equipo buscado = repositorioEquipo.buscar(nombreEquipo);
+        Equipo buscado = repositorioEquipo.buscarEquipoPorNombre(nombreEquipo);
 
         assertThat(buscado,notNullValue());
         assertThat(buscado.getCbu(), equalToIgnoringCase("4934607627390389151791"));

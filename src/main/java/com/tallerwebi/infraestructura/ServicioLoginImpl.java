@@ -16,15 +16,18 @@ public class ServicioLoginImpl implements ServicioLogin {
     private RepositorioUsuario repositorioUsuario;
 
     @Autowired
+
     public ServicioLoginImpl(RepositorioUsuario repositorioUsuario){
         this.repositorioUsuario = repositorioUsuario;
     }
 
+    @Transactional
     @Override
     public Usuario consultarUsuario (String email, String password) {
         return repositorioUsuario.buscarUsuario(email, password);
     }
 
+    @Transactional
     @Override
     public void registrar(Usuario usuario) throws UsuarioExistente {
         Usuario usuarioEncontrado = repositorioUsuario.buscarUsuario(usuario.getEmail(), usuario.getPassword());

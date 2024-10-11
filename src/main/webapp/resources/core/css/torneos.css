@@ -1,55 +1,55 @@
 .nav_admin_container {
-  background-color: #3f7b70;
+    background-color: darkgreen;
 }
 
 .titles_container {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 2px solid #3f7b70;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid darkgreen;
 }
 
 .active_title_container {
-  background-color: #3f7b70;
-  cursor: pointer;
+    background-color: darkgreen;
+    cursor: pointer;
 }
 
 .title_container {
-  background-color: #fff;
-  cursor: pointer;
+    background-color: #fff;
+    cursor: pointer;
 }
 
 .active_title {
-  color: #fff;
-  font-size: 20px;
+    color: #fff;
+    font-size: 20px;
 }
 
 .title {
-  color: #3f7b70;
-  font-size: 20px;
+    color: darkgreen;
+    font-size: 20px;
 }
 
 .tournament_card {
-  border-radius: 10px;
-  color: #455a64;
+    border-radius: 10px;
+    color: #455a64;
 }
 
 .tournament_title {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .tournament_subtitle {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .tournament_button {
-  background-color: #3f7b70;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  text-align: center;
-  transition: 0.2s;
+    background-color: darkgreen;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.2s;
 }
 
 .tournament_button:hover {
-  background-color: #529b8d;
+    background-color: #4caf50;
 }

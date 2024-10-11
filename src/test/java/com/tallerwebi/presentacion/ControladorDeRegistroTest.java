@@ -1,11 +1,10 @@
 package com.tallerwebi.presentacion;
 
-import org.dom4j.rule.Mode;
-import org.junit.jupiter.api.Test;
-import org.springframework.web.servlet.ModelAndView;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.web.servlet.ModelAndView;
 
 public class ControladorDeRegistroTest {
 

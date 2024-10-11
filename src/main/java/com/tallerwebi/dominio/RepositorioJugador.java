@@ -1,14 +1,11 @@
 package com.tallerwebi.dominio;
 
-
-
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
-public interface RepositorioJugador extends JpaRepository<Jugador, Long> {
-    void guardar(Jugador jugador);
+public interface RepositorioJugador {
+    Jugador crearJugador(Jugador j);
+    void eliminarJugador(Jugador j);
+    Jugador buscarJugador(Long idJugador);
+    List<Jugador> buscarJugadores();
 
-    Jugador obtenerPorDni(String dni);
 }

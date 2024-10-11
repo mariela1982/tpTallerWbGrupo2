@@ -1,103 +1,121 @@
 package com.tallerwebi.dominio;
 
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Equipo {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEquipo;
-    private String logo;
+    private Long id;
     private String nombre;
     private String cbu;
     private Long dtDni;
-    private PartidosDeBsAs partido;
 
     @ManyToOne
-    @JoinColumn(name = "torneo_id")
     private Torneo torneo;
 
-
-    @OneToMany
+    @OneToMany(mappedBy = "equipo", fetch = FetchType.EAGER)
     private List<Jugador> jugadores;
 
-    public List<Jugador> getJugadores() {
-        return jugadores;
+
+    @Column(name = "orden")
+    private Integer orden;
+
+
+
+    public Equipo(String nombre, String cbu, Long dni) {
+            this.nombre = nombre;
+            this.cbu = cbu;
+            this.dtDni = dni;
+            this.jugadores = new ArrayList<>();
+            this.orden = 0;
+            this.torneo = new Torneo();
+        }
+
+    public Equipo() {
+        this.jugadores = new ArrayList<>();
+        this.orden = 0;
+        this.torneo = new Torneo();
+
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+        public Long getId() {
+        return id;
     }
 
-    public void setIdEquipo(Long idEquipo) {
-        this.idEquipo = idEquipo;
-    }
 
-    public Long getIdEquipo() {
-        return idEquipo;
-    }
+        public void setId(Long id) {
+        this.id = id;}
 
-    public String getCbu() {
-        return cbu;
-    }
 
-    public void setCbu(String cbu) {
-        this.cbu = cbu;
-    }
+        public List<Jugador> getJugadores () {
+            return jugadores;
+        }
 
-    public String getNombre() {
-        return nombre;
-    }
+        public void setJugadores (List < Jugador > jugadores) {
+            this.jugadores = jugadores;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+        }
 
-    public Long getDtDni() {
-        return dtDni;
-    }
+        public void agregarJugador (Jugador jugador){
+            if (this.jugadores == null) {
+                this.jugadores = new ArrayList<>();
+            }
+            this.jugadores.add(jugador);
+        }
 
-    public void setDtDni(Long dtDni) {
-        this.dtDni = dtDni;
-    }
+        public String getCbu () {
+            return cbu;
+        }
 
-    public String getLogo() {
-        return logo;
-    }
+        public void setCbu (String cbu){
+            this.cbu = cbu;
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
+        }
 
-    public PartidosDeBsAs getPartido() {
-        return partido;
-    }
+        public String getNombre () {
+            return nombre;
+        }
 
-    public void setPartido(PartidosDeBsAs partido) {
-        this.partido = partido;
-    }
+        public void setNombre (String nombre){
+            this.nombre = nombre;
+        }
 
-    @Override
-    public String toString() {
-        return "Equipo{" +
-                "nombre='" + nombre + '\'' +
-                ", cbu='" + cbu + '\'' +
-                ", dtDni=" + dtDni +
-                ", idEquipo=" + idEquipo +
-                '}';
+
+        public Long getDtDni () {
+            return dtDni;
+        }
+
+        public void setDtDni (Long dtDni){
+            this.dtDni = dtDni;
+        }
+
+        public Torneo getTorneo () {
+            return torneo;
+        }
+
+        public void setTorneo (Torneo torneo){
+            this.torneo = torneo;
+        }
+
+        public Integer getOrden () {
+            return orden;
+        }
+
+        public void setOrden (Integer orden){
+            this.orden = orden;
+        }
+
     }
-}

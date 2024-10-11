@@ -26,7 +26,7 @@
 //
 
 //    @Override
-//    public Usuario registrar(String email, String password) throws PasswordLongitudIncorrecta {
+//    public Usuario guardarEquipo(String email, String password) throws PasswordLongitudIncorrecta {
 //       if(password.length() < 5){
 //           throw new PasswordLongitudIncorrecta();
 //       }

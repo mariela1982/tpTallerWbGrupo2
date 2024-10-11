@@ -11,15 +11,17 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository("repositorioUsuario")
-@SuppressWarnings({ "deprecation" })
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
-    @Autowired
+
     public RepositorioUsuarioImpl(SessionFactory sessionFactory){
+
         this.sessionFactory = sessionFactory;
     }
+
 
     @Transactional
     @Override

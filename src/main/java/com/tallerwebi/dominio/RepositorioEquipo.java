@@ -1,7 +1,20 @@
 package com.tallerwebi.dominio;
 
-public interface RepositorioEquipo {
-    Equipo buscar(String nombre);
+import java.util.List;
 
-    void guardar(Equipo equipoCreado);
+public interface RepositorioEquipo {
+    Equipo buscarEquipoPorNombre(String nombre);
+    Equipo buscarPorID(Long id);
+
+    Equipo guardar(Equipo equipo);
+
+    Equipo editar(Jugador jugadornuevo, Jugador jugadorViejo, Equipo equipo);
+
+    Torneo  agregarTorneo(Torneo torneo, String nombreEquipo);
+
+    Jugador buscarJugador(Long idJugador, Equipo equipo);
+
+    List<Equipo> buscarEquipos();
+
+    void eliminar(Equipo equipo);
 }
