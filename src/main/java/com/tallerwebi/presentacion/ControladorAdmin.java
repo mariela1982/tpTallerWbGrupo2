@@ -6,8 +6,11 @@ import java.time.LocalTime;
 import java.util.List;
 
 
-import com.tallerwebi.dominio.*;
+import java.sql.Date;
+import java.time.LocalTime;
+import java.util.List;
 
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,15 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-
-import com.tallerwebi.dominio.Arbitro;
-import com.tallerwebi.dominio.Cancha;
-import com.tallerwebi.dominio.Equipo;
-import com.tallerwebi.dominio.Jugador;
-import com.tallerwebi.dominio.Partido;
-import com.tallerwebi.dominio.RepositorioAdmin;
-import com.tallerwebi.dominio.Torneo;
 
 
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
@@ -72,7 +66,7 @@ public class ControladorAdmin {
         mav.addObject("torneo", new Torneo());
 
         mav.addObject("torneos", servicioAdmin.obtenerTorneos());
-        
+
 
         mav.addObject("partidosDeBsAs", PartidosDeBsAs.values());
 
