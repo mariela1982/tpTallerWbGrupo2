@@ -88,8 +88,8 @@
                     const select = document.getElementById("jugadores")
                     jugadores.forEach(jugador => {
                         const option = document.createElement("option");
-                        option.value = jugador.id; // Asegúrate de que "id" es el campo correcto
-                        option.textContent = jugador.nombreYapellido; // Asegúrate de que "nombreYapellido" es el campo correcto
+                        option.value = jugador.id; //
+                        option.textContent = jugador.nombreYapellido; //
                         select.appendChild(option);
                     });
                 });
@@ -97,7 +97,7 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            fetch('/spring/api/jugadores') // Cambia la ruta según sea necesario
+            fetch('/spring/api/jugadores')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

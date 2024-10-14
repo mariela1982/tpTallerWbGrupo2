@@ -7,4 +7,7 @@ public interface ServicioLogin {
     Usuario consultarUsuario(String email, String password);
     void registrar(Usuario usuario) throws UsuarioExistente;
 
+    void modificar(Usuario usuario);
+
+    void actualizarSaldo(Usuario usuario,Integer saldo);
 }

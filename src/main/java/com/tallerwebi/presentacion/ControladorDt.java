@@ -1,13 +1,16 @@
 package com.tallerwebi.presentacion;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.tallerwebi.dominio.*;
+import com.tallerwebi.dominio.enums.TipoDePago;
 import com.tallerwebi.dominio.excepcion.EquipoExistente;
 import com.tallerwebi.dominio.excepcion.EquipoInexistente;
 import com.tallerwebi.dominio.excepcion.JugadorExistente;
@@ -15,11 +18,7 @@ import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
@@ -32,14 +31,16 @@ public class ControladorDt {
     private ServicioEquipo servicioEquipo;
     private ServicioAdmin servicioAdmin;
     private ServicioJugador servicioJugador;
+    private ServicioLogin servicioLogin;
 
 
     @Autowired
-     public ControladorDt(ServicioDt servicioDt, ServicioEquipo servicioEquipo, ServicioAdmin admin,ServicioJugador servicioJugador) {
+     public ControladorDt(ServicioDt servicioDt, ServicioEquipo servicioEquipo, ServicioAdmin admin,ServicioJugador servicioJugador,ServicioLogin servicioLogin) {
         this.servicioDt = servicioDt;
         this.servicioEquipo = servicioEquipo;
         this.servicioAdmin = admin;
         this.servicioJugador = servicioJugador;
+        this.servicioLogin = servicioLogin;
     }
 
     @GetMapping("/directorTecnico")
@@ -104,41 +105,120 @@ public class ControladorDt {
         return mav;
     }
 
+
     @PostMapping("/equipo/inscribir")
-    public ModelAndView inscribirEquipo(@RequestParam("torneoId") Long torneoId, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("torneo");
+    public ModelAndView inscribirEquipo(@RequestParam(value ="torneoId") Long torneoId, HttpServletRequest request,RedirectAttributes redirectAttributes) {
+
+        ModelMap model = new ModelMap();
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         Torneo torneo = servicioAdmin.obtenerTorneo(torneoId);
-
         Integer cuposOcupados = torneo.getEquipos().size();
         Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
 
-        // Validar si el usuario esta logueado
+        //valido usuaruio
         if (usuario == null) {
-            mav.addObject("error", "Tenes que estar logueado para inscribirte a un torneo");
+            model.addAttribute("error", "Tenes que estar logueado para inscribirte a un torneo");
+            model.addAttribute("torneo",torneo);
+            return new ModelAndView("torneo", model);
         } else {
             // Validar si el torneo tiene cupos disponibles
             if (cuposDisponibles <= 0) {
-                mav.addObject("error", "No hay cupos disponibles para inscribirte al torneo");
-            } else {
-                // Validar si el usuario tiene saldo suficiente
-                if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
-                    mav.addObject("error", "No tenes saldo suficiente para inscribirte al torneo");
-                } else {
-                    // Si tiene saldo suficiente, procesar el pago
-                    usuario.setSaldo(usuario.getSaldo() - torneo.getPrecioEntrada());
-                    mav.addObject("success", "Te inscribiste al torneo correctamente");
+                model.addAttribute("error", "No hay cupos disponibles para inscribirte al torneo");
+                model.addAttribute("torneo",torneo);
+                return new ModelAndView("torneo", model);
+             }
+//            else {
+//                // Validar si el usuario tiene saldo suficiente
+//                if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
+//                    model.addAttribute("error", "No tenes saldo suficiente para inscribirte al torneo");
+//                    model.addAttribute("torneo",torneo);
+//                    return new ModelAndView("torneo", model);
+//               }
+//                else {
+//                    // Si tiene saldo suficiente, procesar el pago
+//                    usuario.setSaldo(usuario.getSaldo() - torneo.getPrecioEntrada());
+//                    model.addAttribute("success", "Te inscribiste al torneo correctamente");
+//                    return new ModelAndView("torneo", model);
+//                }
                 }
+
+            if (usuario.getDni() == null) {
+                model.addAttribute("error", "no hay usuario");
+                model.addAttribute("torneo",torneo);
+                return new ModelAndView("torneo", model);
+
             }
+            Equipo equipo = servicioEquipo.buscarEquipoPorDt(usuario.getDni());
+            torneo.getEquipos().add(equipo);
+            cuposOcupados = torneo.getEquipos().size();
+            cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+
+//            model.addAttribute("usuario", usuario);
+//            model.addAttribute("torneo", torneo);
+//            // model.addAttribute("cuposOcupados", cuposOcupados);
+//            // model.addAttribute("cuposDisponibles", cuposDisponibles);
+//            model.addAttribute("equipo", equipo);
+        redirectAttributes.addFlashAttribute("torneo",torneo);
+        redirectAttributes.addFlashAttribute("cuposOcupados",cuposOcupados);
+        redirectAttributes.addFlashAttribute("cuposDisponibles",cuposDisponibles);
+        redirectAttributes.addFlashAttribute("usuario",usuario);
+        redirectAttributes.addFlashAttribute("equipo",equipo);
+        redirectAttributes.addFlashAttribute("exitoso","carga para inscribire exitosa");
+
+            return new ModelAndView("redirect:/inscripcion");
         }
 
-        mav.addObject("usuario", usuario);
-        mav.addObject("torneo", torneo);
-        mav.addObject("cuposOcupados", cuposOcupados);
-        mav.addObject("cuposDisponibles", cuposDisponibles);
+    @GetMapping("/inscripcion")
+    public String inscripcionAtorneo(){
 
-        return mav;
+        return "inscripcion";
     }
+
+
+    @GetMapping("/tipoDePago")
+    public ModelAndView irAPagar() {
+
+
+        return new ModelAndView("/tipoDePago");
+
+    }
+    @RequestMapping(path = "/pagar", method = RequestMethod.POST)
+    public ModelAndView pagar(@RequestParam("tipoTarjeta") TipoDePago tipoPago, HttpServletRequest request) {
+
+        HttpSession misession = request.getSession();
+        Usuario usuario = (Usuario) misession.getAttribute("usuario");
+
+
+//        Integer  totalPedido = usuario.getSaldo();
+        Integer  totalPedido = 15000; //harcodeo
+
+
+        ModelAndView modelAndView = new ModelAndView("pago");
+        modelAndView.addObject("tipoPago", tipoPago);
+        modelAndView.addObject("totalPedido", totalPedido);
+        return modelAndView;
+    }
+
+    @RequestMapping(path = "/generarPago", method = RequestMethod.POST)
+//    public ModelAndView generarPedido(@RequestParam("tipoTarjeta") TipoDePago tipoPago,
+//                                      @RequestParam("saldo") Integer saldo, HttpServletRequest request,
+//                                        RedirectAttributes redirectAttributes) {
+        public ModelAndView generarPedido( HttpServletRequest request,
+                RedirectAttributes redirectAttributes) {
+        HttpSession misession = request.getSession();
+        Usuario usuario = (Usuario) misession.getAttribute("usuario");
+        servicioLogin.actualizarSaldo(usuario,5000);
+
+
+        misession.setAttribute("usuario", usuario);
+        redirectAttributes.addFlashAttribute("mensajeExito", "Pago al torneo realizado con éxito.");
+
+        return new ModelAndView("redirect:/directorTecnico");
+
+    }
+
+
+
     @GetMapping("/jugadores")
     public ModelAndView crearJugadores(){
         ModelMap model = new ModelMap();

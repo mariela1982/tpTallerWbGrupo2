@@ -109,5 +109,14 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
 
     }
 
+    @Override
+    public Equipo buscarPorDt(Long dni) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return (Equipo) session.createCriteria(Equipo.class,"equipo")
+                .add(Restrictions.eq("dtDni",dni))
+                .uniqueResult();
+    }
+
 
 }

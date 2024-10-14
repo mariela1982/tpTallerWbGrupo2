@@ -17,4 +17,6 @@ public interface RepositorioEquipo {
     List<Equipo> buscarEquipos();
 
     void eliminar(Equipo equipo);
+
+    Equipo buscarPorDt(Long dni);
 }

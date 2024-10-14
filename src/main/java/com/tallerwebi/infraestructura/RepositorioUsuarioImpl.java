@@ -42,18 +42,22 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         session.save(usuario);
     }
 
-//    @Transactional
-//    @Override
-//    public Usuario buscar(String email) {
-//        return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
-//                .add(Restrictions.eq("email", email))
-//                .uniqueResult();
-//    }
+    @Transactional
+    @Override
+    public void modificar(Usuario usuario) {
+        sessionFactory.getCurrentSession().update(usuario);
+    }
 
-//    @Transactional
-//    @Override
-//    public void modificar(Usuario usuario) {
-//        sessionFactory.getCurrentSession().update(usuario);
-//    }
+    @Override
+    public void actualizarSaldo(Usuario usuario, Integer nuevoSaldo) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        // Actualizar el saldo en el objeto usuario
+        usuario.setSaldo(nuevoSaldo);
+
+        // Guardar o actualizar el objeto usuario en la base de datos
+        session.update(usuario); // Usa update o save dependiendo de tu lógica
+    }
+
 
 }

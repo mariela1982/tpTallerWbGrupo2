@@ -37,5 +37,15 @@ public class ServicioLoginImpl implements ServicioLogin {
         repositorioUsuario.guardar(usuario);
     }
 
+    @Override
+    public void modificar(Usuario usuario) {
+        repositorioUsuario.modificar(usuario);
+    }
+
+    @Override
+    public void actualizarSaldo(Usuario usuario,Integer saldo) {
+        repositorioUsuario.actualizarSaldo(usuario,saldo);
+    }
+
 }
 

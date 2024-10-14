@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,6 +31,10 @@ public class Torneo {
     @OneToMany(mappedBy = "torneo", fetch = FetchType.EAGER)
     @OrderColumn(name = "orden")
     private List<Equipo> equipos;
+
+    public Torneo() {
+        this.equipos = new ArrayList<Equipo>();
+    }
 
     public Long getId() {
         return id;
@@ -104,11 +109,14 @@ public class Torneo {
     }
 
     public void agregarEquipo(Equipo equipo) {
-        if (equipos == null) {
-            equipos = Collections.emptyList();
+//        if (equipos == null) {
+//            equipos = Collections.emptyList();
+//        }
+        if (cantidadEquipos < equipos.size()) {
+            equipos.add(equipo);
         }
 
-        equipos.add(equipo);
+
     }
 
     public void eliminarEquipo(Equipo equipo) {

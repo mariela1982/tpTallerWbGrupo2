@@ -2,8 +2,6 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
-import com.tallerwebi.dominio.enums.Localidades;
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -126,13 +117,39 @@ public ModelAndView nuevoUsuario() {
 //    }
 
 
-    // Logout
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    // cerran session
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.invalidate();
-        return new ModelAndView("redirect:/login");
+        session.removeAttribute("usuario");
+        return new ModelAndView("redirect:/home");
     }
-    
+
+    @RequestMapping(path = "/miCuenta",method = RequestMethod.GET)
+    public ModelAndView miCuenta(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return new ModelAndView("redirect:/home");
+        }
+        ModelMap model = new ModelMap();
+        model.put("usuario",usuario);
+        session.setAttribute("usuario", usuario); //actualiza el usuario
+        return new ModelAndView("miCuenta",model);
+    }
+
+    @RequestMapping(path = "/modificar", method = RequestMethod.POST)
+    public ModelAndView modificar(@ModelAttribute("usuario")Usuario usuario, HttpServletRequest request) {
+        try{
+            servicioLogin.modificar(usuario);
+            HttpSession miSession = request.getSession(true);
+            miSession.setAttribute("usuario", usuario);
+            return new ModelAndView("redirect:/directorTecnico");
+        } catch (Exception e){
+            ModelMap model = new ModelMap();
+            model.put("error", "Error al modificar el usuario " + e.getMessage());
+            return new ModelAndView("miCuenta", model);
+        }
+    }
 }
 

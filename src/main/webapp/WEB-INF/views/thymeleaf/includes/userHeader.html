@@ -8,17 +8,17 @@
                     <a class="nav-link text-white" th:href="@{/home}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/admin/torneos}">Torneos</a>
+                    <a class="nav-link text-white" th:href="@{/torneos}">Torneos</a>
                 </li>
-                <li class="nav-item" th:if="${usuario != null}">
-                    <a class="nav-link text-white" th:href="@{/cargar-dinero}">Saldo:
-                        <span th:text="${usuario.saldo}"></span>
+                <li class="nav-item" th:if="${session.usuario != null and session.usuario.admin ==false}">
+                    <a class="nav-link text-white" th:href="@{/miCuenta.html}">
+                        <span th:text="${session.usuario['nombre']}"></span>
                     </a>
                 </li>
-                <li class="nav-item" th:if="${usuario == null}">
-                    <a class="nav-link text-white" th:href="@{/login}">Iniciar Sesion</a>
+                <li class="nav-item" th:if="${session.usuario == null}">
+                    <a class="nav-link text-white" th:href="@{/miCuenta.html}"  >Mi Cuenta</a>
                 </li>
-                <li class="nav-item" th:if="${usuario != null}">
+                <li class="nav-item" th:if="${session.usuario != null}">
                     <a class="nav-link text-white" th:href="@{/logout}">Cerrar Sesion</a>
                 </li>
             </ul>

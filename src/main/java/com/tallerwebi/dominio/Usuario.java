@@ -18,7 +18,7 @@ public class Usuario {
     private Integer id;
     private String nombre;
     private String apellido;
-    private String dni;
+    private Long dni;
     private String direccion;
     private String email;
     private String password;
@@ -29,6 +29,8 @@ public class Usuario {
     private PartidosDeBsAs partido;
 
 
+
+
 //    @Enumerated(EnumType.STRING)
 //    private Localidades localidad;
 
@@ -36,7 +38,7 @@ public class Usuario {
 
     }
 
-    public Usuario(String nombre, String apellido, String dni, String direccion, String email, String password, PartidosDeBsAs partido) {
+    public Usuario(String nombre, String apellido, Long dni, String direccion, String email, String password, PartidosDeBsAs partido) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -87,11 +89,11 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public String getDni() {
+    public Long getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(Long dni) {
         this.dni = dni;
     }
 

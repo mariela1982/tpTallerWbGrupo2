@@ -103,6 +103,11 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
 
     }
 
+    @Override
+    public Equipo buscarEquipoPorDt(Long dni) {
+        return repositorioEquipo.buscarPorDt(dni);
+    }
+
 
 }
 

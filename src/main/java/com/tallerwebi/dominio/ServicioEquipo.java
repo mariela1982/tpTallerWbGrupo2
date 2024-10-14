@@ -24,4 +24,6 @@ public interface ServicioEquipo {
     Equipo buscarEquipoPorId(Long id) throws EquipoInexistente;
 
     void eliminarEquipo(Equipo equipo);
+
+    Equipo buscarEquipoPorDt(Long dni);
 }
