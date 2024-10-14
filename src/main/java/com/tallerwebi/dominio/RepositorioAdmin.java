@@ -1,10 +1,29 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.transaction.Transactional;
 import java.util.List;
 
+import com.tallerwebi.dominio.excepcion.TorneoExistente;
+
 public interface RepositorioAdmin {
+
+    // Torneos
+    void guardarTorneo(Torneo torneo);
+    void eliminarPartido(Partido partido);
+    List<Torneo> obtenerTorneos();
+    Torneo buscarTorneoPorNombre(String nombre);
+    Torneo obtenerTorneoPorId(Long id);
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    Cancha guardarCancha(Cancha cancha);
 //    List<Cancha> obtenerCanchas();
@@ -21,7 +40,7 @@ public interface RepositorioAdmin {
     List<Cancha> obtenerCanchas();
 
 
-    Cancha obtenerCanchaPorId(Integer id);
+    Cancha obtenerCanchaPorId(Long id);
 
 
     void eliminarCancha(Cancha cancha);
@@ -32,7 +51,7 @@ public interface RepositorioAdmin {
 
     List<Arbitro> obtenerArbitros();
 
-    Arbitro obtenerArbitroPorId(Integer id);
+    Arbitro obtenerArbitroPorId(Long id);
 
     void eliminarArbitro(Arbitro arbitro);
 
@@ -42,17 +61,13 @@ public interface RepositorioAdmin {
 
     Partido obtenerPartidoPorId(Long id);
 
-    void eliminarPartido(Partido partido);
 
     List<Partido> obtenerPartidosPorTorneo(Torneo torneo);
 
     Partido obtenerPartidoEsperandoRival(Torneo torneo, String fase);
 
-    List<Torneo> obtenerTorneos();
 
-    Torneo obtenerTorneoPorId(Long id);
 
-    Torneo guardarTorneo(Torneo torneo);
 
 
     void eliminarTorneo(Torneo torneo);

@@ -1,5 +1,5 @@
 
-        package com.tallerwebi.dominio;
+package com.tallerwebi.dominio;
 
 import java.sql.Date;
 import java.time.LocalTime;

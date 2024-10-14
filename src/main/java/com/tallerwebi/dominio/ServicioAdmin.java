@@ -2,10 +2,15 @@ package com.tallerwebi.dominio;
 
 import java.util.List;
 
+import com.tallerwebi.dominio.excepcion.TorneoExistente;
+
 public interface ServicioAdmin {
 
-    void guardarTorneo(Torneo nombre);
-    void eliminarTorneo(Torneo nombre);
+    void guardarTorneo(Torneo torneo) throws TorneoExistente;
+    void eliminarTorneo(Torneo torneo);
+    void actualizarTorneo(Torneo torneo);
+    List<Torneo> obtenerTorneos();
+    Torneo buscarTorneoPorId(Long id);
 
 //    void guardarEquipo(Equipo nombre);
 //    void eliminarEquipo(Equipo nombre);
@@ -20,12 +25,17 @@ public interface ServicioAdmin {
     void eliminarArbitro(Arbitro nombre);
 
     List<Cancha> obtenerCanchas();
+    Cancha obtenerCanchaPorId(Long id);
 
     List<Arbitro> obtenerArbitros();
+    Arbitro obtenerArbitroPorId(Long id);
 
-    List<Torneo> obtenerTorneos();
-    Torneo obtenerTorneo(Long id);
 
+    void guardarPartido(Partido partido);
+    List<Partido> obtenerPartidos();
+    List<Partido> obtenerPartidosPorTorneo(Torneo torneo);
+    Partido obtenerPartidoPorId(Long id);
+    Partido obtenerPartidoEsperandoRival(Torneo torneo, String fase);
 
 
 

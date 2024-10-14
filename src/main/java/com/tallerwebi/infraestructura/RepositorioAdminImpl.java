@@ -15,6 +15,7 @@ import com.tallerwebi.dominio.Cancha;
 import com.tallerwebi.dominio.Partido;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.Torneo;
+import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 @Repository("repositorioAdmin")
 @SuppressWarnings({ "deprecation", "unchecked" })
@@ -22,12 +23,19 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     @Autowired
     private SessionFactory sessionFactory;
 
+    // TORNEOS
     @Transactional
     @Override
-    public Torneo guardarTorneo(Torneo torneo) {
+    public void guardarTorneo(Torneo torneo){
         final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(torneo);
-        return torneo;
+        session.merge(torneo);
+    }
+
+    @Transactional
+    @Override
+    public void eliminarTorneo(Torneo torneo) {
+        final Session session = sessionFactory.getCurrentSession();
+        session.delete(torneo);
     }
 
     @Transactional
@@ -37,19 +45,27 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         return session.createQuery("SELECT DISTINCT t FROM Torneo t").list();
     }
 
+    @Transactional
+    @Override
+    public Torneo buscarTorneoPorNombre(String nombre) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Torneo) session.createCriteria(Torneo.class).add(Restrictions.eq("nombre", nombre)).uniqueResult();
+    }
+
     @Override
     @Transactional
     public Torneo obtenerTorneoPorId(Long id) {
         final Session session = sessionFactory.getCurrentSession();
-        return session.get(Torneo.class, id);
+        return (Torneo) session.get(Torneo.class, id);
     }
 
-    @Transactional
-    @Override
-    public void eliminarTorneo(Torneo torneo) {
-        final Session session = sessionFactory.getCurrentSession();
-        session.delete(torneo);
-    }
+
+
+
+
+
+
+
 
     @Transactional
     @Override
@@ -69,7 +85,7 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public Cancha obtenerCanchaPorId(Integer id) {
+    public Cancha obtenerCanchaPorId(Long id) {
         final Session session = sessionFactory.getCurrentSession();
         return (Cancha) session.get(Cancha.class, id);
     }
@@ -100,7 +116,7 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
 
     @Transactional
     @Override
-    public Arbitro obtenerArbitroPorId(Integer id) {
+    public Arbitro obtenerArbitroPorId(Long id) {
         final Session session = sessionFactory.getCurrentSession();
         return (Arbitro) session.get(Arbitro.class, id);
     }

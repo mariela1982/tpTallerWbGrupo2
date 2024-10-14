@@ -21,11 +21,12 @@
         <h1 class="my-4 text-center">Gestion de Torneos</h1>
 
         <!-- Formulario para crear un nuevo torneo -->
-
-        <form action="#" th:action="${editando ? '/spring/admin/torneosAdmin/editar' : '/spring/admin/torneosAdmin/crear'}" method="post" class="mb-4" th:object="${torneo}">
+        <form action="#" th:action="${editando == null 
+            ? '/spring/admin/torneos/crear' 
+            : '/spring/admin/torneos/editar'}" method="post" class="mb-4" th:object="${torneo}">
 
             <!-- Campo oculto para el ID del torneo si estamos editando -->
-            <input type="hidden" th:if="${editando}" th:name="id" th:value="${torneo.id}" />
+            <input type="hidden" th:if="${editando}" th:name="id" th:value="${torneo.id}" th:field="*{id}">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="nombre" class="form-label">Nombre del Torneo</label>
@@ -67,7 +68,7 @@
                 <!-- Partidos -->
                 <div class="col-md-6 mb-3">
                     <label for="partido" class="form-label">Partido</label>
-                    <select id="partido" name="partido" class="form-select" required>
+                    <select id="partido" name="partido" class="form-select" required th:field="*{partido}">
                         <option value="">Seleccionar un Partido</option>
                         <option th:each="partido : ${partidosDeBsAs}" th:value="${partido}" th:text="${partido.name()}">
                         </option>
@@ -75,19 +76,28 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary"
-                th:text="${editando ? 'Actualizar Torneo' : 'Agregar Torneo'}">
+                th:text="${editando == null ? 'Crear Torneo' : 'Actualizar Torneo'}">
             </button>
         </form>
 
         <!-- Mensajes de alerta -->
-        <div th:if="${param.creado}" class="alert alert-success" role="alert">
-            Torneo creado exitosamente
-        </div>
-        <div th:if="${param.editado}" class="alert alert-success" role="alert">
-            Torneo actualizado exitosamente
-        </div>
-        <div th:if="${param.eliminado}" class="alert alert-danger" role="alert">
-            Torneo eliminado exitosamente
+        <div th:if="${
+                param.creado != null || 
+                param.editado != null || 
+                param.eliminado != null || 
+                param.existente != null
+            }" class="alert" th:classappend="${
+                param.creado != null || 
+                param.editado != null 
+                ? 'alert-success' 
+                : 'alert-danger'
+            }" role="alert">
+            <span th:text="${
+                param.creado != null ? 'Torneo creado exitosamente' : 
+                param.editado != null ? 'Torneo actualizado exitosamente' : 
+                param.eliminado != null ? 'Torneo eliminado exitosamente' : 
+                'Ya existe un torneo con ese nombre'
+            }"></span>
         </div>
 
         <!-- Lista de torneos activos -->

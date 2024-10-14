@@ -92,7 +92,7 @@ public class ControladorDt {
     public ModelAndView verTorneo(@PathVariable("id") Long torneoId, HttpServletRequest request) {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         ModelAndView mav = new ModelAndView("torneo");
-        Torneo torneo = servicioAdmin.obtenerTorneo(torneoId);
+        Torneo torneo = servicioAdmin.buscarTorneoPorId(torneoId);
 
         Integer cuposOcupados = torneo.getEquipos().size();
         Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
@@ -111,7 +111,7 @@ public class ControladorDt {
 
         ModelMap model = new ModelMap();
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        Torneo torneo = servicioAdmin.obtenerTorneo(torneoId);
+        Torneo torneo = servicioAdmin.buscarTorneoPorId(torneoId);
         Integer cuposOcupados = torneo.getEquipos().size();
         Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
 

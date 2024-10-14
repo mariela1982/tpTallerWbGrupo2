@@ -27,26 +27,21 @@ INSERT INTO Arbitro(id, nombre, apellido, partido) VALUES
                     (null, 'Jose', 'Lopez', 60),
                     (null, 'Miguel', 'Gonzalez', 60);
 
-INSERT INTO Cancha(id, nombre) VALUES
-                    (null, 'Cancha Central'),
-                    (null, 'Cancha Este'),
-                    (null, 'Cancha Oeste'),
-                    (null, 'Cancha Norte'),
-                    (null, 'Cancha Sur');
-
+INSERT INTO Cancha(id, nombre, direccion, telefono) VALUES
+                    (null, 'Cancha Central', 'Av. Principal 123', '123456789'),
+                    (null, 'Cancha Este', 'Calle Este 456', '987654321'),
+                    (null, 'Cancha Oeste', 'Calle Oeste 789', '456123789'),
+                    (null, 'Cancha Norte', 'Calle Norte 101', '789456123'),
+                    (null, 'Cancha Sur', 'Calle Sur 202', '321654987');
 
 INSERT INTO Torneo(id, nombre, premio, precioEntrada, fechaInicio, cantidadEquipos, partido) VALUES
-                    (null, 'Torneo 1', 1000, 100, '2025-06-01', 4, 64),
-                    (null, 'Torneo 2', 2000, 200, '2025-06-01', 8, 65),
-                    (null, 'Torneo 3', 3000, 300, '2025-06-01', 16, 60),
-                    (null, 'Torneo 4', 4000, 400, '2025-06-01', 32, 82),
                     (null, 'Copa Campeones', 1000, 100, '2025-06-01', 4, 64),
                     (null, 'Copa Argentina', 2000, 200, '2025-06-01', 8, 65),
                     (null, 'Copa Libertadores', 3000, 300, '2025-06-01', 16, 60),
                     (null, 'Copa Sudamericana', 4000, 400, '2025-06-01', 32, 82);
 
 INSERT INTO Equipo(id, nombre, cbu, dtDni, torneo_id, orden) VALUES
-                    (null, 'boca', '123456789', 29363692, null, 0),
+                    (null, 'Boca', '123456789', 29363692, 1, 0),
                     (null, 'River', '123456789', 29363691, 1, 1),
                     (null, 'Racing', '123456789', 29363691, 1, 2),
                     (null, 'Independiente', '123456789', 29363691, 1, 3),
@@ -108,12 +103,12 @@ INSERT INTO Jugador(id, nombreyapellido, posicion, equipo_id) VALUES
 
 INSERT INTO Partido(id, golesLocal, golesVisitante, fecha, hora, fase, equipoLocal_id, equipoVisitante_id, torneo_id, cancha_id, arbitro_id) VALUES
                     (null, null, null, '2025-06-01', '20:00:00', 'Semifinal', 1, 2, 1, 1, 1),
-                    (null, null, null, '2025-06-01', '20:00:00', 'Semifinal', 3, 4, 1, 1, 2),
+                    (null, null, null, '2025-06-01', '20:00:00', 'Semifinal', 3, 4, 1, 1, 2);
 
-                    (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 5, 6, 2, 2, 3),
-                    (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 7, 8, 2, 2, 4),
-                    (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 9, 10, 2, 2, 5),
-                    (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 11, 12, 2, 2, 2);
+                    -- (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 5, 6, 2, 2, 3),
+                    -- (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 7, 8, 2, 2, 4),
+                    -- (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 9, 10, 2, 2, 5),
+                    -- (null, null, null, '2025-06-01', '20:00:00', 'Cuartos de Final', 11, 12, 2, 2, 2);
 
 
 

@@ -21,13 +21,30 @@
         <h1 class="my-4 text-center">Gestion de Canchas</h1>
 
         <!-- Formulario para crear o editar una cancha -->
-        <form action="#" th:action="${editando ? '/spring/admin/canchas/editar' : '/spring/admin/canchas/crear'}" method="post" class="mb-4" th:object="${cancha}">
+        <form action="#" th:action="${editando ? '/spring/admin/canchas/editar' : '/spring/admin/canchas/crear'}"
+            method="post" class="mb-4" th:object="${cancha}">
             <!-- Campo oculto para el ID de la cancha si estamos editando -->
             <input type="hidden" th:if="${editando}" th:name="id" th:value="${cancha.id}" />
-            
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre de la Cancha</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required>
+
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="nombre" class="form-label">Nombre de la Cancha</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label for="direccion" class="form-label">Direccion de la Cancha</label>
+                    <input type="text" class="form-control" id="direccion" name="direccion" th:field="*{direccion}"
+                        required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="nombre" class="form-label">Numero de telefono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" th:field="*{telefono}"
+                        required>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-primary"
@@ -51,18 +68,23 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:if="${#lists.isEmpty(canchas)}">
-                    <td colspan="2" class="text-center">No hay canchas registradas</td>
+                    <td colspan="4" class="text-center">No hay canchas registradas</td>
                 </tr>
                 <tr th:each="cancha : ${canchas}">
                     <td th:text="${cancha.nombre}"></td>
+                    <td th:text="${cancha.direccion}"></td>
+                    <td th:text="${cancha.telefono}"></td>
                     <td>
                         <a th:href="@{/admin/canchas/editar/{id}(id=${cancha.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/admin/canchas/eliminar/{id}(id=${cancha.id})}" class="btn btn-danger">Eliminar</a>
+                        <a th:href="@{/admin/canchas/eliminar/{id}(id=${cancha.id})}"
+                            class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             </tbody>

@@ -1,10 +1,10 @@
 package com.tallerwebi.dominio;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,7 +17,6 @@ import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Entity
 public class Torneo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,15 +31,13 @@ public class Torneo {
     @OrderColumn(name = "orden")
     private List<Equipo> equipos;
 
-    public Torneo() {
-        this.equipos = new ArrayList<Equipo>();
-    }
-
     public Long getId() {
         return id;
     }
 
-
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -109,13 +106,12 @@ public class Torneo {
     }
 
     public void agregarEquipo(Equipo equipo) {
-//        if (equipos == null) {
-//            equipos = Collections.emptyList();
-//        }
+        // if (equipos == null) {
+        // equipos = Collections.emptyList();
+        // }
         if (cantidadEquipos < equipos.size()) {
             equipos.add(equipo);
         }
-
 
     }
 
