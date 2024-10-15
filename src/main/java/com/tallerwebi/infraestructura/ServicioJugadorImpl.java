@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.ServicioJugador;
@@ -8,7 +9,13 @@ import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.transaction.Transactional;
+
+import java.util.Date;
 import java.util.List;
 
 @Service("servicioJugador")
@@ -67,5 +74,13 @@ public class ServicioJugadorImpl implements ServicioJugador {
         return repositorioJugador.buscarJugadores();
     }
 
+    @Override
+    public List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo) {
+        return repositorioJugador.buscarJugadoresPorEquipo(equipo);
+    }
 
+    @Override
+    public List<Jugador> obtenerJugadoresConSancion() {
+        return repositorioJugador.buscarJugadoresConSancion();
+    }
 }

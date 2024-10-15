@@ -19,7 +19,7 @@
                     data.forEach(function (jugador) {
                         var option = document.createElement("option");
                         option.value = jugador.id;
-                        option.text = jugador.nombre + " " + jugador.apellido;
+                        option.text = jugador.nombreYapellido;
                         jugadorSelect.appendChild(option);
                     });
                 })

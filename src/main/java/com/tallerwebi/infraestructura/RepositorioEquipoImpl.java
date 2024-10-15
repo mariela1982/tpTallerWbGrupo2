@@ -49,8 +49,7 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
     @Override
     public Equipo buscarPorID(Long id) {
         Session session = sessionFactory.getCurrentSession();
-
-        return (Equipo)session.get(Equipo.class, id);
+        return session.get(Equipo.class, id);
     }
 
     @Override
@@ -81,7 +80,7 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
         return null;
     }
 
-
+    
     @Override
     public Jugador buscarJugador(Long idJugador, Equipo equipo) {
         Session sesion= sessionFactory.getCurrentSession();
@@ -93,20 +92,17 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
 
     }
 
+    @Transactional
     @Override
     public List<Equipo> buscarEquipos() {
         Session session = sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(Equipo.class);
-        return criteria.list();
-
-
+        return session.createQuery("SELECT DISTINCT e FROM Equipo e", Equipo.class).list();
     }
 
     @Override
     public void eliminar(Equipo equipo) {
         Session sesion= sessionFactory.getCurrentSession();
         sesion.delete(equipo);
-
     }
 
     @Override

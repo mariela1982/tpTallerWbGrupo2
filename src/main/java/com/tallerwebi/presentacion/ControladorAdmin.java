@@ -4,7 +4,13 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,17 +18,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tallerwebi.dominio.Arbitro;
 import com.tallerwebi.dominio.Cancha;
 import com.tallerwebi.dominio.Equipo;
+import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.Partido;
 import com.tallerwebi.dominio.ServicioAdmin;
 import com.tallerwebi.dominio.ServicioEquipo;
 import com.tallerwebi.dominio.ServicioJugador;
 import com.tallerwebi.dominio.Torneo;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+import com.tallerwebi.dominio.excepcion.EquipoInexistente;
+import com.tallerwebi.dominio.excepcion.JugadorExistente;
+import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 @Controller
@@ -452,36 +463,40 @@ public class ControladorAdmin {
         ModelAndView mav = new ModelAndView("admin/sanciones");
         mav.addObject("equipos", servicioEquipo.obtenerEquipos());
         mav.addObject("jugadores", servicioJugador.obtenerJugadores());
-        // mav.addObject("jugadoresConSancion",repositorioAdmin.obtenerJugadoresConSancion());
+        mav.addObject("jugadoresConSancion",servicioJugador.obtenerJugadoresConSancion());
         return mav;
     }
 
     // Metodo para obtener los jugadores de un equipo
-    // @GetMapping("/sanciones/jugadores/{id}")
-    // @ResponseBody
-    // public ResponseEntity<List<Jugador>> obtenerJugadoresPorEquipo(@PathVariable
-    // Long id) {
-    // Equipo equipo = repositorioAdmin.obtenerEquipoPorId(id);
-    // List<Jugador> jugadores = repositorioAdmin.obtenerJugadoresPorEquipo(equipo);
-    // return ResponseEntity.ok(jugadores);
-    // }
+    @GetMapping("/sanciones/jugadores/{id}")
+    @ResponseBody
+    public ResponseEntity<List<Jugador>> obtenerJugadoresPorEquipo(@PathVariable Long id) throws EquipoInexistente {
+        Equipo equipo = servicioEquipo.buscarEquipoPorId(id);
+        List<Jugador> jugadores = servicioJugador.obtenerJugadoresPorEquipo(equipo);
+        return ResponseEntity.ok(jugadores);
+    }
 
     // Controller para asignar sancion a un jugador
-    // @PostMapping("/sanciones/asignar")
-    // public ModelAndView asignarSancion(
-    // @RequestParam("equipo") Long equipoId,
-    // @RequestParam("jugador") Long jugadorId,
-    // @RequestParam("sancion") String sancion) {
-    // Equipo equipo = repositorioAdmin.obtenerEquipoPorId(equipoId);
-    // Jugador jugador = repositorioAdmin.obtenerJugadorPorId(jugadorId);
-    //
-    // if (equipo != null && jugador != null) {
-    // jugador.setSancion(sancion);
-    // repositorioAdmin.guardarJugador(jugador);
-    // }
-    //
-    // return new ModelAndView("redirect:/admin/sanciones?asignada=true");
-    // }
+    @PostMapping("/sanciones/asignar")
+    public ModelAndView asignarSancion(
+            @RequestParam("equipo") Long equipoId,
+            @RequestParam("jugador") Long jugadorId,
+            @RequestParam("sancion") String sancion) throws EquipoInexistente, JugadorInexistente, JugadorExistente {
+        Equipo equipo = servicioEquipo.buscarEquipoPorId(equipoId);
+        Jugador jugador = servicioJugador.buscarJugador(jugadorId);
+
+        if (equipo != null && jugador != null) {
+            if (sancion.equals("Amarilla")) {
+                jugador.setTarjetaAmarilla(true);
+            } else if (sancion.equals("Roja")) {
+                jugador.setTarjetaRoja(true);
+            }
+
+            servicioJugador.guardarJugador(jugador);
+        }
+
+        return new ModelAndView("redirect:/admin/sanciones?asignada=true");
+    }
 
     // Controller para la vista de gestion de Resultados
     @GetMapping("/resultados")

@@ -12,4 +12,6 @@ public interface ServicioJugador {
     Jugador buscarJugador(Long jugadorId) throws JugadorInexistente;
 
     List<Jugador> obtenerJugadores();
+    List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
+    List<Jugador> obtenerJugadoresConSancion();
 }

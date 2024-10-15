@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioJugador;
 import org.hibernate.Session;
@@ -51,6 +52,21 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
         final Session session = sessionFactory.getCurrentSession();
 
         TypedQuery<Jugador> query= session.createQuery("from Jugador", Jugador.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Jugador> buscarJugadoresPorEquipo(Equipo equipo) {
+        final Session session = sessionFactory.getCurrentSession();
+        TypedQuery<Jugador> query= session.createQuery("from Jugador where equipo = :equipo", Jugador.class);
+        query.setParameter("equipo", equipo);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<Jugador> buscarJugadoresConSancion() {
+        final Session session = sessionFactory.getCurrentSession();
+        TypedQuery<Jugador> query= session.createQuery("from Jugador where tarjetaAmarilla = true or tarjetaRoja = true", Jugador.class);
         return query.getResultList();
     }
 }

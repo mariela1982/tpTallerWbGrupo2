@@ -44,8 +44,8 @@
                 <label for="sancion" class="form-label">Sancion</label>
                 <select id="sancion" name="sancion" class="form-select" required>
                     <option value="" disabled selected>Selecciona una sancion</option>
-                    <option value="Tarjeta Amarilla">Tarjeta Amarilla</option>
-                    <option value="Tarjeta Roja">Tarjeta Roja</option>
+                    <option value="Amarilla">Tarjeta Amarilla</option>
+                    <option value="Roja">Tarjeta Roja</option>
                 </select>
             </div>
 
@@ -57,6 +57,7 @@
             <thead>
                 <tr>
                     <th>Jugador</th>
+                    <th>Posicion</th>
                     <th>Equipo</th>
                     <th>Sancion</th>
                     <th>Acciones</th>
@@ -64,15 +65,17 @@
             </thead>
             <tbody>
                 <tr th:if="${#lists.isEmpty(jugadoresConSancion)}">
-                    <td colspan="4" class="text-center">
+                    <td colspan="5" class="text-center">
                         No hay jugadores sancionados
                     </td>
                 </tr>
 
                 <tr th:each="jugador : ${jugadoresConSancion}">
-                    <td th:text="${jugador.nombre + ' ' + jugador.apellido}"></td>
+                    <td th:text="${jugador.nombreYapellido}"></td>
+                    <td th:text="${jugador.posicion}"></td>
                     <td th:text="${jugador.equipo.nombre}"></td>
-                    <td th:text="${jugador.sancion}"></td>
+                    <td th:if="${jugador.tarjetaAmarilla}" th:text="'Amarilla'"></td>
+                    <td th:if="${jugador.tarjetaRoja}" th:text="'Roja'"></td>
                     <td>
                         <a th:href="@{/admin/sanciones/quitar/{id}(id=${jugador.id})}" class="btn btn-danger">
                             Quitar Sancion

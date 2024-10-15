@@ -8,4 +8,6 @@ public interface RepositorioJugador {
     Jugador buscarJugador(Long idJugador);
     List<Jugador> buscarJugadores();
 
+    List<Jugador> buscarJugadoresPorEquipo(Equipo equipo);
+    List<Jugador> buscarJugadoresConSancion();
 }

@@ -90,12 +90,16 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
 
     @Override
     public List<Equipo> obtenerEquipos() {
-        return List.of();
+        return repositorioEquipo.buscarEquipos();
     }
 
     @Override
     public Equipo buscarEquipoPorId(Long id) throws EquipoInexistente {
-        return null;
+        Equipo equipo = repositorioEquipo.buscarPorID(id);
+        if(equipo == null){
+            throw new EquipoInexistente();
+        }
+        return equipo;
     }
 
     @Override

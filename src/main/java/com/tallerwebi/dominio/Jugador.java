@@ -1,27 +1,21 @@
 package com.tallerwebi.dominio;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
-
-import java.util.Date;
 
 @Entity
 public class Jugador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
-    private PartidosDeBsAs partido;
-    private String sancion;
-
     private String nombreYapellido;
     private Date fechaNacimiento;
     private String posicion;
@@ -80,23 +74,7 @@ public class Jugador {
         this.posicion = posicion;
     }
 
-    public PartidosDeBsAs getPartido() {
-        return partido;
-    }
-
-    public void setPartido(PartidosDeBsAs partido) {
-        this.partido = partido;
-    }
-
-    public String getSancion() {
-        return sancion;
-    }
-
-    public void setSancion(String sancion) {
-        this.sancion = sancion;
-    }
-
-    //@JsonIgnore
+    @JsonIgnore
     public Equipo getEquipo() {
         return equipo;
     }
