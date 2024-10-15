@@ -2,6 +2,10 @@ package com.tallerwebi.dominio;
 
 import java.util.List;
 
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Torneo;
+
 public interface RepositorioEquipo {
     Equipo buscarEquipoPorNombre(String nombre);
     Equipo buscarPorID(Long id);

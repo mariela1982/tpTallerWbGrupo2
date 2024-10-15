@@ -6,12 +6,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.tallerwebi.dominio.Arbitro;
-import com.tallerwebi.dominio.Cancha;
-import com.tallerwebi.dominio.Partido;
 import com.tallerwebi.dominio.RepositorioAdmin;
 import com.tallerwebi.dominio.ServicioAdmin;
-import com.tallerwebi.dominio.Torneo;
+import com.tallerwebi.dominio.entidades.Arbitro;
+import com.tallerwebi.dominio.entidades.Cancha;
+import com.tallerwebi.dominio.entidades.Partido;
+import com.tallerwebi.dominio.entidades.Torneo;
 import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 @Service("servicioAdmin")

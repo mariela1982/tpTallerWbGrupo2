@@ -1,5 +1,5 @@
 
-package com.tallerwebi.dominio;
+package com.tallerwebi.dominio.entidades;
 
 import java.sql.Date;
 import java.time.LocalTime;
@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.tallerwebi.dominio.entidades.Equipo;
 
 @Entity
 public class Partido {

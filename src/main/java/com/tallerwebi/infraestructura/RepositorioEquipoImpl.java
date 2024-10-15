@@ -1,8 +1,10 @@
 package com.tallerwebi.infraestructura;
 
 
-import com.tallerwebi.dominio.Jugador;
-import com.tallerwebi.dominio.Torneo;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Torneo;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tallerwebi.dominio.Equipo;
 import com.tallerwebi.dominio.RepositorioEquipo;
 
 import java.util.List;

@@ -12,12 +12,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.tallerwebi.dominio.Arbitro;
-import com.tallerwebi.dominio.Cancha;
-import com.tallerwebi.dominio.Equipo;
-import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioAdmin;
-import com.tallerwebi.dominio.Torneo;
+import com.tallerwebi.dominio.entidades.Arbitro;
+import com.tallerwebi.dominio.entidades.Cancha;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Torneo;
 
 public class ControladorAdminTest {
 

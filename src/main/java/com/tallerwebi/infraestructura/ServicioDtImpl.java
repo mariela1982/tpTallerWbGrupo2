@@ -1,9 +1,10 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.Equipo;
-import com.tallerwebi.dominio.Jugador;
 import com.tallerwebi.dominio.RepositorioDt;
 import com.tallerwebi.dominio.ServicioDt;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

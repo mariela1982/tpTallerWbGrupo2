@@ -2,6 +2,9 @@ package com.tallerwebi.dominio;
 
 import java.util.List;
 
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+
 public interface RepositorioJugador {
     Jugador crearJugador(Jugador j);
     void eliminarJugador(Jugador j);

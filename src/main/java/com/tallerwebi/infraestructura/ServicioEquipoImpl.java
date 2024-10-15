@@ -3,6 +3,9 @@ package com.tallerwebi.infraestructura;
 import javax.transaction.Transactional;
 
 import com.tallerwebi.dominio.*;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Torneo;
 import com.tallerwebi.dominio.excepcion.EquipoInexistente;
 import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;

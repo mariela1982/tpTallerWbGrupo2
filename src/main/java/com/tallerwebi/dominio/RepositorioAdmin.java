@@ -2,6 +2,10 @@ package com.tallerwebi.dominio;
 
 import java.util.List;
 
+import com.tallerwebi.dominio.entidades.Arbitro;
+import com.tallerwebi.dominio.entidades.Cancha;
+import com.tallerwebi.dominio.entidades.Partido;
+import com.tallerwebi.dominio.entidades.Torneo;
 import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 public interface RepositorioAdmin {
