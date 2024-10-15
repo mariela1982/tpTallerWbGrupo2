@@ -26,7 +26,7 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     // TORNEOS
     @Transactional
     @Override
-    public void guardarTorneo(Torneo torneo){
+    public void guardarTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
         session.merge(torneo);
     }
@@ -59,20 +59,12 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         return (Torneo) session.get(Torneo.class, id);
     }
 
-
-
-
-
-
-
-
-
+    // CANCHAS
     @Transactional
     @Override
-    public Cancha guardarCancha(Cancha nombre) {
+    public void guardarCancha(Cancha cancha) {
         final Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(nombre);
-        return nombre;
+        session.saveOrUpdate(cancha);
     }
 
     @Transactional
@@ -81,7 +73,6 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         final Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Cancha.class).list();
     }
-
 
     @Transactional
     @Override
@@ -97,12 +88,12 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         session.delete(cancha);
     }
 
+    // ARBITROS
     @Transactional
     @Override
-    public Arbitro guardarArbitro(Arbitro arbitro) {
+    public void guardarArbitro(Arbitro arbitro) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(arbitro);
-        return arbitro;
     }
 
     @Transactional
@@ -111,8 +102,6 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         final Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Arbitro.class).list();
     }
-
-
 
     @Transactional
     @Override
@@ -128,12 +117,12 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
         session.delete(arbitro);
     }
 
+    // PARTIDOS
     @Transactional
     @Override
-    public Partido guardarPartido(Partido partido) {
+    public void guardarPartido(Partido partido) {
         final Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(partido);
-        return partido;
     }
 
     @Transactional
@@ -161,14 +150,14 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     @Override
     public List<Partido> obtenerPartidosPorTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("SELECT DISTINCT p FROM Partido p WHERE p.torneo = :torneo").setParameter("torneo", torneo).list();
+        return session.createQuery("SELECT DISTINCT p FROM Partido p WHERE p.torneo = :torneo")
+                .setParameter("torneo", torneo).list();
     }
 
     @Transactional
     @Override
     public Partido obtenerPartidoEsperandoRival(Torneo torneo, String fase) {
-        // Devuelve el primer partido que no tiene equipo visitante que se encuentre en
-        // la fase indicada y pertenezca al torneo indicado
+        // Devuelve el primer partido que no tiene equipo visitante que se encuentre
         final Session session = sessionFactory.getCurrentSession();
         return (Partido) session.createCriteria(Partido.class).add(Restrictions.isNull("equipoVisitante"))
                 .add(Restrictions.eq("fase", fase)).add(Restrictions.eq("torneo", torneo)).uniqueResult();
