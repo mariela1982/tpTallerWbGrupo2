@@ -70,4 +70,17 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
         TypedQuery<Jugador> query= session.createQuery("from Jugador where tarjetaAmarilla = true or tarjetaRoja = true", Jugador.class);
         return query.getResultList();
     }
+
+    @Override
+    public void agregarEquipo(Long jugador, Equipo equipo) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        Jugador jugadorActual = buscarJugador(jugador);
+        jugadorActual.setEquipo(equipo);
+        session.saveOrUpdate(jugadorActual);
+
+
+    }
+
+
 }

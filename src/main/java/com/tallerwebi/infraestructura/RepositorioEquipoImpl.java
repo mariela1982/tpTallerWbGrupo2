@@ -21,7 +21,7 @@ import java.util.List;
 @Transactional
 public class RepositorioEquipoImpl implements RepositorioEquipo {
 
-    private  SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
     public RepositorioEquipoImpl(SessionFactory sessionFactory) {
@@ -32,7 +32,12 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
     @Override
     public Equipo guardar(Equipo equipo) {
         final Session session = sessionFactory.getCurrentSession();
-        session.save(equipo);
+        session.saveOrUpdate(equipo);
+
+        for (Jugador jugador : equipo.getJugadores()) {
+            jugador.setEquipo(equipo);
+            session.saveOrUpdate(jugador);
+        }
         return equipo;
     }
 

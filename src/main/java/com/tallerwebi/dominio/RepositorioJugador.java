@@ -13,4 +13,6 @@ public interface RepositorioJugador {
 
     List<Jugador> buscarJugadoresPorEquipo(Equipo equipo);
     List<Jugador> buscarJugadoresConSancion();
+
+    void agregarEquipo(Long jugador, Equipo equipo);
 }

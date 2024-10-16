@@ -9,13 +9,8 @@ import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.transaction.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service("servicioJugador")
@@ -83,4 +78,10 @@ public class ServicioJugadorImpl implements ServicioJugador {
     public List<Jugador> obtenerJugadoresConSancion() {
         return repositorioJugador.buscarJugadoresConSancion();
     }
+
+    @Override
+    public void agregarleEquipo(Long jugador, Equipo equipo) {
+        repositorioJugador.agregarEquipo(jugador,equipo);
+    }
 }
+

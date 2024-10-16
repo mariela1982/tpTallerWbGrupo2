@@ -321,6 +321,8 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
                     Jugador jugador = servicioJugador.buscarJugador(id);
                     jugadoresElegidos.add(jugador);
                     equipo.agregarJugador(jugador);
+                    //relacion bidireccional
+                    servicioJugador.agregarleEquipo(jugador.getId(),equipo);
                     System.out.println("Equipo recibido: " + equipo);
                     System.out.println("Jugadores ID: " + jugadoresId);
 
@@ -395,6 +397,8 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         }
         return new ModelAndView("redirect:/equipos?eliminado=true");
     }
+
+
 
 
 }

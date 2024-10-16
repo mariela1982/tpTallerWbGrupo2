@@ -34,19 +34,23 @@
                 <input type="text" id="dni" name="dni" th:field="*{dtDni}" class="form-control" required>
             </div>
 
-<!--            <div class="mb-3">-->
-<!--                <label  class="form-label">Jugadores</label>-->
+            <div class="mb-3">
+                <label  class="form-label">Jugadores</label>
+                <div class="mb-3">
+                    <label class="form-label">Jugadores</label>
+                    <div id="jugadores-list"></div>
+                </div>
 <!--                <div th:each="jugador : ${jugadores}">-->
 <!--                    <input type="checkbox" th:name="jugadoresId" th:value="${jugador.getId()}">-->
 <!--                    <label th:text="${jugador.getNombreYapellido()}"></label>-->
 <!--                </div>-->
-<!--            </div>-->
-            <div class="mb-3">
-                <label for="jugadores" class="form-label">Jugadores</label>
-                <select id="jugadores" th:name="jugadoresId"   multiple required>
-                    <!-- Opciones se llenarán con JavaScript -->
-                </select>
             </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="jugadoresId" class="form-label" >Jugadores</label>-->
+<!--                <select id="jugadoresId" th:name="jugadoresId"   multiple required>-->
+<!--                    &lt;!&ndash; Opciones se llenarán con JavaScript &ndash;&gt;-->
+<!--                </select>-->
+<!--            </div>-->
 
             <button type="submit" class="btn btn-primary">Crear Equipo</button>
         </form>
@@ -78,6 +82,7 @@
                 </tr>
             </tbody>
         </table>
+        <button type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</button>
     </main>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -85,37 +90,58 @@
 
                 .then(response => response.json())
                 .then(jugadores => {
-                    const select = document.getElementById("jugadores")
+                    const jugadoresList = document.getElementById("jugadores-list");
                     jugadores.forEach(jugador => {
-                        const option = document.createElement("option");
-                        option.value = jugador.id; //
-                        option.textContent = jugador.nombreYapellido; //
-                        select.appendChild(option);
+                        const checkboxDiv = document.createElement("div");
+                        checkboxDiv.classList.add("form-check");
+
+                        const checkbox = document.createElement("input");
+                        checkbox.classList.add("form-check-input");
+                        checkbox.type = "checkbox";
+                        checkbox.id = `jugador-${jugador.id}`;
+                        checkbox.name = "jugadoresId";
+                        checkbox.value = jugador.id;
+
+                        const label = document.createElement("label");
+                        label.classList.add("form-check-label");
+                        label.htmlFor = 'jugador-${jugador.id}';
+                        label.textContent =jugador.nombreYapellido;
+
+                        checkboxDiv.appendChild(checkbox);
+                        checkboxDiv.appendChild(label);
+                        jugadoresList.appendChild(checkboxDiv);
                     });
+                    // const select = document.getElementById("jugadoresId")
+                    // jugadores.forEach(jugador => {
+                    //     const option = document.createElement("option");
+                    //     option.value = jugador.id; //
+                    //     option.textContent = jugador.nombreYapellido; //
+                    //     select.appendChild(option);
+                    // });
                 });
         });
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('/spring/api/jugadores')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(jugadores => {
-                    const select = document.getElementById('jugadores');
-                    jugadores.forEach(jugador => {
-                        const option = document.createElement('option');
-                        option.value = jugador.id;
-                        option.textContent = jugador.nombreYapellido;
-                        select.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching jugadores:', error));
-        });
-    </script>
+<!--    <script>-->
+<!--        document.addEventListener("DOMContentLoaded", function() {-->
+<!--            fetch('/spring/api/jugadores')-->
+<!--                .then(response => {-->
+<!--                    if (!response.ok) {-->
+<!--                        throw new Error('Network response was not ok');-->
+<!--                    }-->
+<!--                    return response.json();-->
+<!--                })-->
+<!--                .then(jugadores => {-->
+<!--                    const select = document.getElementById('jugadores');-->
+<!--                    jugadores.forEach(jugador => {-->
+<!--                        const option = document.createElement('option');-->
+<!--                        option.value = jugador.id;-->
+<!--                        option.textContent = jugador.nombreYapellido;-->
+<!--                        select.appendChild(option);-->
+<!--                    });-->
+<!--                })-->
+<!--                .catch(error => console.error('Error fetching jugadores:', error));-->
+<!--        });-->
+<!--    </script>-->
 
 
     <!-- Boostrap core js -->

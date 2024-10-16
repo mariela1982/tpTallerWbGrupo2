@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.tallerwebi.dominio.entidades.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -11,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tallerwebi.dominio.RepositorioAdmin;
-import com.tallerwebi.dominio.entidades.Arbitro;
-import com.tallerwebi.dominio.entidades.Cancha;
-import com.tallerwebi.dominio.entidades.Partido;
-import com.tallerwebi.dominio.entidades.Torneo;
 import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 @Repository("repositorioAdmin")
@@ -28,7 +25,13 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     @Override
     public void guardarTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
-        session.merge(torneo);
+        //session.merge(torneo);
+        session.saveOrUpdate(torneo);
+
+        for (Equipo equipo : torneo.getEquipos()) {
+            equipo.setTorneo(torneo);
+            session.saveOrUpdate(equipo);
+        }
     }
 
     @Transactional

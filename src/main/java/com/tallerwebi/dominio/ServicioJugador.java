@@ -16,4 +16,6 @@ public interface ServicioJugador {
     List<Jugador> obtenerJugadores();
     List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
     List<Jugador> obtenerJugadoresConSancion();
+
+    void agregarleEquipo(Long jugador, Equipo equipo);
 }
