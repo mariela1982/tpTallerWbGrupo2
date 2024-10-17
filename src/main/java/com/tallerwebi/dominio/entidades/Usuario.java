@@ -6,8 +6,12 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DynamicUpdate
@@ -28,7 +32,9 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
 
-
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<TorneoPago> torneosPagos = new ArrayList<>();
 
 
 //    @Enumerated(EnumType.STRING)
@@ -127,5 +133,13 @@ public class Usuario {
 
     public void setSaldo(Integer saldo) {
         this.saldo = saldo;
+    }
+
+    public List<TorneoPago> getTorneosPagos() {
+        return torneosPagos;
+    }
+
+    public void setTorneosPagos(List<TorneoPago> torneosPagos) {
+        this.torneosPagos = torneosPagos;
     }
 }

@@ -8,25 +8,27 @@
 <body>
     <header th:replace="~{includes/userHeader :: header}"></header>
 
-    <div class="container mt-5">
-        <div class="row">
+<!--    <div class="container mt-5">-->
+<!--        <div class="row">-->
             <!-- Información del torneo -->
-            <div class="col-lg-6">
-                <h1 class="mb-4"><i class="fas fa-trophy"></i> Detalles del Torneo</h1>
+<!--            <div class="col-lg-6">-->
+<!--                <h1 class="mb-4"><i class="fas fa-trophy"></i> Detalles del Torneo</h1>-->
 
-                <!-- Mostrar mensajes -->
-                <div th:if="${success}" class="alert alert-success">
-                    <p th:text="${success}"></p>
-                </div>
+<!--                &lt;!&ndash; Mostrar mensajes &ndash;&gt;-->
+<!--                <div th:if="${success}" class="alert alert-success">-->
+<!--                    <p th:text="${success}"></p>-->
+<!--                </div>-->
 
-                <div th:if="${error}" class="alert alert-danger">
-                    <p th:text="${error}"></p>
-                </div>
+<!--                <div th:if="${error}" class="alert alert-danger">-->
+<!--                    <p th:text="${error}"></p>-->
+<!--                </div>-->
 
 <!--                <ul class="list-group list-group-flush">-->
+
 <!--                    <li class="list-group-item">-->
 <!--                        <strong><i class="fas fa-futbol"></i> Nombre:</strong>  <span th:field="${torneo.nombre}">Torneo-->
 <!--                            Nombre</span>-->
+
 <!--                    </li>-->
 <!--                    <li class="list-group-item">-->
 <!--                        <strong><i class="fas fa-gem"></i> Premio:</strong> $<span th:text="${torneo.premio}">0</span>-->
@@ -45,7 +47,7 @@
 
 <!--                <h3 class="mt-4"><i class="fas fa-users"></i> Equipo a inscribir </h3>-->
 <!--                <ul class="list-group">-->
-<!--                    <li class="list-group-item" th:object="${equipo}">-->
+<!--                    <li class="list-group-item" th:object="${equipo}"  >-->
 
 <!--                        <i class="fas fa-shield-alt"></i> <span th:text="${equipo.nombre}">Equipo 1</span>-->
 <!--                    </li>-->
@@ -70,6 +72,8 @@
                                 <div id="errorMessages" class="alert alert-danger" style="display: none;"></div>
 
                                 <form id="formPago" th:action="@{/generarPago}" method="POST">
+<!--                                    <input type="hidden" name="torneoId" th:value="${torneo.id}">-->
+
                                     <div class="mb-3">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="tipoTarjeta" id="credito"

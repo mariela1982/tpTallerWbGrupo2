@@ -27,7 +27,7 @@ public class Torneo {
     private Integer cantidadEquipos;
     private PartidosDeBsAs partido;
 
-    @OneToMany(mappedBy = "torneo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "torneo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderColumn(name = "orden")
     private List<Equipo> equipos;
 

@@ -23,18 +23,6 @@
     toggleCuotasDiv();
 });
 
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    actualizarTotal();
-
-    // var cantidadSelects = document.querySelectorAll('.cantidad-select');
-    // cantidadSelects.forEach(function(select) {
-    //     select.addEventListener('change', function() {
-    //         actualizarPrecioTotal(this.closest('tr'));
-    //     });
-    // });
-
     // Copiar el valor del total al abrir el modal
     document.querySelector('[data-bs-target="#modalPago"]').addEventListener('click', function () {
         document.getElementById('totalPagar').innerText = document.getElementById('total-final').innerText;
@@ -81,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const domicilio = document.getElementById('domicilio');
         const codigoPostal = document.getElementById('codigoPostal');
         const tipoTarjeta = document.querySelector('input[name="tipoTarjeta"]:checked').value;
-        const totalPagar = parseFloat(document.getElementById('total-final').innerText);
+
         const saldoActual = 5000; // Harcodeado, sustituir con el saldo real
 
         // Función para mostrar mensajes de error
@@ -134,34 +122,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Mostrar mensaje de éxito en el modal
         document.getElementById('mensajeExito').style.display = 'block';
         setTimeout(function () {
-            window.location.href = '/spring/home'; // Redirigir a la página principal
-            fetch('/spring/vaciarCarrito', {method: 'POST'});
-        }, 3000);
+            window.location.href = '/spring/directorTecnico'; // Redirigir a la página principal
+
     });
 
-    function actualizarPrecioTotal(row) {
-        var precioUnitario = parseFloat(row.querySelector('.precio-unitario').innerText);
-        var cantidad = parseInt(row.querySelector('.cantidad-select').value);
-        var precioTotal = precioUnitario * cantidad;
-        row.querySelector('.precio-total').innerText = precioTotal.toFixed(2);
-        actualizarTotal();
-    }
-
-    function actualizarTotal() {
-        var total = 0;
-        var precios = document.querySelectorAll('.precio-total');
-        precios.forEach(function (precio) {
-            total += parseFloat(precio.innerText);
-        });
-        document.getElementById('total-final').innerText = total.toFixed(2);
-    }
-
-    function eliminarFila(button) {
-        var row = button.closest('tr');
-        row.parentNode.removeChild(row);
-        actualizarTotal();
-        actualizarCantidadProductos();
-    }
 
 
     function actualizarCuotas() {
@@ -185,15 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function mostrarSaldoActual(saldo) {
-        const saldoActual = document.getElementById('saldoActual');
-        if (saldoActual) {
-            saldoActual.innerText = 'Saldo actual: $' + saldo.toFixed(2);
-            saldoActual.style.display = 'block'; // Asegúrate de mostrar el elemento si está oculto
-        } else {
-            console.error('Elemento saldoActual no encontrado en el DOM.');
-        }
-    }
+
 
     function ocultarSaldoActual() {
         const saldoActual = document.getElementById('saldoActual');

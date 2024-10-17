@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.tallerwebi.dominio.*;
-import com.tallerwebi.dominio.entidades.Equipo;
-import com.tallerwebi.dominio.entidades.Jugador;
-import com.tallerwebi.dominio.entidades.Torneo;
-import com.tallerwebi.dominio.entidades.Usuario;
+import com.tallerwebi.dominio.entidades.*;
 import com.tallerwebi.dominio.enums.TipoDePago;
 import com.tallerwebi.dominio.excepcion.EquipoExistente;
 import com.tallerwebi.dominio.excepcion.EquipoInexistente;
@@ -163,61 +160,85 @@ public class ControladorDt {
 //            // model.addAttribute("cuposDisponibles", cuposDisponibles);
 //            model.addAttribute("equipo", equipo);
         redirectAttributes.addFlashAttribute("torneo",torneo);
+        redirectAttributes.addFlashAttribute("id",torneoId);
         redirectAttributes.addFlashAttribute("cuposOcupados",cuposOcupados);
         redirectAttributes.addFlashAttribute("cuposDisponibles",cuposDisponibles);
         redirectAttributes.addFlashAttribute("usuario",usuario);
         redirectAttributes.addFlashAttribute("equipo",equipo);
         redirectAttributes.addFlashAttribute("exitoso","carga para inscribire exitosa");
 
-            return new ModelAndView("redirect:/inscripcion");
+            return new ModelAndView("redirect:/inscripcion", model);
         }
 
     @GetMapping("/inscripcion")
-    public String inscripcionAtorneo(){
-
-        return "inscripcion";
-    }
-
-
-    @GetMapping("/tipoDePago")
-    public ModelAndView irAPagar() {
+    public ModelAndView verInscripcion( HttpServletRequest request) {
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+            ModelAndView mav = new ModelAndView("inscripcion");
 
 
-        return new ModelAndView("/tipoDePago");
+//            Integer cuposOcupados = torneo.getEquipos().size();
+//            Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+//
+//            mav.addObject("usuario", usuario);
+//            mav.addObject("equipo",equipo);
+//        mav.addObject("torneo", torneo);
+//        mav.addObject("cuposOcupados", cuposOcupados);
+//        mav.addObject("cuposDisponibles", cuposDisponibles);
 
-    }
-    @RequestMapping(path = "/pagar", method = RequestMethod.POST)
-    public ModelAndView pagar(@RequestParam("tipoTarjeta") TipoDePago tipoPago, HttpServletRequest request) {
-
-        HttpSession misession = request.getSession();
-        Usuario usuario = (Usuario) misession.getAttribute("usuario");
+        return mav;
+}
 
 
-//        Integer  totalPedido = usuario.getSaldo();
-        Integer  totalPedido = 15000; //harcodeo
-
-
-        ModelAndView modelAndView = new ModelAndView("pago");
-        modelAndView.addObject("tipoPago", tipoPago);
-        modelAndView.addObject("totalPedido", totalPedido);
-        return modelAndView;
-    }
+//    @GetMapping("/tipoDePago")
+//    public ModelAndView irAPagar() {
+//
+//
+//        return new ModelAndView("/tipoDePago");
+//
+//    }
+//    @RequestMapping(path = "/pagar", method = RequestMethod.POST)
+//    public ModelAndView pagar(@RequestParam("tipoTarjeta") TipoDePago tipoPago, HttpServletRequest request) {
+//
+//        HttpSession misession = request.getSession();
+//        Usuario usuario = (Usuario) misession.getAttribute("usuario");
+//
+//
+////        Integer  totalPedido = usuario.getSaldo();
+//        Integer  totalPedido = 15000; //harcodeo
+//
+//
+//        ModelAndView modelAndView = new ModelAndView("pago");
+//        modelAndView.addObject("tipoPago", tipoPago);
+//        modelAndView.addObject("totalPedido", totalPedido);
+//        return modelAndView;
+//    }
 
     @RequestMapping(path = "/generarPago", method = RequestMethod.POST)
 //    public ModelAndView generarPedido(@RequestParam("tipoTarjeta") TipoDePago tipoPago,
 //                                      @RequestParam("saldo") Integer saldo, HttpServletRequest request,
 //                                        RedirectAttributes redirectAttributes) {
-        public ModelAndView generarPedido( HttpServletRequest request,
+        public ModelAndView generarPago( @RequestParam("tipoTarjeta") TipoDePago tipoDePago,
+                                         @RequestParam("totalPagar") Integer totalApagar,
+
+                                         HttpServletRequest request,
                 RedirectAttributes redirectAttributes) {
         HttpSession misession = request.getSession();
         Usuario usuario = (Usuario) misession.getAttribute("usuario");
+
+
+
         servicioLogin.actualizarSaldo(usuario,5000);
+        usuario.setSaldo(5000);
 
 
+        TorneoPago torneoPago = new TorneoPago();
+        torneoPago.setTipoDePago(tipoDePago);
+        torneoPago.setTotal(totalApagar);
         misession.setAttribute("usuario", usuario);
+
         redirectAttributes.addFlashAttribute("mensajeExito", "Pago al torneo realizado con éxito.");
 
-        return new ModelAndView("redirect:/directorTecnico");
+        return new ModelAndView();
 
     }
 
@@ -322,7 +343,8 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
                     jugadoresElegidos.add(jugador);
                     equipo.agregarJugador(jugador);
                     //relacion bidireccional
-                    servicioJugador.agregarleEquipo(jugador.getId(),equipo);
+                 //  servicioJugador.agregarleEquipo(jugador.getId(),equipo);
+                    jugador.setEquipo(equipo);
                     System.out.println("Equipo recibido: " + equipo);
                     System.out.println("Jugadores ID: " + jugadoresId);
 
@@ -397,8 +419,6 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         }
         return new ModelAndView("redirect:/equipos?eliminado=true");
     }
-
-
 
 
 }

@@ -3,15 +3,7 @@ package com.tallerwebi.dominio.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Entity
 public class Equipo {
@@ -23,16 +15,16 @@ public class Equipo {
     private String cbu;
     private Long dtDni;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="torneo_id",nullable = true)
     private Torneo torneo;
 
-    @OneToMany(mappedBy = "equipo", fetch = FetchType.EAGER)
-    private List<Jugador> jugadores;
+    @OneToMany(mappedBy = "equipo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Jugador> jugadores = new ArrayList<>();
 
 
     @Column(name = "orden")
     private Integer orden;
-
 
 
     public Equipo(String nombre, String cbu, Long dni) {
@@ -45,7 +37,6 @@ public class Equipo {
         }
 
     public Equipo() {
-        this.jugadores = new ArrayList<>();
         this.orden = 0;
         this.torneo = new Torneo();
 
@@ -70,9 +61,7 @@ public class Equipo {
         }
 
         public void agregarJugador (Jugador jugador){
-            if (this.jugadores == null) {
-                this.jugadores = new ArrayList<>();
-            }
+
             this.jugadores.add(jugador);
         }
 

@@ -20,6 +20,7 @@
 
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Jugadores</h1>
+        <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
 
         <form th:action="@{/crearJugador}" method="post"  th:object="${jugador}" class="signIn">
             <div class="row">
@@ -103,7 +104,7 @@
                 </tr>
             </tbody>
         </table>
-        <button type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</button>
+
     </main>
 
 

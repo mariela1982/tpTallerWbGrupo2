@@ -64,27 +64,16 @@ INSERT INTO Equipo(id, nombre, cbu, dtDni, torneo_id, orden) VALUES
                     (null, 'Argentinos Juniors', '123456789', 29163692, 3, 6),
                     (null, 'Patronato', '123456789', 29313692, 3, 7),
 
+                    (null, 'Chacarita', '123456789', 29361692, null, null),
+                    (null, 'Brown', '123456789', 29361692, null, null),
+                    (null, 'chicago', '123456789', 29361692, null, null),
+
                     (null, 'Boca', '123456789', 29361692, 4, 0),
                     (null, 'River', '123456789', 29361692, 4, 1),
                     (null, 'Racing', '123456789', 29361692, 4, 2),
                     (null, 'Independiente', '123456789', 21363692, 4, 3),
                     (null, 'San Lorenzo', '123456789', 29163692, 4, 4);
 
-
-    --                 public class Jugador {
-    -- @Id
-    -- @GeneratedValue(strategy = GenerationType.IDENTITY)
-    -- private Long id;
-    -- private String nombreYapellido;
-    -- private Date fechaNacimiento;
-    -- private String posicion;
-    -- private String dni;
-    -- private String direccion;
-    -- private String email;
-    -- private String telefono;
-    -- private Integer numeroCamiseta;
-    -- private Boolean tarjetaAmarilla;
-    -- private Boolean tarjetaRoja;
 
 INSERT INTO Jugador(id, nombreYapellido, fechaNacimiento, posicion, dni, direccion, email, telefono, numeroCamiseta, tarjetaAmarilla, tarjetaRoja, equipo_id) VALUES
                     (null, 'Roman Riquelme', '1978-06-24', 'Delantero', '29333555', 'fuentes222', 'roman@gmail.com', '1522522214', 10, false, false, 1),

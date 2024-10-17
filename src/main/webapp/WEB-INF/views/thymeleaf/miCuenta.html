@@ -53,6 +53,28 @@
                     <input th:field="*{password}" id="contrasena" type="password" class="form-control mb-3" placeholder="Contraseña" required />
                     <input type="hidden" id="contrasena-value" th:value="*{password}" />
                 </div>
+
+
+                    <!-- Información del torneo -->
+                    <div class="col-lg-8">
+<!--                        <h1 class="mb-4"><i class="fas fa-trophy"></i> Detalle del Torneo</h1>-->
+
+                        <ul class="list-group list-group-flush">
+<!--                            <li class="list-group-item">-->
+<!--                                <strong><i class="fas fa-futbol"></i> Nombre:</strong> <span th:text="${usuario.torneosPagos.get(0)}">Torneo-->
+<!--                            Nombre</span>-->
+<!--                            </li>-->
+
+                            <li class="list-group-item">
+                                <strong><i class="fas fa-users"></i> saldo:</strong> <span
+                                    th:text="${usuario.getSaldo()}">0</span>
+                            </li>
+
+                        </ul>
+
+
+                    </div>
+
                 <div class="d-flex justify-content-center">
                     <button id="btn-modificar" class="btn btn-sm btn-primary btn-block mb-3 me-2" type="submit">Modificar</button>
                     <a id="btn-signOut" class="btn btn-sm btn-primary btn-block mb-3 ms-2" th:href="@{/logout}">Cerrar sesión</a>

@@ -50,7 +50,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
         if(equipoBuscado != null){
             throw new EquipoExistente();
         }
-        repositorioEquipo.guardar(equipoBuscado);
+        repositorioEquipo.guardar(equipo);
 
           return  true;
 
