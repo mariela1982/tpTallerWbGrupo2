@@ -29,7 +29,7 @@ public class Torneo {
 
     @OneToMany(mappedBy = "torneo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderColumn(name = "orden")
-    private List<Equipo> equipos;
+    private List<Equipo> equipos = Collections.emptyList();
 
     public Long getId() {
         return id;
