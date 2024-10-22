@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tallerwebi.dominio.RepositorioAdmin;
@@ -18,12 +19,14 @@ import com.tallerwebi.dominio.excepcion.TorneoExistente;
 @Transactional
 public class ServicioAdminImpl implements ServicioAdmin {
 
+    @Autowired
     private RepositorioAdmin repositorioAdmin;
 
     public ServicioAdminImpl(RepositorioAdmin repositorioAdmin) {
         this.repositorioAdmin = repositorioAdmin;
     }
 
+    // TORNEOS
     @Override
     public void guardarTorneo(Torneo torneo) throws TorneoExistente {
         Torneo torneoExistente = repositorioAdmin.buscarTorneoPorNombre(torneo.getNombre());
@@ -55,26 +58,7 @@ public class ServicioAdminImpl implements ServicioAdmin {
         return repositorioAdmin.obtenerTorneoPorId(id);
     }
 
-    // @Override
-    // public void guardarEquipo(Equipo nombre) {
-    // repositorioAdmin.guardarEquipo(nombre);
-    // }
-    //
-    // @Override
-    // public void eliminarEquipo(Equipo nombre) {
-    // repositorioAdmin.eliminarEquipo(nombre);
-    // }
-    //
-    // @Override
-    // public void guardarJugador(Jugador nombre) {
-    // repositorioAdmin.guardarJugador(nombre);
-    // }
-    //
-    // @Override
-    // public void eliminarJugador(Jugador nombre) {
-    // repositorioAdmin.eliminarJugador(nombre);
-    // }
-
+    // CANCHAS
     @Override
     public void guardarCancha(Cancha nombre) {
         repositorioAdmin.guardarCancha(nombre);
@@ -83,16 +67,6 @@ public class ServicioAdminImpl implements ServicioAdmin {
     @Override
     public void elimiarCancha(Cancha nombre) {
         repositorioAdmin.eliminarCancha(nombre);
-    }
-
-    @Override
-    public void guardarArbitro(Arbitro nombre) {
-        repositorioAdmin.guardarArbitro(nombre);
-    }
-
-    @Override
-    public void eliminarArbitro(Arbitro nombre) {
-        repositorioAdmin.eliminarArbitro(nombre);
     }
 
     @Override
@@ -105,6 +79,17 @@ public class ServicioAdminImpl implements ServicioAdmin {
         return repositorioAdmin.obtenerCanchaPorId(id);
     }
 
+    // ARBITROS
+    @Override
+    public void guardarArbitro(Arbitro nombre) {
+        repositorioAdmin.guardarArbitro(nombre);
+    }
+
+    @Override
+    public void eliminarArbitro(Arbitro nombre) {
+        repositorioAdmin.eliminarArbitro(nombre);
+    }
+
     @Override
     public List<Arbitro> obtenerArbitros() {
         return repositorioAdmin.obtenerArbitros();
@@ -115,6 +100,7 @@ public class ServicioAdminImpl implements ServicioAdmin {
         return repositorioAdmin.obtenerArbitroPorId(id);
     }
 
+    // PARTIDOS
     @Override
     public void guardarPartido(Partido partido) {
         repositorioAdmin.guardarPartido(partido);

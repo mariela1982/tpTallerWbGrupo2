@@ -10,37 +10,30 @@ import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 public interface ServicioAdmin {
 
+    // Torneos
     void guardarTorneo(Torneo torneo) throws TorneoExistente;
     void eliminarTorneo(Torneo torneo);
     void actualizarTorneo(Torneo torneo);
     List<Torneo> obtenerTorneos();
     Torneo buscarTorneoPorId(Long id);
 
-//    void guardarEquipo(Equipo nombre);
-//    void eliminarEquipo(Equipo nombre);
-//
-//    void guardarJugador(Jugador nombre);
-//    void eliminarJugador(Jugador nombre);
-
+    // Canchas
     void guardarCancha(Cancha nombre);
     void elimiarCancha(Cancha nombre);
-
-    void guardarArbitro(Arbitro nombre);
-    void eliminarArbitro(Arbitro nombre);
-
     List<Cancha> obtenerCanchas();
     Cancha obtenerCanchaPorId(Long id);
 
+    // Arbitros
+    void guardarArbitro(Arbitro nombre);
+    void eliminarArbitro(Arbitro nombre);
     List<Arbitro> obtenerArbitros();
     Arbitro obtenerArbitroPorId(Long id);
 
-
+    // Partidos
     void guardarPartido(Partido partido);
     List<Partido> obtenerPartidos();
     List<Partido> obtenerPartidosPorTorneo(Torneo torneo);
     Partido obtenerPartidoPorId(Long id);
     Partido obtenerPartidoEsperandoRival(Torneo torneo, String fase);
-
-
 
 }
