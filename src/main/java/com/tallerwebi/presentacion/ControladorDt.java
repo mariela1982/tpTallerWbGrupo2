@@ -75,12 +75,7 @@ public class ControladorDt {
         ModelAndView mav = new ModelAndView("torneos");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-        List<Torneo> torneos = servicioAdmin.obtenerTorneos();
-        if (partido != null) {
-            torneos = torneos.stream()
-                    .filter(torneo -> torneo.getPartido().equals(partido))
-                    .collect(Collectors.toList());
-        }
+        List<Torneo> torneos = servicioAdmin.obtenerTorneosPorPartidoDeBsAs(partido);
 
         mav.addObject("torneos", torneos);
         mav.addObject("usuario", usuario);

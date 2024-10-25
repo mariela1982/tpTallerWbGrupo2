@@ -13,6 +13,7 @@ import com.tallerwebi.dominio.entidades.Arbitro;
 import com.tallerwebi.dominio.entidades.Cancha;
 import com.tallerwebi.dominio.entidades.Partido;
 import com.tallerwebi.dominio.entidades.Torneo;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 @Service("servicioAdmin")
@@ -51,6 +52,15 @@ public class ServicioAdminImpl implements ServicioAdmin {
     @Override
     public List<Torneo> obtenerTorneos() {
         return repositorioAdmin.obtenerTorneos();
+    }
+
+    @Override
+    public List<Torneo> obtenerTorneosPorPartidoDeBsAs(PartidosDeBsAs partido) {
+        if (partido == null) {
+            return repositorioAdmin.obtenerTorneos();
+        } else {
+            return repositorioAdmin.obtenerTorneosPorPartidoDeBsAs(partido);
+        }
     }
 
     @Override
