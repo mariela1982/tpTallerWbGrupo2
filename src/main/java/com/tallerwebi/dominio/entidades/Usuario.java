@@ -1,17 +1,23 @@
 package com.tallerwebi.dominio.entidades;
 
-import com.tallerwebi.dominio.enums.Localidades;
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
-import org.hibernate.annotations.DynamicUpdate;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.*;
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Entity
 @DynamicUpdate
@@ -28,6 +34,8 @@ public class Usuario {
     private String password;
     private Boolean admin = false;
     private Integer saldo = 0;
+    private Boolean esJugador = false;
+    private String posicion = null;
 
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
@@ -62,6 +70,9 @@ public class Usuario {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
@@ -141,5 +152,21 @@ public class Usuario {
 
     public void setTorneosPagos(List<TorneoPago> torneosPagos) {
         this.torneosPagos = torneosPagos;
+    }
+
+    public Boolean getEsJugador() {
+        return esJugador;
+    }
+
+    public void setEsJugador(Boolean esJugador) {
+        this.esJugador = esJugador;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
+    }
+
+    public String getPosicion() {
+        return posicion;
     }
 }

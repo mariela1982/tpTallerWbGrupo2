@@ -415,5 +415,12 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         return new ModelAndView("redirect:/equipos?eliminado=true");
     }
 
-
+    @GetMapping("/buscarJugadores")
+    public ModelAndView buscarJugadores() {
+        ModelMap model = new ModelMap();
+        model.addAttribute("jugadores", servicioJugador.obtenerUsuariosJugadores());
+        model.addAttribute("partidosDeBsAs", PartidosDeBsAs.values());
+        return new ModelAndView("buscarJugadores", model);
+    }
+    
 }
