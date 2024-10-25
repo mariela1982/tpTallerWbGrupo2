@@ -8,6 +8,15 @@
 <body>
     <header th:replace="~{includes/userHeader :: header}"></header>
 
+    <div>
+        <label for="torneos">Torneos </label>
+        <select id="torneos" th:field="*{torneo}" class="form-select mb-3">
+            <option value="" disabled selected>torneo a Incribir  </option>
+            <option th:each="partido : ${T(com.tallerwebi.dominio.enums.PartidosDeBsAs).values()} "
+                    th:value="${partido.name()}" th:text="${partido.name()}"></option>
+        </select>
+    </div>
+
 <!--    <div class="container mt-5">-->
 <!--        <div class="row">-->
             <!-- Información del torneo -->

@@ -1,15 +1,13 @@
 package com.tallerwebi.dominio.entidades;
 
-import com.tallerwebi.dominio.enums.Localidades;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nombre;
     private String apellido;
     private Long dni;
@@ -34,7 +33,17 @@ public class Usuario {
 
     @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<TorneoPago> torneosPagos = new ArrayList<>();
+    private List<TorneoPago> torneosInscriptos = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Jugador> jugadores = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Equipo> equipos = new ArrayList<>();
+
+
 
 
 //    @Enumerated(EnumType.STRING)
@@ -54,6 +63,18 @@ public class Usuario {
         this.admin = false;
         this.saldo = 0;
         this.partido = partido;
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public void agregarJugador(Jugador jugador) {
+        this.jugadores.add(jugador);
     }
 
 
@@ -135,11 +156,27 @@ public class Usuario {
         this.saldo = saldo;
     }
 
-    public List<TorneoPago> getTorneosPagos() {
-        return torneosPagos;
+    public List<TorneoPago> getTorneosInscriptos() {
+        return torneosInscriptos;
     }
 
-    public void setTorneosPagos(List<TorneoPago> torneosPagos) {
-        this.torneosPagos = torneosPagos;
+    public void setTorneosInscriptos(List<TorneoPago> torneosPagos) {
+        this.torneosInscriptos = torneosPagos;
+    }
+
+    public void agregarTorneoPago(TorneoPago torneoPago) {
+        this.torneosInscriptos.add(torneoPago);
+    }
+
+    public List<Equipo> getEquipos() {
+        return equipos;
+    }
+
+    public void setEquipos(List<Equipo> equipos) {
+        this.equipos = equipos;
+    }
+
+    public void agregarEquipo(Equipo equipo) {
+        this.equipos.add(equipo);
     }
 }

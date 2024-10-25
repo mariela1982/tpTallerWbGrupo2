@@ -76,6 +76,7 @@ public class ControladorDt {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
         List<Torneo> torneos = servicioAdmin.obtenerTorneos();
+        //pasar a obtener torneos el filtro
         if (partido != null) {
             torneos = torneos.stream()
                     .filter(torneo -> torneo.getPartido().equals(partido))
@@ -115,6 +116,8 @@ public class ControladorDt {
         Torneo torneo = servicioAdmin.buscarTorneoPorId(torneoId);
         Integer cuposOcupados = torneo.getEquipos().size();
         Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+
+        // llevarlo al servicio
 
         //valido usuaruio
         if (usuario == null) {
@@ -174,14 +177,15 @@ public class ControladorDt {
     public ModelAndView verInscripcion( HttpServletRequest request) {
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             ModelAndView mav = new ModelAndView("inscripcion");
+            List<Torneo> torneos= servicioAdmin.obtenerTorneos();
 
 
 //            Integer cuposOcupados = torneo.getEquipos().size();
 //            Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
 //
-//            mav.addObject("usuario", usuario);
+            mav.addObject("usuario", usuario);
 //            mav.addObject("equipo",equipo);
-//        mav.addObject("torneo", torneo);
+        mav.addObject("torneo", torneos);
 //        mav.addObject("cuposOcupados", cuposOcupados);
 //        mav.addObject("cuposDisponibles", cuposDisponibles);
 

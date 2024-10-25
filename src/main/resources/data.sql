@@ -1,8 +1,7 @@
-INSERT INTO Usuario(id, nombre, apellido, dni, direccion,email, password, admin, saldo) VALUES
-                    (null, 'mari','manri','29363692','florencia 1900','test@unlam.edu.ar', '123', true, 0),
-                    (null, 'leo', 'arias', '12345678', 'florencia 1900', 'correo@correo.com', '123', false, 0),
-                    (null, 'mari', 'm', '12345878', 'florencia 1900', 'm@gmail.com', '123', false, 0);
-
+ INSERT INTO Usuario(id, nombre, apellido, dni, direccion,email, password, admin, saldo) VALUES
+                  (null, 'mari','manri','29363692','florencia 1900','test@unlam.edu.ar', '123', true, 0),
+                   (null, 'leo', 'arias', '12345678', 'florencia 1900', 'correo@correo.com', '123', false, 0),
+                (null, 'mari', 'm', '12345878', 'florencia 1900', 'm@gmail.com', '123', false, 0);
 
 
 
@@ -35,16 +34,16 @@ INSERT INTO Cancha(id, nombre, direccion, telefono) VALUES
                     (null, 'Cancha Sur', 'Calle Sur 202', '321654987');
 
 INSERT INTO Torneo(id, nombre, premio, precioEntrada, fechaInicio, cantidadEquipos, partido) VALUES
-                    (null, 'Copa Campeones', 1000, 100, '2025-06-01', 4, 64),
-                    (null, 'Copa Argentina', 2000, 200, '2025-06-01', 8, 65),
-                    (null, 'Copa Libertadores', 3000, 300, '2025-06-01', 16, 60),
-                    (null, 'Copa Sudamericana', 4000, 400, '2025-06-01', 32, 82);
+                    (1, 'Copa Campeones', 1000, 100, '2025-06-01', 4, 64),
+                    (2, 'Copa Argentina', 2000, 200, '2025-06-01', 8, 65),
+                    (3, 'Copa Libertadores', 3000, 300, '2025-06-01', 16, 60),
+                    (4, 'Copa Sudamericana', 4000, 400, '2025-06-01', 32, 82);
 
 INSERT INTO Equipo(id, nombre, cbu, dtDni, torneo_id, orden) VALUES
-                    (null, 'Boca', '123456789', 29363692, 1, 0),
-                    (null, 'River', '123456789', 29363691, 1, 1),
-                    (null, 'Racing', '123456789', 29363691, 1, 2),
-                    (null, 'Independiente', '123456789', 29363691, 1, 3),
+                    (1, 'Boca', '123456789', 29363692, 1, 0),
+                    (2, 'River', '123456789', 29363691, 1, 1),
+                    (3, 'Racing', '123456789', 29363691, 1, 2),
+                    (4, 'Independiente', '123456789', 29363691, 1, 3),
 
                     (null, 'San Lorenzo', '123456789', 29363691, 2, 0),
                     (null, 'Huracan', '123456789', 29363642, 2, 1),
@@ -75,36 +74,36 @@ INSERT INTO Equipo(id, nombre, cbu, dtDni, torneo_id, orden) VALUES
                     (null, 'San Lorenzo', '123456789', 29163692, 4, 4);
 
 
-INSERT INTO Jugador(id, nombreYapellido, fechaNacimiento, posicion, dni, direccion, email, telefono, numeroCamiseta, tarjetaAmarilla, tarjetaRoja, equipo_id) VALUES
-                    (null, 'Roman Riquelme', '1978-06-24', 'Delantero', '29333555', 'fuentes222', 'roman@gmail.com', '1522522214', 10, false, false, 1),
-                    (null, 'Marcos Rojo', '1990-03-20', 'Defensor', '29333556', 'fuentes223', 'marcos@gmail.com', '1522522215', 6, false, false, 1),
-                    (null, 'Fernando Gago', '1986-04-10', 'Mediocampista', '29333557', 'fuentes224', 'gago@gmail.com', '1522522216', 5, false, false, 1),
-                    (null, 'Roberto Abbondanzieri', '1972-08-19', 'Arquero', '29333558', 'fuentes225', 'abbondanzieri@gmail.com', '1522522217', 1, false, false, 1),
-                    (null, 'Martin Palermo', '1973-11-07', 'Delantero', '29333559', 'fuentes226', 'palermo@gmail.com', '1522522218', 9, false, false, 1),
+INSERT INTO Jugador(id, nombreYapellido, fechaNacimiento, posicion, dni, direccion, email, telefono, numeroCamiseta, tarjetaAmarilla, tarjetaRoja, equipo_id, dt_id) VALUES
+                    (1, 'Roman Riquelme', '1978-06-24', 'Delantero', '29333555', 'fuentes222', 'roman@gmail.com', '1522522214', 10, false, false, 1,1),
+                    (2, 'Marcos Rojo', '1990-03-20', 'Defensor', '29333556', 'fuentes223', 'marcos@gmail.com', '1522522215', 6, false, false, 1,1),
+                    (3, 'Fernando Gago', '1986-04-10', 'Mediocampista', '29333557', 'fuentes224', 'gago@gmail.com', '1522522216', 5, false, false, 1,1),
+                    (4, 'Roberto Abbondanzieri', '1972-08-19', 'Arquero', '29333558', 'fuentes225', 'abbondanzieri@gmail.com', '1522522217', 1, false, false, 1,1),
+                    (5, 'Martin Palermo', '1973-11-07', 'Delantero', '29333559', 'fuentes226', 'palermo@gmail.com', '1522522218', 9, false, false, 1,1),
 
-                    (null, 'Enzo Perez', '1986-02-22', 'Mediocampista', '29333560', 'fuentes227', 'enzo@gmail.com', '1522522219', 8, false, false, 2),
-                    (null, 'Franco Armani', '1986-10-16', 'Arquero', '29333561', 'fuentes228', 'armani@gmail.com', '1522522220', 1, false, false, 2),
-                    (null, 'Julian Alvarez', '2000-01-31', 'Delantero', '29333562', 'fuentes229', 'julian@gmail.com', '1522522221', 9, false, false, 2),
-                    (null, 'Milton Casco', '1988-04-11', 'Defensor', '29333563', 'fuentes230', 'casco@gmail.com', '1522522222', 4, false, false, 2),
-                    (null, 'Ignacio Fernandez', '1990-01-12', 'Mediocampista', '29333564', 'fuentes231', 'nacho@gmail.com', '1522522223', 10, false, false, 2),
+                    (null, 'Enzo Perez', '1986-02-22', 'Mediocampista', '29333560', 'fuentes227', 'enzo@gmail.com', '1522522219', 8, false, false, 2,null),
+                    (null, 'Franco Armani', '1986-10-16', 'Arquero', '29333561', 'fuentes228', 'armani@gmail.com', '1522522220', 1, false, false, 2,null),
+                    (null, 'Julian Alvarez', '2000-01-31', 'Delantero', '29333562', 'fuentes229', 'julian@gmail.com', '1522522221', 9, false, false, 2,null),
+                    (null, 'Milton Casco', '1988-04-11', 'Defensor', '29333563', 'fuentes230', 'casco@gmail.com', '1522522222', 4, false, false, 2,null),
+                    (null, 'Ignacio Fernandez', '1990-01-12', 'Mediocampista', '29333564', 'fuentes231', 'nacho@gmail.com', '1522522223', 10, false, false, 2,null),
 
-                    (null, 'Lisandro Lopez', '1983-03-02', 'Delantero', '29333565', 'fuentes232', 'lisandro@gmail.com', '1522522224', 7, false, false, 3),
-                    (null, 'Gabriel Arias', '1987-09-13', 'Arquero', '29333566', 'fuentes233', 'arias@gmail.com', '1522522225', 1, false, false, 3),
-                    (null, 'Leonardo Sigali', '1987-05-29', 'Defensor', '29333567', 'fuentes234', 'sigali@gmail.com', '1522522226', 2, false, false, 3),
-                    (null, 'Matias Rojas', '1995-11-03', 'Mediocampista', '29333568', 'fuentes235', 'rojas@gmail.com', '1522522227', 8, false, false, 3),
-                    (null, 'Nery Dominguez', '1990-04-09', 'Mediocampista', '29333569', 'fuentes236', 'nery@gmail.com', '1522522228', 5, false, false, 3),
+                    (null, 'Lisandro Lopez', '1983-03-02', 'Delantero', '29333565', 'fuentes232', 'lisandro@gmail.com', '1522522224', 7, false, false, 3,null),
+                    (null, 'Gabriel Arias', '1987-09-13', 'Arquero', '29333566', 'fuentes233', 'arias@gmail.com', '1522522225', 1, false, false, 3,null),
+                    (null, 'Leonardo Sigali', '1987-05-29', 'Defensor', '29333567', 'fuentes234', 'sigali@gmail.com', '1522522226', 2, false, false, 3,null),
+                    (null, 'Matias Rojas', '1995-11-03', 'Mediocampista', '29333568', 'fuentes235', 'rojas@gmail.com', '1522522227', 8, false, false, 3,null),
+                    (null, 'Nery Dominguez', '1990-04-09', 'Mediocampista', '29333569', 'fuentes236', 'nery@gmail.com', '1522522228', 5, false, false, 3,null),
 
-                    (null, 'Silvio Romero', '1988-07-22', 'Delantero', '29333570', 'fuentes237', 'silvio@gmail.com', '1522522229', 9, false, false, 4),
-                    (null, 'Martin Campaña', '1989-05-29', 'Arquero', '29333571', 'fuentes238', 'campana@gmail.com', '1522522230', 1, false, false, 4),
-                    (null, 'Fabricio Bustos', '1996-04-28', 'Defensor', '29333572', 'fuentes239', 'bustos@gmail.com', '1522522231', 4, false, false, 4),
-                    (null, 'Lucas Romero', '1994-04-18', 'Mediocampista', '29333573', 'fuentes240', 'lucas@gmail.com', '1522522232', 5, false, false, 4),
-                    (null, 'Alan Velasco', '2002-07-27', 'Delantero', '29333574', 'fuentes241', 'velasco@gmail.com', '1522522233', 10, false, false, 4),
+                    (null, 'Silvio Romero', '1988-07-22', 'Delantero', '29333570', 'fuentes237', 'silvio@gmail.com', '1522522229', 9, false, false, 4,null),
+                    (null, 'Martin Campaña', '1989-05-29', 'Arquero', '29333571', 'fuentes238', 'campana@gmail.com', '1522522230', 1, false, false, 4,null),
+                    (null, 'Fabricio Bustos', '1996-04-28', 'Defensor', '29333572', 'fuentes239', 'bustos@gmail.com', '1522522231', 4, false, false, 4,null),
+                    (null, 'Lucas Romero', '1994-04-18', 'Mediocampista', '29333573', 'fuentes240', 'lucas@gmail.com', '1522522232', 5, false, false, 4,null),
+                    (null, 'Alan Velasco', '2002-07-27', 'Delantero', '29333574', 'fuentes241', 'velasco@gmail.com', '1522522233', 10, false, false, 4,null),
 
-                    (null, 'Angel Romero', '1992-07-04', 'Delantero', '29333575', 'fuentes242', 'angel@gmail.com', '1522522234', 11, false, false, 5),
-                    (null, 'Sebastian Torrico', '1980-02-22', 'Arquero', '29333576', 'fuentes243', 'torrico@gmail.com', '1522522235', 1, false, false, 5),
-                    (null, 'Fabricio Coloccini', '1982-01-22', 'Defensor', '29333577', 'fuentes244', 'coloccini@gmail.com', '1522522236', 2, false, false, 5),
-                    (null, 'Juan Ramirez', '1993-12-25', 'Mediocampista', '29333578', 'fuentes245', 'ramirez@gmail.com', '1522522237', 8, false, false, 5),
-                    (null, 'Oscar Romero', '1992-07-04', 'Mediocampista', '29333579', 'fuentes246', 'oscar@gmail.com', '1522522238', 10, false, false, 5);
+                    (null, 'Angel Romero', '1992-07-04', 'Delantero', '29333575', 'fuentes242', 'angel@gmail.com', '1522522234', 11, false, false, 5,null),
+                    (null, 'Sebastian Torrico', '1980-02-22', 'Arquero', '29333576', 'fuentes243', 'torrico@gmail.com', '1522522235', 1, false, false, 5,null),
+                    (null, 'Fabricio Coloccini', '1982-01-22', 'Defensor', '29333577', 'fuentes244', 'coloccini@gmail.com', '1522522236', 2, false, false, 5,null),
+                    (null, 'Juan Ramirez', '1993-12-25', 'Mediocampista', '29333578', 'fuentes245', 'ramirez@gmail.com', '1522522237', 8, false, false, 5,null),
+                    (null, 'Oscar Romero', '1992-07-04', 'Mediocampista', '29333579', 'fuentes246', 'oscar@gmail.com', '1522522238', 10, false, false, 5,null);
 
 INSERT INTO Partido(id, golesLocal, golesVisitante, fecha, hora, fase, equipoLocal_id, equipoVisitante_id, torneo_id, cancha_id, arbitro_id) VALUES
                     (null, null, null, '2025-06-01', '20:00:00', 'Semifinal', 1, 2, 1, 1, 1),

@@ -27,7 +27,11 @@ public class Jugador {
 
     @ManyToOne
     @JoinColumn(name = "equipo_id")
-    private Equipo equipo;
+    private Equipo equipo = null;
+
+    @ManyToOne
+    @JoinColumn(name = "dt_id")
+    private Usuario directorTecnico = null;
 
 
     public Jugador(String nombre, Date fechaNacimiento, String posicion, String dni, String direccion, String email, String telefono, Integer numeroCamiseta) {
@@ -127,5 +131,12 @@ public class Jugador {
 
     public void setTarjetaRoja(Boolean tarjetaRoja) {
         this.tarjetaRoja = tarjetaRoja;
+    }
+
+    public Usuario getDirectorTecnico() {
+        return directorTecnico;
+    }
+    public void setDirectorTecnico(Usuario directorTecnico) {
+        this.directorTecnico = directorTecnico;
     }
 }

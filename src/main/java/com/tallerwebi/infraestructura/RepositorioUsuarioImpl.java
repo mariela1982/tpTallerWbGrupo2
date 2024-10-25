@@ -46,8 +46,23 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     @Transactional
     @Override
     public void modificar(Usuario usuario) {
-        sessionFactory.getCurrentSession().update(usuario);
+
+        Usuario existingUsuario = sessionFactory.getCurrentSession().get(Usuario.class, usuario.getId());
+
+        if (existingUsuario != null) {
+            existingUsuario.setNombre(usuario.getNombre());
+            existingUsuario.setApellido(usuario.getApellido());
+            existingUsuario.setDireccion(usuario.getDireccion());
+            existingUsuario.setPassword(usuario.getPassword());
+            existingUsuario.setAdmin(usuario.getAdmin());
+
+
+            sessionFactory.getCurrentSession().update(existingUsuario);
+        } else {
+            sessionFactory.getCurrentSession().saveOrUpdate(usuario);
+        }
     }
+
 
     @Override
     public void actualizarSaldo(Usuario usuario, Integer nuevoSaldo) {
