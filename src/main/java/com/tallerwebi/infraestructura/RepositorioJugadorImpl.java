@@ -3,12 +3,18 @@ package com.tallerwebi.infraestructura;
 import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.entidades.Equipo;
 import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Usuario;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -82,5 +88,11 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
 
     }
 
+    @Override
+    public List<Usuario> obtenerUsuariosJugadores() {
+        final Session session = sessionFactory.getCurrentSession();
+        TypedQuery<Usuario> query= session.createQuery("from Usuario where esJugador = true", Usuario.class);
+        return query.getResultList();
+    }
 
 }

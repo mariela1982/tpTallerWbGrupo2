@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.tallerwebi.dominio.entidades.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -12,7 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tallerwebi.dominio.RepositorioAdmin;
-import com.tallerwebi.dominio.excepcion.TorneoExistente;
+import com.tallerwebi.dominio.entidades.Arbitro;
+import com.tallerwebi.dominio.entidades.Cancha;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Partido;
+import com.tallerwebi.dominio.entidades.Torneo;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 
 @Repository("repositorioAdmin")
 @SuppressWarnings({ "deprecation", "unchecked" })
@@ -46,6 +50,14 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     public List<Torneo> obtenerTorneos() {
         final Session session = sessionFactory.getCurrentSession();
         return session.createQuery("SELECT DISTINCT t FROM Torneo t").list();
+    }
+
+    @Transactional  
+    @Override
+    public List<Torneo> obtenerTorneosPorPartidoDeBsAs(PartidosDeBsAs partido) {
+        final Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("SELECT t FROM Torneo t WHERE t.partido = :partido")
+                .setParameter("partido", partido).list();
     }
 
     @Transactional

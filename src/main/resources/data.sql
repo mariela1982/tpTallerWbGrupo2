@@ -1,8 +1,19 @@
- INSERT INTO Usuario(id, nombre, apellido, dni, direccion,email, password, admin, saldo) VALUES
-                  (null, 'mari','manri','29363692','florencia 1900','test@unlam.edu.ar', '123', true, 0),
-                   (null, 'leo', 'arias', '12345678', 'florencia 1900', 'correo@correo.com', '123', false, 0),
-                (null, 'mari', 'm', '12345878', 'florencia 1900', 'm@gmail.com', '123', false, 0);
+INSERT INTO Usuario(id, nombre, apellido, dni, direccion, email, password, admin, saldo, esJugador, posicion, partido) VALUES
+                    (null, 'mari', 'manri', '29363692', 'florencia 1900', 'test@unlam.edu.ar', '123', true, 0, false, null, 'LA_MATANZA'),
+                    (null, 'leo', 'arias', '12345678', 'florencia 1900', 'correo@correo.com', '123', false, 0, false, null, 'MERLO'),
+                    (null, 'mari', 'm', '12345878', 'florencia 1900', 'm@gmail.com', '123', false, 0, false, null, 'MORON'),
 
+                    -- Jugadores
+                    (null, 'Roman', 'Riquelme', '29333555', 'fuentes222', 'roman@gmail.com', '123', false, 0, true, 'Delantero', 'TIGRE'),
+                    (null, 'Marcos', 'Rojo', '29333556', 'fuentes223', 'marcos@gmail.com', '123', false, 0, true, 'Defensor', 'AVELLANEDA'),
+                    (null, 'Fernando', 'Gago', '29333557', 'fuentes224', 'gago@gmail.com', '123', false, 0, true, 'Mediocampista', 'TANDIL'),
+                    (null, 'Roberto', 'Abbondanzieri', '29333558', 'fuentes225', 'abbondanzieri@gmail.com', '123', false, 0, true, 'Arquero', 'OLAVARRIA'),
+                    (null, 'Martin', 'Palermo', '29333559', 'fuentes226', 'martin@gmail.com', '123', false, 0, true, 'Delantero', 'JUNIN'),
+                    (null, 'Enzo', 'Perez', '29333560', 'fuentes227', 'enzo@gmail.com', '123', false, 0, true, 'Mediocampista', 'PILAR'),
+                    (null, 'Franco', 'Armani', '29333561', 'fuentes228', 'armani@gmail.com', '123', false, 0, true, 'Arquero', 'QUILMES'),
+                    (null, 'Julian', 'Alvarez', '29333562', 'fuentes229', 'julian@gmail.com', '123', false, 0, true, 'Delantero', 'MORENO'),
+                    (null, 'Milton', 'Casco', '29333563', 'fuentes230', 'milton@gmail.com', '123', false, 0, true, 'Defensor', 'TRES_ARROYOS'),
+                    (null, 'Ignacio', 'Fernandez', '29333564', 'fuentes231', 'nacho@gmail.com', '123', false, 0, true, 'Mediocampista', 'NECOCHEA');
 
 
 -- INSERT INTO JUGADOR(id,nombreYapellido,fechaNacimiento,posicion, dni,direccion, email, telefono, numeroCamiseta,tarjetaAmarilla, tarjetaRoja) VALUES

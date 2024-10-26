@@ -2,6 +2,7 @@ package com.tallerwebi.dominio;
 
 import com.tallerwebi.dominio.entidades.Equipo;
 import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Usuario;
 import com.tallerwebi.dominio.excepcion.JugadorExistente;
 import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 
@@ -16,6 +17,7 @@ public interface ServicioJugador {
     List<Jugador> obtenerJugadores();
     List<Jugador> obtenerJugadoresPorEquipo(Equipo equipo);
     List<Jugador> obtenerJugadoresConSancion();
+    List<Usuario> obtenerUsuariosJugadores();
 
     void agregarleEquipo(Long jugador, Equipo equipo);
 }

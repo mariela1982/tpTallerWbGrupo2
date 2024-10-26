@@ -4,6 +4,8 @@ import com.tallerwebi.dominio.RepositorioJugador;
 import com.tallerwebi.dominio.ServicioJugador;
 import com.tallerwebi.dominio.entidades.Equipo;
 import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Usuario;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import com.tallerwebi.dominio.excepcion.JugadorExistente;
 import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +22,20 @@ public class ServicioJugadorImpl implements ServicioJugador {
     RepositorioJugador repositorioJugador;
 
     @Autowired
-    public ServicioJugadorImpl(RepositorioJugador repositorioJugador){
+    public ServicioJugadorImpl(RepositorioJugador repositorioJugador) {
         this.repositorioJugador = repositorioJugador;
     }
 
     @Override
     public void guardarJugador(Jugador nombre) throws JugadorExistente, JugadorInexistente {
-//        Jugador jugadorobtenido = buscarJugador(nombre.getId());
-//        try {
-//            if(jugadorobtenido != null){
-//                throw new JugadorExistente();
-//            }
-//        }catch(JugadorExistente ex){
-//            repositorioJugador.crearJugador(jugadorobtenido);
-//        }
+        // Jugador jugadorobtenido = buscarJugador(nombre.getId());
+        // try {
+        // if(jugadorobtenido != null){
+        // throw new JugadorExistente();
+        // }
+        // }catch(JugadorExistente ex){
+        // repositorioJugador.crearJugador(jugadorobtenido);
+        // }
         repositorioJugador.crearJugador(nombre);
 
     }
@@ -41,9 +43,9 @@ public class ServicioJugadorImpl implements ServicioJugador {
     @Override
     public void eliminarJugador(Long jugadorId) throws JugadorInexistente {
         Jugador jugadorBuscado = repositorioJugador.buscarJugador(jugadorId);
-        if(jugadorBuscado == null){
+        if (jugadorBuscado == null) {
             throw new JugadorInexistente();
-        }else {
+        } else {
             repositorioJugador.eliminarJugador(jugadorBuscado);
         }
 
@@ -57,7 +59,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
     @Override
     public Jugador buscarJugador(Long jugadorId) throws JugadorInexistente {
         Jugador jugadorBuscado = repositorioJugador.buscarJugador(jugadorId);
-        if(jugadorBuscado == null){
+        if (jugadorBuscado == null) {
             throw new JugadorInexistente();
         }
         return jugadorBuscado;
@@ -81,7 +83,11 @@ public class ServicioJugadorImpl implements ServicioJugador {
 
     @Override
     public void agregarleEquipo(Long jugador, Equipo equipo) {
-        repositorioJugador.agregarEquipo(jugador,equipo);
+        repositorioJugador.agregarEquipo(jugador, equipo);
+    }
+
+    @Override
+    public List<Usuario> obtenerUsuariosJugadores() {
+            return repositorioJugador.obtenerUsuariosJugadores();
     }
 }
-

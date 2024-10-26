@@ -75,13 +75,7 @@ public class ControladorDt {
         ModelAndView mav = new ModelAndView("torneos");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-        List<Torneo> torneos = servicioAdmin.obtenerTorneos();
-        //pasar a obtener torneos el filtro
-        if (partido != null) {
-            torneos = torneos.stream()
-                    .filter(torneo -> torneo.getPartido().equals(partido))
-                    .collect(Collectors.toList());
-        }
+        List<Torneo> torneos = servicioAdmin.obtenerTorneosPorPartidoDeBsAs(partido);
 
         mav.addObject("torneos", torneos);
         mav.addObject("usuario", usuario);
@@ -424,5 +418,12 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         return new ModelAndView("redirect:/equipos?eliminado=true");
     }
 
+    @GetMapping("/buscarJugadores")
+    public ModelAndView buscarJugadores() {
+        ModelMap model = new ModelMap();
+        model.addAttribute("jugadores", servicioJugador.obtenerUsuariosJugadores());
+        model.addAttribute("partidosDeBsAs", PartidosDeBsAs.values());
+        return new ModelAndView("buscarJugadores", model);
+    }
 
 }

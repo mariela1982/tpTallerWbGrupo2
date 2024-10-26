@@ -11,6 +11,26 @@ import org.hibernate.annotations.LazyCollectionOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
+
+
 @Entity
 @DynamicUpdate
 public class Usuario {
@@ -27,6 +47,8 @@ public class Usuario {
     private String password;
     private Boolean admin = false;
     private Integer saldo = 0;
+    private Boolean esJugador = false;
+    private String posicion = null;
 
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
@@ -42,8 +64,6 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Equipo> equipos = new ArrayList<>();
-
-
 
 
 //    @Enumerated(EnumType.STRING)
@@ -77,12 +97,13 @@ public class Usuario {
         this.jugadores.add(jugador);
     }
 
-
-
     public Integer getId() {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
@@ -178,5 +199,21 @@ public class Usuario {
 
     public void agregarEquipo(Equipo equipo) {
         this.equipos.add(equipo);
+    }
+
+    public Boolean getEsJugador() {
+        return esJugador;
+    }
+
+    public void setEsJugador(Boolean esJugador) {
+        this.esJugador = esJugador;
+    }
+
+    public void setPosicion(String posicion) {
+        this.posicion = posicion;
+    }
+
+    public String getPosicion() {
+        return posicion;
     }
 }

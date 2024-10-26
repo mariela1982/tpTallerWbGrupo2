@@ -6,6 +6,7 @@ import com.tallerwebi.dominio.entidades.Arbitro;
 import com.tallerwebi.dominio.entidades.Cancha;
 import com.tallerwebi.dominio.entidades.Partido;
 import com.tallerwebi.dominio.entidades.Torneo;
+import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 public interface ServicioAdmin {
@@ -15,6 +16,7 @@ public interface ServicioAdmin {
     void eliminarTorneo(Torneo torneo);
     void actualizarTorneo(Torneo torneo);
     List<Torneo> obtenerTorneos();
+    List<Torneo> obtenerTorneosPorPartidoDeBsAs(PartidosDeBsAs partido);
     Torneo buscarTorneoPorId(Long id);
 
     // Canchas
