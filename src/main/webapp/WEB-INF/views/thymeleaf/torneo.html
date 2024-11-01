@@ -62,7 +62,7 @@
                         <span th:text="${#lists.size(torneo.equipos)}">0</span>
                     </span>
 
-                    <span class="badge bg-success">Cupos Disponibles:
+                    <span id="cuposDisponibles" class="badge bg-success">Cupos Disponibles:
                         <span th:text="${cuposDisponibles}">0</span>
                     </span>
 
@@ -77,12 +77,13 @@
                 <h2 class="mb-4"><i class="fas fa-sign-in-alt"></i> Inscripcion</h2>
 
 
-                <form th:action="@{/equipo/inscribir}" method="post">-->
+                <form  id="torneoFormulario" th:action="@{/equipo/inscribir}" method="post">-->
                     <input type="hidden" name="torneoId" th:value="${torneo.id}">
+                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">
                     <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
 
                                         <button type="submit" class="btn btn-success btn-lg btn-block">
-                                            <i class="fas fa-user-plus"></i> Inscribirse al Torneo
+                                            <i class="fas fa-user-plus" onclick="verificarCupos()"></i> Inscribirse al Torneo
                                         </button>
                                     </form>
 
@@ -93,6 +94,22 @@
             </div>
         </div>
     </div>
+
+        <script>
+        function verificarCupos(){
+            var cuposDisponible = document.getElementById('cuposDisponibles');
+            var usuario = document.getElementById('logueado');
+            if  (!usuario){
+                alert("Debes Loguearte");
+            }else if(cuposDisponible === 0) {
+                alert("No Hay cupos disponibles ");
+            }
+                else{
+                    document.getElementById('torneoFormulario').onsubmit;
+                }
+
+        }
+    </script>
 
     <!-- Boostrap core js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

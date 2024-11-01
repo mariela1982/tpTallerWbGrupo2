@@ -92,11 +92,13 @@ public class ControladorDt {
 
         Integer cuposOcupados = torneo.getEquipos().size();
         Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+        boolean usuarioLogueado = (usuario != null);
 
         mav.addObject("usuario", usuario);
         mav.addObject("torneo", torneo);
         mav.addObject("cuposOcupados", cuposOcupados);
         mav.addObject("cuposDisponibles", cuposDisponibles);
+        mav.addObject("usuarioLogueado", usuarioLogueado);
 
         return mav;
     }
@@ -114,17 +116,17 @@ public class ControladorDt {
         // llevarlo al servicio
 
         //valido usuaruio
-        if (usuario == null) {
-            model.addAttribute("error", "Tenes que estar logueado para inscribirte a un torneo");
-            model.addAttribute("torneo",torneo);
-            return new ModelAndView("torneo", model);
-        } else {
-            // Validar si el torneo tiene cupos disponibles
-            if (cuposDisponibles <= 0) {
-                model.addAttribute("error", "No hay cupos disponibles para inscribirte al torneo");
-                model.addAttribute("torneo",torneo);
-                return new ModelAndView("torneo", model);
-             }
+//        if (usuario == null) {
+//            model.addAttribute("error", "Tenes que estar logueado para inscribirte a un torneo");
+//            model.addAttribute("torneo",torneo);
+//            return new ModelAndView("torneo", model);
+//        } else {
+//            // Validar si el torneo tiene cupos disponibles
+//            if (cuposDisponibles <= 0) {
+//                model.addAttribute("error", "No hay cupos disponibles para inscribirte al torneo");
+//                model.addAttribute("torneo",torneo);
+//                return new ModelAndView("torneo", model);
+//             }
 //            else {
 //                // Validar si el usuario tiene saldo suficiente
 //                if (usuario.getSaldo() < torneo.getPrecioEntrada()) {
@@ -138,18 +140,18 @@ public class ControladorDt {
 //                    model.addAttribute("success", "Te inscribiste al torneo correctamente");
 //                    return new ModelAndView("torneo", model);
 //                }
-                }
+           //     }
 
-            if (usuario.getDni() == null) {
-                model.addAttribute("error", "no hay usuario");
-                model.addAttribute("torneo",torneo);
-                return new ModelAndView("torneo", model);
-
-            }
+//            if (usuario.getDni() == null) {
+//                model.addAttribute("error", "no hay usuario");
+//                model.addAttribute("torneo",torneo);
+//                return new ModelAndView("torneo", model);
+//
+//            }
             Equipo equipo = servicioEquipo.buscarEquipoPorDt(usuario.getDni());
             torneo.getEquipos().add(equipo);
             cuposOcupados = torneo.getEquipos().size();
-            cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+           cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
 
 //            model.addAttribute("usuario", usuario);
 //            model.addAttribute("torneo", torneo);
@@ -250,6 +252,7 @@ public class ControladorDt {
 
         return new ModelAndView("jugadores", model);
     }
+
     // Controller para la creacion de jugadores
 @PostMapping("/crearJugador")
 public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
