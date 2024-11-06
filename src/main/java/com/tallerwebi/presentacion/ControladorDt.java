@@ -231,9 +231,9 @@ public class ControladorDt {
         usuario.setSaldo(5000);
 
 
-        TorneoPago torneoPago = new TorneoPago();
-        torneoPago.setTipoDePago(tipoDePago);
-        torneoPago.setTotal(totalApagar);
+//        TorneoPago torneoPago = new TorneoPago();
+//        torneoPago.setTipoDePago(tipoDePago);
+//        torneoPago.setTotal(totalApagar);
         misession.setAttribute("usuario", usuario);
 
         redirectAttributes.addFlashAttribute("mensajeExito", "Pago al torneo realizado con éxito.");

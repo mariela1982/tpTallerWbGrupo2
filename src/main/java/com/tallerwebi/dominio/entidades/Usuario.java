@@ -53,9 +53,9 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
 
-    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<TorneoPago> torneosInscriptos = new ArrayList<>();
+   // @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+  //  @LazyCollection(LazyCollectionOption.FALSE)
+   // private List<TorneoPago> torneosInscriptos = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -177,17 +177,17 @@ public class Usuario {
         this.saldo = saldo;
     }
 
-    public List<TorneoPago> getTorneosInscriptos() {
-        return torneosInscriptos;
-    }
+//    public List<TorneoPago> getTorneosInscriptos() {
+//        return torneosInscriptos;
+//    }
 
-    public void setTorneosInscriptos(List<TorneoPago> torneosPagos) {
-        this.torneosInscriptos = torneosPagos;
-    }
-
-    public void agregarTorneoPago(TorneoPago torneoPago) {
-        this.torneosInscriptos.add(torneoPago);
-    }
+//    public void setTorneosInscriptos(List<TorneoPago> torneosPagos) {
+//        this.torneosInscriptos = torneosPagos;
+//    }
+//
+//    public void agregarTorneoPago(TorneoPago torneoPago) {
+//        this.torneosInscriptos.add(torneoPago);
+//    }
 
     public List<Equipo> getEquipos() {
         return equipos;
