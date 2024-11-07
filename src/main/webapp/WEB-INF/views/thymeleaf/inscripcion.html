@@ -8,156 +8,60 @@
 <body>
     <header th:replace="~{includes/userHeader :: header}"></header>
 
-    <div>
-        <label for="torneos">Torneos </label>
-        <select id="torneos" th:field="*{torneo}" class="form-select mb-3">
-            <option value="" disabled selected>torneo a Incribir  </option>
-            <option th:each="partido : ${T(com.tallerwebi.dominio.enums.PartidosDeBsAs).values()} "
-                    th:value="${partido.name()}" th:text="${partido.name()}"></option>
-        </select>
-    </div>
+<!--    <div>-->
+<!--        <label for="torneos">Torneos </label>-->
+<!--        <select id="torneos" th:field="*{torneo}" class="form-select mb-3">-->
+<!--            <option value="" disabled selected>torneo a Incribir  </option>-->
+<!--            <option th:each="partido : ${T(com.tallerwebi.dominio.enums.PartidosDeBsAs).values()} "-->
+<!--                    th:value="${partido.name()}" th:text="${partido.name()}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
 
-<!--    <div class="container mt-5">-->
-<!--        <div class="row">-->
-            <!-- Información del torneo -->
-<!--            <div class="col-lg-6">-->
-<!--                <h1 class="mb-4"><i class="fas fa-trophy"></i> Detalles del Torneo</h1>-->
+    <div class="container mt-5">
+        <div class="row">
+            <h3> PAGO REALIZADO CON EXITO</h3>
+            <div class="col-lg-6">
+                <h1 class="mb-4"><i class="fas fa-trophy"></i> Detalles del Torneo</h1>
 
-<!--                &lt;!&ndash; Mostrar mensajes &ndash;&gt;-->
-<!--                <div th:if="${success}" class="alert alert-success">-->
-<!--                    <p th:text="${success}"></p>-->
-<!--                </div>-->
-
-<!--                <div th:if="${error}" class="alert alert-danger">-->
-<!--                    <p th:text="${error}"></p>-->
-<!--                </div>-->
-
-<!--                <ul class="list-group list-group-flush">-->
-
-<!--                    <li class="list-group-item">-->
-<!--                        <strong><i class="fas fa-futbol"></i> Nombre:</strong>  <span th:field="${torneo.nombre}">Torneo-->
-<!--                            Nombre</span>-->
-
-<!--                    </li>-->
-<!--                    <li class="list-group-item">-->
-<!--                        <strong><i class="fas fa-gem"></i> Premio:</strong> $<span th:text="${torneo.premio}">0</span>-->
-<!--                        ARG-->
-<!--                    </li>-->
-<!--                    <li class="list-group-item">-->
-<!--                        <strong><i class="fas fa-ticket-alt"></i> Precio de Entrada:</strong> $<span-->
-<!--                            th:text="${torneo.precioEntrada}">0</span> ARG-->
-<!--                    </li>-->
-<!--                    <li class="list-group-item">-->
-<!--                        <strong><i class="fas fa-calendar-alt"></i> Fecha de Inicio:</strong> <span-->
-<!--                            th:text="${#dates.format(torneo.fechaInicio, 'dd/MM/yyyy')}">01/01/2024</span>-->
-<!--                    </li>-->
-
-<!--                </ul>-->
-
-<!--                <h3 class="mt-4"><i class="fas fa-users"></i> Equipo a inscribir </h3>-->
-<!--                <ul class="list-group">-->
-<!--                    <li class="list-group-item" th:object="${equipo}"  >-->
-
-<!--                        <i class="fas fa-shield-alt"></i> <span th:text="${equipo.nombre}">Equipo 1</span>-->
-<!--                    </li>-->
-<!--                </ul>-->
-
-
-<!--                    <button type="submit" class="btn btn-primary" th:href="@{/tipoDePago.html}" >Pagar</button>-->
-                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPago">Pagar</button>
-
-
-
-                <!-- Modal para datos de pago-->
-                <div class="modal fade" id="modalPago" tabindex="-1" aria-labelledby="modalPagoLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalPagoLabel">Datos de Pago</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Contenedor para mensajes de error -->
-                                <div id="errorMessages" class="alert alert-danger" style="display: none;"></div>
-
-                                <form id="formPago" th:action="@{/generarPago}" method="POST">
-<!--                                    <input type="hidden" name="torneoId" th:value="${torneo.id}">-->
-
-                                    <div class="mb-3">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoTarjeta" id="credito"
-                                                   value="credito">
-                                            <label class="form-check-label" for="credito">Tarjeta de Crédito</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoTarjeta" id="debito" value="debito"
-                                                   checked>
-                                            <label class="form-check-label" for="debito">Tarjeta de Débito</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoTarjeta" id="saldo" value="saldo">
-                                            <label class="form-check-label" for="saldo">Saldo en la cuenta</label>
-                                        </div>
-                                    </div>
-                                    <div id="cuotasDiv" style="display: none;">
-                                        <label for="cuotasSelect" class="form-label">Seleccionar cantidad de cuotas:</label>
-                                        <select class="form-select" id="cuotasSelect" name="cuotasSelect"></select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
-                                        <input type="text" class="form-control" id="numeroTarjeta" pattern="\d{16}" maxlength="16"
-                                               placeholder="1234 5678 9123 4567" required>
-                                        <div class="invalid-feedback">El número de tarjeta debe tener 16 dígitos.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="nombreTitular" class="form-label">Nombre del titular</label>
-                                        <input type="text" class="form-control" id="nombreTitular" pattern="[a-zA-Z\s]+"
-                                               placeholder="Nombre Apellido" required>
-                                        <div class="invalid-feedback">El nombre del titular debe contener solo letras y espacios.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="fechaVencimiento" class="form-label">Fecha de vencimiento</label>
-                                        <input type="month" class="form-control" id="fechaVencimiento" required>
-                                        <div class="invalid-feedback">Por favor, seleccione una fecha de vencimiento válida.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="codigoSeguridad" class="form-label">Código de seguridad</label>
-                                        <input type="password" class="form-control" id="codigoSeguridad" pattern="\d{3}" maxlength="3"
-                                               placeholder="123" required>
-                                        <div class="invalid-feedback">El código de seguridad debe tener 3 dígitos.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="domicilio" class="form-label">Domicilio</label>
-                                        <input type="text" class="form-control" id="domicilio" pattern="[a-zA-Z0-9\s]+"
-                                               placeholder="Calle Falsa 123" required>
-                                        <div class="invalid-feedback">Ingrese un domicilio válido sin caracteres especiales.</div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="codigoPostal" class="form-label">Código Postal</label>
-                                        <input type="text" class="form-control" id="codigoPostal" pattern="\d{4}" maxlength="4"
-                                               placeholder="1000" required>
-                                        <div class="invalid-feedback">El código postal debe tener 4 dígitos.</div>
-                                    </div>
-                                    <div class="mb-3 d-flex justify-content-end">
-                                        <label id="saldoActual" class="form-label me-2" style="font-size: 1.2em; display: none;">Saldo
-                                            actual: $ 5000.00</label>
-                                    </div>
-                                    <div class="mb-3 d-flex justify-content-end">
-                                        <label for="totalPagar" class="form-label me-2" style="font-size: 1.2em;">Total a pagar:
-                                            $1000.00</label>
-                                        <label id="totalPagar" class="form-label" style="font-size: 1.2em;"></label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Realizar Pago</button>
-                                </form>
-                                <div id="mensajeExito" class="text-success text-center mt-3" style="display:none; font-size: 1.5rem;">
-                                    Pago exitoso
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Mostrar mensajes -->
+                <div th:if="${success}" class="alert alert-success">
+                    <p th:text="${success}"></p>
                 </div>
-	<!-- Bootstrap core JS -->
-                <script type="text/javascript" th:src="@{/js/pago.js}"></script>
+
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-futbol"></i> Nombre:</strong>  <span th:field="${torneo.nombre}">TORNEO
+                            SUDAMERICANA</span>
+
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-gem"></i> Premio:</strong> $<span th:text="${torneo.premio}">0</span>
+                        ARG
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-ticket-alt"></i> Precio del Torneo:</strong> $<span
+                            th:text="${torneo.precioEntrada}">0</span> ARG
+                    </li>
+                    <li class="list-group-item">
+                        <strong><i class="fas fa-calendar-alt"></i> Fecha de Inicio:</strong> <span
+                            th:text="${#dates.format(torneo.fechaInicio, 'dd/MM/yyyy')}">01/01/2025</span>
+                    </li>
+
+                </ul>
+
+                <h3 class="mt-4"><i class="fas fa-users"></i> Gracias por participar!!!!! </h3>
+
+
+                    <button type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Ir al menu principal</button>
+
+
+
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

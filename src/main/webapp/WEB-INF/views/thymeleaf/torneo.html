@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    // SDK MercadoPago.js
+<!--    // SDK MercadoPago.js-->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 
@@ -80,17 +80,21 @@
                 <h2 class="mb-4"><i class="fas fa-sign-in-alt"></i> Inscripcion</h2>
 
 
-                <form  id="torneoFormulario" th:action="@{/equipo/inscribir}" method="post">-->
+<!--                <form  id="torneoFormulario" th:action="@{/equipo/inscribir}" method="post">&ndash;&gt;-->
                     <input type="hidden" name="torneoId" th:value="${torneo.id}">
-                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">
-                    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
-
-                                        <button type="submit" class="btn btn-success btn-lg btn-block" id="mercadoPago">
-                                            <i class="fas fa-user-plus" onclick="verificarCupos()"></i> Inscribirse al Torneo
+<!--                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">-->
+<!--                    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>-->
+                    <div th:if="${usuarioLogueado}">
+                                        <button type="submit" class="btn btn-success btn-lg btn-block" id="mercadoPago" >
+                                            <i class="fas fa-user-plus" ></i> Inscribirse al Torneo
                                         </button>
-                    <div id="wallet_container"></div>
+                                 <div id="wallet_container"></div>
+                    </div>
+                <div th:unless="${usuarioLogueado}">
+                    <p class="alert alert-warning">Debes loguearte para anotarte en el torneo</p>
+                </div>
 
-                                    </form>
+<!--                                    </form>-->
 
 
 
@@ -100,23 +104,8 @@
         </div>
     </div>
 
-        <script>
-        function verificarCupos(){
-            var cuposDisponible = document.getElementById('cuposDisponibles');
-            var usuario = document.getElementById('logueado');
-            if  (!usuario){
-                alert("Debes Loguearte");
-            }else if(cuposDisponible === 0) {
-                alert("No Hay cupos disponibles ");
-            }
-                else{
-                    document.getElementById('torneoFormulario').onsubmit;
-                }
 
-        }
-    </script>
-
-    <script type="text/javascript" src="/resources/core/js/pago.js"></script>
+    <script type="text/javascript" src="/spring/js/pago.js"></script>
 
 
     <!-- Boostrap core js -->
