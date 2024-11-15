@@ -155,6 +155,16 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
 
     }
 
+    //editar jugadores
+
+    @GetMapping("/edicionJugador")
+    public ModelAndView editarJugador( HttpServletRequest request) {
+        ModelMap model = new ModelMap();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        model.addAttribute("jugadores", servicioDt.obtenerJugadores(usuario.getId()));
+        return new ModelAndView("edicionJugador", model);
+    }
+
     // Controller para la vista de edicion de jugadores
     @GetMapping("/jugadores/editar/{id}")
     public ModelAndView mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {

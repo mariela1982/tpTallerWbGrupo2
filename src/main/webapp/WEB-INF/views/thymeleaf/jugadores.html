@@ -31,6 +31,7 @@
                 <div >
                   <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
                  <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" class="form-control mb-3" required>
+                    <div id="edadAdvertencia" class="text-danger" style="display: none;">Debe ser mayor de 18 años para anotarse.</div>
                 </div>
 
             <div >
@@ -84,7 +85,6 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Fecha de Nacimiento</th>
                     <th>Posicion</th>
                     <th>Acciones</th>
                 </tr>
@@ -107,6 +107,24 @@
         <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
 
     </main>
+    <script>
+        document.getElementById('fechaNacimiento').addEventListener('change', function() {
+            const fechaNacimiento = new Date(this.value);
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+
+            const advertencia = document.getElementById('edadAdvertencia');
+            if (edad < 18) {
+                advertencia.style.display = 'block';
+            } else {
+                advertencia.style.display = 'none';
+            }
+        });
+    </script>
 
 
      Boostrap core js

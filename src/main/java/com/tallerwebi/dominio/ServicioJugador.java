@@ -20,4 +20,6 @@ public interface ServicioJugador {
     List<Usuario> obtenerUsuariosJugadores();
 
     void agregarleEquipo(Long jugador, Equipo equipo);
+
+    List<Jugador> obtenerJugadoresPorDt(Integer id);
 }

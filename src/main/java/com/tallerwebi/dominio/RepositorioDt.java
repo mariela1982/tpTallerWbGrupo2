@@ -18,7 +18,7 @@ public interface RepositorioDt {
     void eliminarEquipo(Equipo equipo);
 
     void guardarJugador(Jugador jugador);
-    List<Jugador> obtenerJugadores();
+    List<Jugador> obtenerJugadores(Integer id);
     Jugador obtenerJugadorPorId(Long id);
     void eliminarJugador(Jugador jugador);
 }

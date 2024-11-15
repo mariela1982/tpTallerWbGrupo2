@@ -31,6 +31,7 @@ public class ControladorLogin {
 
         ModelMap modelo = new ModelMap();
         modelo.put("datosLogin", new DatosLogin());
+        modelo.put("logueado",true);
         return new ModelAndView("login", modelo);
     }
 
@@ -102,6 +103,7 @@ public ModelAndView nuevoUsuario() {
     ModelMap model = new ModelMap();
     Usuario usuario = new Usuario();
       model.put("usuario", usuario);
+      model.put("logueado",true);
 //    model.put("partidos", PartidosDeBsAs.values());
 //    model.put("localidadesPorPartido", obtenerLocalidadesPorPartido());
 

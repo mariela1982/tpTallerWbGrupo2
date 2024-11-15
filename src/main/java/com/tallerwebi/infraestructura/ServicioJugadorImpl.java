@@ -5,7 +5,6 @@ import com.tallerwebi.dominio.ServicioJugador;
 import com.tallerwebi.dominio.entidades.Equipo;
 import com.tallerwebi.dominio.entidades.Jugador;
 import com.tallerwebi.dominio.entidades.Usuario;
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
 import com.tallerwebi.dominio.excepcion.JugadorExistente;
 import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +83,11 @@ public class ServicioJugadorImpl implements ServicioJugador {
     @Override
     public void agregarleEquipo(Long jugador, Equipo equipo) {
         repositorioJugador.agregarEquipo(jugador, equipo);
+    }
+
+    @Override
+    public List<Jugador> obtenerJugadoresPorDt(Integer id) {
+        return repositorioJugador.
     }
 
     @Override

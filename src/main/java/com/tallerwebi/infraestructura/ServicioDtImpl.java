@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("servicioDt")
 @Transactional
 public class ServicioDtImpl implements ServicioDt {
@@ -28,6 +30,11 @@ public class ServicioDtImpl implements ServicioDt {
     @Override
     public void eliminarEquipo(Equipo nombre) {
 
+    }
+
+    @Override
+    public List<Jugador> obtenerJugadores(Integer id) {
+        return repositorioDt.obtenerJugadores(id);
     }
 
 

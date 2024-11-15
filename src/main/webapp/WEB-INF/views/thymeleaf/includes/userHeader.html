@@ -3,14 +3,15 @@
         <div class="container-lg">
             <a class="navbar-brand text-uppercase text-white" th:href="@{/home}">Juntadita</a>
 
-            <ul class="navbar-nav ms-auto flex-row gap-5">
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/directorTecnico}">Inicio</a>
+            <ul class="navbar-nav ms-auto flex-row gap-5" th:if="${logueado == null }" >
+
+                <li class="nav-item" th:if="${session.usuario.admin == true}">
+                    <a class="nav-link text-white" th:href="@{/directorTecnico}" >Menu DT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" th:href="@{/torneos}">Torneos</a>
                 </li>
-                <li class="nav-item" th:if="${session.usuario != null and session.usuario.admin ==false}">
+                <li class="nav-item" th:if="${session.usuario != null }">
                     <a class="nav-link text-white" th:href="@{/miCuenta.html}">
                         <span th:text="${session.usuario['nombre']}"></span>
                     </a>
@@ -30,7 +31,7 @@
             </button>
 
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-                aria-labelledby="offcanvasDarkNavbarLabel">
+                aria-labelledby="offcanvasDarkNavbarLabel" th:if="${session.usuario != null and session.usuario.admin == true}">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
@@ -38,7 +39,7 @@
                 </div>
 
                 <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3"  >
                         <li class="nav-item">
                             <div class="d-flex align-items-center gap-2">
                                 <i class="bi bi-trophy"></i>
