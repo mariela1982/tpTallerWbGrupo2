@@ -11,4 +11,6 @@ public interface ServicioDt {
 
 
     List<Jugador> obtenerJugadores(Integer id);
+
+    void guardarJugadorCreadoPorDt(Jugador jugador);
 }

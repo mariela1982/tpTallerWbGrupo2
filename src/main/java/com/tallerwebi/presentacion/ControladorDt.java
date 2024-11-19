@@ -140,10 +140,12 @@ public class ControladorDt {
 
     // Controller para la creacion de jugadores
 @PostMapping("/crearJugador")
-public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
+public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     ModelMap model = new ModelMap();
     try {
         servicioJugador.guardarJugador(jugador);
+        servicioLogin.guardarJugadorCreadoPorDt(usuario.getId(), jugador);
         model.addAttribute("jugadores",servicioJugador.obtenerJugadores());
         model.addAttribute("jugadorCreado",jugador);
         model.put("registro","jugador creado");
@@ -158,13 +160,23 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
     }
 
     //editar jugadores
-
+//
+//    @GetMapping("/edicionJugador")
+//    public ModelAndView editarJugador( HttpServletRequest request) {
+//        ModelMap model = new ModelMap();
+//        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+//        model.addAttribute("jugadores", servicioDt.obtenerJugadores(usuario.getId()));
+//        return new ModelAndView("edicionJugador", model);
+//    }
     @GetMapping("/edicionJugador")
     public ModelAndView editarJugador( HttpServletRequest request) {
-        ModelMap model = new ModelMap();
+        ModelAndView mav = new ModelAndView("edicionJugador");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        model.addAttribute("jugadores", servicioDt.obtenerJugadores(usuario.getId()));
-        return new ModelAndView("edicionJugador", model);
+        Integer id = (Integer) request.getSession().getAttribute("id");
+      mav.addObject("jugadores",servicioJugador.obtenerJugadoresPorDt(id));
+     //   mav.addObject("jugadores", servicioJugador.obtenerJugadores());
+        return mav;
+
     }
 
     // Controller para la vista de edicion de jugadores

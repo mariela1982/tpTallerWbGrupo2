@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import com.tallerwebi.dominio.entidades.Jugador;
 import com.tallerwebi.dominio.entidades.Usuario;
 
 public interface RepositorioUsuario {
@@ -11,5 +12,7 @@ public interface RepositorioUsuario {
 
 
     void actualizarSaldo(Usuario usuario,Integer saldo);
+
+    void guardarJugador(Integer id, Jugador jugador);
 }
 

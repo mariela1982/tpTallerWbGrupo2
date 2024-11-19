@@ -1,6 +1,7 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.RepositorioUsuario;
+import com.tallerwebi.dominio.entidades.Jugador;
 import com.tallerwebi.dominio.entidades.Usuario;
 
 import org.hibernate.Session;
@@ -73,6 +74,19 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
         // Guardar o actualizar el objeto usuario en la base de datos
         session.update(usuario); // Usa update o save dependiendo de tu lógica
+    }
+
+    @Override
+    public void guardarJugador(Integer id, Jugador jugador) {
+        Session session = sessionFactory.getCurrentSession();
+        Usuario existingUsuario = session.get(Usuario.class, id);
+        if (existingUsuario != null) {
+            jugador.setDirectorTecnico(existingUsuario);
+            existingUsuario.agregarJugador(jugador);
+            session.saveOrUpdate(existingUsuario);
+            session.saveOrUpdate(jugador);
+        }
+
     }
 
 

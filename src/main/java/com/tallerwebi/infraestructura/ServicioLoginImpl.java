@@ -2,6 +2,7 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.ServicioLogin;
+import com.tallerwebi.dominio.entidades.Jugador;
 import com.tallerwebi.dominio.entidades.Usuario;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class ServicioLoginImpl implements ServicioLogin {
     @Override
     public void actualizarSaldo(Usuario usuario,Integer saldo) {
         repositorioUsuario.actualizarSaldo(usuario,saldo);
+    }
+
+    @Override
+    public void guardarJugadorCreadoPorDt(Integer id, Jugador jugador) {
+        repositorioUsuario.guardarJugador(id,jugador);
     }
 
 }

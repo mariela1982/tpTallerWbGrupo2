@@ -37,5 +37,11 @@ public class ServicioDtImpl implements ServicioDt {
         return repositorioDt.obtenerJugadores(id);
     }
 
+    @Override
+    public void guardarJugadorCreadoPorDt(Jugador jugador) {
+
+
+    }
+
 
 }

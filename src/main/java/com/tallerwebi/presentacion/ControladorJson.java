@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.ServicioDt;
 import com.tallerwebi.dominio.ServicioJugador;
 import com.tallerwebi.dominio.entidades.Jugador;
 
@@ -16,9 +17,11 @@ public class ControladorJson {
 
     private final ServicioJugador servicioJugador;
 
+
     @Autowired
     public ControladorJson(ServicioJugador servicioJugador) {
         this.servicioJugador = servicioJugador;
+
     }
 
     @GetMapping("/jugadoresJson")

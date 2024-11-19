@@ -93,6 +93,7 @@ public class Usuario {
         this.jugadores = jugadores;
     }
 
+
     public void agregarJugador(Jugador jugador) {
         this.jugadores.add(jugador);
     }

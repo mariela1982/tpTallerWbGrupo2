@@ -17,4 +17,6 @@ public interface RepositorioJugador {
     List<Usuario> obtenerUsuariosJugadores();
 
     void agregarEquipo(Long jugador, Equipo equipo);
+
+    List<Jugador> buscarJugadoresPorDt(Integer id);
 }

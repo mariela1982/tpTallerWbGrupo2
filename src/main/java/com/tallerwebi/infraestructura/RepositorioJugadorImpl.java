@@ -89,6 +89,14 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
     }
 
     @Override
+    public List<Jugador> buscarJugadoresPorDt(Integer id) {
+        final Session session = sessionFactory.getCurrentSession();
+        TypedQuery<Jugador> query= session.createQuery("from Jugador where directorTecnico.id = :id", Jugador.class);
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
+    @Override
     public List<Usuario> obtenerUsuariosJugadores() {
         final Session session = sessionFactory.getCurrentSession();
         TypedQuery<Usuario> query= session.createQuery("from Usuario where esJugador = true", Usuario.class);
