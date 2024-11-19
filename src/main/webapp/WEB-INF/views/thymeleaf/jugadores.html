@@ -98,7 +98,9 @@
 <!--                    <td th:date="${jugador.getFechaNacimiento()}"></td>-->
                     <td th:text="${jugador.getPosicion()}"></td>
                     <td>
-                        <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>
+<!--                        <a th:href="@{/edicionJugador/editar/{id}(id=${jugador.id})}" class="btn btn-primary">Editar</a>-->
+                        <a th:href="@{/edicionJugador}" class="btn btn-primary">Editar</a>
+
                         <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>

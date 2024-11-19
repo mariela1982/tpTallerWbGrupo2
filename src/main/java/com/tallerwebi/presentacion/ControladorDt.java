@@ -17,6 +17,8 @@ import com.tallerwebi.dominio.excepcion.EquipoInexistente;
 import com.tallerwebi.dominio.excepcion.JugadorExistente;
 import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -166,29 +168,23 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
     }
 
     // Controller para la vista de edicion de jugadores
-    @GetMapping("/jugadores/editar/{id}")
-    public ModelAndView mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {
-        Jugador jugador = null;
-        ModelMap model = new ModelMap();
+    @GetMapping("/edicionJugador/editar/{id}")
+    public ResponseEntity<?> mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {
+       // Jugador jugador = null;
+
         try {
-           jugador = servicioJugador.buscarJugador(id);
+         Jugador  jugador = servicioJugador.buscarJugador(id);
+         return ResponseEntity.ok(jugador);
+
         } catch (JugadorInexistente e) {
-            model.put("Error", "El jugador no existe");
-            return new ModelAndView("redirect:/jugadores", model);
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el Jugador No Existe");
 
         }
-        if (jugador != null) {
-            ModelAndView mav = new ModelAndView("jugadores");
-            mav.addObject("jugador", jugador);
-            mav.addObject("jugadores", servicioJugador.obtenerJugadores());
-            mav.addObject("editando", true);
-            return mav;
-        }
-        return new ModelAndView("redirect:/jugadores");
+
     }
 
-    // Controller para la edicion de jugadores
-    @PostMapping("/jugadores/editar")
+    @PostMapping("/edicionJugador/editar")
     public ModelAndView editarJugador(@ModelAttribute("jugador") Jugador jugador) {
         ModelMap model = new ModelMap();
         try {
@@ -197,11 +193,11 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador) {
         } catch (JugadorInexistente e) {
             model.put("Error", "El jugador no existe");
         }
-        return new ModelAndView("redirect:/jugadores?editado=true");
+        return new ModelAndView("redirect:/edicionJugador");
     }
 
     // Controller para la eliminacion de jugadores
-    @GetMapping("/jugadores/eliminar/{id}")
+    @GetMapping("/edicionJugador/eliminar/{id}")
     public ModelAndView eliminarJugador(@PathVariable("id") Long id) {
         ModelMap model = new ModelMap();
         try {

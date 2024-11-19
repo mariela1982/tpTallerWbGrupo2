@@ -87,7 +87,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
 
     @Override
     public List<Jugador> obtenerJugadoresPorDt(Integer id) {
-        return repositorioJugador.
+        return null;
     }
 
     @Override
