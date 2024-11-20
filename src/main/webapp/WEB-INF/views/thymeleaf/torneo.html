@@ -26,16 +26,18 @@
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <strong><i class="fas fa-futbol" id="nombreTorneo"></i> Nombre:</strong> <span th:text="${torneo.nombre}">Torneo
+                        <strong><i class="fas fa-futbol" id="nombreTorneo"></i> Nombre:</strong> <span th:text="${torneo.nombre} " id="nombreTorneoValor">Torneo
                             Nombre</span>
+
                     </li>
+
                     <li class="list-group-item">
                         <strong><i class="fas fa-gem" id="premioTorneo"></i> Premio:</strong> $<span th:text="${torneo.premio}">0</span>
                         ARG
                     </li>
                     <li class="list-group-item">
-                        <strong><i class="fas fa-ticket-alt" id="valorTorneo"></i> Valor del torneo:</strong> $<span
-                            th:text="${torneo.precioEntrada}">0</span> ARG
+                        <strong><i class="fas fa-ticket-alt" ></i> Valor del torneo:</strong> $<span
+                            th:text="${torneo.precioEntrada}" id="valorTorneoValor">0</span> ARG
                     </li>
                     <li class="list-group-item">
                         <strong><i class="fas fa-calendar-alt"></i> Fecha de Inicio:</strong> <span

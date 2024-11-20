@@ -3,6 +3,8 @@
 // Inicializar Mercado Pago al comienzo del script
 const mp = new MercadoPago("TEST-4c9e3fb2-ceac-40fe-bb45-55258520ecb1", {locale: "es-AR"});
 
+
+
 document.getElementById("mercadoPago").addEventListener('click', async () => {
     if (verificarCupos()) {
         iniciarPago();
@@ -22,10 +24,18 @@ function verificarCupos() {
 
 async function iniciarPago() {
     try {
+
+        const nombreTorneo = document.getElementById('nombreTorneoValor').textContent;
+        const valorTorneo = document.getElementById('valorTorneoValor').textContent;
+     //   const torneoId = document.querySelector("input[name='torneoId']").value;
+
+        console.log("Nombre del torneo:", nombreTorneo);
+        console.log("Valor del torneo:", valorTorneo);
+
         const orderData = {
-            title: "torneo",
+            title: nombreTorneo,
             quantity: 1,
-            price: 10000
+            price: valorTorneo
         };
 
         const response = await fetch("../api/mp/crear_preferencia", {
