@@ -49,6 +49,7 @@ public class Usuario {
     private Integer saldo = 0;
     private Boolean esJugador = false;
     private String posicion = null;
+    private Integer telefono;
 
     @Enumerated(EnumType.STRING)
     private PartidosDeBsAs partido;
@@ -73,7 +74,7 @@ public class Usuario {
 
     }
 
-    public Usuario(String nombre, String apellido, Long dni, String direccion, String email, String password, PartidosDeBsAs partido) {
+    public Usuario(String nombre, String apellido, Long dni, String direccion, String email, String password, PartidosDeBsAs partido, Integer telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -83,6 +84,7 @@ public class Usuario {
         this.admin = false;
         this.saldo = 0;
         this.partido = partido;
+        this.telefono = telefono;
     }
 
     public List<Jugador> getJugadores() {
@@ -215,5 +217,13 @@ public class Usuario {
 
     public String getPosicion() {
         return posicion;
+    }
+
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
+    }
+
+    public Integer getTelefono() {
+        return telefono;
     }
 }

@@ -53,10 +53,19 @@
                             <i class="bi bi-geo-alt"></i> <strong>Partido:</strong> <span
                                 th:text="${jugador.partido.name()}"></span><br>
                             <i class="bi bi-envelope"></i> <strong>Email:</strong> <span
-                                th:text="${jugador.email}"></span>
+                                th:text="${jugador.email}"></span><br>
+                            <i class="bi bi-telephone"></i> <strong>Telefono:</strong> <span
+                                th:text="${jugador.telefono}"></span>
                         </p>
-                        <a class="btn btn-primary" th:data-email="${jugador.email}" th:data-nombre="${jugador.nombre}">
-                            <i class="bi bi-envelope"></i> Contactar</a>
+
+                        <div class="d-flex flex-column alieng-items-stretch gap-2">
+                            <a class="btn btn-primary" th:data-email="${jugador.email}" th:data-nombre="${jugador.nombre}">
+                                <i class="bi bi-envelope"></i> Contactar Por Mail
+                            </a>
+                            <a class="btn btn-success" th:data-tel="${jugador.telefono}" th:data-nombre="${jugador.nombre}">
+                                <i class="bi bi-telephone"></i> Contactar Por Whatsapp
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,15 +94,28 @@
             });
         }
 
-        // Boton de Contactar
+        // Boton de Contactar por Mail
         document.querySelectorAll('.btn-primary').forEach(btn => {
             btn.addEventListener('click', (event) => {
                 const email = event.target.getAttribute('data-email');
                 const nombre = event.target.getAttribute('data-nombre');
-                
+
                 if (email) {
-                    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=Consulta%20de%20Equipo&body=Hola%20${nombre},%20estoy%20interesado%20en%20sumarte%20a%20mi%20equipo.%0A%0ASaludos`, 
-                    '_blank');
+                    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=Consulta%20de%20Equipo&body=Hola%20${nombre},%20estoy%20interesado%20en%20sumarte%20a%20mi%20equipo.%0A%0ASaludos`,
+                        '_blank');
+                }
+            });
+        });
+
+        // Boton de Contactar por Whatsapp
+        document.querySelectorAll('.btn-success').forEach(btn => {
+            btn.addEventListener('click', (event) => {
+                const tel = event.target.getAttribute('data-tel');
+                const nombre = event.target.getAttribute('data-nombre');
+
+                if (tel) {
+                    window.open(`https://wa.me/${tel}?text=Hola%20${nombre},%20estoy%20interesado%20en%20sumarte%20a%20mi%20equipo.`,
+                        '_blank');
                 }
             });
         });
