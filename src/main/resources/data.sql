@@ -45,10 +45,10 @@ INSERT INTO Cancha(id, nombre, direccion, telefono) VALUES
                     (null, 'Cancha Sur', 'Calle Sur 202', '321654987');
 
 INSERT INTO Torneo(id, nombre, premio, precioEntrada, fechaInicio, cantidadEquipos, partido) VALUES
-                    (1, 'Copa Campeones', 1000, 100, '2025-06-01', 4, 64),
-                    (2, 'Copa Argentina', 2000, 200, '2025-06-01', 8, 65),
-                    (3, 'Copa Libertadores', 3000, 300, '2025-06-01', 16, 60),
-                    (4, 'Copa Sudamericana', 4000, 400, '2025-06-01', 32, 82);
+                    (1, 'Copa Super Campeones', 1000, 10000, '2025-06-01', 4, 64),
+                    (2, 'Copa Argentina', 2000, 20000, '2025-06-01', 8, 65),
+                    (3, 'Copa Libertadores', 3000, 30000, '2025-06-01', 16, 60),
+                    (4, 'Copa Sudamericana', 4000, 40000, '2025-06-01', 32, 82);
 
 INSERT INTO Equipo(id, nombre, cbu, dtDni, torneo_id, orden) VALUES
                     (1, 'Boca', '123456789', 29363692, 1, 0),
