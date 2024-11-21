@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,8 +56,7 @@ public class ControladorApi {
 
             PreferenceBackUrlsRequest backUrlsRequest = PreferenceBackUrlsRequest
                     .builder() //comienza con builder y termina con build
-                    .success("http://localhost:8080/spring/inscripcion")
-                    .pending("http://localhost:8080/spring/home")
+                    .success("http://localhost:8080/spring/inscripcion?title=" + URLEncoder.encode(title, StandardCharsets.UTF_8))
                     .failure("http://localhost:8080/spring/home")
                     .build();
 

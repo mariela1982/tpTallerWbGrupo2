@@ -5,7 +5,7 @@
 
             <ul class="navbar-nav ms-auto flex-row gap-5" th:if="${logueado == null }" >
 
-                <li class="nav-item" th:if="${session.usuario.admin}">
+                <li class="nav-item" th:if="${session.usuario != null } and ${!session.usuario.admin} ">
                     <a class="nav-link text-white" th:href="@{/directorTecnico}" >Menu DT</a>
                 </li>
                 <li class="nav-item">
@@ -31,7 +31,8 @@
             </button>
 
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-                aria-labelledby="offcanvasDarkNavbarLabel" th:if="${session.usuario != null} and ${!session.usuario.esJugador} and ${!session.usuario.admin}">
+                aria-labelledby="offcanvasDarkNavbarLabel"
+                 th:if="${session.usuario != null} and ${!session.usuario.esJugador} and ${!session.usuario.admin}">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
