@@ -4,16 +4,15 @@
             <a class="navbar-brand text-uppercase text-white" th:href="@{/home}">Juntadita</a>
 
             <ul class="navbar-nav ms-auto flex-row gap-5" th:if="${logueado == null }" >
-
-                <li class="nav-item" th:if="${session.usuario != null } and ${!session.usuario.admin} ">
+                <li class="nav-item" th:if="${session.usuario != null and session.usuario.admin == true}">
                     <a class="nav-link text-white" th:href="@{/directorTecnico}" >Menu DT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" th:href="@{/torneos}">Torneos</a>
                 </li>
-                <li class="nav-item" th:if="${session.usuario != null }">
+                <li class="nav-item" th:if="${session.usuario != null}">
                     <a class="nav-link text-white" th:href="@{/miCuenta.html}">
-                        <span th:text="Hola +  ${session.usuario['nombre']}"></span>
+                        <span th:text="${session.usuario['nombre']}"></span>
                     </a>
                 </li>
                 <li class="nav-item" th:if="${session.usuario == null}">
@@ -31,8 +30,7 @@
             </button>
 
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
-                aria-labelledby="offcanvasDarkNavbarLabel"
-                 th:if="${session.usuario != null} and ${!session.usuario.esJugador} and ${!session.usuario.admin}">
+                aria-labelledby="offcanvasDarkNavbarLabel" th:if="${session.usuario != null and session.usuario.admin == true}">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
