@@ -1,7 +1,7 @@
 INSERT INTO Usuario(id, nombre, apellido, dni, direccion, email, password, admin, saldo, esJugador, posicion, partido, telefono) VALUES
-                    (null, 'mari', 'manri', '29363692', 'florencia 1900', 'test@unlam.edu.ar', '123', true, 0, false, null, 'LA_MATANZA', '123456789'),
-                    (null, 'leo', 'arias', '12345678', 'florencia 1900', 'correo@correo.com', '123', false, 0, false, null, 'MERLO', '987654321'),
-                    (null, 'mari', 'm', '12345878', 'florencia 1900', 'm@gmail.com', '123', false, 0, false, null, 'MORON', '456123789'),
+                    (null, 'Mari', 'manri', '29363692', 'florencia 1900', 'test@unlam.edu.ar', '123', true, 0, false, null, 'LA_MATANZA', '123456789'),
+                    (null, 'Leo', 'arias', '12345678', 'florencia 1900', 'correo@correo.com', '123', false, 0, false, null, 'MERLO', '987654321'),
+                    (null, 'Mariel', 'm', '12345878', 'florencia 1900', 'm@gmail.com', '123', false, 0, false, null, 'MORON', '456123789'),
 
                     -- Jugadores
                     (null, 'Roman', 'Riquelme', '29333555', 'fuentes222', 'roman@gmail.com', '123', false, 0, true, 'Delantero', 'TIGRE', '1522522214'),

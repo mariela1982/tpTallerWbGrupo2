@@ -86,14 +86,14 @@
                     <input type="hidden" name="torneoId" th:value="${torneo.id}">
 <!--                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">-->
 <!--                    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>-->
-                    <div th:if="${usuarioLogueado}">
+                    <div th:if="${usuarioLogueado} or ${cuposDisponibles != 0}">
                                         <button type="submit" class="btn btn-success btn-lg btn-block" id="mercadoPago" >
                                             <i class="fas fa-user-plus" ></i> Inscribirse al Torneo
                                         </button>
                                  <div id="wallet_container"></div>
                     </div>
-                <div th:unless="${usuarioLogueado}">
-                    <p class="alert alert-warning">Debes loguearte para anotarte en el torneo</p>
+                <div th:unless="${usuarioLogueado} or ${cuposDisponibles !=0}">
+                    <p class="alert alert-warning">Debes loguearte para anotarte en el torneo O el Torneo ya esta lleno "No hay cupo"</p>
                 </div>
 
 <!--                                    </form>-->

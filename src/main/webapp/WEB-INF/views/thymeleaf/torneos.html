@@ -29,7 +29,7 @@
 	<div class="container mt-3 d-flex justify-content-center align-items-center">
 		<form th:action="@{/torneos}" method="get" class="col-10 col-md-8 col-lg-6 d-flex justify-content-center align-items-center">
 			<select name="partido" class="form-select me-2" aria-label="Filtrar por partido">
-				<option value="" th:selected="${partido == null}">Todos los partidos</option>
+				<option value="" th:selected="${partido == null}">Todas las localidades</option>
 				<option th:each="partido : ${partidosDeBsAs}" th:value="${partido}" th:text="${partido}"></option>
 			</select>
 			<button type="submit" class="btn btn-primary">Filtrar</button>
