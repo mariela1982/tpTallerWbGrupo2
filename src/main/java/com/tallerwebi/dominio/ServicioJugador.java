@@ -9,9 +9,9 @@ import com.tallerwebi.dominio.excepcion.JugadorInexistente;
 import java.util.List;
 
 public interface ServicioJugador {
-    void guardarJugador(Jugador jugador) throws JugadorExistente, JugadorInexistente;
+    void guardarJugador(Jugador jugador, Usuario usuario) throws JugadorExistente, JugadorInexistente;
     void eliminarJugador(Long jugadorId) throws JugadorInexistente;
-    Boolean actualizarJugador(Long jugadorId) throws JugadorInexistente;
+    void actualizarJugador(Long jugadorId) throws JugadorInexistente;
     Jugador buscarJugador(Long jugadorId) throws JugadorInexistente;
 
     List<Jugador> obtenerJugadores();
@@ -22,4 +22,6 @@ public interface ServicioJugador {
     void agregarleEquipo(Long jugador, Equipo equipo);
 
     List<Jugador> obtenerJugadoresPorDt(Integer id);
+
+
 }

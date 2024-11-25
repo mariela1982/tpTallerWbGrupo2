@@ -7,7 +7,7 @@ import com.tallerwebi.dominio.entidades.Jugador;
 import com.tallerwebi.dominio.entidades.Usuario;
 
 public interface RepositorioJugador {
-    Jugador crearJugador(Jugador j);
+    Jugador crearJugador(Jugador j, Usuario usuario);
     void eliminarJugador(Jugador j);
     Jugador buscarJugador(Long idJugador);
     List<Jugador> buscarJugadores();
@@ -19,4 +19,6 @@ public interface RepositorioJugador {
     void agregarEquipo(Long jugador, Equipo equipo);
 
     List<Jugador> buscarJugadoresPorDt(Integer id);
+
+    void actualizarJugador(Long jugadorId);
 }

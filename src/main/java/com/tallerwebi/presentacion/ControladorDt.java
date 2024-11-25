@@ -144,11 +144,12 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     ModelMap model = new ModelMap();
     try {
-        servicioJugador.guardarJugador(jugador);
-        servicioLogin.guardarJugadorCreadoPorDt(usuario.getId(), jugador);
-        model.addAttribute("jugadores",servicioJugador.obtenerJugadores());
+        servicioJugador.guardarJugador(jugador,usuario);
+       // servicioLogin.guardarJugadorCreadoPorDt(usuario.getId(), jugador);
+        model.addAttribute("jugadores",servicioJugador.obtenerJugadoresPorDt(usuario.getId()));
         model.addAttribute("jugadorCreado",jugador);
         model.put("registro","jugador creado");
+        model.addAttribute("jugador",new Jugador());
 
     } catch (JugadorExistente | JugadorInexistente e) {
         model.put("Error", "El jugador ya existe");
@@ -168,33 +169,61 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
 //        model.addAttribute("jugadores", servicioDt.obtenerJugadores(usuario.getId()));
 //        return new ModelAndView("edicionJugador", model);
 //    }
+
     @GetMapping("/edicionJugador")
     public ModelAndView editarJugador( HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("edicionJugador");
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-        Integer id = (Integer) request.getSession().getAttribute("id");
-      mav.addObject("jugadores",servicioJugador.obtenerJugadoresPorDt(id));
-     //   mav.addObject("jugadores", servicioJugador.obtenerJugadores());
+        Integer id = usuario.getId();
+
+     // mav.addObject("jugadores",servicioJugador.obtenerJugadoresPorDt(id));
+
+        if (usuario != null && id != null) {
+            // Obtener los jugadores asociados al DT en sesión
+            List<Jugador> jugadores = servicioJugador.obtenerJugadoresPorDt(id);
+
+            if (jugadores != null && !jugadores.isEmpty()) {
+                mav.addObject("jugadores", jugadores);
+            } else {
+                mav.addObject("mensaje", "No se encontraron jugadores para este director técnico.");
+            }
+        } else {
+            mav.addObject("mensaje", "No hay un director técnico en sesión.");
+        }
         return mav;
 
     }
 
     // Controller para la vista de edicion de jugadores
-    @GetMapping("/edicionJugador/editar/{id}")
-    public ResponseEntity<?> mostrarFormularioEdicionJugador(@PathVariable("id") Long id) {
-       // Jugador jugador = null;
-
+//    @GetMapping("/edicionJugador/editar/{id}")
+//    public ResponseEntity<?> mostrarFormularioEdicionJugador(@PathVariable("id") Long id ,HttpServletRequest request) {
+//
+//        // Jugador jugador = null;
+//
+//        try {
+//         Jugador  jugador = servicioJugador.buscarJugador(id);
+//         return ResponseEntity.ok(jugador);
+//
+//        } catch (JugadorInexistente e) {
+//
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el Jugador No Existe");
+//
+//        }
+//
+//    }
+    @GetMapping("edicionJugador/editar/{id}")
+    public ModelAndView editarJugador(@PathVariable("id") Integer id) {
+        ModelMap model = new ModelMap();
         try {
-         Jugador  jugador = servicioJugador.buscarJugador(id);
-         return ResponseEntity.ok(jugador);
+          Jugador jugador= servicioJugador.buscarJugador(id.longValue());
+          model.addAttribute("jugador", jugador);
+          return new ModelAndView("edicionJugador", model);
 
         } catch (JugadorInexistente e) {
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el Jugador No Existe");
-
+            throw new RuntimeException(e);
         }
-
     }
+
 
     @PostMapping("/edicionJugador/editar")
     public ModelAndView editarJugador(@ModelAttribute("jugador") Jugador jugador) {

@@ -45,6 +45,7 @@ public class Jugador {
         this.numeroCamiseta = numeroCamiseta;
         this.tarjetaAmarilla = false;
         this.tarjetaRoja = false;
+        this.directorTecnico = new Usuario();
     }
 
     public Jugador() {

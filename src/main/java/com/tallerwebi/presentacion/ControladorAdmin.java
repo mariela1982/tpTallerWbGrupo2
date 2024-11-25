@@ -4,11 +4,6 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -492,7 +487,7 @@ public class ControladorAdmin {
                 jugador.setTarjetaRoja(true);
             }
 
-            servicioJugador.guardarJugador(jugador);
+            servicioJugador.actualizarJugador(jugadorId);
         }
 
         return new ModelAndView("redirect:/admin/sanciones?asignada=true");

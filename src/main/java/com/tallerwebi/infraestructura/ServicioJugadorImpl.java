@@ -26,7 +26,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
-    public void guardarJugador(Jugador nombre) throws JugadorExistente, JugadorInexistente {
+    public void guardarJugador(Jugador nombre, Usuario usuario) throws JugadorExistente, JugadorInexistente {
         // Jugador jugadorobtenido = buscarJugador(nombre.getId());
         // try {
         // if(jugadorobtenido != null){
@@ -35,7 +35,7 @@ public class ServicioJugadorImpl implements ServicioJugador {
         // }catch(JugadorExistente ex){
         // repositorioJugador.crearJugador(jugadorobtenido);
         // }
-        repositorioJugador.crearJugador(nombre);
+        repositorioJugador.crearJugador(nombre,usuario);
 
     }
 
@@ -51,8 +51,8 @@ public class ServicioJugadorImpl implements ServicioJugador {
     }
 
     @Override
-    public Boolean actualizarJugador(Long jugadorId) throws JugadorInexistente {
-        return null;
+    public void actualizarJugador(Long jugadorId) throws JugadorInexistente {
+        repositorioJugador.actualizarJugador(jugadorId);
     }
 
     @Override
@@ -90,6 +90,8 @@ public class ServicioJugadorImpl implements ServicioJugador {
 
         return repositorioJugador.buscarJugadoresPorDt(id);
     }
+
+
 
     @Override
     public List<Usuario> obtenerUsuariosJugadores() {
