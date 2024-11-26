@@ -62,27 +62,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                 Formulario de edición del jugador
-                <p>funciona </p>
 
-                <form th:action="@{/edicionJugador/editar}" method="post" th:object="${jugador}" id="editarJugadorForm">
-                    <input type="hidden" th:field="*{id}" id="jugadorId"> <!-- Campo oculto para el ID del jugador -->
+                <form method="post" id="editarJugadorForm">
+                    <input type="hidden" name="judadorId" id="jugadorId"> <!-- Campo oculto para el ID del jugador -->
 
                     <div class="row">
                         <div class="col-6">
                             <label for="nombre">Nombre y apellido del Jugador</label>
-                            <input type="text" id="nombre" th:field="*{nombreYapellido}" class="form-control mb-3" placeholder="Ingrese Nombre y Apellido" required>
+                            <input type="text" name="nombre" id="nombre"  class="form-control mb-3" placeholder="Ingrese Nombre y Apellido" required>
                         </div>
 
                         <div>
                             <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" class="form-control mb-3" required>
+                            <input type="date" name="fechaNacimiento" id="fechaNacimiento"  class="form-control mb-3" required>
                             <div id="edadAdvertencia" class="text-danger" style="display: none;">Debe ser mayor de 18 años para anotarse.</div>
                         </div>
 
                         <div>
                             <label for="posicion" class="form-label">Posición</label>
-                            <select id="posicion" th:field="*{posicion}" class="form-select mb-3" required>
+                            <select id="posicion"  name="posicion" class="form-select mb-3" required>
                                 <option value="ARQUERO">Arquero</option>
                                 <option value="DEFENSA">Defensa</option>
                                 <option value="MEDIOCAMPISTA">Mediocampista</option>
@@ -92,27 +90,27 @@
 
                         <div>
                             <label for="dni">DNI</label>
-                            <input th:field="*{dni}" id="dni" type="text" class="form-control mb-3" placeholder="DNI" required>
+                            <input id="dni" name="dni" type="text" class="form-control mb-3" placeholder="DNI" required>
                         </div>
 
                         <div>
                             <label for="direccion">Dirección</label>
-                            <input id="direccion" th:field="*{direccion}" type="text" placeholder="Ingrese dirección" class="form-select mb-3">
+                            <input id="direccion" name="direccion" type="text" placeholder="Ingrese dirección" class="form-select mb-3">
                         </div>
 
                         <div>
                             <label for="email">Email</label>
-                            <input th:field="*{email}" id="email" type="email" class="form-control mb-3" placeholder="Email" required>
+                            <input  id="email" name="email" type="email" class="form-control mb-3" placeholder="Email" required>
                         </div>
 
                         <div>
                             <label for="telefono">Número de Teléfono</label>
-                            <input th:field="*{telefono}" id="telefono" type="text" class="form-control mb-3" placeholder="Teléfono" required>
+                            <input  id="telefono" name="telefono" type="text" class="form-control mb-3" placeholder="Teléfono" required>
                         </div>
 
                         <div>
                             <label for="numero">Número de Camiseta</label>
-                            <input th:field="*{numeroCamiseta}" id="numero" type="text" class="form-control mb-3" placeholder="Número de Camiseta" required>
+                            <input  id="numero" name="numero" type="text" class="form-control mb-3" placeholder="Número de Camiseta" required>
                         </div>
 
                         <div class="d-flex justify-content-center">
@@ -133,35 +131,33 @@
             button.addEventListener('click', (event) => {
                 jugadorId = button.getAttribute('data-id');
                 console.log(jugadorId);
-                window.location.href = `/spring/edicionJugador/editar/${jugadorId}`
-                // fetch(`/spring/edicionJugador/editar/${jugadorId}`)
-                //
-                //         .then(response => {
-                //         if (!response.ok){
-                //             throw new Error("Error al obtener los datos del Jugador");
-                //         }
-                //         return response.json();
-                //     })
-                //     .then(data => {
-                //         console.log(data);
-                //      //    const fecha = new Date(data.fechaNacimiento).toISOString().split('T')[0];
-                //      //    document.getElementById("fechaNacimiento").value = fecha;
-                //      //
-                //      //    document.getElementById("jugadorId").value = data.id;
-                //      //    document.getElementById("nombre").value = data.nombre;
-                //      // //   document.getElementById("fechaNacimiento").value = data.fechaNacimiento;
-                //      //    document.getElementById('posicion').value = data.posicion;
-                //      //    document.getElementById('dni').value = data.dni;
-                //      //    document.getElementById('direccion').value = data.direccion;
-                //      //    document.getElementById('email').value = data.email;
-                //      //    document.getElementById('telefono').value = data.telefono;
-                //      //    document.getElementById('numero').value = data.numeroCamiseta;
-                //         modal.show();
-                //     })
-                //     .catch(error => {
-                //         console.error("Error l obtener lo datos del jugador", error);
-                //         alert("No se pudo cargar la info del jugador");
-                //     });
+             //   window.location.href = `/spring/edicionJugador/editar/${jugadorId}`
+                fetch(`/spring/edicionJugador/editar/${jugadorId}`)
+
+
+                        .then(response => {
+                        if (!response.ok){
+                            throw new Error("Error al obtener los datos del Jugador");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        document.getElementById("jugadorId").value = data.id;
+                        document.getElementById("nombre").value = data.nombreYapellido;
+                        document.getElementById("fechaNacimiento").value = new Date(data.fechaNacimiento).toISOString().split('T')[0];
+                        document.getElementById("dni").value = data.dni;
+                        document.getElementById("direccion").value = data.direccion;
+                        document.getElementById("posicion").value = data.posicion;
+                        document.getElementById("numero").value = data.numeroCamiseta;
+                        document.getElementById(("telefono")).value = data.telefono;
+                        document.getElementById("email").value = data.email;
+                        modal.show();
+                    })
+                    .catch(error => {
+                        console.error("Error l obtener lo datos del jugador", error);
+                        alert("No se pudo cargar la info del jugador");
+                    });
             });
 
         });
@@ -170,18 +166,30 @@
 
             //crea un objeto par poner los datos
             const formularioDatos = new FormData(event.target);
+            const dataObject = {};
+            formularioDatos.forEach((value, key) => {
+                dataObject[key] = value;
+            });
+            console.log(dataObject);
 
             fetch('edicionJugador/editar',{
                 method : "POST",
-                body : formularioDatos,
+
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dataObject)
             })
                 .then(response => {
+                    console.log("respuesta del servidor", response);
                     if (!response.ok) {
                         throw new Error("Error al actualizar Jugador");
                     }
                     return response.json();
                 })
                 .then(data =>{
+                    console.log("datos recibidos",data)
+
                     modal.hide();
                     window.location.reload();
                 })

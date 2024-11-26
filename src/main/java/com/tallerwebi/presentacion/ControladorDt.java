@@ -1,8 +1,10 @@
 package com.tallerwebi.presentacion;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -195,47 +197,84 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
     }
 
     // Controller para la vista de edicion de jugadores
-//    @GetMapping("/edicionJugador/editar/{id}")
-//    public ResponseEntity<?> mostrarFormularioEdicionJugador(@PathVariable("id") Long id ,HttpServletRequest request) {
-//
-//        // Jugador jugador = null;
-//
+    @GetMapping("/edicionJugador/editar/{id}")
+    @ResponseBody
+    public ResponseEntity<?> mostrarFormularioEdicionJugador(@PathVariable("id") Long id ,HttpServletRequest request) {
+
+        try {
+         Jugador  jugador = servicioJugador.buscarJugador(id);
+
+             return ResponseEntity.ok(jugador);
+
+        } catch (JugadorInexistente e) {
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el Jugador No Existe");
+
+        }
+
+    }
+
+
+//    @PostMapping("/edicionJugador/editar")
+//    public ModelAndView editarJugador(@ModelAttribute("jugador") Jugador jugador) {
+//        ModelMap model = new ModelMap();
 //        try {
-//         Jugador  jugador = servicioJugador.buscarJugador(id);
-//         return ResponseEntity.ok(jugador);
+//            servicioJugador.actualizarJugador(jugador.getId());
 //
 //        } catch (JugadorInexistente e) {
-//
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el Jugador No Existe");
-//
+//            model.put("Error", "El jugador no existe");
 //        }
-//
+//        return new ModelAndView("redirect:/edicionJugador");
 //    }
-    @GetMapping("edicionJugador/editar/{id}")
-    public ModelAndView editarJugador(@PathVariable("id") Integer id) {
-        ModelMap model = new ModelMap();
-        try {
-          Jugador jugador= servicioJugador.buscarJugador(id.longValue());
-          model.addAttribute("jugador", jugador);
-          return new ModelAndView("edicionJugador", model);
-
-        } catch (JugadorInexistente e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 
     @PostMapping("/edicionJugador/editar")
-    public ModelAndView editarJugador(@ModelAttribute("jugador") Jugador jugador) {
-        ModelMap model = new ModelMap();
-        try {
-            servicioJugador.actualizarJugador(jugador.getId());
+    @ResponseBody
+    public ResponseEntity<?> editarJugador(@RequestBody Map<String,Object> jugadorData,HttpServletRequest request) {
+//    @RequestParam("id") Long id,
+//                                                @RequestParam("nombre") String nombreYapellido,
+//                                                @RequestParam("fechaNacimiento") String fechaNacimiento,
+//                                                @RequestParam("posicion") String posicion,
+//                                                @RequestParam("dni") String dni,
+//                                                @RequestParam("direccion") String direccion,
+//                                                @RequestParam("email") String email,
+//                                                @RequestParam("telefono") String telefono,
+//                                                @RequestParam("numero") String numeroCamiseta) {
 
-        } catch (JugadorInexistente e) {
-            model.put("Error", "El jugador no existe");
+
+        try {
+             Long id = Long.parseLong(jugadorData.get("id").toString());
+             String nombreYapellido= (String) jugadorData.get("nombre");
+             String fechaNacimiento = (String) jugadorData.get("fechaNacimiento");
+             String posicion = (String) jugadorData.get("posicion");
+             String dni= (String) jugadorData.get("dni");
+             String direccion= (String) jugadorData.get("direccion");
+             String email= (String) jugadorData.get("email");
+             String telefono =  (String) jugadorData.get("telefono");
+             String numeroCamiseta = (String) jugadorData.get("numero");
+
+
+            Jugador jugador = servicioJugador.buscarJugador(id);
+            jugador.setNombreYapellido(nombreYapellido);
+            jugador.setFechaNacimiento(Date.valueOf(fechaNacimiento)); // Convierte la fecha si es necesario
+            jugador.setPosicion(posicion);
+            jugador.setDni(dni);
+            jugador.setDireccion(direccion);
+            jugador.setEmail(email);
+            jugador.setTelefono(telefono);
+            jugador.setNumeroCamiseta(Integer.parseInt(numeroCamiseta));
+
+            // Llamada al servicio para actualizar el jugador
+            servicioJugador.actualizarJugador(jugador);
+
+            return ResponseEntity.ok("Jugador actualizado con éxito");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Hubo un error al actualizar el jugador");
         }
-        return new ModelAndView("redirect:/edicionJugador");
     }
+
 
     // Controller para la eliminacion de jugadores
     @GetMapping("/edicionJugador/eliminar/{id}")

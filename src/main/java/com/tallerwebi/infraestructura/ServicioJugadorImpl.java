@@ -91,6 +91,10 @@ public class ServicioJugadorImpl implements ServicioJugador {
         return repositorioJugador.buscarJugadoresPorDt(id);
     }
 
+    @Override
+    public void actualizarJugador(Jugador jugador) {
+        repositorioJugador.actualizarJugador(jugador);
+    }
 
 
     @Override

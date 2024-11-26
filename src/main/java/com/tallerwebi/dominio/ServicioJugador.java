@@ -24,4 +24,5 @@ public interface ServicioJugador {
     List<Jugador> obtenerJugadoresPorDt(Integer id);
 
 
+    void actualizarJugador(Jugador jugador);
 }

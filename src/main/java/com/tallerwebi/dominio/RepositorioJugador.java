@@ -21,4 +21,6 @@ public interface RepositorioJugador {
     List<Jugador> buscarJugadoresPorDt(Integer id);
 
     void actualizarJugador(Long jugadorId);
+
+    void actualizarJugador(Jugador jugador);
 }

@@ -104,6 +104,13 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
     }
 
     @Override
+    public void actualizarJugador(Jugador jugador) {
+        final Session session = sessionFactory.getCurrentSession();
+        session.update(jugador);
+
+    }
+
+    @Override
     public List<Usuario> obtenerUsuariosJugadores() {
         final Session session = sessionFactory.getCurrentSession();
         TypedQuery<Usuario> query= session.createQuery("from Usuario where esJugador = true", Usuario.class);
