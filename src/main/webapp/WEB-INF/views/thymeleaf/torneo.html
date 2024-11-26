@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-<!--    // SDK MercadoPago.js-->
+    <!--    // SDK MercadoPago.js-->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 
@@ -26,17 +26,19 @@
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <strong><i class="fas fa-futbol" id="nombreTorneo"></i> Nombre:</strong> <span th:text="${torneo.nombre} " id="nombreTorneoValor">Torneo
+                        <strong><i class="fas fa-futbol" id="nombreTorneo"></i> Nombre:</strong> <span
+                            th:text="${torneo.nombre} " id="nombreTorneoValor">Torneo
                             Nombre</span>
 
                     </li>
 
                     <li class="list-group-item">
-                        <strong><i class="fas fa-gem" id="premioTorneo"></i> Premio:</strong> $<span th:text="${torneo.premio}">0</span>
+                        <strong><i class="fas fa-gem" id="premioTorneo"></i> Premio:</strong> $<span
+                            th:text="${torneo.premio}">0</span>
                         ARG
                     </li>
                     <li class="list-group-item">
-                        <strong><i class="fas fa-ticket-alt" ></i> Valor del torneo:</strong> $<span
+                        <strong><i class="fas fa-ticket-alt"></i> Valor del torneo:</strong> $<span
                             th:text="${torneo.precioEntrada}" id="valorTorneoValor">0</span> ARG
                     </li>
                     <li class="list-group-item">
@@ -82,18 +84,19 @@
                 <h2 class="mb-4"><i class="fas fa-sign-in-alt"></i> Inscripcion</h2>
 
 
-<!--                <form  id="torneoFormulario" th:action="@{/equipo/inscribir}" method="post">&ndash;&gt;-->
-                    <input type="hidden" name="torneoId" th:value="${torneo.id}">
-<!--                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">-->
-<!--                    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>-->
-                    <div th:if="${session.usuario != null} and ${cuposDisponibles != 0}">
-                                        <button type="submit" class="btn btn-success btn-lg btn-block" id="mercadoPago" >
-                                            <i class="fas fa-user-plus" ></i> Inscribirse al Torneo
-                                        </button>
-                                 <div id="wallet_container"></div>
-                    </div>
-                <div th:unless="${session.usuario!= null} and ${cuposDisponibles !=0}">
-                    <p class="alert alert-warning">Debes loguearte para anotarte en el torneo O el Torneo ya esta lleno "No hay cupo"</p>
+                <!--                <form  id="torneoFormulario" th:action="@{/equipo/inscribir}" method="post">&ndash;&gt;-->
+                <input type="hidden" name="torneoId" th:value="${torneo.id}">
+                <!--                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">-->
+                <!--                    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>-->
+                <div th:if="${usuarioLogueado} or ${cuposDisponibles != 0}">
+                    <button type="submit" class="btn btn-success btn-lg btn-block" id="mercadoPago">
+                        <i class="fas fa-user-plus"></i> Inscribirse al Torneo
+                    </button>
+                    <div id="wallet_container"></div>
+                </div>
+                <div th:unless="${usuarioLogueado} or ${cuposDisponibles !=0}">
+                    <p class="alert alert-warning">Debes loguearte para anotarte en el torneo O el Torneo ya esta lleno
+                        "No hay cupo"</p>
                 </div>
 
 <!--                                    </form>-->
@@ -102,6 +105,42 @@
 
                 <div th:if="${error}" class="alert alert-danger mt-4" role="alert" th:text="${error}"></div>
                 <div th:if="${success}" class="alert alert-success mt-4" role="alert" th:text="${success}"></div>
+            </div>
+        </div>
+
+        <!-- Partidos -->
+        <div th:if="${cuposDisponibles == 0}" class="mb-4">
+            <h2 class="mt-4">
+                <i class="fas fa-futbol"></i> Partidos
+            </h2>
+
+            <div th:each="partido : ${partidos}" th:if="${partido.fase == 'Octavos de Final'}">
+                <h3 class="mt-4" th:text="${partido.fase}"></h3>
+                <ul th:replace="~{includes/userPartidos :: ul}"></ul>
+            </div>
+
+            <div th:each="partido : ${partidos}" th:if="${partido.fase == 'Cuartos de Final'}">
+                <h3 class="mt-4" th:text="${partido.fase}"></h3>
+                <ul th:replace="~{includes/userPartidos :: ul}"></ul>
+            </div>
+
+            <div th:each="partido : ${partidos}" th:if="${partido.fase == 'Semifinal'}">
+                <h3 class="mt-4" th:text="${partido.fase}"></h3>
+                <ul th:replace="~{includes/userPartidos :: ul}"></ul>
+            </div>
+
+            <div th:each="partido : ${partidos}" th:if="${partido.fase == 'Final'}">
+                <h3 class="mt-4" th:text="${partido.fase}"></h3>
+                <ul th:replace="~{includes/userPartidos :: ul}"></ul>
+            </div>
+
+            <!-- Mostrar el ganador del partido que es fase "final" -->
+            <div th:each="partido : ${partidos}" th:if="${partido.fase == 'Final'}" class="alert alert-info my-4"
+                role="alert">
+                <i class="fas fa-trophy"></i>
+                <strong>Ganador:</strong>
+                <span th:text="${partido.ganador != null ? partido.ganador.nombre : 'Por determinar'}">Por
+                    determinar</span>
             </div>
         </div>
     </div>

@@ -81,6 +81,7 @@ public class ControladorDt {
 
         Integer cuposOcupados = torneo.getEquipos().size();
         Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
+        List<Partido> partidos = servicioAdmin.obtenerPartidosPorTorneo(torneo);
         boolean usuarioLogueado = (usuario != null);
 
         mav.addObject("usuario", usuario);
@@ -88,10 +89,28 @@ public class ControladorDt {
         mav.addObject("cuposOcupados", cuposOcupados);
         mav.addObject("cuposDisponibles", cuposDisponibles);
         mav.addObject("usuarioLogueado", usuarioLogueado);
+        mav.addObject("partidos", partidos);
 
         return mav;
     }
 
+    @GetMapping("/partidos/{id}")
+    public ModelAndView verPartido(@PathVariable("id") Long id) {
+        Partido partido = servicioAdmin.obtenerPartidoPorId(id);
+
+        if (partido != null) {
+            ModelAndView mav = new ModelAndView("partido");
+            List<Cancha> canchas = servicioAdmin.obtenerCanchas();
+            List<Arbitro> arbitros = servicioAdmin.obtenerArbitros();
+
+            mav.addObject("partido", partido);
+            mav.addObject("canchas", canchas);
+            mav.addObject("arbitros", arbitros);
+            return mav;
+        }
+
+        return new ModelAndView("redirect:/torneos");
+    }
 
     @PostMapping("/equipo/inscribir")
     public ModelAndView inscribirEquipo(@RequestParam(value ="torneoId") Long torneoId, HttpServletRequest request,RedirectAttributes redirectAttributes) {
