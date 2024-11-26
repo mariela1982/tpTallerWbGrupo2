@@ -230,16 +230,6 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
     @PostMapping("/edicionJugador/editar")
     @ResponseBody
     public ResponseEntity<?> editarJugador(@RequestBody Map<String,Object> jugadorData,HttpServletRequest request) {
-//    @RequestParam("id") Long id,
-//                                                @RequestParam("nombre") String nombreYapellido,
-//                                                @RequestParam("fechaNacimiento") String fechaNacimiento,
-//                                                @RequestParam("posicion") String posicion,
-//                                                @RequestParam("dni") String dni,
-//                                                @RequestParam("direccion") String direccion,
-//                                                @RequestParam("email") String email,
-//                                                @RequestParam("telefono") String telefono,
-//                                                @RequestParam("numero") String numeroCamiseta) {
-
 
         try {
              Long id = Long.parseLong(jugadorData.get("id").toString());
@@ -266,12 +256,12 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
             // Llamada al servicio para actualizar el jugador
             servicioJugador.actualizarJugador(jugador);
 
-            return ResponseEntity.ok("Jugador actualizado con éxito");
+            return ResponseEntity.ok(Map.of("mensaje", "Jugador actualizado con éxito"));
 
         } catch (Exception e) {
 
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Hubo un error al actualizar el jugador");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("mensaje", "Error al actualizar el jugador"));
         }
     }
 

@@ -27,10 +27,12 @@ public class Jugador {
 
     @ManyToOne
     @JoinColumn(name = "equipo_id")
+    @JsonIgnore
     private Equipo equipo = null;
 
     @ManyToOne
     @JoinColumn(name = "dt_id")
+    @JsonIgnore
     private Usuario directorTecnico = null;
 
 
