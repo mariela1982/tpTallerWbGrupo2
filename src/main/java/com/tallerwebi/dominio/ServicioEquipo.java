@@ -28,5 +28,5 @@ public interface ServicioEquipo {
 
     void eliminarEquipo(Equipo equipo);
 
-    Equipo buscarEquipoPorDt(Long dni);
+    List<Equipo> buscarEquipoPorDt(Integer id);
 }

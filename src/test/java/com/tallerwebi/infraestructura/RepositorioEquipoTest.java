@@ -44,8 +44,8 @@ public class RepositorioEquipoTest {
     public void puedoGuardarUnEquipo() {
         Equipo equipo = new Equipo();
         equipo.setNombre(nombreEquipo);
-        equipo.setDtDni(dtDni);
-        equipo.setCbu(cbu);
+//        equipo.setDtDni(dtDni);
+//        equipo.setCbu(cbu);
 
         repositorioEquipo.guardar(equipo);
 
@@ -65,15 +65,15 @@ public class RepositorioEquipoTest {
     public void buscarEquipoPorNombreEquipoPorNombre(){
         Equipo equipo = new Equipo();
         equipo.setNombre(nombreEquipo);
-        equipo.setDtDni(dtDni);
-        equipo.setCbu(cbu);
+//        equipo.setDtDni(dtDni);
+//        equipo.setCbu(cbu);
         sessionFactory.getCurrentSession().saveOrUpdate(equipo);
 
 
         Equipo buscado = repositorioEquipo.buscarEquipoPorNombre(nombreEquipo);
 
         assertThat(buscado,notNullValue());
-        assertThat(buscado.getCbu(), equalToIgnoringCase("4934607627390389151791"));
+     //   assertThat(buscado.getCbu(), equalToIgnoringCase("4934607627390389151791"));
     }
 
 

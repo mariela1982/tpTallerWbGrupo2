@@ -5,7 +5,6 @@ import com.tallerwebi.dominio.entidades.Equipo;
 import com.tallerwebi.dominio.entidades.Jugador;
 import com.tallerwebi.dominio.entidades.Torneo;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tallerwebi.dominio.RepositorioEquipo;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository("repositorioEquipo")
@@ -112,12 +112,13 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
     }
 
     @Override
-    public Equipo buscarPorDt(Long dni) {
+    public List<Equipo> buscarPorDt(Integer id) {
         Session session = sessionFactory.getCurrentSession();
 
-        return (Equipo) session.createCriteria(Equipo.class,"equipo")
-                .add(Restrictions.eq("dtDni",dni))
-                .uniqueResult();
+        TypedQuery<Equipo> query = session.createQuery("from Equipo where directorTecnico.id = :id", Equipo.class);
+        query.setParameter("id", id);
+        return query.getResultList();
+
     }
 
 

@@ -26,26 +26,29 @@
                 <label for="nombre" class="form-label">Nombre del Equipo</label>
                 <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required>
             </div>
-            <div class="mb-3">
-                <label for="cbu" class="form-label">Ingrese el cbu</label>
-                <input type="text" id="cbu" name="cbu" th:field="*{cbu}" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="dni" class="form-label">ingrese el dni</label>
-                <input type="text" id="dni" name="dni" th:field="*{dtDni}" class="form-control" required>
-            </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="cbu" class="form-label">Ingrese el cbu</label>-->
+<!--                <input type="text" id="cbu" name="cbu" th:field="*{cbu}" class="form-control" required>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label for="dni" class="form-label">ingrese el dni</label>-->
+<!--                <input type="text" id="dni" name="dni" th:field="*{dtDni}" class="form-control" required>-->
+<!--            </div>-->
 
-            <div class="mb-3">
-                <label  class="form-label">Jugadores</label>
+<!--            <div class="mb-3">-->
+<!--                <label  class="form-label">Jugadores</label>-->
                 <div class="mb-3">
                     <label class="form-label">Jugadores</label>
-                    <div id="jugadores-list"></div>
+                    <div id="jugadores-list" class="checkbox-grid" style="display: grid;
+    grid-template-columns: repeat(3, 1fr);"></div>
                 </div>
+
+
 <!--                <div th:each="jugador : ${jugadores}">-->
 <!--                    <input type="checkbox" th:name="jugadoresId" th:value="${jugador.getId()}">-->
 <!--                    <label th:text="${jugador.getNombreYapellido()}"></label>-->
 <!--                </div>-->
-            </div>
+<!--            </div>-->
 <!--            <div class="mb-3">-->
 <!--                <label for="jugadoresId" class="form-label" >Jugadores</label>-->
 <!--                <select id="jugadoresId" th:name="jugadoresId"   multiple required>-->
@@ -55,6 +58,7 @@
 
             <button type="submit" class="btn btn-primary">Crear Equipo</button>
         </form>
+
 
         <h2>Equipos</h2>
         <table class="table table-striped">
@@ -69,7 +73,7 @@
                 <tr th:if="${#lists.isEmpty(equipos)}">
                     <td colspan="3" class="text-center">No hay equipos registrados</td>
                 </tr>
-                <tr th:each="equipo : ${equipos}">
+                <tr th:each="equipo : ${equipos}"  >
                     <td th:text="${equipo.nombre}"></td>
                     <td>
                         <ul>

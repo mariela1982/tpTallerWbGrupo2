@@ -1,5 +1,7 @@
 package com.tallerwebi.dominio.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,8 @@ public class Equipo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String cbu;
-    private Long dtDni;
+   // private String cbu;
+  //  private Long dtDni;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="torneo_id",nullable = true)
@@ -22,15 +24,22 @@ public class Equipo {
     @OneToMany(mappedBy = "equipo",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Jugador> jugadores = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "dt_id")
+    @JsonIgnore
+    private Usuario directorTecnico = null;
+
+
 
     @Column(name = "orden")
     private Integer orden;
 
 
-    public Equipo(String nombre, String cbu, Long dni) {
+   // public Equipo(String nombre, String cbu, Long dni) {
+    public Equipo(String nombre){
             this.nombre = nombre;
-            this.cbu = cbu;
-            this.dtDni = dni;
+           // this.cbu = cbu;
+          //  this.dtDni = dni;
             this.jugadores = new ArrayList<>();
             this.orden = 0;
             this.torneo = new Torneo();
@@ -65,14 +74,14 @@ public class Equipo {
             this.jugadores.add(jugador);
         }
 
-        public String getCbu () {
-            return cbu;
-        }
+     //   public String getCbu () {
+     //       return cbu;
+     //   }
 
-        public void setCbu (String cbu){
-            this.cbu = cbu;
-
-        }
+//        public void setCbu (String cbu){
+//            this.cbu = cbu;
+//
+//        }
 
         public String getNombre () {
             return nombre;
@@ -83,13 +92,13 @@ public class Equipo {
         }
 
 
-        public Long getDtDni () {
-            return dtDni;
-        }
-
-        public void setDtDni (Long dtDni){
-            this.dtDni = dtDni;
-        }
+//        public Long getDtDni () {
+//            return dtDni;
+//        }
+//
+//        public void setDtDni (Long dtDni){
+//            this.dtDni = dtDni;
+//        }
 
         public Torneo getTorneo () {
             return torneo;
@@ -106,5 +115,11 @@ public class Equipo {
         public void setOrden (Integer orden){
             this.orden = orden;
         }
+    public Usuario getDirectorTecnico() {
+        return directorTecnico;
+    }
+    public void setDirectorTecnico(Usuario directorTecnico) {
+        this.directorTecnico = directorTecnico;
+    }
 
     }

@@ -50,7 +50,7 @@
                             th:text="${torneo.cantidadEquipos}">0</span>
                     </li>
                     <li class="list-group-item">
-                        <strong><i class="fas fa-map-marker-alt"></i> Partido:</strong> <span
+                        <strong><i class="fas fa-map-marker-alt"></i> Lugar Donde se Disputara:</strong> <span
                             th:text="${torneo.partido}">Partido</span>
                     </li>
                 </ul>
@@ -88,15 +88,14 @@
                 <input type="hidden" name="torneoId" th:value="${torneo.id}">
                 <!--                    <input type="hidden" id="logueado" th:value="${usuarioLogueado}">-->
                 <!--                    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>-->
-                <div th:if="${usuarioLogueado} or ${cuposDisponibles != 0}">
+                <div th:if="${session.usuario != null} and ${cuposDisponibles != 0}">
                     <button type="submit" class="btn btn-success btn-lg btn-block" id="mercadoPago">
                         <i class="fas fa-user-plus"></i> Inscribirse al Torneo
                     </button>
                     <div id="wallet_container"></div>
                 </div>
-                <div th:unless="${usuarioLogueado} or ${cuposDisponibles !=0}">
-                    <p class="alert alert-warning">Debes loguearte para anotarte en el torneo O el Torneo ya esta lleno
-                        "No hay cupo"</p>
+                <div th:unless="${session.usuario !=null} and ${cuposDisponibles !=0}">
+                    <p class="alert alert-warning">Para poder inscribirte debes estar logueado , y si estas logueado quiere decir que este torneo ya esta lleno "</p>
                 </div>
 
 <!--                                    </form>-->

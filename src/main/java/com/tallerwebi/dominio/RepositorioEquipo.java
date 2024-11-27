@@ -22,5 +22,5 @@ public interface RepositorioEquipo {
 
     void eliminar(Equipo equipo);
 
-    Equipo buscarPorDt(Long dni);
+    List<Equipo> buscarPorDt(Integer id);
 }

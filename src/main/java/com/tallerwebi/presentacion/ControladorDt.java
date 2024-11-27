@@ -121,7 +121,7 @@ public class ControladorDt {
      //   Integer cuposOcupados = torneo.getEquipos().size();
        // Integer cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
 
-            Equipo equipo = servicioEquipo.buscarEquipoPorDt(usuario.getDni());
+            Equipo equipo = servicioEquipo.buscarEquipoPorDt(usuario.getId()).get(0);
             torneo.getEquipos().add(equipo);
           Integer  cuposOcupados = torneo.getEquipos().size();
          Integer  cuposDisponibles = torneo.getCantidadEquipos() - cuposOcupados;
@@ -298,13 +298,18 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
     }
     // Controller para la vista de gestion de equipos
     @GetMapping("/equipos")
-    public ModelAndView gestionEquipos() {
-        ModelMap modelMap = new ModelMap();
+    public ModelAndView gestionEquipos(HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Integer id = usuario.getId();
+
+
+
+            ModelMap modelMap = new ModelMap();
         Equipo equipo = new Equipo();
 
         modelMap.addAttribute("equipo", equipo);
-        modelMap.addAttribute("equipos", servicioEquipo.obtenerEquipos());
-        modelMap.addAttribute("jugadores", servicioJugador.obtenerJugadores());
+        modelMap.addAttribute("equipos", servicioEquipo.buscarEquipoPorDt(id));
+        modelMap.addAttribute("jugadores", servicioJugador.obtenerJugadoresPorDt(id));
         modelMap.addAttribute("editando", false);
         return new ModelAndView("equipos",modelMap);
     }
@@ -312,8 +317,10 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
     // Controller para la creacion de equipos
     @PostMapping("/equipos/crear")
     public ModelAndView crearEquipo(@ModelAttribute("equipo") Equipo equipo,
-                                    @RequestParam(value = "jugadoresId",required = false)List<Long> jugadoresId) {
+                                    @RequestParam(value = "jugadoresId",required = false)List<Long> jugadoresId, HttpServletRequest request) {
         ModelMap model = new ModelMap();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Integer idDT = usuario.getId();
         try {
             if (jugadoresId != null) {
                 List<Jugador> jugadoresElegidos = new ArrayList<>();
@@ -324,8 +331,8 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
                     //relacion bidireccional
                  //  servicioJugador.agregarleEquipo(jugador.getId(),equipo);
                     jugador.setEquipo(equipo);
-                    System.out.println("Equipo recibido: " + equipo);
-                    System.out.println("Jugadores ID: " + jugadoresId);
+                 //   System.out.println("Equipo recibido: " + equipo);
+                  //  System.out.println("Jugadores ID: " + jugadoresId);
 
                 }
                 if (equipo.getJugadores() == null) {
@@ -340,6 +347,7 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
             servicioEquipo.guardarEquipo(equipo);
             model.addAttribute("equipos", servicioEquipo.obtenerEquipos());
             model.addAttribute("equipoCreado", equipo);
+            model.addAttribute("usuario",usuario);
             model.put("registro", "equipoCreado");
 
         } catch (EquipoExistente | JugadorInexistente e) {

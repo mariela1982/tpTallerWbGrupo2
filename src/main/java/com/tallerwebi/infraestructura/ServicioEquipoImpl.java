@@ -111,8 +111,9 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
     }
 
     @Override
-    public Equipo buscarEquipoPorDt(Long dni) {
-        return repositorioEquipo.buscarPorDt(dni);
+    public List<Equipo> buscarEquipoPorDt(Integer id) {
+
+    return repositorioEquipo.buscarPorDt(id);
     }
 
 
