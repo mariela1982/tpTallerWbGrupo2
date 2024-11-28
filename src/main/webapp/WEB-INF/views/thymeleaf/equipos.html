@@ -16,7 +16,7 @@
 
 <body>
     <header th:replace="~{includes/userHeader :: header}"></header>
-    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
+<!--    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>-->
 
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Equipos</h1>
@@ -132,6 +132,7 @@
     <!-- Boostrap core js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Volver al Menu</a>
-
+<div class="d-flex justify-content-center">
+<a type="submit" class="btnLogin btn btn-sm btn-primary btn-block mb-3" th:href="@{/directorTecnico.html}" >Volver al Menu</a>
+</div>
 </html>

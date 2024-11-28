@@ -107,8 +107,17 @@ public class RepositorioEquipoImpl implements RepositorioEquipo {
 
     @Override
     public void eliminar(Equipo equipo) {
-        Session sesion= sessionFactory.getCurrentSession();
-        sesion.delete(equipo);
+        Session session= sessionFactory.getCurrentSession();
+
+
+        for (Jugador jugador : equipo.getJugadores()) {
+            jugador.setEquipo(null);
+            session.saveOrUpdate(jugador);
+        }
+        equipo.setDirectorTecnico(null);
+        session.delete(equipo);
+
+
     }
 
     @Override

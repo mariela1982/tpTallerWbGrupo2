@@ -311,7 +311,8 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
         } catch (JugadorInexistente e) {
             model.put("Error", "El jugador no existe");
         }
-       return new ModelAndView("redirect:/jugadores?eliminado=true");
+    //   return new ModelAndView("redirect:/jugadores?eliminado=true");
+        return new ModelAndView("redirect:/edicionJugador?eliminado=true");
     }
     // Controller para la vista de gestion de equipos
     @GetMapping("/equipos")
@@ -410,9 +411,12 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
 
     // Controller para la eliminacion de equipos
     @GetMapping("/equipos/eliminar/{id}")
-    public ModelAndView eliminarEquipo(@PathVariable("id") Long id) {
+    public ModelAndView eliminarEquipo(@PathVariable("id") Long id, HttpServletRequest request) {
+
         Equipo equipo = null;
         ModelMap model = new ModelMap();
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Integer idDT = usuario.getId();
         try {
             equipo = servicioEquipo.buscarEquipoPorId(id);
         } catch (EquipoInexistente e) {
@@ -423,6 +427,10 @@ public ModelAndView crearJugador(@ModelAttribute("jugador") Jugador jugador,Http
         }
         return new ModelAndView("redirect:/equipos?eliminado=true");
     }
+
+
+
+
 
     @GetMapping("/buscarJugadores")
     public ModelAndView buscarJugadores() {

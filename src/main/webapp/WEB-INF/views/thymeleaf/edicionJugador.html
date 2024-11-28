@@ -44,12 +44,14 @@
                 <a href="#" class="btn btn-primary btn-editar" th:data-id="${jugador.id}">Editar</a>
 
                 <a th:href="@{/edicionJugador/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger">Eliminar</a>
+
             </td>
         </tr>
         </tbody>
     </table>
-    <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
-
+    <div class="d-flex justify-content-center">
+        <a type="submit" class="btnLogin btn btn-sm btn-primary btn-block mb-3" th:href="@{/directorTecnico.html}" >Volver al Menu</a>
+    </div>
 
 </main>
 

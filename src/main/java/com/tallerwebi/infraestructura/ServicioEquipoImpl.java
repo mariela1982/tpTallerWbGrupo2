@@ -107,6 +107,7 @@ public ServicioEquipoImpl(RepositorioEquipo repositorioEquipo) {
 
     @Override
     public void eliminarEquipo(Equipo equipo) {
+    repositorioEquipo.eliminar(equipo);
 
     }
 
