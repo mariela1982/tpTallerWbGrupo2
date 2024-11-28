@@ -29,12 +29,13 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     @Override
     public void guardarTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
-        //session.merge(torneo);
-        session.saveOrUpdate(torneo);
+        session.merge(torneo);
+        // session.saveOrUpdate(torneo);
 
         for (Equipo equipo : torneo.getEquipos()) {
             equipo.setTorneo(torneo);
-            session.saveOrUpdate(equipo);
+            // session.saveOrUpdate(equipo);
+            session.merge(equipo);
         }
     }
 
@@ -42,7 +43,8 @@ public class RepositorioAdminImpl implements RepositorioAdmin {
     @Override
     public void eliminarTorneo(Torneo torneo) {
         final Session session = sessionFactory.getCurrentSession();
-        session.delete(torneo);
+        Torneo torneoMerged = (Torneo) session.merge(torneo);
+        session.delete(torneoMerged);
     }
 
     @Transactional

@@ -41,7 +41,14 @@ public class ServicioAdminImpl implements ServicioAdmin {
 
     @Override
     public void eliminarTorneo(Torneo torneo) {
-        repositorioAdmin.eliminarTorneo(torneo);
+        Torneo torneoExistente = repositorioAdmin.obtenerTorneoPorId(torneo.getId());
+        if (torneoExistente != null) {
+            List<Partido> partidos = repositorioAdmin.obtenerPartidosPorTorneo(torneoExistente);
+            for (Partido partido : partidos) {
+                repositorioAdmin.eliminarPartido(partido);
+            }
+            repositorioAdmin.eliminarTorneo(torneoExistente);
+        }
     }
 
     @Override

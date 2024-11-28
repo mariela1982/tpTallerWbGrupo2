@@ -12,7 +12,7 @@
                 </li>
                 <li class="nav-item" th:if="${session.usuario != null}">
                     <a class="nav-link text-white" th:href="@{/miCuenta.html}">
-                        <span th:text="'Hola,' + ${session.usuario.nombre}"></span>
+                        <span th:text="'Hola, ' + ${session.usuario.nombre}"></span>
                     </a>
                 </li>
                 <li class="nav-item" th:if="${session.usuario == null}">

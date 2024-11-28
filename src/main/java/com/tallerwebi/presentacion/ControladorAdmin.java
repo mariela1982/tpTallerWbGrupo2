@@ -487,10 +487,24 @@ public class ControladorAdmin {
                 jugador.setTarjetaRoja(true);
             }
 
-            servicioJugador.actualizarJugador(jugadorId);
+            servicioJugador.actualizarJugador(jugador);
         }
 
         return new ModelAndView("redirect:/admin/sanciones?asignada=true");
+    }
+
+    // Controller para quitar sancion a un jugador
+    @GetMapping("/sanciones/quitar/{id}")
+    public ModelAndView quitarSancion(@PathVariable("id") Long id) throws JugadorInexistente {
+        Jugador jugador = servicioJugador.buscarJugador(id);
+
+        if (jugador != null) {
+            jugador.setTarjetaAmarilla(false);
+            jugador.setTarjetaRoja(false);
+            servicioJugador.actualizarJugador(jugador);
+        }
+
+        return new ModelAndView("redirect:/admin/sanciones?quitada=true");
     }
 
     // Controller para la vista de gestion de Resultados

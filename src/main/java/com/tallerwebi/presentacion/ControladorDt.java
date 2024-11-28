@@ -52,7 +52,11 @@ public class ControladorDt {
     public ModelAndView panelAdmin(HttpServletRequest request){
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario)session.getAttribute("usuario");
-        return new ModelAndView();
+        
+        
+        ModelAndView mav = new ModelAndView("directorTecnico");
+        mav.addObject("usuario", usuario);
+        return mav;
     }
 
 

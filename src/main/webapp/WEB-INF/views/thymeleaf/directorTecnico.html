@@ -16,25 +16,35 @@
 
 <body>
 
-<header th:replace="~{includes/userHeader :: header}"></header>
+    <header th:replace="~{includes/userHeader :: header}"></header>
 
-<main class="container-lg">
-    <h1 class="my-4 text-center">Director Tecnico</h1>
+    <main class="container-lg">
+        <h1 class="my-4 text-center" th:text="${usuario.esJugador} ? 'Jugador Sin Equipo' : 'Director Tecnico'"></h1>
 
-    <div class="list-group">
-        <a th:href="@{/jugadores}" class="list-group-item list-group-item-action">Inscribir Jugadores</a>
-        <a th:href="@{/equipos}" class="list-group-item list-group-item-action">Armar Equipo</a>
-        <a th:href="@{/torneos}" class="list-group-item list-group-item-action">Elegir Torneos</a>
-        <a th:href="@{/buscarJugadores}" class="list-group-item list-group-item-action">Buscar Jugadores sin Equipo</a>
-        <a th:href="@{/edicionJugador}" class="list-group-item list-group-item-action">Editar Jugadores</a>
+        <div class="list-group">
+            <a th:href="@{/jugadores}" class="list-group-item list-group-item-action" th:if="${!usuario.esJugador}">
+                Inscribir Jugadores
+            </a>
+            <a th:href="@{/equipos}" class="list-group-item list-group-item-action" th:if="${!usuario.esJugador}">
+                Armar Equipo
+            </a>
+            <a th:href="@{/torneos}" class="list-group-item list-group-item-action" th:if="${!usuario.esJugador}">
+                Elegir Torneos
+            </a>
+            <a th:href="@{/buscarJugadores}" class="list-group-item list-group-item-action">
+                Buscar Jugadores sin Equipo
+            </a>
+            <a th:href="@{/edicionJugador}" class="list-group-item list-group-item-action" th:if="${!usuario.esJugador}">
+                Editar Jugadores
+            </a>
 
 
-<!--        <a th:href="@{/admin/sanciones}" class="list-group-item list-group-item-action">ver Sanciones</a>-->
-         </div>
-</main>
+            <!--        <a th:href="@{/admin/sanciones}" class="list-group-item list-group-item-action">ver Sanciones</a>-->
+        </div>
+    </main>
 
-<!-- Boostrap core js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Boostrap core js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
