@@ -7,7 +7,6 @@ import com.tallerwebi.dominio.entidades.Cancha;
 import com.tallerwebi.dominio.entidades.Partido;
 import com.tallerwebi.dominio.entidades.Torneo;
 import com.tallerwebi.dominio.enums.PartidosDeBsAs;
-import com.tallerwebi.dominio.excepcion.TorneoExistente;
 
 public interface RepositorioAdmin {
 

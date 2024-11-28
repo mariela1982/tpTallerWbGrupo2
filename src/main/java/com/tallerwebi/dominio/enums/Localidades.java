@@ -3,8 +3,6 @@ package com.tallerwebi.dominio.enums;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.spi.ToolProvider.findFirst;
-
 public enum Localidades {
     ADOLFO_ALSINA(PartidosDeBsAs.ADOLFO_ALSINA, Arrays.asList("Carhué", "Villa Maza", "Rivera", "San Miguel Arcángel", "Arano", "La Pala", "Lartigau", "Saladita", "Leubucó", "Delfín Huergo")),
     ADOLFO_GONZALES_CHAVES(PartidosDeBsAs.ADOLFO_GONZALES_CHAVES, Arrays.asList("Gonzales Chaves", "De La Garma", "Vasquez", "Juan Eulogio Barra", "San Mayol", "Paraje El Tigre", "Paraje Las Mostazas", "El Lenguaraz", "Primero de Mayo", "Estancia El Alba")),

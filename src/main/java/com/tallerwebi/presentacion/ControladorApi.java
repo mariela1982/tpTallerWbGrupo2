@@ -1,22 +1,5 @@
 package com.tallerwebi.presentacion;
 
-import com.mercadopago.MercadoPagoConfig;
-import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
-import com.mercadopago.client.preference.PreferenceClient;
-import com.mercadopago.client.preference.PreferenceItemRequest;
-import com.mercadopago.client.preference.PreferenceRequest;
-import com.mercadopago.exceptions.MPApiException;
-import com.mercadopago.exceptions.MPException;
-import com.mercadopago.resources.preference.Preference;
-import com.tallerwebi.dominio.entidades.UserBuyer;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -24,6 +7,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mercadopago.MercadoPagoConfig;
+import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
+import com.mercadopago.client.preference.PreferenceClient;
+import com.mercadopago.client.preference.PreferenceItemRequest;
+import com.mercadopago.client.preference.PreferenceRequest;
+import com.mercadopago.resources.preference.Preference;
+import com.tallerwebi.dominio.entidades.UserBuyer;
 
 @RestController
 public class ControladorApi {

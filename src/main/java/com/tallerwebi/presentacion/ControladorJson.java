@@ -1,17 +1,17 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.ServicioDt;
-import com.tallerwebi.dominio.ServicioJugador;
-import com.tallerwebi.dominio.entidades.Jugador;
+import java.util.List;
 
-import com.tallerwebi.dominio.entidades.Usuario;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import com.tallerwebi.dominio.ServicioJugador;
+import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Usuario;
 
 @RestController // Anotación para un controlador que maneja solicitudes REST
 @RequestMapping("/api") // Agrupa tus endpoints bajo una misma ruta

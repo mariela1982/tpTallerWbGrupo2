@@ -1,9 +1,9 @@
 package com.tallerwebi.infraestructura;
 
 
-import com.tallerwebi.dominio.entidades.Equipo;
-import com.tallerwebi.dominio.entidades.Jugador;
-import com.tallerwebi.dominio.entidades.Torneo;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tallerwebi.dominio.RepositorioEquipo;
-
-import javax.persistence.TypedQuery;
-import java.util.List;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.dominio.entidades.Jugador;
+import com.tallerwebi.dominio.entidades.Torneo;
 
 @Repository("repositorioEquipo")
 @Transactional

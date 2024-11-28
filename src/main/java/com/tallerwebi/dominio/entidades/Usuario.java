@@ -1,16 +1,5 @@
 package com.tallerwebi.dominio.entidades;
 
-import com.tallerwebi.dominio.enums.PartidosDeBsAs;
-import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.*;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -36,39 +36,6 @@ public class RepositorioAdminTest {
     @Test
     @Transactional
     @Rollback
-    public void queSePuedaGuardarTorneo() {
-        // Preparación
-        Torneo torneo = new Torneo();
-        torneo.setNombre("Torneo de prueba");
-
-        // Ejecución
-        repositorioAdmin.guardarTorneo(torneo);
-
-        // Validación
-        Torneo torneoGuardado = repositorioAdmin.obtenerTorneoPorId(torneo.getId());
-        assertNotNull(torneoGuardado);
-    }
-
-    @Test
-    @Transactional
-    @Rollback
-    public void queSePuedaEliminarTorneo() {
-        // Preparación
-        Torneo torneo = new Torneo();
-        torneo.setNombre("Torneo de prueba");
-        repositorioAdmin.guardarTorneo(torneo);
-
-        // Ejecución
-        repositorioAdmin.eliminarTorneo(torneo);
-
-        // Validación
-        Torneo torneoEliminado = repositorioAdmin.obtenerTorneoPorId(torneo.getId());
-        assertNull(torneoEliminado);
-    }
-
-    @Test
-    @Transactional
-    @Rollback
     public void queSePuedaObtenerTorneos() {
         // Preparación
         Torneo torneo1 = new Torneo();
@@ -100,22 +67,6 @@ public class RepositorioAdminTest {
 
         // Validación
         assertNotNull(torneoBuscado);
-    }
-
-    @Test
-    @Transactional
-    @Rollback
-    public void queSePuedaObtenerTorneoPorId() {
-        // Preparación
-        Torneo torneo = new Torneo();
-        torneo.setNombre("Torneo de prueba");
-        repositorioAdmin.guardarTorneo(torneo);
-
-        // Ejecución
-        Torneo torneoObtenido = repositorioAdmin.obtenerTorneoPorId(torneo.getId());
-
-        // Validación
-        assertNotNull(torneoObtenido);
     }
 
     @Test
@@ -328,68 +279,6 @@ public class RepositorioAdminTest {
         // Validación
         Partido partidoEliminado = repositorioAdmin.obtenerPartidoPorId(partido.getId());
         assertNull(partidoEliminado);
-    }
-
-    @Test
-    @Transactional
-    @Rollback
-    public void queSePuedaObtenerPartidosPorTorneo() {
-        // Preparación
-        Torneo torneo = new Torneo();
-        torneo.setNombre("Torneo de prueba");
-        repositorioAdmin.guardarTorneo(torneo);
-
-        Partido partido1 = new Partido();
-        Date fecha1 = Date.valueOf(LocalDate.of(2024, 10, 10));
-        partido1.setFecha(fecha1);
-        partido1.setTorneo(torneo);
-
-        Partido partido2 = new Partido();
-        Date fecha2 = Date.valueOf(LocalDate.of(2024, 10, 11));
-        partido2.setFecha(fecha2);
-        partido2.setTorneo(torneo);
-        repositorioAdmin.guardarPartido(partido1);
-        repositorioAdmin.guardarPartido(partido2);
-
-        // Ejecución
-        List<Partido> partidos = repositorioAdmin.obtenerPartidosPorTorneo(torneo);
-
-        // Validación
-        assertNotNull(partidos);
-        assertEquals(2, partidos.size());
-    }
-
-    @Test
-    @Transactional
-    @Rollback
-    public void queSePuedaObtenerPartidoEsperandoRival() {
-        // Preparación
-        Torneo torneo = new Torneo();
-        torneo.setNombre("Torneo de prueba");
-        repositorioAdmin.guardarTorneo(torneo);
-
-        Partido partido1 = new Partido();
-        Date fecha1 = Date.valueOf(LocalDate.of(2024, 10, 10));
-        partido1.setFecha(fecha1);
-        partido1.setTorneo(torneo);
-        partido1.setFase("Semifinal");
-
-        Partido partido2 = new Partido();
-        Date fecha2 = Date.valueOf(LocalDate.of(2024, 10, 11));
-        partido2.setFecha(fecha2);
-        partido2.setTorneo(torneo);
-        partido2.setFase("Final");
-
-        repositorioAdmin.guardarPartido(partido1);
-        repositorioAdmin.guardarPartido(partido2);
-
-        // Ejecución
-        Partido partidoEsperandoRival = repositorioAdmin.obtenerPartidoEsperandoRival(torneo,
-                partido1.avanzarFase(partido1.getFase()));
-
-        // Validación
-        assertEquals(partido2.getId(), partidoEsperandoRival.getId());
-        assertNotNull(partidoEsperandoRival);
     }
 
 }

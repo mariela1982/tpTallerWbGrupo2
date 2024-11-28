@@ -1,9 +1,8 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.RepositorioEquipo;
-import com.tallerwebi.dominio.entidades.Equipo;
-import com.tallerwebi.integracion.config.HibernateTestConfig;
-import com.tallerwebi.integracion.config.SpringWebTestConfig;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
+
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,9 +13,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalToIgnoringCase;
-import static org.hamcrest.Matchers.notNullValue;
+import com.tallerwebi.dominio.RepositorioEquipo;
+import com.tallerwebi.dominio.entidades.Equipo;
+import com.tallerwebi.integracion.config.HibernateTestConfig;
+import com.tallerwebi.integracion.config.SpringWebTestConfig;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
