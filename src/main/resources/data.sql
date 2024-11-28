@@ -45,10 +45,10 @@ INSERT INTO Cancha(id, nombre, direccion, telefono) VALUES
                     (null, 'Cancha Sur', 'Calle Sur 202', '321654987');
 
 INSERT INTO Torneo(id, nombre, premio, precioEntrada, fechaInicio, cantidadEquipos, partido) VALUES
-                    (1, 'Copa Super Campeones', 1000, 10000, '2025-06-01', 4, 64),
-                    (2, 'Copa Argentina', 2000, 20000, '2025-06-01', 8, 65),
-                    (3, 'Copa Libertadores', 3000, 30000, '2025-06-01', 16, 60),
-                    (4, 'Copa Sudamericana', 4000, 40000, '2025-06-01', 32, 82);
+                    (1, 'Copa Super Campeones', 10000, 10000, '2024-11-25', 4, 64),
+                    (2, 'Copa Argentina', 20000, 20000, '2024-06-01', 8, 65),
+                    (3, 'Copa Libertadores', 30000, 30000, '2025-01-01', 16, 60),
+                    (4, 'Copa Sudamericana', 40000, 40000, '2025-06-01', 32, 82);
 
 INSERT INTO Equipo(id, nombre, torneo_id, orden, dt_id) VALUES
                     (1, 'Boca',  1, 0,null),
@@ -119,11 +119,11 @@ INSERT INTO Equipo(id, nombre, torneo_id, orden, dt_id) VALUES
 
 
 INSERT INTO Jugador(id, nombreYapellido, fechaNacimiento, posicion, dni, direccion, email, telefono, numeroCamiseta, tarjetaAmarilla, tarjetaRoja, equipo_id, dt_id) VALUES
-                    (1, 'Roman Riquelme', '1978-06-24', 'Delantero', '29333555', 'fuentes222', 'roman@gmail.com', '1522522214', 10, false, false, null,5),
-                    (2, 'Marcos Rojo', '1990-03-20', 'Defensor', '29333556', 'fuentes223', 'marcos@gmail.com', '1522522215', 6, false, false, null,5),
-                    (3, 'Fernando Gago', '1986-04-10', 'Mediocampista', '29333557', 'fuentes224', 'gago@gmail.com', '1522522216', 5, false, false, null,5),
-                    (4, 'Roberto Abbondanzieri', '1972-08-19', 'Arquero', '29333558', 'fuentes225', 'abbondanzieri@gmail.com', '1522522217', 1, false, false, null,5),
-                    (5, 'Martin Palermo', '1973-11-07', 'Delantero', '29333559', 'fuentes226', 'palermo@gmail.com', '1522522218', 9, false, false, null,5),
+                    (1, 'Roman Riquelme', '1978-06-24', 'Delantero', '29333555', 'fuentes222', 'roman@gmail.com', '1522522214', 10, false, false, 1,null),
+                    (2, 'Marcos Rojo', '1990-03-20', 'Defensor', '29333556', 'fuentes223', 'marcos@gmail.com', '1522522215', 6, false, false, 1,null),
+                    (3, 'Fernando Gago', '1986-04-10', 'Mediocampista', '29333557', 'fuentes224', 'gago@gmail.com', '1522522216', 5, false, false, 1,null),
+                    (4, 'Roberto Abbondanzieri', '1972-08-19', 'Arquero', '29333558', 'fuentes225', 'abbondanzieri@gmail.com', '1522522217', 1, false, false, 1,null),
+                    (5, 'Martin Palermo', '1973-11-07', 'Delantero', '29333559', 'fuentes226', 'palermo@gmail.com', '1522522218', 9, false, false, 1,null),
 
                     (6, 'Enzo Perez', '1986-02-22', 'Mediocampista', '29333560', 'fuentes227', 'enzo@gmail.com', '1522522219', 8, false, false, null,5),
                     (7, 'Franco Armani', '1986-10-16', 'Arquero', '29333561', 'fuentes228', 'armani@gmail.com', '1522522220', 1, false, false, null,5),
