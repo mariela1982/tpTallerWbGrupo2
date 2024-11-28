@@ -40,12 +40,33 @@ public class RepositorioJugadorImpl implements RepositorioJugador {
 
     }
 
+//    @Override
+//    public void eliminarJugador(Jugador jugador) {
+//        Session session = sessionFactory.getCurrentSession();
+//        session.delete(jugador);
+//
+//    }
+
     @Override
     public void eliminarJugador(Jugador jugador) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(jugador);
 
+        // Desvincular jugador del equipo si está asociado
+        if (jugador.getEquipo() != null) {
+            jugador.setEquipo(null); // Desvincular del equipo
+            session.saveOrUpdate(jugador);
+        }
+
+        // Desvincular jugador del director técnico si está asociado
+        if (jugador.getDirectorTecnico() != null) {
+            jugador.setDirectorTecnico(null); // Desvincular del DT
+            session.saveOrUpdate(jugador);
+        }
+
+        // Eliminar jugador
+        session.delete(jugador);
     }
+
 
     @Override
     @Transactional

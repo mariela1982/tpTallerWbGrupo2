@@ -20,7 +20,7 @@
 
     <main class="container-lg">
         <h1 class="my-4 text-center">Gestion de Jugadores</h1>
-        <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
+
 
         <form th:action="@{/crearJugador}" method="post"  th:object="${jugador}" class="signIn">
             <div class="row">
@@ -108,8 +108,9 @@
                 </tr>
             </tbody>
         </table>
-        <a type="submit" class="btn btn-primary" th:href="@{/directorTecnico.html}" >Menu</a>
-
+        <div class="d-flex justify-content-center">
+        <a type="submit" class="btnLogin btn btn-sm btn-primary btn-block mb-3"  th:href="@{/directorTecnico.html}" >Menu</a>
+        </div>
     </main>
     <script>
         document.getElementById('fechaNacimiento').addEventListener('change', function() {
