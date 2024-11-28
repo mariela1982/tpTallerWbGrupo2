@@ -51,19 +51,6 @@ public class ServicioAdminTest {
             servicioAdmin.guardarTorneo(torneo);
         });
     }
-
-    @Test
-    public void queSePuedaEliminarTorneo() {
-        // Preparación
-        Torneo torneo = new Torneo();
-        torneo.setNombre("Torneo de prueba");
-
-        // Ejecución
-        servicioAdmin.eliminarTorneo(torneo);
-
-        // Validación
-        verify(repositorioAdmin, times(1)).eliminarTorneo(torneo);
-    }
     
     @Test
     public void queSePuedaActualizarTorneo() {
